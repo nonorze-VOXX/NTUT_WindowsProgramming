@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Unity
@@ -15,6 +8,12 @@ namespace Unity
         public Form1()
         {
             InitializeComponent();
+            this.textBox1.DataBindings.Add("Text", _calculatorModel, "_context", true, DataSourceUpdateMode.OnPropertyChanged);
+        }
+
+
+        private void NumberClick(object sender, EventArgs e)
+        {
         }
     }
 }
