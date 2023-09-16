@@ -8,12 +8,6 @@ namespace Unity
         public Form1()
         {
             InitializeComponent();
-            this.textBox1.DataBindings.Add("Text", _calculatorModel, "_context", true, DataSourceUpdateMode.OnPropertyChanged);
-        }
-
-
-        private void NumberClick(object sender, EventArgs e)
-        {
         }
     }
 }
