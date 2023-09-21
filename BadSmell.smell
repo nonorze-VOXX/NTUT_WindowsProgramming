@@ -191,11 +191,6 @@
           <AnalysisFileManager>
             <AnalysisFiles>
               <AnalysisFile>
-                <RelativePath>ButtonFunction.cs</RelativePath>
-                <ProjectName>Unity</ProjectName>
-                <AnalysisFileType>Model</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
                 <RelativePath>CalculatorModel.cs</RelativePath>
                 <ProjectName>Unity</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
@@ -232,7 +227,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>238</ProductionLoc>
+          <ProductionLoc>379</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>

@@ -44,47 +44,24 @@ namespace Unity
         private void InitializeComponent()
         {
             _buttons = new List<Button>();
-            this._textBox1 = new System.Windows.Forms.TextBox();
+            this._textBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
-            // 
-            // buttons 1-9
-            // 
-            for (int i = 0; i < 3; i++)
-            {
-                for (int j = 0; j < 3; j++)
-                {
-                    var buttonFunction = new ButtonFunction();
-                    buttonFunction._calculatorModel = _calculatorModel;
-                    buttonFunction.form1 = this;
-                    string numberString = (i*3+j+1).ToString();
-                    buttonFunction._context = numberString;
-                    
-                    var button = new Button();
-                    button.Location = new System.Drawing.Point(58+j*35, 93+35*3-i*35);
-                    button.Name = "button"+numberString;
-                    button.Size = new System.Drawing.Size(30, 30);
-                    button.TabIndex = 0;
-                    button.Text = numberString;
-                    button.UseVisualStyleBackColor = true;
-                    button.Click += new System.EventHandler(buttonFunction.ClickNumber);
-                    this.Controls.Add(button);
-                }
-            }
-            // 
-            // textBox1
+            // richTextBox1
             // 
             this._textBox1.Location = new System.Drawing.Point(33, 28);
             this._textBox1.Name = "textBox1";
-            this._textBox1.ReadOnly = false;
-            this._textBox1.Size = new System.Drawing.Size(337, 20);
+            this._textBox1.ReadOnly = true;
+            this._textBox1.Size = new System.Drawing.Size(240, 40);
             this._textBox1.TabIndex = 1;
-            _calculatorModel._context = "delay";
+            this._textBox1.Text = "";
+            this._textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19F);
+
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(300, 450);
             this.Controls.Add(this._textBox1);
             
             this.Name = "Form1";
@@ -94,18 +71,62 @@ namespace Unity
 
         }
 
+        /// <summary>
+        /// create
+        /// </summary>
+        private void CreateButtons()
+        {
+            List<List<string>> lists = new List<List<string>>();
+            lists.Add(new List<string> { "0", ".", "=", "/", });
+            lists.Add(new List<string> { "1", "2", "3", "*", } );
+            lists.Add(new List<string> { "4", "5", "6", "-", } );
+            lists.Add(new List<string> { "7", "8", "9", "+", } );
+            lists.Add(new List<string> { "", "", "CE", "C", });
+            for (var y = 0; y < lists.Count; y++)
+            {
+                var list = lists[y];
+                for (var x = 0; x < list.Count; x++)
+                {
+                    var o = list[x];
+                    if (o.Equals(""))
+                    {
+                        continue;
+                    }
+
+                    var button = new Button();
+                    button.Location = new System.Drawing.Point(25 + x * 60, 250 + 35 * 3 - y * 70);
+                    button.Name = "button" + o;
+                    button.Size = new System.Drawing.Size(60, 70);
+                    button.TabIndex = 0;
+                    button.Text = o;
+                    button.UseVisualStyleBackColor = true;
+                    button.Click += new System.EventHandler(
+                        (object sender, EventArgs e) =>
+                        {
+                            _calculatorModel.Input(o);
+                            GetTextBox1().Text = GetCalculatorModel().GetOutput();
+                            // GetTextBox1().Text = GetCalculatorModel()._result + " "
+                            //                                                   + GetCalculatorModel()._processingNumber +
+                            //                                                   " "
+                            //                                                   + GetCalculatorModel()._operator;
+                        });
+                    this.Controls.Add(button);
+                }
+            }
+        }
+        
         #endregion
 
         /// <summary>
         /// getTextBox1
         /// </summary>
         /// <returns></returns>
-        public System.Windows.Forms.TextBox GetTextBox1()
+        public System.Windows.Forms.RichTextBox GetTextBox1()
         {
             return _textBox1;
         }
         private List<Button> _buttons;
-        private System.Windows.Forms.TextBox _textBox1;
+        private System.Windows.Forms.RichTextBox _textBox1;
     }
 }
 
