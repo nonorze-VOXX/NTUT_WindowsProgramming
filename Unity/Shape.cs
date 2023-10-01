@@ -35,6 +35,15 @@ namespace Unity
         {
             return _info;
         }
+        public virtual string GetInfoString()
+        {
+            string result = "";
+            foreach(var i in _info)
+            {
+                result += i.ToString();
+            }
+            return result;
+        }
 
         public virtual string GetShapeName()
         {

@@ -44,7 +44,6 @@ namespace Unity
             this.說明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.關於ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rightGroupBox = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.topbar.SuspendLayout();
             this.rightGroupBox.SuspendLayout();
@@ -59,10 +58,10 @@ namespace Unity
             this.delete,
             this.shape,
             this.information});
-            this.dataGridView.Location = new System.Drawing.Point(6, 36);
+            this.dataGridView.Location = new System.Drawing.Point(6, 72);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
-            this.dataGridView.Size = new System.Drawing.Size(279, 330);
+            this.dataGridView.Size = new System.Drawing.Size(273, 348);
             this.dataGridView.TabIndex = 0;
             // 
             // delete
@@ -89,7 +88,7 @@ namespace Unity
             // 
             // createButton
             // 
-            this.createButton.Location = new System.Drawing.Point(309, 99);
+            this.createButton.Location = new System.Drawing.Point(204, 30);
             this.createButton.Name = "createButton";
             this.createButton.Size = new System.Drawing.Size(75, 23);
             this.createButton.TabIndex = 1;
@@ -99,13 +98,15 @@ namespace Unity
             // 
             // shapeComboBox
             // 
+            this.shapeComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.shapeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.shapeComboBox.FormattingEnabled = true;
             this.shapeComboBox.Items.AddRange(new object[] {
             "Line",
             "Rectangle"});
-            this.shapeComboBox.Location = new System.Drawing.Point(163, 191);
+            this.shapeComboBox.Location = new System.Drawing.Point(6, 30);
             this.shapeComboBox.Name = "shapeComboBox";
-            this.shapeComboBox.Size = new System.Drawing.Size(121, 21);
+            this.shapeComboBox.Size = new System.Drawing.Size(178, 21);
             this.shapeComboBox.TabIndex = 2;
             // 
             // topbar
@@ -135,29 +136,21 @@ namespace Unity
             // rightGroupBox
             // 
             this.rightGroupBox.Controls.Add(this.dataGridView);
-            this.rightGroupBox.Location = new System.Drawing.Point(562, 27);
+            this.rightGroupBox.Controls.Add(this.shapeComboBox);
+            this.rightGroupBox.Controls.Add(this.createButton);
+            this.rightGroupBox.Location = new System.Drawing.Point(550, 27);
             this.rightGroupBox.Name = "rightGroupBox";
             this.rightGroupBox.Size = new System.Drawing.Size(285, 426);
             this.rightGroupBox.TabIndex = 4;
             this.rightGroupBox.TabStop = false;
             this.rightGroupBox.Text = "groupBox1";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(21, 63);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(409, 20);
-            this.textBox1.TabIndex = 5;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 503);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.rightGroupBox);
-            this.Controls.Add(this.shapeComboBox);
-            this.Controls.Add(this.createButton);
             this.Controls.Add(this.topbar);
             this.MainMenuStrip = this.topbar;
             this.Name = "Form1";
@@ -182,7 +175,6 @@ namespace Unity
         private DataGridViewButtonColumn delete;
         private DataGridViewTextBoxColumn shape;
         private DataGridViewTextBoxColumn information;
-        private TextBox textBox1;
     }
 }
 

@@ -22,5 +22,9 @@
             _x = x;
             _y = y;
         }
+        public  override string ToString()
+        {
+            return ("(" + _x + "," + _y + ")").ToString();
+        }
     }
 }

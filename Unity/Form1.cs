@@ -10,20 +10,13 @@ namespace Unity
         {
             shapeModel = new ShapeModel();
             InitializeComponent();
-            this.dataGridView.Rows.Add("", 1, 1, 1);
             this.dataGridView.CellContentClick += DeleteButton_Click;
         }
 
         private void createButton_Click(object sender, EventArgs e)
         {
-            string str = shapeComboBox.Text;
             ShapeType shapeType;
             var r = new Random();
-            if (Enum.TryParse(str, out shapeType))
-                str += "SUCC";
-            else
-                str += "fail";
-            textBox1.Text = str;
             shapeModel.Add(shapeComboBox.Text);
             UpdateDataGridView(shapeModel);
         }
@@ -33,14 +26,17 @@ namespace Unity
             dataGridView.Rows.Clear();
             foreach(var s in shapeModel.shapeList)
             {
-                dataGridView.Rows.Add("",s.GetShapeName(),s.GetInfo()) ;
+                dataGridView.Rows.Add("",s.GetShapeName(),s.GetInfoString()) ;
             }
         }
 
         private void DeleteButton_Click(object sender, DataGridViewCellEventArgs  e)
         {
-            shapeModel.RemoveIndex(e.RowIndex);
-            dataGridView.Rows.RemoveAt(e.RowIndex);
+            if (e.ColumnIndex == 0&&e.RowIndex!=-1)
+            {
+                shapeModel.RemoveIndex(e.RowIndex);
+                dataGridView.Rows.RemoveAt(e.RowIndex);
+            }
         }
     }
 }
