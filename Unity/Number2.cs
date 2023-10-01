@@ -32,10 +32,10 @@
             }
         }
 
-        public Number2(float x, float y)
+        public Number2(float first, float second)
         {
-            _first = x;
-            _second = y;
+            _first = first;
+            _second = second;
         }
 
         /// <summary>
@@ -44,8 +44,7 @@
         /// <returns></returns>
         public override string ToString()
         {
-
-            return ROUND_BRACKET_LEFT + _first + COMMA+ _second + ROUND_BRACKET_RIGHT;
+            return ROUND_BRACKET_LEFT + _first + COMMA + _second + ROUND_BRACKET_RIGHT;
         }
     }
 }
