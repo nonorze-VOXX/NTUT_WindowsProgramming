@@ -2,7 +2,7 @@
 {
     public class Line : Shape
     {
-        public Line(Vector2 start, Vector2 end) : base(start, end)
+        public Line(Number2 start, Number2 end) : base(start, end)
         {
             ShapeType = ShapeType.LINE;
         }

@@ -8,7 +8,14 @@
 
     internal class ShapeFactory
     {
-        public static Shape CreateShape(ShapeType shapeType, Vector2 start, Vector2 end)
+        /// <summary>
+        /// create shape by factory
+        /// </summary>
+        /// <param name="shapeType"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public static Shape CreateShape(ShapeType shapeType, Number2 start, Number2 end)
         {
             switch (shapeType)
             {

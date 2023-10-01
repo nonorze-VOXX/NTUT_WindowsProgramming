@@ -191,11 +191,6 @@
           <AnalysisFileManager>
             <AnalysisFiles>
               <AnalysisFile>
-                <RelativePath>CalculatorModel.cs</RelativePath>
-                <ProjectName>Unity</ProjectName>
-                <AnalysisFileType>Model</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
                 <RelativePath>Form1.cs</RelativePath>
                 <ProjectName>Unity</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
@@ -204,6 +199,16 @@
                 <RelativePath>Form1.Designer.cs</RelativePath>
                 <ProjectName>Unity</ProjectName>
                 <AnalysisFileType>Designer</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Line.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Number2.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Unknown</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
                 <RelativePath>Program.cs</RelativePath>
@@ -225,9 +230,29 @@
                 <ProjectName>Unity</ProjectName>
                 <AnalysisFileType>Designer</AnalysisFileType>
               </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Rectangle.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Shape.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ShapeFactory.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ShapeModel.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>379</ProductionLoc>
+          <ProductionLoc>557</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>
