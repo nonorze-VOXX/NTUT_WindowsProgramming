@@ -40,32 +40,40 @@ namespace Unity
             this.information = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.createButton = new System.Windows.Forms.Button();
             this.shapeComboBox = new System.Windows.Forms.ComboBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.topbar = new System.Windows.Forms.MenuStrip();
             this.說明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.關於ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rightGroupBox = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.menuStrip1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.topbar.SuspendLayout();
+            this.rightGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView
             // 
+            this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.delete,
             this.shape,
             this.information});
-            this.dataGridView.Location = new System.Drawing.Point(0, 65);
+            this.dataGridView.Location = new System.Drawing.Point(6, 36);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(285, 361);
+            this.dataGridView.ReadOnly = true;
+            this.dataGridView.Size = new System.Drawing.Size(279, 330);
             this.dataGridView.TabIndex = 0;
             // 
             // delete
             // 
+            this.delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.delete.HeaderText = "delete";
             this.delete.Name = "delete";
+            this.delete.ReadOnly = true;
+            this.delete.Text = "delete";
+            this.delete.UseColumnTextForButtonValue = true;
+            this.delete.Width = 79;
             // 
             // shape
             // 
@@ -87,6 +95,7 @@ namespace Unity
             this.createButton.TabIndex = 1;
             this.createButton.Text = "create";
             this.createButton.UseVisualStyleBackColor = true;
+            this.createButton.Click += new System.EventHandler(this.createButton_Click);
             // 
             // shapeComboBox
             // 
@@ -99,15 +108,15 @@ namespace Unity
             this.shapeComboBox.Size = new System.Drawing.Size(121, 21);
             this.shapeComboBox.TabIndex = 2;
             // 
-            // menuStrip1
+            // topbar
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.topbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.說明ToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(847, 24);
-            this.menuStrip1.TabIndex = 3;
-            this.menuStrip1.Text = "menuStrip1";
+            this.topbar.Location = new System.Drawing.Point(0, 0);
+            this.topbar.Name = "topbar";
+            this.topbar.Size = new System.Drawing.Size(847, 24);
+            this.topbar.TabIndex = 3;
+            this.topbar.Text = "menuStrip1";
             // 
             // 說明ToolStripMenuItem
             // 
@@ -123,32 +132,40 @@ namespace Unity
             this.關於ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.關於ToolStripMenuItem.Text = "關於";
             // 
-            // groupBox1
+            // rightGroupBox
             // 
-            this.groupBox1.Controls.Add(this.dataGridView);
-            this.groupBox1.Location = new System.Drawing.Point(562, 27);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(285, 426);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.rightGroupBox.Controls.Add(this.dataGridView);
+            this.rightGroupBox.Location = new System.Drawing.Point(562, 27);
+            this.rightGroupBox.Name = "rightGroupBox";
+            this.rightGroupBox.Size = new System.Drawing.Size(285, 426);
+            this.rightGroupBox.TabIndex = 4;
+            this.rightGroupBox.TabStop = false;
+            this.rightGroupBox.Text = "groupBox1";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(21, 63);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(409, 20);
+            this.textBox1.TabIndex = 5;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 503);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.rightGroupBox);
             this.Controls.Add(this.shapeComboBox);
             this.Controls.Add(this.createButton);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.topbar);
+            this.MainMenuStrip = this.topbar;
             this.Name = "Form1";
             this.Text = "Caculator";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
+            this.topbar.ResumeLayout(false);
+            this.topbar.PerformLayout();
+            this.rightGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,13 +175,14 @@ namespace Unity
         private DataGridView dataGridView;
         private Button createButton;
         private ComboBox shapeComboBox;
+        private MenuStrip topbar;
+        private ToolStripMenuItem 說明ToolStripMenuItem;
+        private ToolStripMenuItem 關於ToolStripMenuItem;
+        private GroupBox rightGroupBox;
         private DataGridViewButtonColumn delete;
         private DataGridViewTextBoxColumn shape;
         private DataGridViewTextBoxColumn information;
-        private MenuStrip menuStrip1;
-        private ToolStripMenuItem 說明ToolStripMenuItem;
-        private ToolStripMenuItem 關於ToolStripMenuItem;
-        private GroupBox groupBox1;
+        private TextBox textBox1;
     }
 }
 

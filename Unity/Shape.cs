@@ -8,13 +8,10 @@ namespace Unity
 {
     public class Shape
     {
-        private List<Vector2> _info;
+        private List<Vector2> _info = new List<Vector2>();
         private ShapeType _shapeType;
 
 
-        public Shape()
-        {
-        }
 
         public Shape(Vector2 start, Vector2 end)
         {
