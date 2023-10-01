@@ -44,6 +44,8 @@ namespace Unity
             this.說明ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.關於ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rightGroupBox = new System.Windows.Forms.GroupBox();
+            this.slide1 = new System.Windows.Forms.Button();
+            this.slide2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.topbar.SuspendLayout();
             this.rightGroupBox.SuspendLayout();
@@ -145,11 +147,31 @@ namespace Unity
             this.rightGroupBox.TabStop = false;
             this.rightGroupBox.Text = "groupBox1";
             // 
+            // slide1
+            // 
+            this.slide1.Location = new System.Drawing.Point(26, 67);
+            this.slide1.Name = "slide1";
+            this.slide1.Size = new System.Drawing.Size(75, 23);
+            this.slide1.TabIndex = 5;
+            this.slide1.Text = "Slide1";
+            this.slide1.UseVisualStyleBackColor = true;
+            // 
+            // slide2
+            // 
+            this.slide2.Location = new System.Drawing.Point(26, 118);
+            this.slide2.Name = "slide2";
+            this.slide2.Size = new System.Drawing.Size(75, 23);
+            this.slide2.TabIndex = 6;
+            this.slide2.Text = "slide2";
+            this.slide2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 503);
+            this.Controls.Add(this.slide2);
+            this.Controls.Add(this.slide1);
             this.Controls.Add(this.rightGroupBox);
             this.Controls.Add(this.topbar);
             this.MainMenuStrip = this.topbar;
@@ -175,6 +197,8 @@ namespace Unity
         private DataGridViewButtonColumn delete;
         private DataGridViewTextBoxColumn shape;
         private DataGridViewTextBoxColumn information;
+        private Button slide1;
+        private Button slide2;
     }
 }
 
