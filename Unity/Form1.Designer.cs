@@ -62,6 +62,7 @@ namespace Unity
             this._information});
             this._dataGridView.Location = new System.Drawing.Point(6, 72);
             this._dataGridView.Name = "dataGridView";
+            this._dataGridView.RowHeadersVisible = false;
             this._dataGridView.ReadOnly = true;
             this._dataGridView.Size = new System.Drawing.Size(273, 348);
             this._dataGridView.TabIndex = 0;
