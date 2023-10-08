@@ -6,11 +6,21 @@ namespace Unity
     public partial class Form1 : Form
     {
         ShapeModel _shapeModel;
+
         public Form1()
         {
             _shapeModel = new ShapeModel();
             InitializeComponent();
             this._dataGridView.CellContentClick += DeleteButtonClick;
+            this._dataGridView.DataSource = _shapeModel.shapeList;
+        }
+
+        public Form1(ShapeModel shapeModel)
+        {
+            this._shapeModel = shapeModel;
+            InitializeComponent();
+            this._dataGridView.CellContentClick += DeleteButtonClick;
+            this._dataGridView.DataSource = _shapeModel.shapeList;
         }
 
         /// <summary>
@@ -22,21 +32,8 @@ namespace Unity
         {
             var random = new Random();
             _shapeModel.Add(_shapeComboBox.Text);
-            UpdateDataGridView(_shapeModel);
         }
 
-        /// <summary>
-        /// update data grid view same with shape model
-        /// </summary>
-        /// <param name="shapeModel"></param>
-        private void UpdateDataGridView(ShapeModel shapeModel)
-        {
-            _dataGridView.Rows.Clear();
-            foreach (var s in shapeModel.shapeList)
-            {
-                _dataGridView.Rows.Add("",s.GetShapeName(),s.GetInfoString()) ;
-            }
-        }
 
         /// <summary>
         /// delete button click with delete model and datagridview
@@ -47,7 +44,7 @@ namespace Unity
         {
             if (e.ColumnIndex == 0 && e.RowIndex != -1)
             {
-                _shapeModel.RemoveIndex(e.RowIndex);
+                //    _shapeModel.RemoveIndex(e.RowIndex);
                 _dataGridView.Rows.RemoveAt(e.RowIndex);
             }
         }

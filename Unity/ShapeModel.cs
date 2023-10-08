@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace Unity
 {
-    internal class ShapeModel
+    public class ShapeModel
     {
         private const int HUNDRED = 100;
-        private List<Shape> _shapeList = new List<Shape>();
-        public List<Shape> shapeList 
+        private BindingList<Shape> _shapeList = new BindingList<Shape>();
+        public BindingList<Shape> shapeList
         {
-            get 
+            get
             {
-                return _shapeList; 
+                return _shapeList;
             }
         }
 
@@ -27,10 +24,14 @@ namespace Unity
             var zero = 0;
             ShapeType shapeType;
             var random = new Random();
+            Number2 number = new Number2(random.Next(zero, HUNDRED), random.Next(zero, HUNDRED));
+
             if (Enum.TryParse(type.ToUpper(), out shapeType))
+            {
                 Add(shapeType,
-                    new Number2(random.Next(zero, HUNDRED), random.Next(zero, HUNDRED)),
-                    new Number2(random.Next(zero, HUNDRED), random.Next(zero, HUNDRED)));
+                    new Number2(random.Next(zero, (int)number.X), random.Next(zero, (int)number.Y)),
+                    new Number2(random.Next((int)number.X, HUNDRED), random.Next((int)number.Y, HUNDRED)));
+            }
         }
 
         /// <summary>

@@ -4,7 +4,7 @@
     {
         public Line(Number2 start, Number2 end) : base(start, end)
         {
-            ShapeType = ShapeType.LINE;
+            shape = ShapeType.LINE;
         }
     }
 }

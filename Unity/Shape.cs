@@ -1,32 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Unity
 {
     public class Shape
     {
-        private List<Number2> _info = new List<Number2>();
         private ShapeType _shapeType;
+        public ShapeType shape
+        {
+            get
+            {
+                return _shapeType;
+            }
+            set
+            {
+                _shapeType = value;
+            }
+        }
+        private List<Number2> _info = new List<Number2>();
+        public string infomation
+        {
+            get
+            {
+                if (_info.Count == 0)
+                {
+                    return "";
+                }
+                return _info[0].ToString() + ", " + _info[1].ToString();
+            }
+        }
 
         public Shape(Number2 start, Number2 end)
         {
             SetInfo(start, end);
         }
 
-        public ShapeType ShapeType
-        {
-            get 
-            {
-                return _shapeType; 
-            }
-            set 
-            {
-                _shapeType = value;
-            }
-        }
 
         /// <summary>
         /// set two point at once
