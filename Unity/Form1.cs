@@ -34,7 +34,6 @@ namespace Unity
             _shapeModel.Add(_shapeComboBox.Text);
         }
 
-
         /// <summary>
         /// delete button click with delete model and datagridview
         /// </summary>

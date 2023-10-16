@@ -5,6 +5,8 @@ namespace Unity
     public class Shape
     {
         private ShapeType _shapeType;
+        private const string COMMA = ",";
+        private const string EMPTY = " ";
         public ShapeType shape
         {
             get
@@ -17,7 +19,7 @@ namespace Unity
             }
         }
         private List<Number2> _info = new List<Number2>();
-        public string infomation
+        public string Information
         {
             get
             {
@@ -25,7 +27,7 @@ namespace Unity
                 {
                     return "";
                 }
-                return _info[0].ToString() + ", " + _info[1].ToString();
+                return _info[0].ToString() + COMMA + EMPTY + _info[1].ToString();
             }
         }
 
@@ -33,7 +35,6 @@ namespace Unity
         {
             SetInfo(start, end);
         }
-
 
         /// <summary>
         /// set two point at once

@@ -43,7 +43,7 @@ namespace Unity
             this._rightGroupBox = new System.Windows.Forms.GroupBox();
             this._slide1 = new System.Windows.Forms.Button();
             this._slide2 = new System.Windows.Forms.Button();
-            this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this._delete = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
             this._topBar.SuspendLayout();
             this._rightGroupBox.SuspendLayout();
@@ -55,7 +55,7 @@ namespace Unity
             this._dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this._dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.delete});
+            this._delete});
             this._dataGridView.Location = new System.Drawing.Point(6, 72);
             this._dataGridView.Name = "_dataGridView";
             this._dataGridView.ReadOnly = true;
@@ -142,13 +142,13 @@ namespace Unity
             // 
             // delete
             // 
-            this.delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.delete.HeaderText = "delete";
-            this.delete.Name = "delete";
-            this.delete.ReadOnly = true;
-            this.delete.Text = "delete";
-            this.delete.UseColumnTextForButtonValue = true;
-            this.delete.Width = 79;
+            this._delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this._delete.HeaderText = "delete";
+            this._delete.Name = "delete";
+            this._delete.ReadOnly = true;
+            this._delete.Text = "delete";
+            this._delete.UseColumnTextForButtonValue = true;
+            this._delete.Width = 79;
             // 
             // Form1
             // 
@@ -184,7 +184,6 @@ namespace Unity
         private DataGridViewTextBoxColumn _information;
         private Button _slide1;
         private Button _slide2;
-        private DataGridViewButtonColumn delete;
     }
 }
 
