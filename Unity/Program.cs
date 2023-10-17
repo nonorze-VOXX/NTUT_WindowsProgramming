@@ -14,7 +14,11 @@ namespace Unity
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             ShapeModel shapeModel = new ShapeModel();
-            Application.Run(new Form1(shapeModel));
+            PresentationModel presentationModel = new PresentationModel(shapeModel);
+            shapeModel.Attach(presentationModel);
+            Form1 form = new Form1(shapeModel, presentationModel);
+            shapeModel.Attach(form);
+            Application.Run(form);
         }
     }
 }

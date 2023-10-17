@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Unity
@@ -13,6 +14,24 @@ namespace Unity
             {
                 return _shapeList;
             }
+        }
+        private List<Interface.IShapeObserver> _subscriberList = new List<Interface.IShapeObserver>();
+        public void Attach(Interface.IShapeObserver shapeObserver)
+        {
+            _subscriberList.Add(shapeObserver);
+        }
+
+        private void NotifyShapeObserver()
+        {
+            foreach (var shapeOvserver in _subscriberList)
+            {
+                shapeOvserver.UpdateView();
+            }
+        }
+
+        public void Detach(Interface.IShapeObserver shapeObserver)
+        {
+            _subscriberList.Remove(shapeObserver);
         }
 
         /// <summary>

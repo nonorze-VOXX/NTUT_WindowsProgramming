@@ -3,24 +3,23 @@ using System.Windows.Forms;
 
 namespace Unity
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, Interface.IShapeObserver
     {
         ShapeModel _shapeModel;
+        PresentationModel _presentationModel;
 
-        public Form1()
+        public Form1(ShapeModel shapeModel, PresentationModel presentationModel)
         {
-            _shapeModel = new ShapeModel();
+            this._presentationModel = presentationModel;
+            this._shapeModel = shapeModel;
             InitializeComponent();
             this._dataGridView.CellContentClick += DeleteButtonClick;
             this._dataGridView.DataSource = _shapeModel.shapeList;
         }
 
-        public Form1(ShapeModel shapeModel)
+        public void UpdateView()
         {
-            this._shapeModel = shapeModel;
-            InitializeComponent();
-            this._dataGridView.CellContentClick += DeleteButtonClick;
-            this._dataGridView.DataSource = _shapeModel.shapeList;
+            throw new NotImplementedException();
         }
 
         /// <summary>
