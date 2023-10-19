@@ -15,7 +15,7 @@ namespace Unity
             Application.SetCompatibleTextRenderingDefault(false);
             ShapeModel shapeModel = new ShapeModel();
             PresentationModel presentationModel = new PresentationModel(shapeModel);
-            var form = new Form1(shapeModel, presentationModel);
+            var form = new Form1(presentationModel);
             shapeModel.Attach(form);
             Application.Run(form);
         }

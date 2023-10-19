@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace Unity
 {
@@ -31,11 +32,13 @@ namespace Unity
 
         public void DrawRectangle(Point2 point1, Point2 point2)
         {
+            var position = new Point2(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y));
+            Point2 distance = Point2.Abs(point1, point2);
             _graphics.DrawRectangle(
                 Pens.Black,
-                point1.X, point1.Y,
-                point2.X - point1.X,
-                point2.Y - point1.Y
+                position.X, position.Y,
+                distance.X,
+                distance.Y
                 );
         }
     }

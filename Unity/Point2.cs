@@ -1,4 +1,6 @@
-﻿namespace Unity
+﻿using System;
+
+namespace Unity
 {
     public class Point2
     {
@@ -37,6 +39,11 @@
         {
             _first = first;
             _second = second;
+        }
+
+        internal static Point2 Abs(Point2 point1, Point2 point2)
+        {
+            return new Point2(Math.Abs(point1.X - point2.X), Math.Abs(point1.Y - point2.Y));
         }
 
         /// <summary>

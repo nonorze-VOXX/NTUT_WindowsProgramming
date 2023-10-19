@@ -50,29 +50,27 @@ namespace Unity
             }
         }
 
-        internal void HandleCanvasMouseDown(Point2 point)
+        internal void MouseDown(ShapeType i, Point2 point)
         {
             if (point.X > 0 && point.Y > 0)
             {
+                _hint = ShapeFactory.CreateShape(i, Point2.ZERO, Point2.ZERO);
                 _hint.SetFirst(point);
                 _isPressed = true;
             }
         }
 
-        internal void HandleCanvasMouseUp(Point2 point)
+        internal void MouseUp(Point2 point)
         {
             if (_isPressed)
             {
                 _isPressed = false;
-                Line line = new Line(_hint.GetFirst(), _hint.GetSecond());
-                _hint.SetFirst(Point2.ZERO);
-                _hint.SetSecond(Point2.ZERO);
-                _shapeList.Add(line);
+                _shapeList.Add(_hint);
                 NotifyModelChanged();
             }
         }
 
-        internal void HandleCanvasMouseMove(Point2 point)
+        internal void MouseMove(Point2 point)
         {
             if (_isPressed)
             {
