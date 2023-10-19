@@ -191,6 +191,16 @@
           <AnalysisFileManager>
             <AnalysisFiles>
               <AnalysisFile>
+                <RelativePath>Canvas.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Ellipse.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>Form1.cs</RelativePath>
                 <ProjectName>Unity</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
@@ -201,12 +211,27 @@
                 <AnalysisFileType>Designer</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>IGraphics.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>IShapeObserver.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>Line.cs</RelativePath>
                 <ProjectName>Unity</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>Number2.cs</RelativePath>
+                <RelativePath>Point2.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>PresentationModel.cs</RelativePath>
                 <ProjectName>Unity</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
@@ -250,9 +275,14 @@
                 <ProjectName>Unity</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>WindowFormsGraphicsAdaptor.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>538</ProductionLoc>
+          <ProductionLoc>1105</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>

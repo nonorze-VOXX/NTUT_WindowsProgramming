@@ -2,6 +2,9 @@
 {
     public interface IShapeObserver
     {
-        void Bell();
+        /// <summary>
+        /// notify
+        /// </summary>
+        void ReceiveBell();
     }
 }

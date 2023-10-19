@@ -9,12 +9,5 @@ namespace Unity
         {
             DoubleBuffered = true;
         }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            this.ResumeLayout(false);
-
-        }
     }
 }

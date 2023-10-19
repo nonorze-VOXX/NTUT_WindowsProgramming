@@ -7,9 +7,13 @@
             shape = ShapeType.Line;
         }
 
+        /// <summary>
+        /// draw
+        /// </summary>
+        /// <param name="graphics"></param>
         public override void Draw(IGraphics graphics)
         {
-            graphics.Drawline(_info[0], _info[1]);
+            graphics.DrawLine(_info[0], _info[1]);
         }
     }
 }

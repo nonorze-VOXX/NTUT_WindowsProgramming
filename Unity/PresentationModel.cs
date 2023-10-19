@@ -9,55 +9,95 @@ namespace Unity
     public class PresentationModel
     {
         ShapeModel _shapeModel;
-        List<bool> toolbarActive;
+        List<bool> _shapeButtonActive;
         public PresentationModel(ShapeModel model)
         {
             _shapeModel = model;
-            toolbarActive = new List<bool> { false, false, false };
+            _shapeButtonActive = new List<bool>
+            {
+                false, false, false
+            };
         }
+
+        /// <summary>
+        /// draw
+        /// </summary>
+        /// <param name="graphics"></param>
         public void Draw(System.Drawing.Graphics graphics)
         {
             var graphicsAdaptor = new WindowFormsGraphicsAdaptor(graphics);
             _shapeModel.Draw(graphicsAdaptor);
         }
 
-        internal void ClickDrawButton(List<System.Windows.Forms.ToolStripItem> toolStripItems, int clickedIndex, bool clicked)
+        /// <summary>
+        /// update tool stript
+        /// </summary>
+        /// <param name="toolStripItems"></param>
+        /// <param name="clickedIndex"></param>
+        /// <param name="clicked"></param>
+        internal void UpdateShapeButtonActive(List<System.Windows.Forms.ToolStripItem> toolStripItems, int clickedIndex, bool clicked)
         {
-            toolbarActive = new List<bool> { false, false, false };
-            toolbarActive[clickedIndex] = clicked;
+            _shapeButtonActive = new List<bool>();
+            _shapeButtonActive.Add(false);
+            _shapeButtonActive.Add(false);
+            _shapeButtonActive.Add(false);
+            _shapeButtonActive[clickedIndex] = clicked;
             for (int i = 0; i < toolStripItems.Count; i++)
             {
                 var toolStripButton = (System.Windows.Forms.ToolStripButton)toolStripItems[i];
-                toolStripButton.Checked = toolbarActive[i];
+                toolStripButton.Checked = _shapeButtonActive[i];
             }
         }
 
+        /// <summary>
+        /// get
+        /// </summary>
+        /// <returns></returns>
         internal BindingList<Shape> GetShapeList()
         {
             return _shapeModel.shapeList;
         }
 
+        #region CanvasMouse
+
+        /// <summary>
+        /// mouse up
+        /// </summary>
+        /// <param name="canvas"></param>
+        /// <param name="point"></param>
+        /// <param name="toolStripItems"></param>
         public void HandleCanvasMouseUp(Canvas canvas, Point2 point, List<System.Windows.Forms.ToolStripItem> toolStripItems)
         {
             _shapeModel.MouseUp(point);
-            ClickDrawButton(toolStripItems, 0, false);
+            UpdateShapeButtonActive(toolStripItems, 0, false);
             canvas.Cursor = System.Windows.Forms.Cursors.Default;
 
         }
-        public void HandleCanvasMouseMove(object sender, MouseEventArgs e)
+
+        /// <summary>
+        /// mouse move
+        /// </summary>
+        /// <param name="point"></param>
+        public void HandleCanvasMouseMove(Point2 point)
         {
-            _shapeModel.MouseMove(new Point2(e.X, e.Y));
+            _shapeModel.MouseMove(point);
         }
-        public void HandleCanvasMouseDown(object sender, MouseEventArgs e)
+
+        /// <summary>
+        /// mouse down
+        /// </summary>
+        /// <param name="point"></param>
+        public void HandleCanvasMouseDown(Point2 point)
         {
-            for (int i = 0; i < toolbarActive.Count; i++)
+            for (int i = 0; i < _shapeButtonActive.Count; i++)
             {
-                if (toolbarActive[i])
+                if (_shapeButtonActive[i])
                 {
-                    _shapeModel.MouseDown((ShapeType)i, new Point2(e.X, e.Y));
+                    _shapeModel.MouseDown((ShapeType)i, point);
                 }
             }
         }
+        #endregion
 
         /// <summary>
         /// create shape button click
@@ -85,11 +125,18 @@ namespace Unity
             }
         }
 
+        /// <summary>
+        /// click
+        /// </summary>
+        /// <param name="toolStripItems"></param>
+        /// <param name="shapeType"></param>
+        /// <param name="canvas"></param>
+        /// <returns></returns>
         public ButtonFunction HandleToolStripButtonClick(List<ToolStripItem> toolStripItems, ShapeType shapeType, Canvas canvas)
         {
             return (object sender, EventArgs e) =>
             {
-                ClickDrawButton(toolStripItems, (int)shapeType, true);
+                UpdateShapeButtonActive(toolStripItems, (int)shapeType, true);
                 canvas.Cursor = System.Windows.Forms.Cursors.Cross;
             };
         }

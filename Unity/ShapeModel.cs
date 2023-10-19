@@ -5,12 +5,12 @@ namespace Unity
 {
     public class ShapeModel
     {
-        public event ModelChangedEventhandler _modelChanged;
-        public delegate void ModelChangedEventhandler();
+        public event ModelChangedEventHandler _modelChanged;
+        public delegate void ModelChangedEventHandler();
         private const int HUNDRED = 100;
         private BindingList<Shape> _shapeList = new BindingList<Shape>();
         bool _isPressed;
-        Shape _hint = new Line(Point2.ZERO, Point2.ZERO);
+        Shape _hint = new Line(new Point2(0, 0), new Point2(0, 0));
         public BindingList<Shape> shapeList
         {
             get
@@ -20,6 +20,10 @@ namespace Unity
         }
 
         #region draw
+        /// <summary>
+        /// draw
+        /// </summary>
+        /// <param name="graphics"></param>
         internal void Draw(IGraphics graphics)
         {
             foreach (Shape shape in _shapeList)
@@ -34,14 +38,28 @@ namespace Unity
         #endregion
 
         #region subscribe
+
+        /// <summary>
+        /// attach
+        /// </summary>
+        /// <param name="shapeObserver"></param>
         public void Attach(IShapeObserver shapeObserver)
         {
-            _modelChanged += shapeObserver.Bell;
+            _modelChanged += shapeObserver.ReceiveBell;
         }
+
+        /// <summary>
+        /// detach
+        /// </summary>
+        /// <param name="shapeObserver"></param>
         public void Detach(IShapeObserver shapeObserver)
         {
-            _modelChanged -= shapeObserver.Bell;
+            _modelChanged -= shapeObserver.ReceiveBell;
         }
+
+        /// <summary>
+        /// notify
+        /// </summary>
         void NotifyModelChanged()
         {
             if (_modelChanged != null)
@@ -50,16 +68,25 @@ namespace Unity
             }
         }
 
-        internal void MouseDown(ShapeType i, Point2 point)
+        /// <summary>
+        /// mouse down
+        /// </summary>
+        /// <param name="shapeType"></param>
+        /// <param name="point"></param>
+        internal void MouseDown(ShapeType shapeType, Point2 point)
         {
-            if (point.X > 0 && point.Y > 0)
+            if (point.IsBothPositive())
             {
-                _hint = ShapeFactory.CreateShape(i, Point2.ZERO, Point2.ZERO);
+                _hint = ShapeFactory.CreateShape(shapeType, new Point2(0, 0), new Point2(0, 0));
                 _hint.SetFirst(point);
                 _isPressed = true;
             }
         }
 
+        /// <summary>
+        /// mouse up
+        /// </summary>
+        /// <param name="point"></param>
         internal void MouseUp(Point2 point)
         {
             if (_isPressed)
@@ -70,6 +97,10 @@ namespace Unity
             }
         }
 
+        /// <summary>
+        /// mouse up
+        /// </summary>
+        /// <param name="point"></param>
         internal void MouseMove(Point2 point)
         {
             if (_isPressed)

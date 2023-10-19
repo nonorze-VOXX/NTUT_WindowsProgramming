@@ -20,6 +20,10 @@ namespace Unity
         }
         protected List<Point2> _info = new List<Point2>();
 
+        /// <summary>
+        /// draw
+        /// </summary>
+        /// <param name="graphics"></param>
         public abstract void Draw(IGraphics graphics);
 
         public string Information
@@ -92,10 +96,20 @@ namespace Unity
         {
             return _shapeType.ToString();
         }
+
+        /// <summary>
+        /// set
+        /// </summary>
+        /// <param name="point"></param>
         public void SetFirst(Point2 point)
         {
             _info[0] = point;
         }
+
+        /// <summary>
+        /// set
+        /// </summary>
+        /// <param name="point"></param>
         public void SetSecond(Point2 point)
         {
             _info[1] = point;

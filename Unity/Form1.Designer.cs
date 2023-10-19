@@ -35,7 +35,7 @@ namespace Unity
         private void InitializeComponent()
         {
             this._dataGridView = new System.Windows.Forms.DataGridView();
-            this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this._delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this._createButton = new System.Windows.Forms.Button();
             this._shapeComboBox = new System.Windows.Forms.ComboBox();
             this._topBar = new System.Windows.Forms.MenuStrip();
@@ -44,7 +44,7 @@ namespace Unity
             this._rightGroupBox = new System.Windows.Forms.GroupBox();
             this._slide1 = new System.Windows.Forms.Button();
             this._slide2 = new System.Windows.Forms.Button();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this._toolStrip1 = new System.Windows.Forms.ToolStrip();
             this._canvas = new Unity.Canvas();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
             this._topBar.SuspendLayout();
@@ -59,7 +59,7 @@ namespace Unity
             this._dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this._dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.delete});
+            this._delete});
             this._dataGridView.Location = new System.Drawing.Point(6, 72);
             this._dataGridView.Name = "_dataGridView";
             this._dataGridView.ReadOnly = true;
@@ -69,13 +69,13 @@ namespace Unity
             // 
             // delete
             // 
-            this.delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.delete.HeaderText = "delete";
-            this.delete.Name = "delete";
-            this.delete.ReadOnly = true;
-            this.delete.Text = "delete";
-            this.delete.UseColumnTextForButtonValue = true;
-            this.delete.Width = 79;
+            this._delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this._delete.HeaderText = "delete";
+            this._delete.Name = "delete";
+            this._delete.ReadOnly = true;
+            this._delete.Text = "delete";
+            this._delete.UseColumnTextForButtonValue = true;
+            this._delete.Width = 79;
             // 
             // _createButton
             // 
@@ -152,11 +152,11 @@ namespace Unity
             // 
             // toolStrip1
             // 
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(847, 25);
-            this.toolStrip1.TabIndex = 8;
-            this.toolStrip1.Text = "toolStrip1";
+            this._toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this._toolStrip1.Name = "toolStrip1";
+            this._toolStrip1.Size = new System.Drawing.Size(847, 25);
+            this._toolStrip1.TabIndex = 8;
+            this._toolStrip1.Text = "toolStrip1";
             // 
             // _canvas
             // 
@@ -171,7 +171,7 @@ namespace Unity
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 503);
-            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this._toolStrip1);
             this.Controls.Add(this._canvas);
             this.Controls.Add(this._slide2);
             this.Controls.Add(this._slide1);
@@ -197,13 +197,10 @@ namespace Unity
         private ToolStripMenuItem _toolStripMenuItem;
         private ToolStripMenuItem _aboutToolStripMenuItem;
         private GroupBox _rightGroupBox;
-        private DataGridViewButtonColumn _delete;
-        private DataGridViewTextBoxColumn _shape;
-        private DataGridViewTextBoxColumn _information;
         private Button _slide1;
         private Button _slide2;
-        private DataGridViewButtonColumn delete;
-        private ToolStrip toolStrip1;
+        private DataGridViewButtonColumn _delete;
+        private ToolStrip _toolStrip1;
         private Canvas _canvas;
     }
 }

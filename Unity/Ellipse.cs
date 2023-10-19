@@ -6,6 +6,11 @@
         {
             shape = ShapeType.Ellipse;
         }
+
+        /// <summary>
+        /// draw
+        /// </summary>
+        /// <param name="graphics"></param>
         public override void Draw(IGraphics graphics)
         {
             graphics.DrawEllipse(_info[0], _info[1]);
