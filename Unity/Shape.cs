@@ -56,9 +56,18 @@ namespace Unity
         /// getter
         /// </summary>
         /// <returns></returns>
-        public virtual List<Point2> GetInfo()
+        public virtual Point2 GetFirst()
         {
-            return _info;
+            return _info[0];
+        }
+
+        /// <summary>
+        /// getter
+        /// </summary>
+        /// <returns></returns>
+        public virtual Point2 GetSecond()
+        {
+            return _info[1];
         }
 
         /// <summary>
@@ -82,6 +91,14 @@ namespace Unity
         public virtual string GetShapeName()
         {
             return _shapeType.ToString();
+        }
+        public void SetFirst(Point2 point)
+        {
+            _info[0] = point;
+        }
+        public void SetSecond(Point2 point)
+        {
+            _info[1] = point;
         }
     }
 }

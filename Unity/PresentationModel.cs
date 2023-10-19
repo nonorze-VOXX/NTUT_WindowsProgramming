@@ -17,9 +17,15 @@ namespace Unity
             _model.Draw(graphicsAdaptor);
         }
 
-        internal void ClickDrawButton(ShapeType shapeType)
+        internal void ClickDrawButton(List<System.Windows.Forms.ToolStripItem> toolStripItems, ShapeType shapeType)
         {
             toolbarActive = new List<bool> { false, false, false };
+            toolbarActive[(int)shapeType] = true;
+            for (int i = 0; i < toolStripItems.Count; i++)
+            {
+                var toolStripButton = (System.Windows.Forms.ToolStripButton)toolStripItems[i];
+                toolStripButton.Checked = toolbarActive[i];
+            }
         }
     }
 }

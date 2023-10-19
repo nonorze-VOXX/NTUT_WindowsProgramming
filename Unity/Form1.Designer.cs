@@ -34,7 +34,6 @@ namespace Unity
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this._dataGridView = new System.Windows.Forms.DataGridView();
             this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this._createButton = new System.Windows.Forms.Button();
@@ -50,7 +49,6 @@ namespace Unity
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
             this._topBar.SuspendLayout();
             this._rightGroupBox.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // _dataGridView
@@ -185,8 +183,6 @@ namespace Unity
             this._topBar.ResumeLayout(false);
             this._topBar.PerformLayout();
             this._rightGroupBox.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

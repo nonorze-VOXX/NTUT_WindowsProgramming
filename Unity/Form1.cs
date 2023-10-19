@@ -9,7 +9,7 @@ namespace Unity
     {
         ShapeModel _shapeModel;
         PresentationModel _presentationModel;
-        ToolStripItem[] _toolStripItems;
+        List<ToolStripItem> _toolStripItems;
 
         public Form1(ShapeModel shapeModel, PresentationModel presentationModel)
         {
@@ -20,24 +20,37 @@ namespace Unity
             _dataGridView.CellContentClick += DeleteButtonClick;
             _dataGridView.DataSource = _shapeModel.shapeList;
             _canvas.Paint += HandleCanvasPaint;
+            _canvas.MouseUp += HandleCanvasMouseUp;
+            _canvas.MouseDown += HandleCanvasMouseDown;
+            _canvas.MouseMove += HandleCanvasMouseMove;
             _toolStripItems = GenerateToolStripItems();
-            toolStrip1.Items.AddRange(_toolStripItems);
+            toolStrip1.Items.AddRange(_toolStripItems.ToArray());
         }
 
-        ToolStripItem[] GenerateToolStripItems()
+        private void HandleCanvasMouseDown(object sender, MouseEventArgs e)
+        {
+            _shapeModel.HandleCanvasMouseDown(new Point2(e.X, e.Y));
+        }
+        private void HandleCanvasMouseUp(object sender, MouseEventArgs e)
+        {
+            _shapeModel.HandleCanvasMouseUp(new Point2(e.X, e.Y));
+        }
+        private void HandleCanvasMouseMove(object sender, MouseEventArgs e)
+        {
+            _shapeModel.HandleCanvasMouseMove(new Point2(e.X, e.Y));
+        }
+
+        List<ToolStripItem> GenerateToolStripItems()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            var toolStripItems = new ToolStripItem[3];
+            var toolStripItems = new List<ToolStripItem>();
             List<string> imageNames = new List<string>
-           {
-            "line.Image",
-            "rectangle.Image",
-            "ellipse.Image"
-           };
-            List<ShapeType> shapeTypes = new List<ShapeType> {
-                ShapeType.Line,
-                ShapeType.Rectangle,
-                ShapeType.Ellipse,
+            {
+                "line.Image", "rectangle.Image", "ellipse.Image"
+            };
+            List<ShapeType> shapeTypes = new List<ShapeType>
+            {
+                ShapeType.Line, ShapeType.Rectangle, ShapeType.Ellipse,
             };
             for (int i = 0; i < 3; i++)
             {
@@ -49,19 +62,20 @@ namespace Unity
                 toolStripButton.Name = "toolStripButton" + i.ToString();
                 toolStripButton.Size = new System.Drawing.Size(23, 22);
                 toolStripButton.Text = "toolStripButton" + i.ToString();
-                toolStripButton.Click += new EventHandler(HandleToolStripButtonClick(shapeTypes[i]));
-                toolStripItems[i] = toolStripButton;
+                toolStripButton.Click += new EventHandler(HandleToolStripButtonClick(toolStripItems, shapeTypes[i]));
+                toolStripItems.Add(toolStripButton);
 
             }
             return toolStripItems;
         }
 
 
-        private ToolStripButtonFunction HandleToolStripButtonClick(ShapeType shapeType)
+        private ToolStripButtonFunction HandleToolStripButtonClick(List<ToolStripItem> toolStripItems, ShapeType shapeType)
         {
             return (object sender, EventArgs e) =>
             {
-                _presentationModel.ClickDrawButton(shapeType);
+                _presentationModel.ClickDrawButton(toolStripItems, shapeType);
+                this._canvas.Cursor = System.Windows.Forms.Cursors.Cross;
             };
         }
         public void Bell()
