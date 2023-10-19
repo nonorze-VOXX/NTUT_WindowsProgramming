@@ -10,6 +10,17 @@ namespace Unity
         {
             _graphics = graphics;
         }
+
+        public void DrawEllipse(Point2 point1, Point2 point2)
+        {
+            _graphics.DrawEllipse(
+                Pens.Black,
+                point1.X, point1.Y,
+                point2.X - point1.X,
+                point2.Y - point1.Y
+                );
+        }
+
         public void Drawline(Point2 point1, Point2 point2)
         {
             _graphics.DrawLine(Pens.Black,

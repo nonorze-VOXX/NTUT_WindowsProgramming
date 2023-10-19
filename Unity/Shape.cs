@@ -34,10 +34,6 @@ namespace Unity
             }
         }
 
-        public Shape()
-        {
-            SetInfo(Point2.ZERO, Point2.ZERO);
-        }
         public Shape(Point2 start, Point2 end)
         {
             SetInfo(start, end);

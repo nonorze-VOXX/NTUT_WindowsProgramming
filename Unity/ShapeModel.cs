@@ -10,8 +10,16 @@ namespace Unity
         private const int HUNDRED = 100;
         private BindingList<Shape> _shapeList = new BindingList<Shape>();
         bool _isPressed;
-        Shape _hint = new Line();
+        Shape _hint = new Line(Point2.ZERO, Point2.ZERO);
+        public BindingList<Shape> shapeList
+        {
+            get
+            {
+                return _shapeList;
+            }
+        }
 
+        #region draw
         internal void Draw(IGraphics graphics)
         {
             foreach (Shape shape in _shapeList)
@@ -23,14 +31,9 @@ namespace Unity
                 _hint.Draw(graphics);
             }
         }
+        #endregion
 
-        public BindingList<Shape> shapeList
-        {
-            get
-            {
-                return _shapeList;
-            }
-        }
+        #region subscribe
         public void Attach(IShapeObserver shapeObserver)
         {
             _modelChanged += shapeObserver.Bell;
@@ -46,25 +49,20 @@ namespace Unity
                 _modelChanged();
             }
         }
+        #endregion
 
         /// <summary>
         /// Add newShape with type, info is random
         /// </summary>
         /// <param name="type"></param>
-        public void Add(string type)
+        public void Add(ShapeType shapeType)
         {
             var zero = 0;
-            ShapeType shapeType;
             var random = new Random();
             Point2 number = new Point2(random.Next(zero, HUNDRED), random.Next(zero, HUNDRED));
-
-            if (Enum.TryParse(type.ToUpper(), out shapeType))
-            {
-                Add(shapeType,
-                    new Point2(random.Next(zero, (int)number.X), random.Next(zero, (int)number.Y)),
-                    new Point2(random.Next((int)number.X, HUNDRED), random.Next((int)number.Y, HUNDRED)));
-            }
-            NotifyModelChanged();
+            Add(shapeType,
+                new Point2(random.Next(zero, (int)number.X), random.Next(zero, (int)number.Y)),
+                new Point2(random.Next((int)number.X, HUNDRED), random.Next((int)number.Y, HUNDRED)));
         }
 
         /// <summary>
@@ -76,6 +74,7 @@ namespace Unity
         public void Add(ShapeType type, Point2 start, Point2 end)
         {
             _shapeList.Add(ShapeFactory.CreateShape(type, start, end));
+            NotifyModelChanged();
         }
 
         /// <summary>
@@ -85,6 +84,7 @@ namespace Unity
         internal void RemoveIndex(int rowIndex)
         {
             _shapeList.RemoveAt(rowIndex);
+            NotifyModelChanged();
         }
     }
 }

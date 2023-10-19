@@ -13,7 +13,7 @@ namespace Unity
             _presentationModel = presentationModel;
             _shapeModel = shapeModel;
             InitializeComponent();
-            _shapeComboBox.DataSource = Enum.GetNames(typeof(ShapeType));
+            _shapeComboBox.DataSource = Enum.GetValues(typeof(ShapeType));
             _dataGridView.CellContentClick += DeleteButtonClick;
             _dataGridView.DataSource = _shapeModel.shapeList;
             _canvas.Paint += HandleCanvasPaint;
@@ -37,8 +37,7 @@ namespace Unity
         /// <param name="e"></param>
         private void CreateButtonClick(object sender, EventArgs e)
         {
-            var random = new Random();
-            _shapeModel.Add(_shapeComboBox.Text);
+            _shapeModel.Add((ShapeType)_shapeComboBox.SelectedItem);
         }
 
         /// <summary>
@@ -50,8 +49,7 @@ namespace Unity
         {
             if (e.ColumnIndex == 0 && e.RowIndex != -1)
             {
-                //    _shapeModel.RemoveIndex(e.RowIndex);
-                _dataGridView.Rows.RemoveAt(e.RowIndex);
+                _shapeModel.RemoveIndex(e.RowIndex);
             }
         }
     }

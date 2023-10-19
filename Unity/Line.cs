@@ -2,13 +2,9 @@
 {
     public class Line : Shape
     {
-        public Line()
-        {
-            shape = ShapeType.LINE;
-        }
         public Line(Point2 start, Point2 end) : base(start, end)
         {
-            shape = ShapeType.LINE;
+            shape = ShapeType.Line;
         }
 
         public override void Draw(IGraphics graphics)

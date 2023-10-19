@@ -4,7 +4,7 @@
     {
         public Rectangle(Point2 start, Point2 end) : base(start, end)
         {
-            shape = ShapeType.RECTANGLE;
+            shape = ShapeType.Rectangle;
         }
 
         public override void Draw(IGraphics graphics)

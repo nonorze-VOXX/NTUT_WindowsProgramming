@@ -2,8 +2,9 @@
 {
     public enum ShapeType
     {
-        LINE,
-        RECTANGLE
+        Line,
+        Rectangle,
+        Ellipse
     }
 
     internal class ShapeFactory
@@ -19,10 +20,12 @@
         {
             switch (shapeType)
             {
-                case ShapeType.LINE:
+                case ShapeType.Line:
                     return new Line(start, end);
-                case ShapeType.RECTANGLE:
+                case ShapeType.Rectangle:
                     return new Rectangle(start, end);
+                case ShapeType.Ellipse:
+                    return new Ellipse(start, end);
                 default:
                     return null;
             }
