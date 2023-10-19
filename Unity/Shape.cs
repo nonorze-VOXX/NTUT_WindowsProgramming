@@ -2,7 +2,7 @@
 
 namespace Unity
 {
-    public class Shape
+    public abstract class Shape
     {
         private ShapeType _shapeType;
         private const string COMMA = ",";
@@ -18,7 +18,14 @@ namespace Unity
                 _shapeType = value;
             }
         }
-        private List<Number2> _info = new List<Number2>();
+        protected List<Point2> _info = new List<Point2>();
+
+        /// <summary>
+        /// draw
+        /// </summary>
+        /// <param name="graphics"></param>
+        public abstract void Draw(IGraphics graphics);
+
         public string Information
         {
             get
@@ -31,7 +38,7 @@ namespace Unity
             }
         }
 
-        public Shape(Number2 start, Number2 end)
+        public Shape(Point2 start, Point2 end)
         {
             SetInfo(start, end);
         }
@@ -42,7 +49,7 @@ namespace Unity
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        private Shape SetInfo(Number2 start, Number2 end)
+        private Shape SetInfo(Point2 start, Point2 end)
         {
             _info.Add(start);
             _info.Add(end);
@@ -53,9 +60,18 @@ namespace Unity
         /// getter
         /// </summary>
         /// <returns></returns>
-        public virtual List<Number2> GetInfo()
+        public virtual Point2 GetFirst()
         {
-            return _info;
+            return _info[0];
+        }
+
+        /// <summary>
+        /// getter
+        /// </summary>
+        /// <returns></returns>
+        public virtual Point2 GetSecond()
+        {
+            return _info[1];
         }
 
         /// <summary>
@@ -79,6 +95,24 @@ namespace Unity
         public virtual string GetShapeName()
         {
             return _shapeType.ToString();
+        }
+
+        /// <summary>
+        /// set
+        /// </summary>
+        /// <param name="point"></param>
+        public void SetFirst(Point2 point)
+        {
+            _info[0] = point;
+        }
+
+        /// <summary>
+        /// set
+        /// </summary>
+        /// <param name="point"></param>
+        public void SetSecond(Point2 point)
+        {
+            _info[1] = point;
         }
     }
 }

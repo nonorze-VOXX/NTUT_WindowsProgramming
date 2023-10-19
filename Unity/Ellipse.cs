@@ -1,10 +1,10 @@
 ﻿namespace Unity
 {
-    public class Rectangle : Shape
+    class Ellipse : Shape
     {
-        public Rectangle(Point2 start, Point2 end) : base(start, end)
+        public Ellipse(Point2 point1, Point2 point2) : base(point1, point2)
         {
-            shape = ShapeType.Rectangle;
+            shape = ShapeType.Ellipse;
         }
 
         /// <summary>
@@ -13,7 +13,7 @@
         /// <param name="graphics"></param>
         public override void Draw(IGraphics graphics)
         {
-            graphics.DrawRectangle(_info[0], _info[1]);
+            graphics.DrawEllipse(_info[0], _info[1]);
         }
     }
 }
