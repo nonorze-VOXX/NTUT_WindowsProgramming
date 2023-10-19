@@ -15,7 +15,7 @@
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public static Shape CreateShape(ShapeType shapeType, Number2 start, Number2 end)
+        public static Shape CreateShape(ShapeType shapeType, Point2 start, Point2 end)
         {
             switch (shapeType)
             {

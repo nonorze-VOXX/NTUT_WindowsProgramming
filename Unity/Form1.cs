@@ -3,24 +3,31 @@ using System.Windows.Forms;
 
 namespace Unity
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, IShapeObserver
     {
         ShapeModel _shapeModel;
+        PresentationModel _presentationModel;
 
-        public Form1()
+        public Form1(ShapeModel shapeModel, PresentationModel presentationModel)
         {
-            _shapeModel = new ShapeModel();
+            _presentationModel = presentationModel;
+            _shapeModel = shapeModel;
             InitializeComponent();
-            this._dataGridView.CellContentClick += DeleteButtonClick;
-            this._dataGridView.DataSource = _shapeModel.shapeList;
+            _shapeComboBox.DataSource = Enum.GetNames(typeof(ShapeType));
+            _dataGridView.CellContentClick += DeleteButtonClick;
+            _dataGridView.DataSource = _shapeModel.shapeList;
+            _canvas.Paint += HandleCanvasPaint;
         }
 
-        public Form1(ShapeModel shapeModel)
+        public void Bell()
         {
-            this._shapeModel = shapeModel;
-            InitializeComponent();
-            this._dataGridView.CellContentClick += DeleteButtonClick;
-            this._dataGridView.DataSource = _shapeModel.shapeList;
+            Invalidate(true);
+        }
+
+        public void HandleCanvasPaint(object sender,
+        System.Windows.Forms.PaintEventArgs e)
+        {
+            _presentationModel.Draw(e.Graphics);
         }
 
         /// <summary>

@@ -1,12 +1,13 @@
 ﻿namespace Unity
 {
-    public class Number2
+    public class Point2
     {
         private float _first;
         private float _second;
         private const string ROUND_BRACKET_LEFT = "(";
         private const string ROUND_BRACKET_RIGHT = ")";
         private const string COMMA = ",";
+        internal static readonly Point2 ZERO = new Point2(0, 0);
 
         public float X
         {
@@ -15,8 +16,8 @@
                 return _first;
             }
             set
-            { 
-                _first = value; 
+            {
+                _first = value;
             }
         }
 
@@ -28,11 +29,11 @@
             }
             set
             {
-                _second = value; 
+                _second = value;
             }
         }
 
-        public Number2(float first, float second)
+        public Point2(float first, float second)
         {
             _first = first;
             _second = second;

@@ -5,13 +5,45 @@ namespace Unity
 {
     public class ShapeModel
     {
+        public event ModelChangedEventhandler _modelChanged;
+        public delegate void ModelChangedEventhandler();
         private const int HUNDRED = 100;
         private BindingList<Shape> _shapeList = new BindingList<Shape>();
+        bool _isPressed;
+        Shape _hint = new Line();
+
+        internal void Draw(IGraphics graphics)
+        {
+            foreach (Shape shape in _shapeList)
+            {
+                shape.Draw(graphics);
+            }
+            if (_isPressed)
+            {
+                _hint.Draw(graphics);
+            }
+        }
+
         public BindingList<Shape> shapeList
         {
             get
             {
                 return _shapeList;
+            }
+        }
+        public void Attach(IShapeObserver shapeObserver)
+        {
+            _modelChanged += shapeObserver.Bell;
+        }
+        public void Detach(IShapeObserver shapeObserver)
+        {
+            _modelChanged -= shapeObserver.Bell;
+        }
+        void NotifyModelChanged()
+        {
+            if (_modelChanged != null)
+            {
+                _modelChanged();
             }
         }
 
@@ -24,14 +56,15 @@ namespace Unity
             var zero = 0;
             ShapeType shapeType;
             var random = new Random();
-            Number2 number = new Number2(random.Next(zero, HUNDRED), random.Next(zero, HUNDRED));
+            Point2 number = new Point2(random.Next(zero, HUNDRED), random.Next(zero, HUNDRED));
 
             if (Enum.TryParse(type.ToUpper(), out shapeType))
             {
                 Add(shapeType,
-                    new Number2(random.Next(zero, (int)number.X), random.Next(zero, (int)number.Y)),
-                    new Number2(random.Next((int)number.X, HUNDRED), random.Next((int)number.Y, HUNDRED)));
+                    new Point2(random.Next(zero, (int)number.X), random.Next(zero, (int)number.Y)),
+                    new Point2(random.Next((int)number.X, HUNDRED), random.Next((int)number.Y, HUNDRED)));
             }
+            NotifyModelChanged();
         }
 
         /// <summary>
@@ -40,7 +73,7 @@ namespace Unity
         /// <param name="type"></param>
         /// <param name="start"></param>
         /// <param name="end"></param>
-        public void Add(ShapeType type, Number2 start, Number2 end)
+        public void Add(ShapeType type, Point2 start, Point2 end)
         {
             _shapeList.Add(ShapeFactory.CreateShape(type, start, end));
         }

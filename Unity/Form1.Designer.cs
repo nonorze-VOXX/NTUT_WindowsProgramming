@@ -35,6 +35,7 @@ namespace Unity
         private void InitializeComponent()
         {
             this._dataGridView = new System.Windows.Forms.DataGridView();
+            this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this._createButton = new System.Windows.Forms.Button();
             this._shapeComboBox = new System.Windows.Forms.ComboBox();
             this._topBar = new System.Windows.Forms.MenuStrip();
@@ -43,7 +44,7 @@ namespace Unity
             this._rightGroupBox = new System.Windows.Forms.GroupBox();
             this._slide1 = new System.Windows.Forms.Button();
             this._slide2 = new System.Windows.Forms.Button();
-            this._delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this._canvas = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
             this._topBar.SuspendLayout();
             this._rightGroupBox.SuspendLayout();
@@ -55,13 +56,23 @@ namespace Unity
             this._dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this._dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this._delete});
+            this.delete});
             this._dataGridView.Location = new System.Drawing.Point(6, 72);
             this._dataGridView.Name = "_dataGridView";
             this._dataGridView.ReadOnly = true;
             this._dataGridView.RowHeadersVisible = false;
             this._dataGridView.Size = new System.Drawing.Size(273, 348);
             this._dataGridView.TabIndex = 0;
+            // 
+            // delete
+            // 
+            this.delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.delete.HeaderText = "delete";
+            this.delete.Name = "delete";
+            this.delete.ReadOnly = true;
+            this.delete.Text = "delete";
+            this.delete.UseColumnTextForButtonValue = true;
+            this.delete.Width = 79;
             // 
             // _createButton
             // 
@@ -78,9 +89,6 @@ namespace Unity
             this._shapeComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this._shapeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._shapeComboBox.FormattingEnabled = true;
-            this._shapeComboBox.Items.AddRange(new object[] {
-            "Line",
-            "Rectangle"});
             this._shapeComboBox.Location = new System.Drawing.Point(6, 30);
             this._shapeComboBox.Name = "_shapeComboBox";
             this._shapeComboBox.Size = new System.Drawing.Size(178, 21);
@@ -140,28 +148,27 @@ namespace Unity
             this._slide2.Text = "slide2";
             this._slide2.UseVisualStyleBackColor = true;
             // 
-            // delete
+            // panel1
             // 
-            this._delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this._delete.HeaderText = "delete";
-            this._delete.Name = "delete";
-            this._delete.ReadOnly = true;
-            this._delete.Text = "delete";
-            this._delete.UseColumnTextForButtonValue = true;
-            this._delete.Width = 79;
+            this._canvas.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this._canvas.Location = new System.Drawing.Point(185, 57);
+            this._canvas.Name = "canvas";
+            this._canvas.Size = new System.Drawing.Size(346, 390);
+            this._canvas.TabIndex = 7;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 503);
+            this.Controls.Add(this._canvas);
             this.Controls.Add(this._slide2);
             this.Controls.Add(this._slide1);
             this.Controls.Add(this._rightGroupBox);
             this.Controls.Add(this._topBar);
             this.MainMenuStrip = this._topBar;
             this.Name = "Form1";
-            this.Text = "Caculator";
+            this.Text = "amogus";
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).EndInit();
             this._topBar.ResumeLayout(false);
             this._topBar.PerformLayout();
@@ -184,6 +191,8 @@ namespace Unity
         private DataGridViewTextBoxColumn _information;
         private Button _slide1;
         private Button _slide2;
+        private DataGridViewButtonColumn delete;
+        private Panel _canvas;
     }
 }
 
