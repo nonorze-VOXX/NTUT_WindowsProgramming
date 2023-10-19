@@ -34,6 +34,7 @@ namespace Unity
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this._dataGridView = new System.Windows.Forms.DataGridView();
             this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this._createButton = new System.Windows.Forms.Button();
@@ -45,9 +46,11 @@ namespace Unity
             this._slide1 = new System.Windows.Forms.Button();
             this._slide2 = new System.Windows.Forms.Button();
             this._canvas = new System.Windows.Forms.Panel();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
             this._topBar.SuspendLayout();
             this._rightGroupBox.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // _dataGridView
@@ -148,19 +151,28 @@ namespace Unity
             this._slide2.Text = "slide2";
             this._slide2.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // _canvas
             // 
             this._canvas.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this._canvas.Location = new System.Drawing.Point(185, 57);
-            this._canvas.Name = "canvas";
+            this._canvas.Name = "_canvas";
             this._canvas.Size = new System.Drawing.Size(346, 390);
             this._canvas.TabIndex = 7;
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(847, 25);
+            this.toolStrip1.TabIndex = 8;
+            this.toolStrip1.Text = "toolStrip1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(847, 503);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this._canvas);
             this.Controls.Add(this._slide2);
             this.Controls.Add(this._slide1);
@@ -173,6 +185,8 @@ namespace Unity
             this._topBar.ResumeLayout(false);
             this._topBar.PerformLayout();
             this._rightGroupBox.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -193,6 +207,7 @@ namespace Unity
         private Button _slide2;
         private DataGridViewButtonColumn delete;
         private Panel _canvas;
+        private ToolStrip toolStrip1;
     }
 }
 
