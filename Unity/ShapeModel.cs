@@ -9,6 +9,7 @@ namespace Unity
         private BindingList<Shape> _shapeList = new BindingList<Shape>();
         bool _isPressed;
         Shape _hint = new Line(new Point2(0, 0), new Point2(0, 0));
+        private const int CANVAS_MAX = 400;
         public BindingList<Shape> shapeList
         {
             get
@@ -115,7 +116,7 @@ namespace Unity
         /// <param name="type"></param>
         public void Add(ShapeType shapeType)
         {
-            _shapeList.Add(ShapeFactory.CreateByRandom(shapeType));
+            _shapeList.Add(ShapeFactory.CreateByRandom(shapeType, CANVAS_MAX));
             NotifyModelChanged();
         }
 
