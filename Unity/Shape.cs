@@ -4,18 +4,13 @@ namespace Unity
 {
     public abstract class Shape
     {
-        private ShapeType _shapeType;
         private const string COMMA = ",";
         private const string EMPTY = " ";
-        public ShapeType shape
+        public string shape
         {
             get
             {
-                return _shapeType;
-            }
-            set
-            {
-                _shapeType = value;
+                return GetShapeName();
             }
         }
         protected List<Point2> _info = new List<Point2>();
@@ -92,10 +87,7 @@ namespace Unity
         /// get shape name string
         /// </summary>
         /// <returns></returns>
-        public virtual string GetShapeName()
-        {
-            return _shapeType.ToString();
-        }
+        public abstract string GetShapeName();
 
         /// <summary>
         /// set

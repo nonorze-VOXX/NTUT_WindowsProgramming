@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Unity
 {
@@ -7,10 +6,10 @@ namespace Unity
     {
         public event ModelChangedEventHandler _modelChanged;
         public delegate void ModelChangedEventHandler();
-        private const int HUNDRED = 100;
         private BindingList<Shape> _shapeList = new BindingList<Shape>();
         bool _isPressed;
         Shape _hint = new Line(new Point2(0, 0), new Point2(0, 0));
+        private const int CANVAS_MAX = 400;
         public BindingList<Shape> shapeList
         {
             get
@@ -117,12 +116,8 @@ namespace Unity
         /// <param name="type"></param>
         public void Add(ShapeType shapeType)
         {
-            var zero = 0;
-            var random = new Random();
-            Point2 number = new Point2(random.Next(zero, HUNDRED), random.Next(zero, HUNDRED));
-            Add(shapeType,
-                new Point2(random.Next(zero, (int)number.X), random.Next(zero, (int)number.Y)),
-                new Point2(random.Next((int)number.X, HUNDRED), random.Next((int)number.Y, HUNDRED)));
+            _shapeList.Add(ShapeFactory.CreateByRandom(shapeType, CANVAS_MAX));
+            NotifyModelChanged();
         }
 
         /// <summary>
