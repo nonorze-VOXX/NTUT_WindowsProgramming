@@ -1,4 +1,6 @@
-﻿namespace Unity
+﻿using System;
+
+namespace Unity
 {
     public enum ShapeType
     {
@@ -9,6 +11,23 @@
 
     internal class ShapeFactory
     {
+        /// <summary>
+        /// create shape by factory
+        /// </summary>
+        /// <param name="shapeType"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public static Shape CreateByRandom(ShapeType shapeType)
+        {
+            var zero = 0;
+            var max = 400;
+            var random = new Random();
+            return CreateShape(shapeType,
+                new Point2(random.Next(zero, max), random.Next(zero, max)),
+                new Point2(random.Next(zero, max), random.Next(zero, max)));
+        }
+
         /// <summary>
         /// create shape by factory
         /// </summary>
