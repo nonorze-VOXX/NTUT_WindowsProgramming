@@ -1,14 +1,20 @@
 ﻿using System.ComponentModel;
+using Unity.ShapeModelState;
 
 namespace Unity
 {
+    enum state
+    {
+        drawing,
+        point
+    }
     public class ShapeModel
     {
         public event ModelChangedEventHandler _modelChanged;
         public delegate void ModelChangedEventHandler();
         private BindingList<Shape> _shapeList = new BindingList<Shape>();
+        private DrawingState drawingState = new DrawingState();
         bool _isPressed;
-        Shape _hint = new Line(new Point2(0, 0), new Point2(0, 0));
         private const int CANVAS_MAX = 400;
         public BindingList<Shape> shapeList
         {
@@ -31,7 +37,7 @@ namespace Unity
             }
             if (_isPressed)
             {
-                _hint.Draw(graphics);
+                drawingState.draw(graphics);
             }
         }
         #endregion
@@ -76,8 +82,7 @@ namespace Unity
         {
             if (point.IsBothPositive())
             {
-                _hint = ShapeFactory.CreateShape(shapeType, new Point2(0, 0), new Point2(0, 0));
-                _hint.SetFirst(point);
+                drawingState.MouseDown(shapeType, point);
                 _isPressed = true;
             }
         }
@@ -90,8 +95,8 @@ namespace Unity
         {
             if (_isPressed)
             {
+                drawingState.MouseUp(point, _shapeList);
                 _isPressed = false;
-                _shapeList.Add(_hint);
                 NotifyModelChanged();
             }
         }
@@ -104,7 +109,7 @@ namespace Unity
         {
             if (_isPressed)
             {
-                _hint.SetSecond(point);
+                drawingState.MouseMove(point);
                 NotifyModelChanged();
             }
         }
