@@ -13,6 +13,7 @@ namespace Unity
         public event ModelChangedEventHandler _modelChanged;
         public delegate void ModelChangedEventHandler();
         private BindingList<Shape> _shapeList = new BindingList<Shape>();
+        private PointState pointState = new PointState();
         private IState state = new DrawingState();
         bool _isPressed;
         private const int CANVAS_MAX = 400;
@@ -26,11 +27,13 @@ namespace Unity
         #region state
         public void SwitchStateDrawing()
         {
+            pointState = new PointState();
             state = new DrawingState();
+            NotifyModelChanged();
         }
         public void SwitchStatePoint()
         {
-            state = new PointState();
+            state = pointState;
         }
         #endregion
 
@@ -101,7 +104,7 @@ namespace Unity
         /// mouse up
         /// </summary>
         /// <param name="point"></param>
-        internal bool MouseUp(Point2 point)
+        internal void MouseUp(Point2 point)
         {
             if (_isPressed)
             {
@@ -109,7 +112,6 @@ namespace Unity
                 _isPressed = false;
                 NotifyModelChanged();
             }
-            return state.IsKeep();
         }
 
         /// <summary>

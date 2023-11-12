@@ -81,8 +81,8 @@ namespace Unity
         /// <param name="toolStripItems"></param>
         public void HandleCanvasMouseUp(Canvas canvas, Point2 point, List<System.Windows.Forms.ToolStripItem> toolStripItems)
         {
-            UpdateShapeButtonActive(toolStripItems, 1 + 1 + 1, _shapeModel.MouseUp(point));
-            canvas.Cursor = System.Windows.Forms.Cursors.Default;
+            _shapeModel.MouseUp(point);
+            HandleToolStripPointButtonClick(toolStripItems, canvas)(null, null);
 
         }
 

@@ -70,6 +70,14 @@ namespace Unity
             return _info[0];
         }
 
+        internal void Move(Point2 delta)
+        {
+            for (int i = 0; i < _info.Count; i++)
+            {
+                _info[i] = Point2.Add(_info[i], delta);
+            }
+        }
+
         /// <summary>
         /// getter
         /// </summary>
