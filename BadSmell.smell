@@ -276,13 +276,28 @@
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>ShapeModelState\DrawingState.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ShapeModelState\IState.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ShapeModelState\PointState.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>WindowFormsGraphicsAdaptor.cs</RelativePath>
                 <ProjectName>Unity</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>1138</ProductionLoc>
+          <ProductionLoc>1535</ProductionLoc>
           <TestLoc>0</TestLoc>
         </CodeReview>
       </Data>

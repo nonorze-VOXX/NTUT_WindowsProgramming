@@ -15,7 +15,18 @@ namespace Unity
         /// <param name="point1"></param>
         /// <param name="point2"></param>
         void DrawRectangle(Point2 point1, Point2 point2);
+        /// <summary>
+        /// draw ellipse
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="size"></param>
         void DrawEllipseByCenterAndSize(Point2 first, Point2 size);
+        /// <summary>
+        /// rectangle by color
+        /// </summary>
+        /// <param name="point1"></param>
+        /// <param name="point2"></param>
+        /// <param name="pen"></param>
         void DrawRectangle(Point2 point1, Point2 point2, Pen pen);
         /// <summary>
         /// ellipse

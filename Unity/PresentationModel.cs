@@ -41,6 +41,12 @@ namespace Unity
             _shapeButtonActive[clickedIndex] = clicked;
             UpdateToolStripButton(toolStripItems, _shapeButtonActive);
         }
+
+        /// <summary>
+        /// reset
+        /// </summary>
+        /// <param name="toolStripItems"></param>
+        /// <returns></returns>
         List<bool> ResetToolStripButton(List<System.Windows.Forms.ToolStripItem> toolStripItems)
         {
             List<bool> newList = new List<bool>();
@@ -52,6 +58,11 @@ namespace Unity
             return newList;
         }
 
+        /// <summary>
+        /// tool
+        /// </summary>
+        /// <param name="toolStripItems"></param>
+        /// <param name="shapeButtonActive"></param>
         void UpdateToolStripButton(List<System.Windows.Forms.ToolStripItem> toolStripItems, List<bool> shapeButtonActive)
         {
             for (int i = 0; i < toolStripItems.Count; i++)
@@ -152,6 +163,13 @@ namespace Unity
                 _shapeModel.SwitchStateDrawing();
             };
         }
+
+        /// <summary>
+        /// click
+        /// </summary>
+        /// <param name="toolStripItems"></param>
+        /// <param name="canvas"></param>
+        /// <returns></returns>
         public ButtonFunction HandleToolStripPointButtonClick(List<ToolStripItem> toolStripItems, Canvas canvas)
         {
             return (object sender, EventArgs e) =>
@@ -162,7 +180,11 @@ namespace Unity
             };
         }
 
-        internal void OnKeyDown(KeyEventArgs e)
+        /// <summary>
+        /// down
+        /// </summary>
+        /// <param name="e"></param>
+        internal void HandleKeyDown(KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
             {

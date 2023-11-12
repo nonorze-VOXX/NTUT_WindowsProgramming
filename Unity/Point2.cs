@@ -40,14 +40,26 @@ namespace Unity
             _second = second;
         }
 
-        internal static Point2 Sub(Point2 point1, Point2 point2)
+        /// <summary>
+        /// sub
+        /// </summary>
+        /// <param name="point1"></param>
+        /// <param name="point2"></param>
+        /// <returns></returns>
+        internal static Point2 GetSubstract(Point2 point1, Point2 point2)
         {
             return new Point2(point1.X - point2.X, point1.Y - point2.Y);
         }
 
-        internal static Point2 Div(Point2 point, int v)
+        /// <summary>
+        /// div
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        internal static Point2 Divide(Point2 point, int number)
         {
-            return new Point2(point.X / v, point.Y / v);
+            return new Point2(point.X / number, point.Y / number);
         }
 
         /// <summary>
@@ -60,6 +72,13 @@ namespace Unity
         {
             return new Point2(Math.Abs(point1.X - point2.X), Math.Abs(point1.Y - point2.Y));
         }
+
+        /// <summary>
+        /// add
+        /// </summary>
+        /// <param name="point1"></param>
+        /// <param name="point2"></param>
+        /// <returns></returns>
         internal static Point2 Add(Point2 point1, Point2 point2)
         {
             return new Point2(point1.X + point2.X, point1.Y + point2.Y);

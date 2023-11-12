@@ -1,67 +1,94 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace Unity.ShapeModelState
 {
     class PointState : IState
     {
-        Shape choosingShape = null;
-        Point2 size = new Point2(5, 5);
-        Point2 prePoint = new Point2(0, 0);
+        Shape _choosingShape = null;
+        public const int EIGHT_INTEGER = 8;
+        public const int TWO_INTEGER = 2;
+        Point2 _size = new Point2(EIGHT_INTEGER, EIGHT_INTEGER);
+        Point2 _pastPoint = new Point2(0, 0);
 
+        /// <summary>
+        /// delete
+        /// </summary>
+        /// <param name="shapeList"></param>
         public void DeletePress(System.ComponentModel.BindingList<Shape> shapeList)
         {
-            if (choosingShape != null)
+            if (_choosingShape != null)
             {
-                shapeList.Remove(choosingShape);
-                choosingShape = null;
+                shapeList.Remove(_choosingShape);
+                _choosingShape = null;
             }
         }
 
-        public void draw(IGraphics graphics)
+        /// <summary>
+        /// draw
+        /// </summary>
+        /// <param name="graphics"></param>
+        public void Draw(IGraphics graphics)
         {
-            if (choosingShape != null)
+            if (_choosingShape != null)
             {
-                var first = choosingShape.GetFirst();
-                var second = choosingShape.GetSecond();
+                var first = _choosingShape.GetFirst();
+                var (x1, y1) = first.GetTuple();
+                var second = _choosingShape.GetSecond();
+                var (x2, y2) = second.GetTuple();
                 graphics.DrawRectangle(first, second, Pens.Red);
-                graphics.DrawEllipseByCenterAndSize(first, size);
-                graphics.DrawEllipseByCenterAndSize(second, size);
-                graphics.DrawEllipseByCenterAndSize(new Point2(first.X, second.Y), size);
-                graphics.DrawEllipseByCenterAndSize(new Point2(second.X, first.Y), size);
-                graphics.DrawEllipseByCenterAndSize(new Point2(first.X, (first.Y + second.Y) / 2), size);
-                graphics.DrawEllipseByCenterAndSize(new Point2(second.X, (first.Y + second.Y) / 2), size);
-                graphics.DrawEllipseByCenterAndSize(new Point2((first.X + second.X) / 2, first.Y), size);
-                graphics.DrawEllipseByCenterAndSize(new Point2((first.X + second.X) / 2, second.Y), size);
+                graphics.DrawEllipseByCenterAndSize(first, _size);
+                graphics.DrawEllipseByCenterAndSize(second, _size);
+                graphics.DrawEllipseByCenterAndSize(new Point2(x1, y2), _size);
+                graphics.DrawEllipseByCenterAndSize(new Point2(x2, y1), _size);
+                graphics.DrawEllipseByCenterAndSize(new Point2(x1, (y1 + y2) / TWO_INTEGER), _size);
+                graphics.DrawEllipseByCenterAndSize(new Point2(x2, (y1 + y2) / TWO_INTEGER), _size);
+                graphics.DrawEllipseByCenterAndSize(new Point2((x1 + x2) / TWO_INTEGER, y1), _size);
+                graphics.DrawEllipseByCenterAndSize(new Point2((x1 + x2) / TWO_INTEGER, y2), _size);
             }
         }
 
-        public void MouseDown(ShapeType shapeType, Point2 point, System.ComponentModel.BindingList<Shape> _shapeList)
+        /// <summary>
+        /// down
+        /// </summary>
+        /// <param name="shapeType"></param>
+        /// <param name="point"></param>
+        /// <param name="shapeList"></param>
+        public void MouseDown(ShapeType shapeType, Point2 point, System.ComponentModel.BindingList<Shape> shapeList)
         {
-            prePoint = point;
-            foreach (var shape in _shapeList)
+            _pastPoint = point;
+            foreach (var shape in shapeList)
             {
                 if (shape.IsPointIn(point))
                 {
-                    choosingShape = shape;
+                    _choosingShape = shape;
                     return;
                 }
             }
-            choosingShape = null;
+            _choosingShape = null;
         }
 
+        /// <summary>
+        /// move
+        /// </summary>
+        /// <param name="point"></param>
         public void MouseMove(Point2 point)
         {
-            if (choosingShape != null)
+            if (_choosingShape != null)
             {
-                var delta = Point2.Sub(point, prePoint);
-                choosingShape.Move(delta);
-                prePoint = point;
+                var delta = Point2.GetSubstract(point, _pastPoint);
+                _choosingShape.Move(delta);
+                _pastPoint = point;
             }
         }
 
-        public void MouseUp(Point2 point, System.ComponentModel.BindingList<Shape> _shapeList)
+        /// <summary>
+        /// up
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="shapeList"></param>
+        public void MouseUp(Point2 point, System.ComponentModel.BindingList<Shape> shapeList)
         {
-            //throw new NotImplementedException();
         }
     }
 }

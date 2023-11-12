@@ -6,6 +6,7 @@ namespace Unity
     class WindowFormsGraphicsAdaptor : IGraphics
     {
         private Graphics _graphics;
+        public const int TWO_INTEGER = 2;
 
         public WindowFormsGraphicsAdaptor(Graphics graphics)
         {
@@ -24,11 +25,16 @@ namespace Unity
             _graphics.DrawEllipse(Pens.Black, x1, y1, x2 - x1, y2 - y1);
         }
 
+        /// <summary>
+        /// fraw
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="size"></param>
         public void DrawEllipseByCenterAndSize(Point2 first, Point2 size)
         {
             DrawEllipse(
-                Point2.Sub(first, Point2.Div(size, 2)),
-                Point2.Add(first, Point2.Div(size, 2))
+                Point2.GetSubstract(first, Point2.Divide(size, TWO_INTEGER)),
+                Point2.Add(first, Point2.Divide(size, TWO_INTEGER))
                 );
         }
 
@@ -58,6 +64,7 @@ namespace Unity
                 distance.Y
                 );
         }
+
         /// <summary>
         /// rectangle
         /// </summary>
