@@ -7,6 +7,16 @@ namespace Unity.ShapeModelState
         Shape choosingShape = null;
         Point2 size = new Point2(5, 5);
         Point2 prePoint = new Point2(0, 0);
+
+        public void DeletePress(System.ComponentModel.BindingList<Shape> shapeList)
+        {
+            if (choosingShape != null)
+            {
+                shapeList.Remove(choosingShape);
+                choosingShape = null;
+            }
+        }
+
         public void draw(IGraphics graphics)
         {
             if (choosingShape != null)

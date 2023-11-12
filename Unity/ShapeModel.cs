@@ -159,5 +159,11 @@ namespace Unity
             _shapeList.RemoveAt(rowIndex);
             NotifyModelChanged();
         }
+
+        internal void DeletePress()
+        {
+            state.DeletePress(shapeList);
+            NotifyModelChanged();
+        }
     }
 }

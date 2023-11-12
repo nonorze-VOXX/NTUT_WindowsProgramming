@@ -28,6 +28,8 @@ namespace Unity
             _canvas.MouseUp += HandleCanvasMouseUp;
             _canvas.MouseDown += HandleCanvasMouseDown;
             _canvas.MouseMove += HandleCanvasMouseMove;
+            KeyPreview = true;
+            KeyDown += OnKeyDown;
             this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             List<string> imageNames = GenerateImagePathList();
@@ -156,5 +158,10 @@ namespace Unity
         }
         #endregion
 
+
+        void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            _presentationModel.OnKeyDown(e);
+        }
     }
 }

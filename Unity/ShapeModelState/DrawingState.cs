@@ -4,6 +4,10 @@
     {
         Shape _hint = new Line(new Point2(0, 0), new Point2(0, 0));
 
+        public void DeletePress(System.ComponentModel.BindingList<Shape> shapeList)
+        {
+        }
+
         public void draw(IGraphics graphics)
         {
             _hint.Draw(graphics);

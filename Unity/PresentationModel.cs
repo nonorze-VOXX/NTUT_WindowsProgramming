@@ -83,7 +83,6 @@ namespace Unity
         {
             _shapeModel.MouseUp(point);
             HandleToolStripPointButtonClick(toolStripItems, canvas)(null, null);
-
         }
 
         /// <summary>
@@ -161,6 +160,14 @@ namespace Unity
                 canvas.Cursor = System.Windows.Forms.Cursors.Default;
                 _shapeModel.SwitchStatePoint();
             };
+        }
+
+        internal void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                _shapeModel.DeletePress();
+            }
         }
     }
 }
