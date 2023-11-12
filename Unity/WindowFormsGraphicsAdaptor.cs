@@ -24,6 +24,14 @@ namespace Unity
             _graphics.DrawEllipse(Pens.Black, x1, y1, x2 - x1, y2 - y1);
         }
 
+        public void DrawEllipseByCenterAndSize(Point2 first, Point2 size)
+        {
+            DrawEllipse(
+                Point2.Sub(first, Point2.Div(size, 2)),
+                Point2.Add(first, Point2.Div(size, 2))
+                );
+        }
+
         /// <summary>
         /// line
         /// </summary>
@@ -45,6 +53,22 @@ namespace Unity
             Point2 distance = Point2.GetDistance(point1, point2);
             _graphics.DrawRectangle(
                 Pens.Black,
+                position.X, position.Y,
+                distance.X,
+                distance.Y
+                );
+        }
+        /// <summary>
+        /// rectangle
+        /// </summary>
+        /// <param name="point1"></param>
+        /// <param name="point2"></param>
+        public void DrawRectangle(Point2 point1, Point2 point2, Pen pen)
+        {
+            var position = new Point2(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y));
+            Point2 distance = Point2.GetDistance(point1, point2);
+            _graphics.DrawRectangle(
+                pen,
                 position.X, position.Y,
                 distance.X,
                 distance.Y

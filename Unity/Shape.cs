@@ -33,6 +33,16 @@ namespace Unity
             }
         }
 
+        internal bool IsPointIn(Point2 point)
+        {
+            var firstDistance = Point2.GetDistance(point, GetFirst());
+            var secondDistance = Point2.GetDistance(point, GetSecond());
+            var shapeDistance = Point2.GetDistance(GetFirst(), GetSecond());
+            return
+                firstDistance.X + secondDistance.X <= shapeDistance.X &&
+                firstDistance.Y + secondDistance.Y <= shapeDistance.Y;
+        }
+
         public Shape(Point2 start, Point2 end)
         {
             SetInfo(start, end);

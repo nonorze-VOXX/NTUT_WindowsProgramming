@@ -3,7 +3,7 @@ using Unity.ShapeModelState;
 
 namespace Unity
 {
-    enum state
+    enum ModelState
     {
         drawing,
         point
@@ -13,7 +13,7 @@ namespace Unity
         public event ModelChangedEventHandler _modelChanged;
         public delegate void ModelChangedEventHandler();
         private BindingList<Shape> _shapeList = new BindingList<Shape>();
-        private DrawingState drawingState = new DrawingState();
+        private IState state = new DrawingState();
         bool _isPressed;
         private const int CANVAS_MAX = 400;
         public BindingList<Shape> shapeList
@@ -23,6 +23,16 @@ namespace Unity
                 return _shapeList;
             }
         }
+        #region state
+        public void SwitchStateDrawing()
+        {
+            state = new DrawingState();
+        }
+        public void SwitchStatePoint()
+        {
+            state = new PointState();
+        }
+        #endregion
 
         #region draw
         /// <summary>
@@ -37,8 +47,8 @@ namespace Unity
             }
             if (_isPressed)
             {
-                drawingState.draw(graphics);
             }
+            state.draw(graphics);
         }
         #endregion
 
@@ -82,7 +92,7 @@ namespace Unity
         {
             if (point.IsBothPositive())
             {
-                drawingState.MouseDown(shapeType, point);
+                state.MouseDown(shapeType, point, _shapeList);
                 _isPressed = true;
             }
         }
@@ -91,14 +101,15 @@ namespace Unity
         /// mouse up
         /// </summary>
         /// <param name="point"></param>
-        internal void MouseUp(Point2 point)
+        internal bool MouseUp(Point2 point)
         {
             if (_isPressed)
             {
-                drawingState.MouseUp(point, _shapeList);
+                state.MouseUp(point, _shapeList);
                 _isPressed = false;
                 NotifyModelChanged();
             }
+            return state.IsKeep();
         }
 
         /// <summary>
@@ -109,7 +120,7 @@ namespace Unity
         {
             if (_isPressed)
             {
-                drawingState.MouseMove(point);
+                state.MouseMove(point);
                 NotifyModelChanged();
             }
         }

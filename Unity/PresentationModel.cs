@@ -37,16 +37,29 @@ namespace Unity
         /// <param name="clicked"></param>
         internal void UpdateShapeButtonActive(List<System.Windows.Forms.ToolStripItem> toolStripItems, int clickedIndex, bool clicked)
         {
-            _shapeButtonActive = new List<bool>();
-            _shapeButtonActive.Add(false);
-            _shapeButtonActive.Add(false);
-            _shapeButtonActive.Add(false);
+            _shapeButtonActive = ResetToolStripButton(toolStripItems);
             _shapeButtonActive[clickedIndex] = clicked;
+            UpdateToolStripButton(toolStripItems, _shapeButtonActive);
+        }
+        List<bool> ResetToolStripButton(List<System.Windows.Forms.ToolStripItem> toolStripItems)
+        {
+            List<bool> newList = new List<bool>();
+            for (int i = 0; i < toolStripItems.Count; i++)
+            {
+                newList.Add(false);
+            }
+
+            return newList;
+        }
+
+        void UpdateToolStripButton(List<System.Windows.Forms.ToolStripItem> toolStripItems, List<bool> shapeButtonActive)
+        {
             for (int i = 0; i < toolStripItems.Count; i++)
             {
                 var toolStripButton = (System.Windows.Forms.ToolStripButton)toolStripItems[i];
-                toolStripButton.Checked = _shapeButtonActive[i];
+                toolStripButton.Checked = shapeButtonActive[i];
             }
+
         }
 
         /// <summary>
@@ -68,8 +81,7 @@ namespace Unity
         /// <param name="toolStripItems"></param>
         public void HandleCanvasMouseUp(Canvas canvas, Point2 point, List<System.Windows.Forms.ToolStripItem> toolStripItems)
         {
-            _shapeModel.MouseUp(point);
-            UpdateShapeButtonActive(toolStripItems, 0, false);
+            UpdateShapeButtonActive(toolStripItems, 1 + 1 + 1, _shapeModel.MouseUp(point));
             canvas.Cursor = System.Windows.Forms.Cursors.Default;
 
         }
@@ -138,6 +150,16 @@ namespace Unity
             {
                 UpdateShapeButtonActive(toolStripItems, (int)shapeType, true);
                 canvas.Cursor = System.Windows.Forms.Cursors.Cross;
+                _shapeModel.SwitchStateDrawing();
+            };
+        }
+        public ButtonFunction HandleToolStripPointButtonClick(List<ToolStripItem> toolStripItems, Canvas canvas)
+        {
+            return (object sender, EventArgs e) =>
+            {
+                UpdateShapeButtonActive(toolStripItems, 1 + 1 + 1, true);
+                canvas.Cursor = System.Windows.Forms.Cursors.Default;
+                _shapeModel.SwitchStatePoint();
             };
         }
     }

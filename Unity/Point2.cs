@@ -40,6 +40,16 @@ namespace Unity
             _second = second;
         }
 
+        internal static Point2 Sub(Point2 point1, Point2 point2)
+        {
+            return new Point2(point1.X - point2.X, point1.Y - point2.Y);
+        }
+
+        internal static Point2 Div(Point2 point, int v)
+        {
+            return new Point2(point.X / v, point.Y / v);
+        }
+
         /// <summary>
         /// get point2 of abs
         /// </summary>
@@ -49,6 +59,10 @@ namespace Unity
         internal static Point2 GetDistance(Point2 point1, Point2 point2)
         {
             return new Point2(Math.Abs(point1.X - point2.X), Math.Abs(point1.Y - point2.Y));
+        }
+        internal static Point2 Add(Point2 point1, Point2 point2)
+        {
+            return new Point2(point1.X + point2.X, point1.Y + point2.Y);
         }
 
         /// <summary>

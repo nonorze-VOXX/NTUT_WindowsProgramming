@@ -9,7 +9,12 @@
             _hint.Draw(graphics);
         }
 
-        public void MouseDown(ShapeType shapeType, Point2 point)
+        public bool IsKeep()
+        {
+            return false;
+        }
+
+        public void MouseDown(ShapeType shapeType, Point2 point, System.ComponentModel.BindingList<Shape> _shapeList)
         {
             _hint = ShapeFactory.CreateShape(shapeType, new Point2(point.X, point.Y), new Point2(0, 0));
         }
