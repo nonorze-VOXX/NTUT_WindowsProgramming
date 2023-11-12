@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Unity
 {
@@ -33,6 +34,24 @@ namespace Unity
             }
         }
 
+        /// <summary>
+        /// in
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        internal bool IsPointIn(Point2 point)
+        {
+            var firstDistance = Point2.GetDistance(point, GetFirst());
+            var secondDistance = Point2.GetDistance(point, GetSecond());
+            var shapeDistance = Point2.GetDistance(GetFirst(), GetSecond());
+            var (x1, y1) = firstDistance.GetTuple();
+            var (x2, y2) = secondDistance.GetTuple();
+            var (x3, y3) = shapeDistance.GetTuple();
+            return
+                x1 + x2 <= x3 &&
+                y1 + y2 <= y3;
+        }
+
         public Shape(Point2 start, Point2 end)
         {
             SetInfo(start, end);
@@ -58,6 +77,18 @@ namespace Unity
         public virtual Point2 GetFirst()
         {
             return _info[0];
+        }
+
+        /// <summary>
+        /// move
+        /// </summary>
+        /// <param name="delta"></param>
+        internal void Move(Point2 delta)
+        {
+            for (int i = 0; i < _info.Count; i++)
+            {
+                _info[i] = Point2.Add(_info[i], delta);
+            }
         }
 
         /// <summary>

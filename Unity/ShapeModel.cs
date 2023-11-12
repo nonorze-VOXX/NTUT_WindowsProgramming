@@ -1,14 +1,21 @@
 ﻿using System.ComponentModel;
+using Unity.ShapeModelState;
 
 namespace Unity
 {
+    enum ModelState
+    {
+        DRAWING,
+        POINT
+    }
     public class ShapeModel
     {
         public event ModelChangedEventHandler _modelChanged;
         public delegate void ModelChangedEventHandler();
         private BindingList<Shape> _shapeList = new BindingList<Shape>();
+        private PointState _pointState = new PointState();
+        private IState _state = new DrawingState();
         bool _isPressed;
-        Shape _hint = new Line(new Point2(0, 0), new Point2(0, 0));
         private const int CANVAS_MAX = 400;
         public BindingList<Shape> shapeList
         {
@@ -17,6 +24,25 @@ namespace Unity
                 return _shapeList;
             }
         }
+        #region state
+        /// <summary>
+        /// switch
+        /// </summary>
+        public void SwitchStateDrawing()
+        {
+            _pointState = new PointState();
+            _state = new DrawingState();
+            NotifyModelChanged();
+        }
+
+        /// <summary>
+        /// switch
+        /// </summary>
+        public void SwitchStatePoint()
+        {
+            _state = _pointState;
+        }
+        #endregion
 
         #region draw
         /// <summary>
@@ -31,8 +57,8 @@ namespace Unity
             }
             if (_isPressed)
             {
-                _hint.Draw(graphics);
             }
+            _state.Draw(graphics);
         }
         #endregion
 
@@ -76,8 +102,7 @@ namespace Unity
         {
             if (point.IsBothPositive())
             {
-                _hint = ShapeFactory.CreateShape(shapeType, new Point2(0, 0), new Point2(0, 0));
-                _hint.SetFirst(point);
+                _state.MouseDown(shapeType, point, _shapeList);
                 _isPressed = true;
             }
         }
@@ -90,8 +115,8 @@ namespace Unity
         {
             if (_isPressed)
             {
+                _state.MouseUp(point, _shapeList);
                 _isPressed = false;
-                _shapeList.Add(_hint);
                 NotifyModelChanged();
             }
         }
@@ -104,7 +129,7 @@ namespace Unity
         {
             if (_isPressed)
             {
-                _hint.SetSecond(point);
+                _state.MouseMove(point);
                 NotifyModelChanged();
             }
         }
@@ -139,6 +164,15 @@ namespace Unity
         internal void RemoveIndex(int rowIndex)
         {
             _shapeList.RemoveAt(rowIndex);
+            NotifyModelChanged();
+        }
+
+        /// <summary>
+        /// delete
+        /// </summary>
+        internal void DeletePress()
+        {
+            _state.DeletePress(shapeList);
             NotifyModelChanged();
         }
     }

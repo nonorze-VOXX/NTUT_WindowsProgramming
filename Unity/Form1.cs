@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Unity
@@ -8,14 +9,17 @@ namespace Unity
     {
         PresentationModel _presentationModel;
         List<ToolStripItem> _toolStripItems;
+        ToolStripButton _toolStripPointButton;
 
         private const string RECTANGLE_IMAGE_PATH = "rectangle.Image";
         private const string ELLIPSE_IMAGE_PATH = "ellipse.Image";
         private const string LINE_IMAGE_PATH = "line.Image";
+        private const string POINTER_IMAGE_PATH = "pointer";
         private const string TOOL_STRIP_BUTTON_NAME = "toolstripButton";
         private const int TOOL_STRIP_BUTTON_HEIGHT = 22;
         private const int TOOL_STRIP_BUTTON_WIDTH = 23;
         private const int STRIP_BUTTON_NUMBER = 3;
+        private Bitmap _brief;
         public Form1(PresentationModel presentationModel)
         {
             _presentationModel = presentationModel;
@@ -27,8 +31,19 @@ namespace Unity
             _canvas.MouseUp += HandleCanvasMouseUp;
             _canvas.MouseDown += HandleCanvasMouseDown;
             _canvas.MouseMove += HandleCanvasMouseMove;
+            KeyPreview = true;
+            KeyDown += HandleKeyDown;
+            _brief = new Bitmap(_canvas.Width, _canvas.Height);
             this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
-            _toolStripItems = GenerateToolStripItems();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            List<string> imageNames = GenerateImagePathList();
+            _toolStripItems = GenerateToolStripItems(resources, imageNames);
+
+            _toolStripPointButton = GenerateButton(POINTER_IMAGE_PATH);
+            _toolStripPointButton.Image = ((System.Drawing.Image)(resources.GetObject(POINTER_IMAGE_PATH)));
+            _toolStripPointButton.Click += new EventHandler(_presentationModel.HandleToolStripPointButtonClick(_toolStripItems, _canvas));
+            _toolStripItems.Add(_toolStripPointButton);
+
             _toolStrip1.Items.AddRange(_toolStripItems.ToArray());
         }
 
@@ -72,6 +87,7 @@ namespace Unity
         public void HandleCanvasPaint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             _presentationModel.Draw(e.Graphics);
+            GenerateBrief();
         }
 
         #region Generate
@@ -80,19 +96,16 @@ namespace Unity
         /// generate
         /// </summary>
         /// <returns></returns>
-        List<ToolStripItem> GenerateToolStripItems()
+        List<ToolStripItem> GenerateToolStripItems(System.ComponentModel.ComponentResourceManager resources, List<string> imageNames)
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             var toolStripItems = new List<ToolStripItem>();
             List<ShapeType> shapeTypes = GenerateShapeTypeList();
-            List<string> imageNames = GenerateImagePathList();
             for (int i = 0; i < STRIP_BUTTON_NUMBER; i++)
             {
                 var toolStripButton = GenerateButton(TOOL_STRIP_BUTTON_NAME + i.ToString());
                 toolStripButton.Image = ((System.Drawing.Image)(resources.GetObject(imageNames[i])));
                 toolStripButton.Click += new EventHandler(_presentationModel.HandleToolStripButtonClick(toolStripItems, shapeTypes[i], _canvas));
                 toolStripItems.Add(toolStripButton);
-
             }
             return toolStripItems;
         }
@@ -150,5 +163,23 @@ namespace Unity
         }
         #endregion
 
+        /// <summary>
+        /// down
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void HandleKeyDown(object sender, KeyEventArgs e)
+        {
+            _presentationModel.HandleKeyDown(e);
+        }
+
+        /// <summary>
+        /// preview
+        /// </summary>
+        private void GenerateBrief()
+        {
+            _canvas.DrawToBitmap(_brief, new System.Drawing.Rectangle(0, 0, _canvas.Width, _canvas.Height));
+            _slide1.Image = new Bitmap(_brief, _slide1.Size);
+        }
     }
 }

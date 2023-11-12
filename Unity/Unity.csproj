@@ -73,6 +73,8 @@
     </Compile>
     <Compile Include="IGraphics.cs" />
     <Compile Include="IShapeObserver.cs" />
+    <Compile Include="ShapeModelState\DrawingState.cs" />
+    <Compile Include="ShapeModelState\IState.cs" />
     <Compile Include="Line.cs" />
     <Compile Include="Point2.cs" />
     <Compile Include="PresentationModel.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Shape.cs" />
     <Compile Include="ShapeFactory.cs" />
     <Compile Include="ShapeModel.cs" />
+    <Compile Include="ShapeModelState\PointState.cs" />
     <Compile Include="WindowFormsGraphicsAdaptor.cs" />
     <EmbeddedResource Include="Canvas.resx">
       <DependentUpon>Canvas.cs</DependentUpon>
@@ -122,6 +125,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pointer.Image.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="picture\pointer.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

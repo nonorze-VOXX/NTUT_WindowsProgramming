@@ -43,7 +43,6 @@ namespace Unity
             this._aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._rightGroupBox = new System.Windows.Forms.GroupBox();
             this._slide1 = new System.Windows.Forms.Button();
-            this._slide2 = new System.Windows.Forms.Button();
             this._toolStrip1 = new System.Windows.Forms.ToolStrip();
             this._canvas = new Unity.Canvas();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
@@ -134,21 +133,12 @@ namespace Unity
             // 
             // _slide1
             // 
-            this._slide1.Location = new System.Drawing.Point(26, 67);
+            this._slide1.Location = new System.Drawing.Point(15, 67);
             this._slide1.Name = "_slide1";
-            this._slide1.Size = new System.Drawing.Size(75, 23);
+            this._slide1.Size = new System.Drawing.Size(150, 110);
             this._slide1.TabIndex = 5;
-            this._slide1.Text = "Slide1";
+            this._slide1.Text = "";
             this._slide1.UseVisualStyleBackColor = true;
-            // 
-            // _slide2
-            // 
-            this._slide2.Location = new System.Drawing.Point(26, 118);
-            this._slide2.Name = "_slide2";
-            this._slide2.Size = new System.Drawing.Size(75, 23);
-            this._slide2.TabIndex = 6;
-            this._slide2.Text = "slide2";
-            this._slide2.UseVisualStyleBackColor = true;
             // 
             // toolStrip1
             // 
@@ -173,7 +163,6 @@ namespace Unity
             this.ClientSize = new System.Drawing.Size(847, 503);
             this.Controls.Add(this._toolStrip1);
             this.Controls.Add(this._canvas);
-            this.Controls.Add(this._slide2);
             this.Controls.Add(this._slide1);
             this.Controls.Add(this._rightGroupBox);
             this.Controls.Add(this._topBar);
@@ -198,7 +187,6 @@ namespace Unity
         private ToolStripMenuItem _aboutToolStripMenuItem;
         private GroupBox _rightGroupBox;
         private Button _slide1;
-        private Button _slide2;
         private DataGridViewButtonColumn _delete;
         private ToolStrip _toolStrip1;
         private Canvas _canvas;
