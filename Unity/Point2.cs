@@ -46,7 +46,7 @@ namespace Unity
         /// <param name="point1"></param>
         /// <param name="point2"></param>
         /// <returns></returns>
-        internal static Point2 GetSubstract(Point2 point1, Point2 point2)
+        public static Point2 GetSubstract(Point2 point1, Point2 point2)
         {
             return new Point2(point1.X - point2.X, point1.Y - point2.Y);
         }
@@ -57,7 +57,7 @@ namespace Unity
         /// <param name="point"></param>
         /// <param name="number"></param>
         /// <returns></returns>
-        internal static Point2 Divide(Point2 point, int number)
+        public static Point2 Divide(Point2 point, int number)
         {
             return new Point2(point.X / number, point.Y / number);
         }
@@ -68,7 +68,7 @@ namespace Unity
         /// <param name="point1"></param>
         /// <param name="point2"></param>
         /// <returns></returns>
-        internal static Point2 GetDistance(Point2 point1, Point2 point2)
+        public static Point2 GetDistance(Point2 point1, Point2 point2)
         {
             return new Point2(Math.Abs(point1.X - point2.X), Math.Abs(point1.Y - point2.Y));
         }
@@ -79,7 +79,7 @@ namespace Unity
         /// <param name="point1"></param>
         /// <param name="point2"></param>
         /// <returns></returns>
-        internal static Point2 Add(Point2 point1, Point2 point2)
+        public static Point2 Add(Point2 point1, Point2 point2)
         {
             return new Point2(point1.X + point2.X, point1.Y + point2.Y);
         }
@@ -97,7 +97,7 @@ namespace Unity
         /// return if both positive
         /// </summary>
         /// <returns></returns>
-        internal bool IsBothPositive()
+        public bool IsBothPositive()
         {
             return X > 0 && Y > 0;
         }

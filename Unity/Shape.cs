@@ -26,11 +26,7 @@ namespace Unity
         {
             get
             {
-                if (_info.Count == 0)
-                {
-                    return "";
-                }
-                return _info[0].ToString() + COMMA + EMPTY + _info[1].ToString();
+                return string.Join(COMMA + EMPTY, _info);
             }
         }
 
@@ -39,7 +35,7 @@ namespace Unity
         /// </summary>
         /// <param name="point"></param>
         /// <returns></returns>
-        internal bool IsPointIn(Point2 point)
+        public bool IsPointIn(Point2 point)
         {
             var firstDistance = Point2.GetDistance(point, GetFirst());
             var secondDistance = Point2.GetDistance(point, GetSecond());
@@ -47,9 +43,7 @@ namespace Unity
             var (x1, y1) = firstDistance.GetTuple();
             var (x2, y2) = secondDistance.GetTuple();
             var (x3, y3) = shapeDistance.GetTuple();
-            return
-                x1 + x2 <= x3 &&
-                y1 + y2 <= y3;
+            return x1 + x2 <= x3 && y1 + y2 <= y3;
         }
 
         public Shape(Point2 start, Point2 end)
@@ -83,7 +77,7 @@ namespace Unity
         /// move
         /// </summary>
         /// <param name="delta"></param>
-        internal void Move(Point2 delta)
+        public void Move(Point2 delta)
         {
             for (int i = 0; i < _info.Count; i++)
             {
