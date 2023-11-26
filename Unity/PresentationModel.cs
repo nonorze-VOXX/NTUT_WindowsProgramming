@@ -10,6 +10,10 @@ namespace Unity
     {
         ShapeModel _shapeModel;
         List<bool> _shapeButtonActive;
+        /// <summary>
+        /// model
+        /// </summary>
+        /// <param name="model"></param>
         public PresentationModel(ShapeModel model)
         {
             _shapeModel = model;
@@ -18,6 +22,11 @@ namespace Unity
                 false, false, false,false
             };
         }
+
+        /// <summary>
+        /// active
+        /// </summary>
+        /// <returns></returns>
         public List<bool> GetShapeButtonActive()
         {
             return _shapeButtonActive;

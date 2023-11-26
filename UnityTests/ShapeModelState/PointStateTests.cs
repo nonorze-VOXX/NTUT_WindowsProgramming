@@ -11,6 +11,9 @@ namespace Unity.ShapeModelState.Tests
         private PrivateObject _pointStatePrivate;
         private PointState _pointState;
 
+        /// <summary>
+        /// up
+        /// </summary>
         [TestInitialize]
         public void SetUp()
         {
@@ -20,6 +23,9 @@ namespace Unity.ShapeModelState.Tests
             _pointStatePrivate = new PrivateObject(_pointState);
         }
 
+        /// <summary>
+        /// press
+        /// </summary>
         [TestMethod()]
         public void TestDeletePress()
         {
@@ -31,6 +37,9 @@ namespace Unity.ShapeModelState.Tests
             Assert.IsTrue(shapeList.Contains(_mockShape.Object));
         }
 
+        /// <summary>
+        /// draw
+        /// </summary>
         [TestMethod()]
         public void TestDraw()
         {
@@ -38,6 +47,9 @@ namespace Unity.ShapeModelState.Tests
             _pointState.Draw(_mockGraphics.Object);
         }
 
+        /// <summary>
+        /// down
+        /// </summary>
         [TestMethod()]
         public void TestMouseDown()
         {
@@ -50,6 +62,9 @@ namespace Unity.ShapeModelState.Tests
             _pointState.Draw(_mockGraphics.Object);
         }
 
+        /// <summary>
+        /// move
+        /// </summary>
         [TestMethod()]
         public void TestMouseMove()
         {
@@ -62,6 +77,10 @@ namespace Unity.ShapeModelState.Tests
             _pointState.MouseDown(ShapeType.Rectangle, new Point2(1, 1), shapeList);
             _pointState.MouseMove(new Point2(1, 1));
         }
+
+        /// <summary>
+        /// false
+        /// </summary>
         [TestMethod()]
         public void TestMouseMoveFalse()
         {
@@ -72,6 +91,9 @@ namespace Unity.ShapeModelState.Tests
             _pointState.MouseDown(ShapeType.Rectangle, new Point2(1, 1), shapeList);
         }
 
+        /// <summary>
+        /// up
+        /// </summary>
         [TestMethod()]
         public void TestMouseUp()
         {
@@ -79,6 +101,9 @@ namespace Unity.ShapeModelState.Tests
             _pointState.MouseUp(new Point2(1, 1), shapeList);
         }
 
+        /// <summary>
+        /// scale
+        /// </summary>
         [TestMethod()]
         public void TestMouseMoveScale()
         {

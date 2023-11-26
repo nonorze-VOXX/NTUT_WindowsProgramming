@@ -73,12 +73,19 @@ namespace Unity
             return new Point2(Math.Abs(point1.X - point2.X), Math.Abs(point1.Y - point2.Y));
         }
 
+        /// <summary>
+        /// float
+        /// </summary>
+        /// <param name="point1"></param>
+        /// <param name="point2"></param>
+        /// <returns></returns>
         public static float GetDistanceFloat(Point2 point1, Point2 point2)
         {
-            var X = point1.X - point2.X;
-            var Y = point1.Y - point2.Y;
-            return (float)Math.Sqrt(X * X + Y * Y);
+            var compare1 = point1.X - point2.X;
+            var compare2 = point1.Y - point2.Y;
+            return (float)Math.Sqrt(compare1 * compare1 + compare2 * compare2);
         }
+
         /// <summary>
         /// add
         /// </summary>

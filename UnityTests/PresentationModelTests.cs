@@ -12,6 +12,9 @@ namespace Unity.Tests
         private Mock<ShapeModel> _mockShapeModel;
         private PresentationModel _model;
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestInitialize()]
         public void SetUp()
         {
@@ -19,6 +22,9 @@ namespace Unity.Tests
             _model = new PresentationModel(_mockShapeModel.Object);
         }
 
+        /// <summary>
+        /// constructor
+        /// </summary>
         [TestMethod()]
         public void TestConstructor()
         {
@@ -28,6 +34,9 @@ namespace Unity.Tests
             Assert.IsFalse(_model.GetShapeButtonActive().Any(x => x));
         }
 
+        /// <summary>
+        /// draw
+        /// </summary>
         [TestMethod()]
         public void TestDraw()
         {
@@ -36,6 +45,9 @@ namespace Unity.Tests
             _mockShapeModel.Verify(x => x.Draw(mockGraphics.Object), Times.Once);
         }
 
+        /// <summary>
+        /// shape
+        /// </summary>
         [TestMethod()]
         public void TestUpdateShapeButtonActive()
         {
@@ -44,6 +56,9 @@ namespace Unity.Tests
             Assert.IsTrue(_model.GetShapeButtonActive()[1]);
         }
 
+        /// <summary>
+        /// up
+        /// </summary>
         [TestMethod()]
         public void TestHandleCanvasMouseUp()
         {
@@ -54,6 +69,9 @@ namespace Unity.Tests
             _mockShapeModel.Verify(x => x.MouseUp(point), Times.Once);
         }
 
+        /// <summary>
+        /// move
+        /// </summary>
         [TestMethod()]
         public void TestHandleCanvasMouseMove()
         {
@@ -62,6 +80,9 @@ namespace Unity.Tests
             _mockShapeModel.Verify(x => x.MouseMove(point), Times.Once);
         }
 
+        /// <summary>
+        /// down
+        /// </summary>
         [TestMethod()]
         public void TestHandleCanvasMouseDown()
         {
@@ -71,6 +92,9 @@ namespace Unity.Tests
             _mockShapeModel.Verify(x => x.MouseDown(It.IsAny<ShapeType>(), point), Times.Once);
         }
 
+        /// <summary>
+        /// click
+        /// </summary>
         [TestMethod()]
         public void TestCreateButtonClick()
         {
@@ -81,6 +105,9 @@ namespace Unity.Tests
             _mockShapeModel.Verify(x => x.Add(ShapeType.Rectangle), Times.Once);
         }
 
+        /// <summary>
+        /// click
+        /// </summary>
         [TestMethod()]
         public void TestDeleteButtonClick()
         {
@@ -89,6 +116,9 @@ namespace Unity.Tests
             _mockShapeModel.Verify(x => x.RemoveIndex(0), Times.Once);
         }
 
+        /// <summary>
+        /// down
+        /// </summary>
         [TestMethod()]
         public void TestHandleKeyDown()
         {
@@ -96,6 +126,10 @@ namespace Unity.Tests
             _model.HandleKeyDown(eventArgs);
             _mockShapeModel.Verify(x => x.DeletePress(), Times.Once);
         }
+
+        /// <summary>
+        /// click
+        /// </summary>
         [TestMethod()]
         public void TestHandleToolStripButtonClick()
         {
