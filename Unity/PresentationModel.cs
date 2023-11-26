@@ -15,18 +15,21 @@ namespace Unity
             _shapeModel = model;
             _shapeButtonActive = new List<bool>
             {
-                false, false, false
+                false, false, false,false
             };
+        }
+        public List<bool> GetShapeButtonActive()
+        {
+            return _shapeButtonActive;
         }
 
         /// <summary>
         /// draw
         /// </summary>
         /// <param name="graphics"></param>
-        public void Draw(System.Drawing.Graphics graphics)
+        public void Draw(IGraphics graphics)
         {
-            var graphicsAdaptor = new WindowFormsGraphicsAdaptor(graphics);
-            _shapeModel.Draw(graphicsAdaptor);
+            _shapeModel.Draw(graphics);
         }
 
         /// <summary>
@@ -35,7 +38,7 @@ namespace Unity
         /// <param name="toolStripItems"></param>
         /// <param name="clickedIndex"></param>
         /// <param name="clicked"></param>
-        internal void UpdateShapeButtonActive(List<System.Windows.Forms.ToolStripItem> toolStripItems, int clickedIndex, bool clicked)
+        public void UpdateShapeButtonActive(List<System.Windows.Forms.ToolStripItem> toolStripItems, int clickedIndex, bool clicked)
         {
             _shapeButtonActive = ResetToolStripButton(toolStripItems);
             _shapeButtonActive[clickedIndex] = clicked;
@@ -77,7 +80,7 @@ namespace Unity
         /// get
         /// </summary>
         /// <returns></returns>
-        internal BindingList<Shape> GetShapeList()
+        public BindingList<Shape> GetShapeList()
         {
             return _shapeModel.shapeList;
         }
@@ -126,11 +129,11 @@ namespace Unity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public ButtonFunction CreateButtonClick(ComboBox comboBox)
+        public ButtonFunction CreateButtonClick(ShapeTypeComboBox comboBox)
         {
             return (object sender, EventArgs e) =>
             {
-                _shapeModel.Add((ShapeType)comboBox.SelectedItem);
+                _shapeModel.Add((ShapeType)comboBox.GetSelectedItem());
             };
         }
 
@@ -184,7 +187,7 @@ namespace Unity
         /// down
         /// </summary>
         /// <param name="e"></param>
-        internal void HandleKeyDown(KeyEventArgs e)
+        public void HandleKeyDown(KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
             {

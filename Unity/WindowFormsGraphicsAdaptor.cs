@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Unity
 {
-    class WindowFormsGraphicsAdaptor : IGraphics
+    public class WindowFormsGraphicsAdaptor : IGraphics
     {
         private Graphics _graphics;
         public const int TWO_INTEGER = 2;

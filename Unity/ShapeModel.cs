@@ -28,7 +28,7 @@ namespace Unity
         /// <summary>
         /// switch
         /// </summary>
-        public void SwitchStateDrawing()
+        public virtual void SwitchStateDrawing()
         {
             _pointState = new PointState();
             _state = new DrawingState();
@@ -38,7 +38,7 @@ namespace Unity
         /// <summary>
         /// switch
         /// </summary>
-        public void SwitchStatePoint()
+        public virtual void SwitchStatePoint()
         {
             _state = _pointState;
         }
@@ -49,14 +49,11 @@ namespace Unity
         /// draw
         /// </summary>
         /// <param name="graphics"></param>
-        internal void Draw(IGraphics graphics)
+        public virtual void Draw(IGraphics graphics)
         {
             foreach (Shape shape in _shapeList)
             {
                 shape.Draw(graphics);
-            }
-            if (_isPressed)
-            {
             }
             _state.Draw(graphics);
         }
@@ -98,7 +95,7 @@ namespace Unity
         /// </summary>
         /// <param name="shapeType"></param>
         /// <param name="point"></param>
-        internal void MouseDown(ShapeType shapeType, Point2 point)
+        public virtual void MouseDown(ShapeType shapeType, Point2 point)
         {
             if (point.IsBothPositive())
             {
@@ -111,7 +108,7 @@ namespace Unity
         /// mouse up
         /// </summary>
         /// <param name="point"></param>
-        internal void MouseUp(Point2 point)
+        public virtual void MouseUp(Point2 point)
         {
             if (_isPressed)
             {
@@ -125,7 +122,7 @@ namespace Unity
         /// mouse up
         /// </summary>
         /// <param name="point"></param>
-        internal void MouseMove(Point2 point)
+        public virtual void MouseMove(Point2 point)
         {
             if (_isPressed)
             {
@@ -139,7 +136,7 @@ namespace Unity
         /// Add newShape with type, info is random
         /// </summary>
         /// <param name="type"></param>
-        public void Add(ShapeType shapeType)
+        public virtual void Add(ShapeType shapeType)
         {
             _shapeList.Add(ShapeFactory.CreateByRandom(shapeType, CANVAS_MAX));
             NotifyModelChanged();
@@ -151,7 +148,7 @@ namespace Unity
         /// <param name="type"></param>
         /// <param name="start"></param>
         /// <param name="end"></param>
-        public void Add(ShapeType type, Point2 start, Point2 end)
+        public virtual void Add(ShapeType type, Point2 start, Point2 end)
         {
             _shapeList.Add(ShapeFactory.CreateShape(type, start, end));
             NotifyModelChanged();
@@ -161,7 +158,7 @@ namespace Unity
         /// remove from list by index
         /// </summary>
         /// <param name="rowIndex"></param>
-        internal void RemoveIndex(int rowIndex)
+        public virtual void RemoveIndex(int rowIndex)
         {
             _shapeList.RemoveAt(rowIndex);
             NotifyModelChanged();
@@ -170,7 +167,7 @@ namespace Unity
         /// <summary>
         /// delete
         /// </summary>
-        internal void DeletePress()
+        public virtual void DeletePress()
         {
             _state.DeletePress(shapeList);
             NotifyModelChanged();

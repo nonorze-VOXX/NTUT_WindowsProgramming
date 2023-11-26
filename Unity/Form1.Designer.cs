@@ -37,7 +37,7 @@ namespace Unity
             this._dataGridView = new System.Windows.Forms.DataGridView();
             this._delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this._createButton = new System.Windows.Forms.Button();
-            this._shapeComboBox = new System.Windows.Forms.ComboBox();
+            this._shapeComboBox = new ShapeTypeComboBox();
             this._topBar = new System.Windows.Forms.MenuStrip();
             this._toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -181,7 +181,7 @@ namespace Unity
 
         private DataGridView _dataGridView;
         private Button _createButton;
-        private ComboBox _shapeComboBox;
+        private ShapeTypeComboBox _shapeComboBox;
         private MenuStrip _topBar;
         private ToolStripMenuItem _toolStripMenuItem;
         private ToolStripMenuItem _aboutToolStripMenuItem;
