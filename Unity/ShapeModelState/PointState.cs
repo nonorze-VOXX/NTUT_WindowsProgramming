@@ -107,41 +107,37 @@ namespace Unity.ShapeModelState
                 {
                     var first = _choosingShape.GetFirst();
                     var second = _choosingShape.GetSecond();
-                    Point2 compare1 = null;
-                    Point2 compare2 = null;
+                    List<Point2> compareList = new List<Point2>();
                     if (Point2.GetDistanceFloat(first, _scalePoint) < Point2.GetDistanceFloat(second, _scalePoint))
                     {
-                        compare1 = first;
-                        compare2 = second;
+                        compareList.Add(first);
+                        compareList.Add(second);
                     }
                     else
                     {
-                        compare1 = second;
-                        compare2 = first;
+                        compareList.Add(second);
+                        compareList.Add(first);
                     }
-                    if (compare1.X.Equals(_scalePoint.X))
+                    foreach (var compare in compareList)
                     {
-                        compare1.X += delta.X;
-                        _scalePoint.X = compare1.X;
+                        if (compare.X.Equals(_scalePoint.X))
+                        {
+                            compare.X += delta.X;
+                            _scalePoint.X = compare.X;
+                            break;
+                        }
                     }
-                    else if (compare2.X.Equals(_scalePoint.X))
+                    foreach (var compare in compareList)
                     {
-                        compare2.X += delta.X;
-                        _scalePoint.X = compare2.X;
+                        if (compare.Y.Equals(_scalePoint.Y))
+                        {
+                            compare.Y += delta.Y;
+                            _scalePoint.Y = compare.Y;
+                            break;
+                        }
                     }
-                    if (compare1.Y.Equals(_scalePoint.Y))
-                    {
-                        compare1.Y += delta.Y;
-                        _scalePoint.Y = compare1.Y;
-                    }
-                    else if (compare2.Y.Equals(_scalePoint.Y))
-                    {
-                        compare2.Y += delta.Y;
-                        _scalePoint.Y = compare2.Y;
-                    }
-
-                    _choosingShape.SetFirst(compare1);
-                    _choosingShape.SetSecond(compare2);
+                    _choosingShape.SetFirst(compareList[0]);
+                    _choosingShape.SetSecond(compareList[1]);
                 }
                 else
                 {

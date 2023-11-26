@@ -96,5 +96,15 @@ namespace Unity.Tests
             Assert.IsTrue(point1.IsBothPositive());
         }
 
+        [TestMethod()]
+        public void GetDistanceFloatTest()
+        {
+            point1.X = FIVE;
+            point1.Y = FIVE;
+            point2.X = FIVE;
+            point2.Y = FIVE;
+            float result = Point2.GetDistanceFloat(point1, point2);
+            Assert.AreEqual(result, 0);
+        }
     }
 }
