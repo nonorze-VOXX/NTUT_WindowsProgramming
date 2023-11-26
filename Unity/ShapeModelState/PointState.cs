@@ -74,9 +74,9 @@ namespace Unity.ShapeModelState
                 foreach (var circle in GetEightpoint(_choosingShape.GetFirst(), _choosingShape.GetSecond()))
                 {
                     var distance = Point2.GetDistanceFloat(circle, point);
-                    if (distance * 2 < _size.X + _size.Y)
+                    var sum = _size.Sum();
+                    if (Close(distance, sum))
                     {
-                        Console.WriteLine("point");
                         _scalePoint = circle;
                         return;
                     }
@@ -94,6 +94,11 @@ namespace Unity.ShapeModelState
             _choosingShape = null;
         }
 
+        private bool Close(float distance, float sum)
+        {
+            return distance * 2 < sum;
+        }
+
         /// <summary>
         /// move
         /// </summary>
@@ -107,37 +112,10 @@ namespace Unity.ShapeModelState
                 {
                     var first = _choosingShape.GetFirst();
                     var second = _choosingShape.GetSecond();
-                    List<Point2> compareList = new List<Point2>();
-                    if (Point2.GetDistanceFloat(first, _scalePoint) < Point2.GetDistanceFloat(second, _scalePoint))
-                    {
-                        compareList.Add(first);
-                        compareList.Add(second);
-                    }
-                    else
-                    {
-                        compareList.Add(second);
-                        compareList.Add(first);
-                    }
-                    foreach (var compare in compareList)
-                    {
-                        if (compare.X.Equals(_scalePoint.X))
-                        {
-                            compare.X += delta.X;
-                            _scalePoint.X = compare.X;
-                            break;
-                        }
-                    }
-                    foreach (var compare in compareList)
-                    {
-                        if (compare.Y.Equals(_scalePoint.Y))
-                        {
-                            compare.Y += delta.Y;
-                            _scalePoint.Y = compare.Y;
-                            break;
-                        }
-                    }
-                    _choosingShape.SetFirst(compareList[0]);
-                    _choosingShape.SetSecond(compareList[1]);
+
+                    (first, second, _scalePoint) = Point2.MoveScaleX(first, second, _scalePoint, delta);
+                    (first, second, _scalePoint) = Point2.MoveScaleY(first, second, _scalePoint, delta);
+                    _choosingShape.SetPosition(first, second);
                 }
                 else
                 {

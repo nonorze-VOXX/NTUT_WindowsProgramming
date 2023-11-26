@@ -131,5 +131,11 @@ namespace Unity
         {
             _info[1] = point;
         }
+
+        internal void SetPosition(Point2 first, Point2 second)
+        {
+            SetFirst(first);
+            SetSecond(second);
+        }
     }
 }
