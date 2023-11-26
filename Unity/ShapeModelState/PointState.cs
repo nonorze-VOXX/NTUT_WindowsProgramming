@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Unity.ShapeModelState
 {
-    class PointState : IState
+    public class PointState : IState
     {
         Shape _choosingShape = null;
         public const int EIGHT_INTEGER = 8;

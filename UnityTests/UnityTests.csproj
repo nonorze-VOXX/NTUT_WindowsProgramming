@@ -78,10 +78,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RectangleTests.cs" />
     <Compile Include="ShapeFactoryTests.cs" />
+    <Compile Include="ShapeModelState\PointStateTests.cs" />
     <Compile Include="ShapeModelTests.cs" />
     <Compile Include="ShapeTests.cs" />
     <Compile Include="ShapeTypeComboBoxTests.cs" />
-    <Compile Include="WindowFormsGraphicsAdaptorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

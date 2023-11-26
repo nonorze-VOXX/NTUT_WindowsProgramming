@@ -35,7 +35,7 @@ namespace Unity
         /// </summary>
         /// <param name="point"></param>
         /// <returns></returns>
-        public bool IsPointIn(Point2 point)
+        public virtual bool IsPointIn(Point2 point)
         {
             var firstDistance = Point2.GetDistance(point, GetFirst());
             var secondDistance = Point2.GetDistance(point, GetSecond());
@@ -77,7 +77,7 @@ namespace Unity
         /// move
         /// </summary>
         /// <param name="delta"></param>
-        public void Move(Point2 delta)
+        public virtual void Move(Point2 delta)
         {
             for (int i = 0; i < _info.Count; i++)
             {
