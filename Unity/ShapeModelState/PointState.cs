@@ -73,9 +73,8 @@ namespace Unity.ShapeModelState
             {
                 foreach (var circle in GetEightpoint(_choosingShape.GetFirst(), _choosingShape.GetSecond()))
                 {
-                    var distance = Point2.GetDistance(circle, point);
-                    if (Math.Sqrt(distance.X * distance.X + distance.Y * distance.Y) * 2 <
-                        _size.X + _size.Y)
+                    var distance = Point2.GetDistanceFloat(circle, point);
+                    if (distance * 2 < _size.X + _size.Y)
                     {
                         Console.WriteLine("point");
                         _scalePoint = circle;
@@ -108,28 +107,41 @@ namespace Unity.ShapeModelState
                 {
                     var first = _choosingShape.GetFirst();
                     var second = _choosingShape.GetSecond();
-                    if (first.X.Equals(_scalePoint.X))
+                    Point2 compare1 = null;
+                    Point2 compare2 = null;
+                    if (Point2.GetDistanceFloat(first, _scalePoint) < Point2.GetDistanceFloat(second, _scalePoint))
                     {
-                        first.X += delta.X;
-                        _scalePoint.X = first.X;
+                        compare1 = first;
+                        compare2 = second;
                     }
-                    else if (second.X.Equals(_scalePoint.X))
+                    else
                     {
-                        second.X += delta.X;
-                        _scalePoint.X = second.X;
+                        compare1 = second;
+                        compare2 = first;
                     }
-                    if (first.Y.Equals(_scalePoint.Y))
+                    if (compare1.X.Equals(_scalePoint.X))
                     {
-                        first.Y += delta.Y;
-                        _scalePoint.Y = first.Y;
+                        compare1.X += delta.X;
+                        _scalePoint.X = compare1.X;
                     }
-                    else if (second.Y.Equals(_scalePoint.Y))
+                    else if (compare2.X.Equals(_scalePoint.X))
                     {
-                        second.Y += delta.Y;
-                        _scalePoint.Y = second.Y;
+                        compare2.X += delta.X;
+                        _scalePoint.X = compare2.X;
                     }
-                    _choosingShape.SetFirst(first);
-                    _choosingShape.SetSecond(second);
+                    if (compare1.Y.Equals(_scalePoint.Y))
+                    {
+                        compare1.Y += delta.Y;
+                        _scalePoint.Y = compare1.Y;
+                    }
+                    else if (compare2.Y.Equals(_scalePoint.Y))
+                    {
+                        compare2.Y += delta.Y;
+                        _scalePoint.Y = compare2.Y;
+                    }
+
+                    _choosingShape.SetFirst(compare1);
+                    _choosingShape.SetSecond(compare2);
                 }
                 else
                 {
