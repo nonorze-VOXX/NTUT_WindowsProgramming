@@ -9,7 +9,7 @@ namespace Unity
         Ellipse
     }
 
-    internal class ShapeFactory
+    public class ShapeFactory
     {
         /// <summary>
         /// create shape by factory
@@ -42,10 +42,8 @@ namespace Unity
                     return new Line(start, end);
                 case ShapeType.Rectangle:
                     return new Rectangle(start, end);
-                case ShapeType.Ellipse:
-                    return new Ellipse(start, end);
                 default:
-                    return null;
+                    return new Ellipse(start, end);
             }
         }
     }

@@ -1,6 +1,6 @@
 ﻿namespace Unity
 {
-    class Ellipse : Shape
+    public class Ellipse : Shape
     {
         private const string ELLIPSE = "Ellipse";
         public Ellipse(Point2 point1, Point2 point2) : base(point1, point2)

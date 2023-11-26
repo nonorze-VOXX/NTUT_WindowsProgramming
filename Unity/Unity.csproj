@@ -85,6 +85,9 @@
     <Compile Include="ShapeFactory.cs" />
     <Compile Include="ShapeModel.cs" />
     <Compile Include="ShapeModelState\PointState.cs" />
+    <Compile Include="ShapeTypeComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="WindowFormsGraphicsAdaptor.cs" />
     <EmbeddedResource Include="Canvas.resx">
       <DependentUpon>Canvas.cs</DependentUpon>

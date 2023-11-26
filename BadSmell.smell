@@ -291,14 +291,74 @@
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>ShapeTypeComboBox.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>WindowFormsGraphicsAdaptor.cs</RelativePath>
                 <ProjectName>Unity</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>EllipseTests.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>LineTests.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Point2Tests.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>PresentationModelTests.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Properties\AssemblyInfo.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>RectangleTests.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ShapeFactoryTests.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ShapeModelState\PointStateTests.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ShapeModelTests.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ShapeTests.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>ShapeTypeComboBoxTests.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>1535</ProductionLoc>
-          <TestLoc>0</TestLoc>
+          <ProductionLoc>1846</ProductionLoc>
+          <TestLoc>803</TestLoc>
         </CodeReview>
       </Data>
     </div>

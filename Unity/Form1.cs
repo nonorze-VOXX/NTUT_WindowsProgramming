@@ -86,7 +86,8 @@ namespace Unity
         /// <param name="e"></param>
         public void HandleCanvasPaint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
-            _presentationModel.Draw(e.Graphics);
+            var graphicsAdaptor = new WindowFormsGraphicsAdaptor(e.Graphics);
+            _presentationModel.Draw(graphicsAdaptor);
             GenerateBrief();
         }
 

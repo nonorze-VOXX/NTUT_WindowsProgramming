@@ -37,7 +37,7 @@ namespace Unity
             this._dataGridView = new System.Windows.Forms.DataGridView();
             this._delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this._createButton = new System.Windows.Forms.Button();
-            this._shapeComboBox = new System.Windows.Forms.ComboBox();
+            this._shapeComboBox = new ShapeTypeComboBox();
             this._topBar = new System.Windows.Forms.MenuStrip();
             this._toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,7 +63,7 @@ namespace Unity
             this._dataGridView.Name = "_dataGridView";
             this._dataGridView.ReadOnly = true;
             this._dataGridView.RowHeadersVisible = false;
-            this._dataGridView.Size = new System.Drawing.Size(273, 348);
+            this._dataGridView.Size = new System.Drawing.Size(340, 348);
             this._dataGridView.TabIndex = 0;
             // 
             // delete
@@ -126,7 +126,7 @@ namespace Unity
             this._rightGroupBox.Controls.Add(this._createButton);
             this._rightGroupBox.Location = new System.Drawing.Point(550, 27);
             this._rightGroupBox.Name = "_rightGroupBox";
-            this._rightGroupBox.Size = new System.Drawing.Size(285, 426);
+            this._rightGroupBox.Size = new System.Drawing.Size(350, 426);
             this._rightGroupBox.TabIndex = 4;
             this._rightGroupBox.TabStop = false;
             this._rightGroupBox.Text = "groupBox1";
@@ -160,7 +160,7 @@ namespace Unity
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(847, 503);
+            this.ClientSize = new System.Drawing.Size(1000, 503);
             this.Controls.Add(this._toolStrip1);
             this.Controls.Add(this._canvas);
             this.Controls.Add(this._slide1);
@@ -181,7 +181,7 @@ namespace Unity
 
         private DataGridView _dataGridView;
         private Button _createButton;
-        private ComboBox _shapeComboBox;
+        private ShapeTypeComboBox _shapeComboBox;
         private MenuStrip _topBar;
         private ToolStripMenuItem _toolStripMenuItem;
         private ToolStripMenuItem _aboutToolStripMenuItem;
