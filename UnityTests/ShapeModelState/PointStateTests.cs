@@ -120,5 +120,23 @@ namespace Unity.ShapeModelState.Tests
             _pointState.MouseMove(new Point2(12, 12));
             _pointState.MouseMove(new Point2(15, 15));
         }
+
+        /// <summary>
+        /// scale
+        /// </summary>
+        [TestMethod()]
+        public void TestMouseMoveScale2()
+        {
+            _mockShape.Setup(s => s.IsPointIn(It.IsAny<Point2>())).Returns(true);
+            var shapeList = new System.ComponentModel.BindingList<Shape> { _mockShape.Object };
+            _mockShape.Setup(s => s.IsPointIn(It.IsAny<Point2>())).Returns(true);
+            _mockShape.Setup(x => x.GetFirst()).Returns(new Point2(10, 10));
+            _mockShape.Setup(x => x.GetSecond()).Returns(new Point2(20, 20));
+            _pointState.MouseDown(ShapeType.Rectangle, new Point2(15, 15), shapeList);
+            _pointState.MouseDown(ShapeType.Rectangle, new Point2(20, 20), shapeList);
+            _pointState.MouseMove(new Point2(20, 10));
+            _pointState.MouseMove(new Point2(18, 12));
+            _pointState.MouseUp(new Point2(15, 15), shapeList);
+        }
     }
 }

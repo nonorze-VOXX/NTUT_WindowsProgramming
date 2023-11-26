@@ -12,12 +12,19 @@ namespace Unity.Tests
         const int TWO = 2;
         Point2 point1;
         Point2 point2;
+        /// <summary>
+        /// t
+        /// </summary>
         [TestInitialize()]
         public void Initialize()
         {
             point1 = new Point2(ZERO, ZERO);
             point2 = new Point2(ZERO, ZERO);
         }
+
+        /// <summary>
+        /// t
+        /// </summary>
         [TestMethod()]
         public void Point2Test()
         {
@@ -25,6 +32,9 @@ namespace Unity.Tests
             Assert.AreEqual(point1.Y, ZERO);
         }
 
+        /// <summary>
+        /// t
+        /// </summary>
         [TestMethod()]
         public void ToStringTest()
         {
@@ -32,6 +42,9 @@ namespace Unity.Tests
             Assert.AreEqual(point1.ToString(), result);
         }
 
+        /// <summary>
+        /// test
+        /// </summary>
         [TestMethod()]
         public void GetTupleTest()
         {
@@ -40,7 +53,9 @@ namespace Unity.Tests
             Assert.AreEqual(tuple.Item2, ZERO);
         }
 
-
+        /// <summary>
+        /// t
+        /// </summary>
         [TestMethod()]
         public void GetSubstractTest()
         {
@@ -53,6 +68,9 @@ namespace Unity.Tests
             Assert.AreEqual(result.Y, FIVE);
         }
 
+        /// <summary>
+        /// test
+        /// </summary>
         [TestMethod()]
         public void DivideTest()
         {
@@ -63,6 +81,9 @@ namespace Unity.Tests
             Assert.AreEqual(result.Y, TWO);
         }
 
+        /// <summary>
+        /// tset
+        /// </summary>
         [TestMethod()]
         public void GetDistanceTest()
         {
@@ -75,6 +96,9 @@ namespace Unity.Tests
             Assert.AreEqual(result.Y, FIVE);
         }
 
+        /// <summary>
+        /// t
+        /// </summary>
         [TestMethod()]
         public void AddTest()
         {
@@ -87,7 +111,9 @@ namespace Unity.Tests
             Assert.AreEqual(result.Y, TEN);
         }
 
-
+        /// <summary>
+        /// t
+        /// </summary>
         [TestMethod()]
         public void IsBothPositiveTest()
         {
@@ -96,6 +122,9 @@ namespace Unity.Tests
             Assert.IsTrue(point1.IsBothPositive());
         }
 
+        /// <summary>
+        /// t
+        /// </summary>
         [TestMethod()]
         public void GetDistanceFloatTest()
         {

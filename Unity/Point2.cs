@@ -117,11 +117,12 @@ namespace Unity
         {
             return new Point2(X + point2.X, Y);
         }
+
         /// <summary>
         /// sum
         /// </summary>
         /// <returns></returns>
-        internal float Sum()
+        internal float GetSum()
         {
             return X + Y;
         }
@@ -144,12 +145,27 @@ namespace Unity
             return X > 0 && Y > 0;
         }
 
+        /// <summary>
+        /// scale
+        /// </summary>
+        /// <param name="scale"></param>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <returns></returns>
         internal static bool IsFirstCloserX(Point2 scale, Point2 first, Point2 second)
         {
             return Math.Abs(scale.X - first.X) < Math.Abs(scale.X - second.X);
         }
 
-        internal static (Point2 first, Point2 second, Point2 _scalePoint) MoveScaleX(Point2 first, Point2 second, Point2 scalePoint, Point2 delta)
+        /// <summary>
+        /// move
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <param name="scalePoint"></param>
+        /// <param name="delta"></param>
+        /// <returns></returns>
+        public static Tuple<Point2, Point2, Point2> MoveScaleX(Point2 first, Point2 second, Point2 scalePoint, Point2 delta)
         {
             if (Point2.IsFirstCloserX(scalePoint, first, second))
             {
@@ -167,14 +183,26 @@ namespace Unity
                     scalePoint = scalePoint.AddX(delta);
                 }
             }
-            return (first, second, scalePoint);
+            return new Tuple<Point2, Point2, Point2>(first, second, scalePoint);
         }
 
+        /// <summary>
+        /// scale
+        /// </summary>
+        /// <param name="scalePoint"></param>
+        /// <returns></returns>
         internal bool EqualsFirst(Point2 scalePoint)
         {
             return X.Equals(scalePoint.X);
         }
 
+        /// <summary>
+        /// sclae
+        /// </summary>
+        /// <param name="scale"></param>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <returns></returns>
         internal static bool IsFirstCloserY(Point2 scale, Point2 first, Point2 second)
         {
             return Math.Abs(scale.Y - first.Y) < Math.Abs(scale.Y - second.Y);
@@ -189,7 +217,15 @@ namespace Unity
             return new Tuple<float, float>(X, Y);
         }
 
-        internal static (Point2 first, Point2 second, Point2 _scalePoint) MoveScaleY(Point2 first, Point2 second, Point2 scalePoint, Point2 delta)
+        /// <summary>
+        /// scale
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <param name="scalePoint"></param>
+        /// <param name="delta"></param>
+        /// <returns></returns>
+        internal static Tuple<Point2, Point2, Point2> MoveScaleY(Point2 first, Point2 second, Point2 scalePoint, Point2 delta)
         {
             if (Point2.IsFirstCloserY(scalePoint, first, second))
             {
@@ -207,10 +243,14 @@ namespace Unity
                     scalePoint = scalePoint.AddY(delta);
                 }
             }
-            return (first, second, scalePoint);
-
+            return new Tuple<Point2, Point2, Point2>(first, second, scalePoint);
         }
 
+        /// <summary>
+        /// sclae
+        /// </summary>
+        /// <param name="scalePoint"></param>
+        /// <returns></returns>
         internal bool EqualsY(Point2 scalePoint)
         {
             return Y.Equals(scalePoint.Y);

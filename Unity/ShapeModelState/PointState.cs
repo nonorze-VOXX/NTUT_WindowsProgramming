@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace Unity.ShapeModelState
@@ -36,7 +37,7 @@ namespace Unity.ShapeModelState
             {
                 var first = _choosingShape.GetFirst();
                 var second = _choosingShape.GetSecond();
-                List<Point2> list = GetEightpoint(first, second);
+                List<Point2> list = GetEightPoint(first, second);
                 graphics.DrawRectangle(first, second, Pens.Red);
                 foreach (var point in list)
                 {
@@ -44,7 +45,14 @@ namespace Unity.ShapeModelState
                 }
             }
         }
-        public List<Point2> GetEightpoint(Point2 first, Point2 second)
+
+        /// <summary>
+        /// scael
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <returns></returns>
+        public List<Point2> GetEightPoint(Point2 first, Point2 second)
         {
             var (x1, y1) = first.GetTuple();
             var (x2, y2) = second.GetTuple();
@@ -71,10 +79,10 @@ namespace Unity.ShapeModelState
             _pastPoint = point;
             if (_choosingShape != null)
             {
-                foreach (var circle in GetEightpoint(_choosingShape.GetFirst(), _choosingShape.GetSecond()))
+                foreach (var circle in GetEightPoint(_choosingShape.GetFirst(), _choosingShape.GetSecond()))
                 {
                     var distance = Point2.GetDistanceFloat(circle, point);
-                    var sum = _size.Sum();
+                    var sum = _size.GetSum();
                     if (Close(distance, sum))
                     {
                         _scalePoint = circle;
@@ -83,6 +91,16 @@ namespace Unity.ShapeModelState
                 }
             }
             _scalePoint = null;
+            MoveLogic(point, shapeList);
+        }
+
+        /// <summary>
+        /// move
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="shapeList"></param>
+        private void MoveLogic(Point2 point, BindingList<Shape> shapeList)
+        {
             foreach (var shape in shapeList)
             {
                 if (shape.IsPointIn(point))
@@ -94,9 +112,15 @@ namespace Unity.ShapeModelState
             _choosingShape = null;
         }
 
+        /// <summary>
+        /// sclae
+        /// </summary>
+        /// <param name="distance"></param>
+        /// <param name="sum"></param>
+        /// <returns></returns>
         private bool Close(float distance, float sum)
         {
-            return distance * 2 < sum;
+            return distance * (1 + 1) < sum;
         }
 
         /// <summary>
@@ -110,12 +134,11 @@ namespace Unity.ShapeModelState
                 var delta = Point2.GetSubstract(point, _pastPoint);
                 if (_scalePoint != null)
                 {
-                    var first = _choosingShape.GetFirst();
-                    var second = _choosingShape.GetSecond();
-
-                    (first, second, _scalePoint) = Point2.MoveScaleX(first, second, _scalePoint, delta);
-                    (first, second, _scalePoint) = Point2.MoveScaleY(first, second, _scalePoint, delta);
-                    _choosingShape.SetPosition(first, second);
+                    var (first, second) = _choosingShape.GetLocal();
+                    var tuple = ScaleByDelta(delta, first, second);
+                    var (first1, second1) = new Tuple<Point2, Point2>(tuple.Item1, tuple.Item2);
+                    _scalePoint = tuple.Item3;
+                    _choosingShape.SetPosition(first1, second1);
                 }
                 else
                 {
@@ -123,6 +146,32 @@ namespace Unity.ShapeModelState
                 }
                 _pastPoint = point;
             }
+        }
+
+        /// <summary>
+        /// scale
+        /// </summary>
+        /// <param name="delta"></param>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        private Tuple<Point2, Point2, Point2> ScaleByDelta(Point2 delta, Point2 first, Point2 second)
+        {
+            var tuple = ScaleX(delta, first, second);
+            first = tuple.Item1;
+            second = tuple.Item2;
+            _scalePoint = tuple.Item3;
+            return Point2.MoveScaleY(first, second, _scalePoint, delta);
+        }
+
+        /// <summary>
+        /// scale
+        /// </summary>
+        /// <param name="delta"></param>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        private Tuple<Point2, Point2, Point2> ScaleX(Point2 delta, Point2 first, Point2 second)
+        {
+            return Point2.MoveScaleX(first, second, _scalePoint, delta);
         }
 
         /// <summary>

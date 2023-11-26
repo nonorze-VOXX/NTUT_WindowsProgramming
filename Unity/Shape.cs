@@ -132,10 +132,24 @@ namespace Unity
             _info[1] = point;
         }
 
+        /// <summary>
+        /// scale
+        /// </summary>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
         internal void SetPosition(Point2 first, Point2 second)
         {
             SetFirst(first);
             SetSecond(second);
+        }
+
+        /// <summary>
+        /// scale
+        /// </summary>
+        /// <returns></returns>
+        internal Tuple<Point2, Point2> GetLocal()
+        {
+            return new Tuple<Point2, Point2>(GetFirst(), GetSecond());
         }
     }
 }
