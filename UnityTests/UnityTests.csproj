@@ -83,7 +83,8 @@
     <Compile Include="ShapeModelTests.cs" />
     <Compile Include="ShapeTests.cs" />
     <Compile Include="ShapeTypeComboBoxTests.cs" />
-      </ItemGroup>
+    <Compile Include="WindowFormsGraphicsAdaptorTests.cs" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
