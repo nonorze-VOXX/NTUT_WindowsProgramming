@@ -42,6 +42,11 @@ namespace Unity
         {
             _state = _pointState;
         }
+
+        internal bool MouseInCircle()
+        {
+            return _state.IsScale();
+        }
         #endregion
 
         #region draw
@@ -124,11 +129,8 @@ namespace Unity
         /// <param name="point"></param>
         public virtual void MouseMove(Point2 point)
         {
-            if (_isPressed)
-            {
-                _state.MouseMove(point);
-                NotifyModelChanged();
-            }
+            _state.MouseMove(point, _isPressed);
+            NotifyModelChanged();
         }
         #endregion
 

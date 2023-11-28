@@ -23,6 +23,7 @@ namespace Unity.ShapeModelState
             if (_choosingShape != null)
             {
                 shapeList.Remove(_choosingShape);
+                _scalePoint = null;
                 _choosingShape = null;
             }
         }
@@ -79,19 +80,43 @@ namespace Unity.ShapeModelState
             _pastPoint = point;
             if (_choosingShape != null)
             {
-                foreach (var circle in GetEightPoint(_choosingShape.GetFirst(), _choosingShape.GetSecond()))
+                _scalePoint = IsWhichCircle();
+                if (_scalePoint != null)
                 {
-                    var distance = Point2.GetDistanceFloat(circle, point);
-                    var sum = _size.GetSum();
-                    if (Close(distance, sum))
-                    {
-                        _scalePoint = circle;
-                        return;
-                    }
+                    return;
                 }
             }
             _scalePoint = null;
             MoveLogic(point, shapeList);
+        }
+        public Point2 IsWhichCircle()
+        {
+            if (_choosingShape == null)
+            { return null; }
+            foreach (var circle in GetEightPoint(_choosingShape.GetFirst(), _choosingShape.GetSecond()))
+            {
+                var distance = Point2.GetDistanceFloat(circle, _pastPoint);
+                var sum = _size.GetSum();
+                if (Close(distance, sum))
+                {
+                    return circle;
+                }
+            }
+            Console.WriteLine(_pastPoint.ToString());
+            return null;
+        }
+
+        public bool IsScale()
+        {
+            if (_scalePoint != null)
+            {
+                return true;
+            }
+            else
+            {
+                return IsWhichCircle() != null;
+            }
+
         }
 
         /// <summary>
@@ -127,25 +152,29 @@ namespace Unity.ShapeModelState
         /// move
         /// </summary>
         /// <param name="point"></param>
-        public void MouseMove(Point2 point)
+        public void MouseMove(Point2 point, bool pressed)
         {
-            if (_choosingShape != null)
+            if (pressed)
             {
-                var delta = Point2.GetSubstract(point, _pastPoint);
-                if (_scalePoint != null)
+                if (_choosingShape != null)
                 {
-                    var (first, second) = _choosingShape.GetLocal();
-                    var tuple = ScaleByDelta(delta, first, second);
-                    var (first1, second1) = new Tuple<Point2, Point2>(tuple.Item1, tuple.Item2);
-                    _scalePoint = tuple.Item3;
-                    _choosingShape.SetPosition(first1, second1);
+                    var delta = Point2.GetSubstract(point, _pastPoint);
+                    if (_scalePoint != null)
+                    {
+                        var (first, second) = _choosingShape.GetLocal();
+                        var tuple = ScaleByDelta(delta, first, second);
+                        var (first1, second1) = new Tuple<Point2, Point2>(tuple.Item1, tuple.Item2);
+                        _scalePoint = tuple.Item3;
+                        _choosingShape.SetPosition(first1, second1);
+                    }
+                    else
+                    {
+                        _choosingShape.Move(delta);
+                    }
                 }
-                else
-                {
-                    _choosingShape.Move(delta);
-                }
-                _pastPoint = point;
+
             }
+            _pastPoint = point;
         }
 
         /// <summary>
@@ -181,6 +210,7 @@ namespace Unity.ShapeModelState
         /// <param name="shapeList"></param>
         public void MouseUp(Point2 point, System.ComponentModel.BindingList<Shape> shapeList)
         {
+            _scalePoint = null;
         }
     }
 }

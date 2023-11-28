@@ -36,9 +36,18 @@ namespace Unity
         /// draw
         /// </summary>
         /// <param name="graphics"></param>
-        public void Draw(IGraphics graphics)
+        public void Draw(IGraphics graphics, Canvas canvas)
         {
             _shapeModel.Draw(graphics);
+            if (_shapeModel.MouseInCircle())
+            {
+                canvas.Cursor = Cursors.SizeNWSE;
+            }
+            else
+            {
+                canvas.Cursor = Cursors.Default;
+
+            }
         }
 
         /// <summary>

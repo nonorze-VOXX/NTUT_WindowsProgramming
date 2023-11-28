@@ -13,7 +13,7 @@
         /// move
         /// </summary>
         /// <param name="point"></param>
-        void MouseMove(Point2 point);
+        void MouseMove(Point2 point, bool _isPress);
         /// <summary>
         /// up
         /// </summary>
@@ -30,5 +30,7 @@
         /// </summary>
         /// <param name="shapeList"></param>
         void DeletePress(System.ComponentModel.BindingList<Shape> shapeList);
+        Point2 IsWhichCircle();
+        bool IsScale();
     }
 }

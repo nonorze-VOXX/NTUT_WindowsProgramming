@@ -21,6 +21,11 @@
             _hint.Draw(graphics);
         }
 
+        public Point2 IsWhichCircle()
+        {
+            return null;
+        }
+
         /// <summary>
         /// down
         /// </summary>
@@ -31,14 +36,22 @@
         {
             _hint = ShapeFactory.CreateShape(shapeType, new Point2(point.X, point.Y), new Point2(0, 0));
         }
+        public bool IsScale()
+        {
+            return false;
+
+        }
 
         /// <summary>
         /// move
         /// </summary>
         /// <param name="point"></param>
-        public void MouseMove(Point2 point)
+        public void MouseMove(Point2 point, bool pressed)
         {
-            _hint.SetSecond(point);
+            if (pressed)
+            {
+                _hint.SetSecond(point);
+            }
         }
 
         /// <summary>
