@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Unity.Tests
 {
@@ -8,7 +9,12 @@ namespace Unity.Tests
         [TestMethod()]
         public void Form1Test()
         {
-            new Form1(new PresentationModel(new ShapeModel()));
+            var shapeModel = new Mock<ShapeModel>();
+            var presentationModel = new Mock<PresentationModel>(shapeModel.Object);
+            var form = new Form1(presentationModel.Object);
+            var formPrivate = new PrivateObject(form);
+            Assert.IsNotNull(formPrivate.GetField("_presentationModel"));
+
         }
     }
 }
