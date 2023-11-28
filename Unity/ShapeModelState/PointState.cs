@@ -89,10 +89,17 @@ namespace Unity.ShapeModelState
             _scalePoint = null;
             MoveLogic(point, shapeList);
         }
+
+        /// <summary>
+        /// cir
+        /// </summary>
+        /// <returns></returns>
         public Point2 IsWhichCircle()
         {
             if (_choosingShape == null)
-            { return null; }
+            {
+                return null;
+            }
             foreach (var circle in GetEightPoint(_choosingShape.GetFirst(), _choosingShape.GetSecond()))
             {
                 var distance = Point2.GetDistanceFloat(circle, _pastPoint);
@@ -106,6 +113,9 @@ namespace Unity.ShapeModelState
             return null;
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         public bool IsScale()
         {
             if (_scalePoint != null)
@@ -154,25 +164,21 @@ namespace Unity.ShapeModelState
         /// <param name="point"></param>
         public void MouseMove(Point2 point, bool pressed)
         {
-            if (pressed)
+            if (pressed && _choosingShape != null)
             {
-                if (_choosingShape != null)
+                var delta = Point2.GetSubstract(point, _pastPoint);
+                if (_scalePoint != null)
                 {
-                    var delta = Point2.GetSubstract(point, _pastPoint);
-                    if (_scalePoint != null)
-                    {
-                        var (first, second) = _choosingShape.GetLocal();
-                        var tuple = ScaleByDelta(delta, first, second);
-                        var (first1, second1) = new Tuple<Point2, Point2>(tuple.Item1, tuple.Item2);
-                        _scalePoint = tuple.Item3;
-                        _choosingShape.SetPosition(first1, second1);
-                    }
-                    else
-                    {
-                        _choosingShape.Move(delta);
-                    }
+                    var (first, second) = _choosingShape.GetLocal();
+                    var tuple = ScaleByDelta(delta, first, second);
+                    var (first1, second1) = new Tuple<Point2, Point2>(tuple.Item1, tuple.Item2);
+                    _scalePoint = tuple.Item3;
+                    _choosingShape.SetPosition(first1, second1);
                 }
-
+                else
+                {
+                    _choosingShape.Move(delta);
+                }
             }
             _pastPoint = point;
         }

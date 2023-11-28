@@ -10,6 +10,9 @@ namespace Unity.Tests
         private WindowFormsGraphicsAdaptor windowFormsGraphicsAdaptor;
 
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestInitialize()]
         public void SetUp()
         {
@@ -17,24 +20,36 @@ namespace Unity.Tests
             windowFormsGraphicsAdaptor = new WindowFormsGraphicsAdaptor(_graphics);
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void DrawEllipseTest()
         {
             windowFormsGraphicsAdaptor.DrawEllipse(new Point2(0, 0), new Point2(0, 0));
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void DrawEllipseByCenterAndSizeTest()
         {
             windowFormsGraphicsAdaptor.DrawEllipseByCenterAndSize(new Point2(1, 1), new Point2(1, 1));
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void DrawLineTest()
         {
             windowFormsGraphicsAdaptor.DrawLine(new Point2(0, 0), new Point2(0, 0));
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void DrawRectangleTest()
         {

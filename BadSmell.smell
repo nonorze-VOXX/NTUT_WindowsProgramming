@@ -306,6 +306,11 @@
                 <AnalysisFileType>Test</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>Form1Tests.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>LineTests.cs</RelativePath>
                 <ProjectName>UnityTests</ProjectName>
                 <AnalysisFileType>Test</AnalysisFileType>
@@ -355,10 +360,15 @@
                 <ProjectName>UnityTests</ProjectName>
                 <AnalysisFileType>Test</AnalysisFileType>
               </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>WindowFormsGraphicsAdaptorTests.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>1846</ProductionLoc>
-          <TestLoc>803</TestLoc>
+          <ProductionLoc>1914</ProductionLoc>
+          <TestLoc>999</TestLoc>
         </CodeReview>
       </Data>
     </div>

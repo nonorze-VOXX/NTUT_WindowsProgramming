@@ -43,6 +43,9 @@ namespace Unity
             _state = _pointState;
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         public virtual bool IsScale()
         {
             return _state.IsScale();

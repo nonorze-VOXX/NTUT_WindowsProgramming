@@ -6,6 +6,9 @@ namespace Unity.Tests
     public class ShapeFactoryTests
     {
         const int CANVAS_MAX = 500;
+        /// <summary>
+        /// test
+        /// </summary>
         [TestMethod()]
         public void CreateByRandomTest()
         {
@@ -13,6 +16,9 @@ namespace Unity.Tests
             Assert.AreEqual(ellipse.shape, "Ellipse");
         }
 
+        /// <summary>
+        /// rt
+        /// </summary>
         [TestMethod()]
         public void CreateShapeTest()
         {

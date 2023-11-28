@@ -8,19 +8,31 @@ namespace Unity.Tests
         {
 
         }
+        /// <summary>
+        /// set
+        /// </summary>
         public override void Draw(IGraphics graphics)
         {
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         public override string GetShapeName()
         {
             return "";
         }
     }
+    /// <summary>
+    /// set
+    /// </summary>
     [TestClass()]
     public class ShapeTests
     {
         const float HALF = 0.5f;
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void IsPointInTest()
         {
@@ -31,6 +43,9 @@ namespace Unity.Tests
             shape.Draw(null);
             Assert.IsTrue(shape.IsPointIn(point3));
         }
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void GetInfomation()
         {
@@ -39,6 +54,9 @@ namespace Unity.Tests
             var shape = new TestShape(point1, point2);
             Assert.AreEqual(shape.Information, point1.ToString() + ", " + point2.ToString());
         }
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void GetInfoStringTest()
         {
@@ -47,6 +65,9 @@ namespace Unity.Tests
             var shape = new TestShape(point1, point2);
             Assert.AreEqual(shape.GetInfoString(), point1.ToString() + point2.ToString());
         }
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void GetShapeNameTest()
         {
@@ -55,6 +76,9 @@ namespace Unity.Tests
             var shape = new TestShape(point1, point2);
             Assert.AreEqual(shape.shape, "");
         }
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void MoveTest()
         {
@@ -70,6 +94,9 @@ namespace Unity.Tests
         }
 
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void SetFirstTest()
         {

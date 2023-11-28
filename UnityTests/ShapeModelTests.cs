@@ -9,6 +9,9 @@ namespace Unity.Tests
         private Mock<IShapeObserver> _mockObserver;
         private ShapeModel _model;
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestInitialize()]
         public void SetUp()
         {
@@ -17,6 +20,9 @@ namespace Unity.Tests
             _model.Attach(_mockObserver.Object);
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void MouseInCirclePoint()
         {
@@ -29,12 +35,19 @@ namespace Unity.Tests
             Assert.IsTrue(_model.IsScale());
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void MouseInCircleDraw()
         {
             _model.SwitchStateDrawing();
             Assert.IsFalse(_model.IsScale());
         }
+
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void SwitchStateDrawing()
         {
@@ -42,6 +55,9 @@ namespace Unity.Tests
             _mockObserver.Verify(x => x.ReceiveBell(), Times.Once);
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void SwitchStatePoint()
         {
@@ -49,6 +65,9 @@ namespace Unity.Tests
             _mockObserver.Verify(x => x.ReceiveBell(), Times.Never);
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void AttachAndDetach()
         {
@@ -57,6 +76,9 @@ namespace Unity.Tests
             _mockObserver.Verify(x => x.ReceiveBell(), Times.Never);
         }
 
+        /// <summary>
+        /// ets
+        /// </summary>
         [TestMethod()]
         public void MouseDown()
         {
@@ -64,6 +86,9 @@ namespace Unity.Tests
             _mockObserver.Verify(x => x.ReceiveBell(), Times.Never);
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void MouseUp()
         {
@@ -72,6 +97,9 @@ namespace Unity.Tests
             _mockObserver.Verify(x => x.ReceiveBell(), Times.Once);
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void DrawTest()
         {
@@ -80,6 +108,9 @@ namespace Unity.Tests
             _model.Draw(graphics.Object);
             graphics.Verify(adapter => adapter.DrawLine(It.IsAny<Point2>(), It.IsAny<Point2>()), Times.Exactly(2));
         }
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void MouseMove()
         {
@@ -88,6 +119,9 @@ namespace Unity.Tests
             _mockObserver.Verify(x => x.ReceiveBell(), Times.Once);
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void AddShape()
         {
@@ -95,6 +129,9 @@ namespace Unity.Tests
             _mockObserver.Verify(x => x.ReceiveBell(), Times.Once);
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void AddShapeWithPoints()
         {
@@ -102,6 +139,9 @@ namespace Unity.Tests
             _mockObserver.Verify(x => x.ReceiveBell(), Times.Once);
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void RemoveIndex()
         {
@@ -110,6 +150,9 @@ namespace Unity.Tests
             _mockObserver.Verify(x => x.ReceiveBell(), Times.Exactly(2));
         }
 
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void DeletePress()
         {

@@ -21,7 +21,6 @@
             _hint.Draw(graphics);
         }
 
-
         /// <summary>
         /// down
         /// </summary>
@@ -32,6 +31,11 @@
         {
             _hint = ShapeFactory.CreateShape(shapeType, new Point2(point.X, point.Y), new Point2(0, 0));
         }
+
+        /// <summary>
+        /// set
+        /// </summary>
+        /// <returns></returns>
         public bool IsScale()
         {
             return false;

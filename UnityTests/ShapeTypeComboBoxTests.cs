@@ -5,6 +5,9 @@ namespace Unity.Tests
     [TestClass()]
     public class ShapeTypeComboBoxTests
     {
+        /// <summary>
+        /// set
+        /// </summary>
         [TestMethod()]
         public void GetSelectedItemTest()
         {
