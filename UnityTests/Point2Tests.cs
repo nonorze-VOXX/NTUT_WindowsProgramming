@@ -119,7 +119,7 @@ namespace Unity.Tests
         {
             point1.X = FIVE;
             point1.Y = FIVE;
-            Assert.IsTrue(point1.IsBothPositive());
+            Assert.IsTrue(point1.IsBothNotNegative());
         }
 
         /// <summary>

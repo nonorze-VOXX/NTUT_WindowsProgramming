@@ -39,7 +39,7 @@ namespace Unity
         public void Draw(IGraphics graphics, Canvas canvas)
         {
             _shapeModel.Draw(graphics);
-            if (_shapeModel.MouseInCircle())
+            if (_shapeModel.IsScale())
             {
                 canvas.Cursor = Cursors.SizeNWSE;
             }

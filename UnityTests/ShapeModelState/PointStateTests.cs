@@ -70,12 +70,12 @@ namespace Unity.ShapeModelState.Tests
         {
             _mockShape.Setup(s => s.IsPointIn(It.IsAny<Point2>())).Returns(true);
             var shapeList = new System.ComponentModel.BindingList<Shape> { _mockShape.Object };
-            _pointState.MouseMove(new Point2(1, 1));
+            _pointState.MouseMove(new Point2(1, 1), false);
             _mockShape.Setup(s => s.IsPointIn(It.IsAny<Point2>())).Returns(true);
             _mockShape.Setup(x => x.GetFirst()).Returns(new Point2(10, 10));
             _mockShape.Setup(x => x.GetSecond()).Returns(new Point2(20, 20));
             _pointState.MouseDown(ShapeType.Rectangle, new Point2(1, 1), shapeList);
-            _pointState.MouseMove(new Point2(1, 1));
+            _pointState.MouseMove(new Point2(1, 1), true);
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Unity.ShapeModelState.Tests
         {
             _mockShape.Setup(s => s.IsPointIn(It.IsAny<Point2>())).Returns(true);
             var shapeList = new System.ComponentModel.BindingList<Shape> { _mockShape.Object };
-            _pointState.MouseMove(new Point2(1, 1));
+            _pointState.MouseMove(new Point2(1, 1), false);
             _mockShape.Setup(s => s.IsPointIn(It.IsAny<Point2>())).Returns(true);
             _mockShape.Setup(x => x.GetFirst()).Returns(new Point2(10, 10));
             _mockShape.Setup(x => x.GetSecond()).Returns(new Point2(20, 20));
@@ -117,8 +117,8 @@ namespace Unity.ShapeModelState.Tests
             Assert.IsNotNull(_pointStatePrivate.GetField("_choosingShape"));
             _pointState.MouseDown(ShapeType.Rectangle, new Point2(10, 20), shapeList);
             Assert.IsNotNull(_pointStatePrivate.GetField("_scalePoint"));
-            _pointState.MouseMove(new Point2(12, 12));
-            _pointState.MouseMove(new Point2(15, 15));
+            _pointState.MouseMove(new Point2(12, 12), true);
+            _pointState.MouseMove(new Point2(15, 15), true);
         }
 
         /// <summary>
@@ -134,8 +134,8 @@ namespace Unity.ShapeModelState.Tests
             _mockShape.Setup(x => x.GetSecond()).Returns(new Point2(20, 20));
             _pointState.MouseDown(ShapeType.Rectangle, new Point2(15, 15), shapeList);
             _pointState.MouseDown(ShapeType.Rectangle, new Point2(20, 20), shapeList);
-            _pointState.MouseMove(new Point2(20, 10));
-            _pointState.MouseMove(new Point2(18, 12));
+            _pointState.MouseMove(new Point2(20, 10), true);
+            _pointState.MouseMove(new Point2(18, 12), true);
             _pointState.MouseUp(new Point2(15, 15), shapeList);
         }
     }

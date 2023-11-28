@@ -21,10 +21,6 @@
             _hint.Draw(graphics);
         }
 
-        public Point2 IsWhichCircle()
-        {
-            return null;
-        }
 
         /// <summary>
         /// down

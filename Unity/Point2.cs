@@ -140,9 +140,9 @@ namespace Unity
         /// return if both positive
         /// </summary>
         /// <returns></returns>
-        public bool IsBothPositive()
+        public bool IsBothNotNegative()
         {
-            return X > 0 && Y > 0;
+            return X >= 0 && Y >= 0;
         }
 
         /// <summary>

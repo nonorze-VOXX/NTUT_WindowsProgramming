@@ -43,7 +43,7 @@ namespace Unity
             _state = _pointState;
         }
 
-        internal bool MouseInCircle()
+        public virtual bool IsScale()
         {
             return _state.IsScale();
         }
@@ -102,7 +102,7 @@ namespace Unity
         /// <param name="point"></param>
         public virtual void MouseDown(ShapeType shapeType, Point2 point)
         {
-            if (point.IsBothPositive())
+            if (point.IsBothNotNegative())
             {
                 _state.MouseDown(shapeType, point, _shapeList);
                 _isPressed = true;

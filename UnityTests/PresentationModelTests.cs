@@ -35,13 +35,29 @@ namespace Unity.Tests
         }
 
         /// <summary>
+        /// draw2
+        /// </summary>
+        [TestMethod()]
+        public void TestDraw1()
+        {
+            var mockGraphics = new Mock<IGraphics>();
+            var canvas = new Mock<Canvas>();
+            _mockShapeModel.Setup(x => x.IsScale()).Returns(true);
+            _model.Draw(mockGraphics.Object, canvas.Object);
+            _mockShapeModel.Verify(x => x.Draw(mockGraphics.Object), Times.Once);
+        }
+
+        /// <summary>
         /// draw
         /// </summary>
         [TestMethod()]
         public void TestDraw()
         {
             var mockGraphics = new Mock<IGraphics>();
-            _model.Draw(mockGraphics.Object);
+            var canvas = new Mock<Canvas>();
+
+            _mockShapeModel.Setup(x => x.IsScale()).Returns(false);
+            _model.Draw(mockGraphics.Object, canvas.Object);
             _mockShapeModel.Verify(x => x.Draw(mockGraphics.Object), Times.Once);
         }
 

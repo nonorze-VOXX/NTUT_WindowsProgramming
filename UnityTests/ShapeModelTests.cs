@@ -18,6 +18,24 @@ namespace Unity.Tests
         }
 
         [TestMethod()]
+        public void MouseInCirclePoint()
+        {
+            _model.SwitchStatePoint();
+            Assert.IsFalse(_model.IsScale());
+            var point1 = new Point2(0, 0);
+            _model.Add(ShapeType.Line, point1, new Point2(1, 1));
+            _model.MouseDown(ShapeType.Line, new Point2(0.5f, 0.5f));
+            _model.MouseDown(ShapeType.Line, point1);
+            Assert.IsTrue(_model.IsScale());
+        }
+
+        [TestMethod()]
+        public void MouseInCircleDraw()
+        {
+            _model.SwitchStateDrawing();
+            Assert.IsFalse(_model.IsScale());
+        }
+        [TestMethod()]
         public void SwitchStateDrawing()
         {
             _model.SwitchStateDrawing();
