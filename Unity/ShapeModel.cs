@@ -17,6 +17,7 @@ namespace Unity
         private IState _state = new DrawingState();
         bool _isPressed;
         private const int CANVAS_MAX = 400;
+        private CommandManager _commandManager = new CommandManager();
         public BindingList<Shape> shapeList
         {
             get

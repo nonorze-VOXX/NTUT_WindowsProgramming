@@ -50,6 +50,17 @@ namespace Unity
             }
         }
 
+        internal void Resize(int height, int width, SplitContainer splitContainer1, SplitContainer splitContainer2, DataGridView _dataGridView, GroupBox _rightGroupBox)
+        {
+            //Control control = (Control)sender;
+            splitContainer2.Height = height;
+            splitContainer2.Width = width;
+            splitContainer1.Height = height;
+            splitContainer1.Width = width;
+            _dataGridView.Height = height - _dataGridView.Location.Y - _rightGroupBox.Location.Y - 9;
+            _rightGroupBox.Height = height - 6;
+        }
+
         /// <summary>
         /// update tool stript
         /// </summary>

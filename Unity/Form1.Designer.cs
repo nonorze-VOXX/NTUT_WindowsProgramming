@@ -45,8 +45,8 @@ namespace Unity
             this._slide1 = new System.Windows.Forms.Button();
             this._toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this._canvas = new Unity.Canvas();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this._canvas = new Unity.Canvas();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
             this._topBar.SuspendLayout();
             this._rightGroupBox.SuspendLayout();
@@ -175,22 +175,16 @@ namespace Unity
             this.splitContainer1.SplitterDistance = 201;
             this.splitContainer1.TabIndex = 9;
             // 
-            // _canvas
-            // 
-            this._canvas.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this._canvas.Location = new System.Drawing.Point(3, 3);
-            this._canvas.Name = "_canvas";
-            this._canvas.Size = new System.Drawing.Size(659, 478);
-            this._canvas.TabIndex = 7;
-            // 
             // splitContainer2
             // 
+            this.splitContainer2.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.splitContainer2.Panel1.Controls.Add(this._canvas);
             // 
             // splitContainer2.Panel2
@@ -199,6 +193,14 @@ namespace Unity
             this.splitContainer2.Size = new System.Drawing.Size(1158, 484);
             this.splitContainer2.SplitterDistance = 665;
             this.splitContainer2.TabIndex = 0;
+            // 
+            // _canvas
+            // 
+            this._canvas.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this._canvas.Location = new System.Drawing.Point(20, 20);
+            this._canvas.Name = "_canvas";
+            this._canvas.Size = new System.Drawing.Size(445, 333);
+            this._canvas.TabIndex = 7;
             // 
             // Form1
             // 

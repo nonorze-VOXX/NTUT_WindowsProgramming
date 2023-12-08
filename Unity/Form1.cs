@@ -45,6 +45,20 @@ namespace Unity
             _toolStripItems.Add(_toolStripPointButton);
 
             _toolStrip1.Items.AddRange(_toolStripItems.ToArray());
+            this.Resize += ResizeWindow;
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.FixedPanel = FixedPanel.Panel2;
+            this.splitContainer2.IsSplitterFixed = true;
+            this.splitContainer2.FixedPanel = FixedPanel.Panel2;
+
+            _presentationModel.Resize(this.ClientSize.Height, this.ClientSize.Width - this._toolStrip1.Height - this._toolStrip1.Height, this.splitContainer1, this.splitContainer2, this._dataGridView, this._rightGroupBox);
+            _rightGroupBox.Location = new Point(0, 0);
+        }
+        internal void ResizeWindow(object sender, EventArgs e)
+        {
+            Control control = (Control)sender;
+            int workHeight = control.ClientSize.Height - this._toolStrip1.Height - this._aboutToolStripMenuItem.Height;
+            _presentationModel.Resize(workHeight, control.Width, this.splitContainer1, this.splitContainer2, this._dataGridView, this._rightGroupBox);
         }
 
         #region Mouse
