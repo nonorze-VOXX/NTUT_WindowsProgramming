@@ -35,19 +35,29 @@ namespace Unity
         private void InitializeComponent()
         {
             this._dataGridView = new System.Windows.Forms.DataGridView();
-            this._delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this._createButton = new System.Windows.Forms.Button();
-            this._shapeComboBox = new ShapeTypeComboBox();
             this._topBar = new System.Windows.Forms.MenuStrip();
             this._toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._rightGroupBox = new System.Windows.Forms.GroupBox();
+            this._shapeComboBox = new Unity.ShapeTypeComboBox();
             this._slide1 = new System.Windows.Forms.Button();
             this._toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this._canvas = new Unity.Canvas();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
             this._topBar.SuspendLayout();
             this._rightGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // _dataGridView
@@ -58,7 +68,7 @@ namespace Unity
             this._dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this._dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this._delete});
+            this.delete});
             this._dataGridView.Location = new System.Drawing.Point(6, 72);
             this._dataGridView.Name = "_dataGridView";
             this._dataGridView.ReadOnly = true;
@@ -68,13 +78,13 @@ namespace Unity
             // 
             // delete
             // 
-            this._delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this._delete.HeaderText = "delete";
-            this._delete.Name = "delete";
-            this._delete.ReadOnly = true;
-            this._delete.Text = "delete";
-            this._delete.UseColumnTextForButtonValue = true;
-            this._delete.Width = 79;
+            this.delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.delete.HeaderText = "delete";
+            this.delete.Name = "delete";
+            this.delete.ReadOnly = true;
+            this.delete.Text = "delete";
+            this.delete.UseColumnTextForButtonValue = true;
+            this.delete.Width = 79;
             // 
             // _createButton
             // 
@@ -85,23 +95,13 @@ namespace Unity
             this._createButton.Text = "create";
             this._createButton.UseVisualStyleBackColor = true;
             // 
-            // _shapeComboBox
-            // 
-            this._shapeComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this._shapeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this._shapeComboBox.FormattingEnabled = true;
-            this._shapeComboBox.Location = new System.Drawing.Point(6, 30);
-            this._shapeComboBox.Name = "_shapeComboBox";
-            this._shapeComboBox.Size = new System.Drawing.Size(178, 21);
-            this._shapeComboBox.TabIndex = 2;
-            // 
             // _topBar
             // 
             this._topBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._toolStripMenuItem});
             this._topBar.Location = new System.Drawing.Point(0, 0);
             this._topBar.Name = "_topBar";
-            this._topBar.Size = new System.Drawing.Size(847, 24);
+            this._topBar.Size = new System.Drawing.Size(1363, 24);
             this._topBar.TabIndex = 3;
             this._topBar.Text = "menuStrip1";
             // 
@@ -124,47 +124,89 @@ namespace Unity
             this._rightGroupBox.Controls.Add(this._dataGridView);
             this._rightGroupBox.Controls.Add(this._shapeComboBox);
             this._rightGroupBox.Controls.Add(this._createButton);
-            this._rightGroupBox.Location = new System.Drawing.Point(550, 27);
+            this._rightGroupBox.Location = new System.Drawing.Point(3, 3);
             this._rightGroupBox.Name = "_rightGroupBox";
-            this._rightGroupBox.Size = new System.Drawing.Size(350, 426);
+            this._rightGroupBox.Size = new System.Drawing.Size(378, 481);
             this._rightGroupBox.TabIndex = 4;
             this._rightGroupBox.TabStop = false;
             this._rightGroupBox.Text = "groupBox1";
             // 
+            // _shapeComboBox
+            // 
+            this._shapeComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this._shapeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this._shapeComboBox.FormattingEnabled = true;
+            this._shapeComboBox.Location = new System.Drawing.Point(6, 30);
+            this._shapeComboBox.Name = "_shapeComboBox";
+            this._shapeComboBox.Size = new System.Drawing.Size(178, 21);
+            this._shapeComboBox.TabIndex = 2;
+            // 
             // _slide1
             // 
-            this._slide1.Location = new System.Drawing.Point(15, 67);
+            this._slide1.Location = new System.Drawing.Point(3, 20);
             this._slide1.Name = "_slide1";
             this._slide1.Size = new System.Drawing.Size(150, 110);
             this._slide1.TabIndex = 5;
-            this._slide1.Text = "";
             this._slide1.UseVisualStyleBackColor = true;
             // 
-            // toolStrip1
+            // _toolStrip1
             // 
             this._toolStrip1.Location = new System.Drawing.Point(0, 24);
-            this._toolStrip1.Name = "toolStrip1";
-            this._toolStrip1.Size = new System.Drawing.Size(847, 25);
+            this._toolStrip1.Name = "_toolStrip1";
+            this._toolStrip1.Size = new System.Drawing.Size(1363, 25);
             this._toolStrip1.TabIndex = 8;
             this._toolStrip1.Text = "toolStrip1";
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Location = new System.Drawing.Point(0, 52);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.WindowText;
+            this.splitContainer1.Panel1.Controls.Add(this._slide1);
+            this.splitContainer1.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+            this.splitContainer1.Size = new System.Drawing.Size(1363, 484);
+            this.splitContainer1.SplitterDistance = 201;
+            this.splitContainer1.TabIndex = 9;
             // 
             // _canvas
             // 
             this._canvas.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this._canvas.Location = new System.Drawing.Point(185, 57);
+            this._canvas.Location = new System.Drawing.Point(3, 3);
             this._canvas.Name = "_canvas";
-            this._canvas.Size = new System.Drawing.Size(346, 390);
+            this._canvas.Size = new System.Drawing.Size(659, 478);
             this._canvas.TabIndex = 7;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this._canvas);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this._rightGroupBox);
+            this.splitContainer2.Size = new System.Drawing.Size(1158, 484);
+            this.splitContainer2.SplitterDistance = 665;
+            this.splitContainer2.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 503);
+            this.ClientSize = new System.Drawing.Size(1363, 548);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this._toolStrip1);
-            this.Controls.Add(this._canvas);
-            this.Controls.Add(this._slide1);
-            this.Controls.Add(this._rightGroupBox);
             this.Controls.Add(this._topBar);
             this.MainMenuStrip = this._topBar;
             this.Name = "Form1";
@@ -173,6 +215,14 @@ namespace Unity
             this._topBar.ResumeLayout(false);
             this._topBar.PerformLayout();
             this._rightGroupBox.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,6 +240,9 @@ namespace Unity
         private DataGridViewButtonColumn _delete;
         private ToolStrip _toolStrip1;
         private Canvas _canvas;
+        private DataGridViewButtonColumn delete;
+        private SplitContainer splitContainer1;
+        private SplitContainer splitContainer2;
     }
 }
 
