@@ -47,7 +47,7 @@ namespace Unity
             _toolStrip1.Items.AddRange(_toolStripItems.ToArray());
             this.Resize += ResizeWindow;
             this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.FixedPanel = FixedPanel.Panel2;
+            this.splitContainer1.FixedPanel = FixedPanel.Panel1;
             this.splitContainer2.IsSplitterFixed = true;
             this.splitContainer2.FixedPanel = FixedPanel.Panel2;
 
