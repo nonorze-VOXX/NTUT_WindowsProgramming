@@ -27,11 +27,7 @@ namespace Unity
             this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 
-            this.Resize += ResizeWindow;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.FixedPanel = FixedPanel.Panel1;
-            this.splitContainer2.IsSplitterFixed = true;
-            this.splitContainer2.FixedPanel = FixedPanel.Panel2;
+            //            this.Resize += ResizeWindow;
 
             //_presentationModel.Resize(this.ClientSize.Height, this.ClientSize.Width - this._toolStrip1.Height - this._toolStrip1.Height, this.splitContainer1, this.splitContainer2, this._dataGridView);
         }

@@ -78,6 +78,9 @@ namespace Unity
             this._dataGridView.AllowUserToAddRows = false;
             this._dataGridView.AllowUserToResizeColumns = false;
             this._dataGridView.AllowUserToResizeRows = false;
+            this._dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
             this._dataGridView.AutoGenerateColumns = false;
             this._dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this._dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -86,23 +89,22 @@ namespace Unity
             this.shapeDataGridViewTextBoxColumn,
             this.informationDataGridViewTextBoxColumn});
             this._dataGridView.DataSource = this.shapeListBindingSource;
-            this._dataGridView.Dock = System.Windows.Forms.DockStyle.Bottom;
             this._dataGridView.Location = new System.Drawing.Point(0, 75);
             this._dataGridView.Name = "_dataGridView";
             this._dataGridView.ReadOnly = true;
             this._dataGridView.RowHeadersVisible = false;
-            this._dataGridView.Size = new System.Drawing.Size(485, 420);
+            this._dataGridView.Size = new System.Drawing.Size(485, 423);
             this._dataGridView.TabIndex = 0;
             // 
             // delete
             // 
-            this.delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.delete.HeaderText = "delete";
             this.delete.Name = "delete";
             this.delete.ReadOnly = true;
             this.delete.Text = "delete";
             this.delete.UseColumnTextForButtonValue = true;
-            this.delete.Width = 79;
+            this.delete.Width = 42;
             // 
             // shapeListBindingSource
             // 
@@ -111,7 +113,7 @@ namespace Unity
             // 
             // _createButton
             // 
-            this._createButton.Location = new System.Drawing.Point(228, 20);
+            this._createButton.Location = new System.Drawing.Point(187, 18);
             this._createButton.Name = "_createButton";
             this._createButton.Size = new System.Drawing.Size(75, 23);
             this._createButton.TabIndex = 1;
@@ -139,7 +141,7 @@ namespace Unity
             // _aboutToolStripMenuItem
             // 
             this._aboutToolStripMenuItem.Name = "_aboutToolStripMenuItem";
-            this._aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this._aboutToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this._aboutToolStripMenuItem.Text = "關於";
             // 
             // _slide1
@@ -225,8 +227,10 @@ namespace Unity
             // 
             // splitContainer1
             // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.Location = new System.Drawing.Point(0, 49);
             this.splitContainer1.Name = "splitContainer1";
@@ -246,11 +250,12 @@ namespace Unity
             // 
             // splitContainer2
             // 
+            this.splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer2.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer2.IsSplitterFixed = true;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
             // 
@@ -278,13 +283,16 @@ namespace Unity
             // 
             // shapeDataGridViewTextBoxColumn
             // 
+            this.shapeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.shapeDataGridViewTextBoxColumn.DataPropertyName = "shape";
             this.shapeDataGridViewTextBoxColumn.HeaderText = "shape";
             this.shapeDataGridViewTextBoxColumn.Name = "shapeDataGridViewTextBoxColumn";
             this.shapeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.shapeDataGridViewTextBoxColumn.Width = 61;
             // 
             // informationDataGridViewTextBoxColumn
             // 
+            this.informationDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.informationDataGridViewTextBoxColumn.DataPropertyName = "Information";
             this.informationDataGridViewTextBoxColumn.HeaderText = "Information";
             this.informationDataGridViewTextBoxColumn.Name = "informationDataGridViewTextBoxColumn";
@@ -299,7 +307,7 @@ namespace Unity
             this._shapeComboBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this._shapeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this._shapeComboBox.FormattingEnabled = true;
-            this._shapeComboBox.Location = new System.Drawing.Point(18, 20);
+            this._shapeComboBox.Location = new System.Drawing.Point(3, 20);
             this._shapeComboBox.Name = "_shapeComboBox";
             this._shapeComboBox.Size = new System.Drawing.Size(178, 21);
             this._shapeComboBox.TabIndex = 2;
@@ -346,7 +354,6 @@ namespace Unity
         private DataGridViewButtonColumn _delete;
         private ToolStrip _toolStrip1;
         private Canvas _canvas;
-        private DataGridViewButtonColumn delete;
         private SplitContainer splitContainer2;
         private ToolStripButton toolStripButton1;
         private ToolStripButton toolStripButton2;
@@ -354,11 +361,12 @@ namespace Unity
         private ToolStripButton toolStripButton4;
         private ToolStripButton toolStripButton5;
         private ToolStripButton toolStripButton6;
-        private DataGridViewTextBoxColumn shapeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn informationDataGridViewTextBoxColumn;
         private BindingSource shapeListBindingSource;
         private BindingSource shapeModelBindingSource;
         private SplitContainer splitContainer1;
+        private DataGridViewButtonColumn delete;
+        private DataGridViewTextBoxColumn shapeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn informationDataGridViewTextBoxColumn;
     }
 }
 
