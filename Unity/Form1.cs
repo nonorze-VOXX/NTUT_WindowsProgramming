@@ -9,14 +9,6 @@ namespace Unity
     {
         PresentationModel _presentationModel;
 
-        private const string RECTANGLE_IMAGE_PATH = "rectangle.Image";
-        private const string ELLIPSE_IMAGE_PATH = "ellipse.Image";
-        private const string LINE_IMAGE_PATH = "line.Image";
-        private const string POINTER_IMAGE_PATH = "pointer";
-        private const string TOOL_STRIP_BUTTON_NAME = "toolstripButton";
-        private const int TOOL_STRIP_BUTTON_HEIGHT = 22;
-        private const int TOOL_STRIP_BUTTON_WIDTH = 23;
-        private const int STRIP_BUTTON_NUMBER = 3;
         private Bitmap _brief;
         public Form1(PresentationModel presentationModel)
         {
