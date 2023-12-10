@@ -15,6 +15,7 @@ namespace Unity
             }
         }
         protected List<Point2> _info = new List<Point2>();
+        protected Point2 _canvasSize = new Point2(16000, 9000);
 
         /// <summary>
         /// draw
@@ -46,9 +47,15 @@ namespace Unity
             return x1 + x2 <= x3 && y1 + y2 <= y3;
         }
 
-        public Shape(Point2 start, Point2 end)
+        public Shape(Point2 start, Point2 end, Point2 canvas)
         {
             SetInfo(start, end);
+            _canvasSize = canvas;
+        }
+
+        private void SetCanvasSize(Point2 canvas)
+        {
+            _canvasSize = canvas;
         }
 
         /// <summary>

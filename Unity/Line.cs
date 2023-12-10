@@ -4,7 +4,7 @@
     {
 
         private const string LINE = "Line";
-        public Line(Point2 start, Point2 end) : base(start, end)
+        public Line(Point2 point1, Point2 point2, Point2 cx) : base(point1, point2, cx)
         {
         }
 

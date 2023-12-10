@@ -2,7 +2,7 @@
 {
     class DrawingState : IState
     {
-        Shape _hint = new Line(new Point2(0, 0), new Point2(0, 0));
+        Shape _hint = new Line(new Point2(0, 0), new Point2(0, 0), new Point2(16000, 9000));
 
         /// <summary>
         /// delete
@@ -63,7 +63,7 @@
         {
             _hint.SetSecond(point);
             shapeList.Add(_hint);
-            _hint = new Line(new Point2(0, 0), new Point2(0, 0));
+            _hint = new Line(new Point2(0, 0), new Point2(0, 0), new Point2(16000, 9000));
         }
     }
 }

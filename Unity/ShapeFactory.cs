@@ -39,11 +39,11 @@ namespace Unity
             switch (shapeType)
             {
                 case ShapeType.Line:
-                    return new Line(start, end);
+                    return new Line(start, end, new Point2(16000, 9000));
                 case ShapeType.Rectangle:
-                    return new Rectangle(start, end);
+                    return new Rectangle(start, end, new Point2(16000, 9000));
                 default:
-                    return new Ellipse(start, end);
+                    return new Ellipse(start, end, new Point2(16000, 9000));
             }
         }
     }

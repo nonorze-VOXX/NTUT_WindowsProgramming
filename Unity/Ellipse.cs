@@ -3,7 +3,7 @@
     public class Ellipse : Shape
     {
         private const string ELLIPSE = "Ellipse";
-        public Ellipse(Point2 point1, Point2 point2) : base(point1, point2)
+        public Ellipse(Point2 point1, Point2 point2, Point2 cx) : base(point1, point2, cx)
         {
         }
 

@@ -28,11 +28,15 @@ namespace Unity
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 
             this.Resize += ResizeWindow;
-
+            ResizeWindow(null, null);
         }
         internal void ResizeWindow(object sender, EventArgs e)
         {
             _presentationModel.Resize(_canvas, _slide1);
+            if (_canvas.Width != 0 && _canvas.Height != 0)
+            {
+                _brief = new Bitmap(_canvas.Width, _canvas.Height);
+            }
         }
 
         #region Mouse
@@ -122,6 +126,7 @@ namespace Unity
         /// </summary>
         private void GenerateBrief()
         {
+
             _canvas.DrawToBitmap(_brief, new System.Drawing.Rectangle(0, 0, _canvas.Width, _canvas.Height));
             _slide1.Image = new Bitmap(_brief, _slide1.Size);
         }

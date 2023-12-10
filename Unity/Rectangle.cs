@@ -3,7 +3,7 @@
     public class Rectangle : Shape
     {
         private const string RECTANGLE = "Rectangle";
-        public Rectangle(Point2 start, Point2 end) : base(start, end)
+        public Rectangle(Point2 point1, Point2 point2, Point2 cx) : base(point1, point2, cx)
         {
         }
 
