@@ -33,14 +33,13 @@ namespace Unity
             this.splitContainer2.IsSplitterFixed = true;
             this.splitContainer2.FixedPanel = FixedPanel.Panel2;
 
-            _presentationModel.Resize(this.ClientSize.Height, this.ClientSize.Width - this._toolStrip1.Height - this._toolStrip1.Height, this.splitContainer1, this.splitContainer2, this._dataGridView, this._rightGroupBox);
-            _rightGroupBox.Location = new Point(0, 0);
+            //_presentationModel.Resize(this.ClientSize.Height, this.ClientSize.Width - this._toolStrip1.Height - this._toolStrip1.Height, this.splitContainer1, this.splitContainer2, this._dataGridView);
         }
         internal void ResizeWindow(object sender, EventArgs e)
         {
             Control control = (Control)sender;
             int workHeight = control.ClientSize.Height - this._toolStrip1.Height - this._aboutToolStripMenuItem.Height;
-            _presentationModel.Resize(workHeight, control.Width, this.splitContainer1, this.splitContainer2, this._dataGridView, this._rightGroupBox);
+            //_presentationModel.Resize(workHeight, control.Width, this.splitContainer1, this.splitContainer2, this._dataGridView);
         }
 
         #region Mouse
