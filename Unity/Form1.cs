@@ -141,5 +141,28 @@ namespace Unity
             _canvas.DrawToBitmap(_brief, new System.Drawing.Rectangle(0, 0, _canvas.Width, _canvas.Height));
             _slide1.Image = new Bitmap(_brief, _slide1.Size);
         }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            _presentationModel.HandleToolStripButtonClick(this._toolStrip1.Items, ShapeType.Line, _canvas);
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            _presentationModel.HandleToolStripButtonClick(this._toolStrip1.Items, ShapeType.Rectangle, _canvas);
+
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            _presentationModel.HandleToolStripButtonClick
+                (this._toolStrip1.Items, ShapeType.Ellipse, _canvas);
+
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            _presentationModel.HandleToolStripPointButtonClick(this._toolStrip1.Items, _canvas);
+        }
     }
 }

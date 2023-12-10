@@ -186,14 +186,11 @@ namespace Unity
         /// <param name="shapeType"></param>
         /// <param name="canvas"></param>
         /// <returns></returns>
-        public ButtonFunction HandleToolStripButtonClick(ToolStripItemCollection toolStripItems, ShapeType shapeType, Canvas canvas)
+        public void HandleToolStripButtonClick(ToolStripItemCollection toolStripItems, ShapeType shapeType, Canvas canvas)
         {
-            return (object sender, EventArgs e) =>
-            {
-                UpdateShapeButtonActive(toolStripItems, (int)shapeType, true);
-                canvas.Cursor = System.Windows.Forms.Cursors.Cross;
-                _shapeModel.SwitchStateDrawing();
-            };
+            UpdateShapeButtonActive(toolStripItems, (int)shapeType, true);
+            canvas.Cursor = System.Windows.Forms.Cursors.Cross;
+            _shapeModel.SwitchStateDrawing();
         }
 
         /// <summary>
