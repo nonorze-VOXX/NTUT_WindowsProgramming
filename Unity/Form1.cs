@@ -8,8 +8,6 @@ namespace Unity
     public partial class Form1 : Form, IShapeObserver
     {
         PresentationModel _presentationModel;
-        List<ToolStripItem> _toolStripItems;
-        ToolStripButton _toolStripPointButton;
 
         private const string RECTANGLE_IMAGE_PATH = "rectangle.Image";
         private const string ELLIPSE_IMAGE_PATH = "ellipse.Image";
@@ -36,15 +34,7 @@ namespace Unity
             _brief = new Bitmap(_canvas.Width, _canvas.Height);
             this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            List<string> imageNames = GenerateImagePathList();
-            _toolStripItems = GenerateToolStripItems(resources, imageNames);
 
-            _toolStripPointButton = GenerateButton(POINTER_IMAGE_PATH);
-            _toolStripPointButton.Image = ((System.Drawing.Image)(resources.GetObject(POINTER_IMAGE_PATH)));
-            _toolStripPointButton.Click += new EventHandler(_presentationModel.HandleToolStripPointButtonClick(_toolStripItems, _canvas));
-            _toolStripItems.Add(_toolStripPointButton);
-
-            _toolStrip1.Items.AddRange(_toolStripItems.ToArray());
             this.Resize += ResizeWindow;
             this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.FixedPanel = FixedPanel.Panel1;
@@ -69,7 +59,7 @@ namespace Unity
         /// <param name="e"></param>
         private void HandleCanvasMouseUp(object sender, MouseEventArgs e)
         {
-            _presentationModel.HandleCanvasMouseUp(_canvas, new Point2(e.X, e.Y), _toolStripItems);
+            _presentationModel.HandleCanvasMouseUp(_canvas, new Point2(e.X, e.Y), this._toolStrip1.Items);
         }
 
         /// <summary>
@@ -108,24 +98,6 @@ namespace Unity
         #region Generate
 
         /// <summary>
-        /// generate
-        /// </summary>
-        /// <returns></returns>
-        List<ToolStripItem> GenerateToolStripItems(System.ComponentModel.ComponentResourceManager resources, List<string> imageNames)
-        {
-            var toolStripItems = new List<ToolStripItem>();
-            List<ShapeType> shapeTypes = GenerateShapeTypeList();
-            for (int i = 0; i < STRIP_BUTTON_NUMBER; i++)
-            {
-                var toolStripButton = GenerateButton(TOOL_STRIP_BUTTON_NAME + i.ToString());
-                toolStripButton.Image = ((System.Drawing.Image)(resources.GetObject(imageNames[i])));
-                toolStripButton.Click += new EventHandler(_presentationModel.HandleToolStripButtonClick(toolStripItems, shapeTypes[i], _canvas));
-                toolStripItems.Add(toolStripButton);
-            }
-            return toolStripItems;
-        }
-
-        /// <summary>
         /// shape list
         /// </summary>
         /// <returns></returns>
@@ -138,34 +110,7 @@ namespace Unity
             return shapeTypes;
         }
 
-        /// <summary>
-        /// image path list
-        /// </summary>
-        /// <returns></returns>
-        List<string> GenerateImagePathList()
-        {
-            List<string> imageNames = new List<string>();
-            imageNames.Add(LINE_IMAGE_PATH);
-            imageNames.Add(RECTANGLE_IMAGE_PATH);
-            imageNames.Add(ELLIPSE_IMAGE_PATH);
-            return imageNames;
-        }
 
-        /// <summary>
-        /// Generate Button
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        ToolStripButton GenerateButton(string name)
-        {
-            var toolStripButton = new System.Windows.Forms.ToolStripButton();
-            toolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton.Size = new System.Drawing.Size(TOOL_STRIP_BUTTON_WIDTH, TOOL_STRIP_BUTTON_HEIGHT);
-            toolStripButton.Name = name;
-            toolStripButton.Text = name;
-            return toolStripButton;
-        }
         #endregion
 
         #region IShapeObserver

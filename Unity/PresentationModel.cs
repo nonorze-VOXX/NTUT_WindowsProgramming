@@ -67,7 +67,7 @@ namespace Unity
         /// <param name="toolStripItems"></param>
         /// <param name="clickedIndex"></param>
         /// <param name="clicked"></param>
-        public void UpdateShapeButtonActive(List<System.Windows.Forms.ToolStripItem> toolStripItems, int clickedIndex, bool clicked)
+        public void UpdateShapeButtonActive(ToolStripItemCollection toolStripItems, int clickedIndex, bool clicked)
         {
             _shapeButtonActive = ResetToolStripButton(toolStripItems);
             _shapeButtonActive[clickedIndex] = clicked;
@@ -79,7 +79,7 @@ namespace Unity
         /// </summary>
         /// <param name="toolStripItems"></param>
         /// <returns></returns>
-        List<bool> ResetToolStripButton(List<System.Windows.Forms.ToolStripItem> toolStripItems)
+        List<bool> ResetToolStripButton(ToolStripItemCollection toolStripItems)
         {
             List<bool> newList = new List<bool>();
             for (int i = 0; i < toolStripItems.Count; i++)
@@ -95,7 +95,7 @@ namespace Unity
         /// </summary>
         /// <param name="toolStripItems"></param>
         /// <param name="shapeButtonActive"></param>
-        void UpdateToolStripButton(List<System.Windows.Forms.ToolStripItem> toolStripItems, List<bool> shapeButtonActive)
+        void UpdateToolStripButton(ToolStripItemCollection toolStripItems, List<bool> shapeButtonActive)
         {
             for (int i = 0; i < toolStripItems.Count; i++)
             {
@@ -122,10 +122,10 @@ namespace Unity
         /// <param name="canvas"></param>
         /// <param name="point"></param>
         /// <param name="toolStripItems"></param>
-        public void HandleCanvasMouseUp(Canvas canvas, Point2 point, List<System.Windows.Forms.ToolStripItem> toolStripItems)
+        public void HandleCanvasMouseUp(Canvas canvas, Point2 point, ToolStripItemCollection items)
         {
             _shapeModel.MouseUp(point);
-            HandleToolStripPointButtonClick(toolStripItems, canvas)(null, null);
+            HandleToolStripPointButtonClick(items, canvas)(null, null);
         }
 
         /// <summary>
@@ -186,7 +186,7 @@ namespace Unity
         /// <param name="shapeType"></param>
         /// <param name="canvas"></param>
         /// <returns></returns>
-        public ButtonFunction HandleToolStripButtonClick(List<ToolStripItem> toolStripItems, ShapeType shapeType, Canvas canvas)
+        public ButtonFunction HandleToolStripButtonClick(ToolStripItemCollection toolStripItems, ShapeType shapeType, Canvas canvas)
         {
             return (object sender, EventArgs e) =>
             {
@@ -202,7 +202,7 @@ namespace Unity
         /// <param name="toolStripItems"></param>
         /// <param name="canvas"></param>
         /// <returns></returns>
-        public ButtonFunction HandleToolStripPointButtonClick(List<ToolStripItem> toolStripItems, Canvas canvas)
+        public ButtonFunction HandleToolStripPointButtonClick(ToolStripItemCollection toolStripItems, Canvas canvas)
         {
             return (object sender, EventArgs e) =>
             {
