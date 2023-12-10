@@ -34,6 +34,7 @@ namespace Unity
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this._dataGridView = new System.Windows.Forms.DataGridView();
             this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -54,6 +55,10 @@ namespace Unity
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this._canvas = new Unity.Canvas();
             this._shapeComboBox = new Unity.ShapeTypeComboBox();
+            this.shapeModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.shapeListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.shapeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.informationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
             this._topBar.SuspendLayout();
             this._rightGroupBox.SuspendLayout();
@@ -66,6 +71,8 @@ namespace Unity
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.shapeModelBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shapeListBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // _dataGridView
@@ -73,10 +80,14 @@ namespace Unity
             this._dataGridView.AllowUserToAddRows = false;
             this._dataGridView.AllowUserToResizeColumns = false;
             this._dataGridView.AllowUserToResizeRows = false;
+            this._dataGridView.AutoGenerateColumns = false;
             this._dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this._dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.delete});
+            this.delete,
+            this.shapeDataGridViewTextBoxColumn,
+            this.informationDataGridViewTextBoxColumn});
+            this._dataGridView.DataSource = this.shapeListBindingSource;
             this._dataGridView.Location = new System.Drawing.Point(6, 72);
             this._dataGridView.Name = "_dataGridView";
             this._dataGridView.ReadOnly = true;
@@ -275,6 +286,29 @@ namespace Unity
             this._shapeComboBox.Size = new System.Drawing.Size(178, 21);
             this._shapeComboBox.TabIndex = 2;
             // 
+            // shapeModelBindingSource
+            // 
+            this.shapeModelBindingSource.DataSource = typeof(Unity.ShapeModel);
+            // 
+            // shapeListBindingSource
+            // 
+            this.shapeListBindingSource.DataMember = "shapeList";
+            this.shapeListBindingSource.DataSource = this.shapeModelBindingSource;
+            // 
+            // shapeDataGridViewTextBoxColumn
+            // 
+            this.shapeDataGridViewTextBoxColumn.DataPropertyName = "shape";
+            this.shapeDataGridViewTextBoxColumn.HeaderText = "shape";
+            this.shapeDataGridViewTextBoxColumn.Name = "shapeDataGridViewTextBoxColumn";
+            this.shapeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // informationDataGridViewTextBoxColumn
+            // 
+            this.informationDataGridViewTextBoxColumn.DataPropertyName = "Information";
+            this.informationDataGridViewTextBoxColumn.HeaderText = "Information";
+            this.informationDataGridViewTextBoxColumn.Name = "informationDataGridViewTextBoxColumn";
+            this.informationDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -300,6 +334,8 @@ namespace Unity
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.shapeModelBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shapeListBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -326,6 +362,10 @@ namespace Unity
         private ToolStripButton toolStripButton4;
         private ToolStripButton toolStripButton5;
         private ToolStripButton toolStripButton6;
+        private DataGridViewTextBoxColumn shapeDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn informationDataGridViewTextBoxColumn;
+        private BindingSource shapeListBindingSource;
+        private BindingSource shapeModelBindingSource;
     }
 }
 
