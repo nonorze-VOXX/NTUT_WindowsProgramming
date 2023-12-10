@@ -50,14 +50,11 @@ namespace Unity
             }
         }
 
-        internal void Resize(int height, int width, SplitContainer splitContainer1, SplitContainer splitContainer2, DataGridView _dataGridView)
+
+        internal void Resize(Canvas canvas, Button _slide1)
         {
-            //Control control = (Control)sender;
-            splitContainer2.Height = height;
-            splitContainer2.Width = width;
-            splitContainer1.Height = height;
-            splitContainer1.Width = width;
-            _dataGridView.Height = height - _dataGridView.Location.Y;
+            canvas.Height = canvas.Width / 16 * 9;
+            _slide1.Height = _slide1.Width / 16 * 9;
         }
 
         /// <summary>

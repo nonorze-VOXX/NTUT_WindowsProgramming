@@ -38,7 +38,10 @@ namespace Unity
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this._dataGridView = new System.Windows.Forms.DataGridView();
             this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.shapeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.informationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.shapeListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.shapeModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this._createButton = new System.Windows.Forms.Button();
             this._topBar = new System.Windows.Forms.MenuStrip();
             this._toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,12 +57,10 @@ namespace Unity
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this._canvas = new Unity.Canvas();
-            this.shapeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.informationDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.shapeModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this._shapeComboBox = new Unity.ShapeTypeComboBox();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.shapeListBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shapeModelBindingSource)).BeginInit();
             this._topBar.SuspendLayout();
             this._toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -70,7 +71,6 @@ namespace Unity
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.shapeModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // _dataGridView
@@ -106,10 +106,31 @@ namespace Unity
             this.delete.UseColumnTextForButtonValue = true;
             this.delete.Width = 42;
             // 
+            // shapeDataGridViewTextBoxColumn
+            // 
+            this.shapeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.shapeDataGridViewTextBoxColumn.DataPropertyName = "shape";
+            this.shapeDataGridViewTextBoxColumn.HeaderText = "shape";
+            this.shapeDataGridViewTextBoxColumn.Name = "shapeDataGridViewTextBoxColumn";
+            this.shapeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.shapeDataGridViewTextBoxColumn.Width = 61;
+            // 
+            // informationDataGridViewTextBoxColumn
+            // 
+            this.informationDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.informationDataGridViewTextBoxColumn.DataPropertyName = "Information";
+            this.informationDataGridViewTextBoxColumn.HeaderText = "Information";
+            this.informationDataGridViewTextBoxColumn.Name = "informationDataGridViewTextBoxColumn";
+            this.informationDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // shapeListBindingSource
             // 
             this.shapeListBindingSource.DataMember = "shapeList";
             this.shapeListBindingSource.DataSource = this.shapeModelBindingSource;
+            // 
+            // shapeModelBindingSource
+            // 
+            this.shapeModelBindingSource.DataSource = typeof(Unity.ShapeModel);
             // 
             // _createButton
             // 
@@ -146,9 +167,12 @@ namespace Unity
             // 
             // _slide1
             // 
-            this._slide1.Location = new System.Drawing.Point(3, 20);
+            this._slide1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this._slide1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this._slide1.Location = new System.Drawing.Point(3, 3);
             this._slide1.Name = "_slide1";
-            this._slide1.Size = new System.Drawing.Size(150, 110);
+            this._slide1.Size = new System.Drawing.Size(191, 110);
             this._slide1.TabIndex = 5;
             this._slide1.UseVisualStyleBackColor = true;
             // 
@@ -247,6 +271,7 @@ namespace Unity
             this.splitContainer1.Size = new System.Drawing.Size(1363, 499);
             this.splitContainer1.SplitterDistance = 201;
             this.splitContainer1.TabIndex = 9;
+            this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
             // splitContainer2
             // 
@@ -272,35 +297,17 @@ namespace Unity
             this.splitContainer2.Size = new System.Drawing.Size(1158, 499);
             this.splitContainer2.SplitterDistance = 665;
             this.splitContainer2.TabIndex = 0;
+            this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
             // _canvas
             // 
+            this._canvas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
             this._canvas.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this._canvas.Location = new System.Drawing.Point(20, 20);
+            this._canvas.Location = new System.Drawing.Point(3, 3);
             this._canvas.Name = "_canvas";
-            this._canvas.Size = new System.Drawing.Size(445, 333);
+            this._canvas.Size = new System.Drawing.Size(655, 315);
             this._canvas.TabIndex = 7;
-            // 
-            // shapeDataGridViewTextBoxColumn
-            // 
-            this.shapeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.shapeDataGridViewTextBoxColumn.DataPropertyName = "shape";
-            this.shapeDataGridViewTextBoxColumn.HeaderText = "shape";
-            this.shapeDataGridViewTextBoxColumn.Name = "shapeDataGridViewTextBoxColumn";
-            this.shapeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.shapeDataGridViewTextBoxColumn.Width = 61;
-            // 
-            // informationDataGridViewTextBoxColumn
-            // 
-            this.informationDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.informationDataGridViewTextBoxColumn.DataPropertyName = "Information";
-            this.informationDataGridViewTextBoxColumn.HeaderText = "Information";
-            this.informationDataGridViewTextBoxColumn.Name = "informationDataGridViewTextBoxColumn";
-            this.informationDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // shapeModelBindingSource
-            // 
-            this.shapeModelBindingSource.DataSource = typeof(Unity.ShapeModel);
             // 
             // _shapeComboBox
             // 
@@ -325,6 +332,7 @@ namespace Unity
             this.Text = "amogus";
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.shapeListBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.shapeModelBindingSource)).EndInit();
             this._topBar.ResumeLayout(false);
             this._topBar.PerformLayout();
             this._toolStrip1.ResumeLayout(false);
@@ -337,7 +345,6 @@ namespace Unity
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.shapeModelBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

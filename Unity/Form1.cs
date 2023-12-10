@@ -27,15 +27,12 @@ namespace Unity
             this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 
-            //            this.Resize += ResizeWindow;
+            this.Resize += ResizeWindow;
 
-            //_presentationModel.Resize(this.ClientSize.Height, this.ClientSize.Width - this._toolStrip1.Height - this._toolStrip1.Height, this.splitContainer1, this.splitContainer2, this._dataGridView);
         }
         internal void ResizeWindow(object sender, EventArgs e)
         {
-            Control control = (Control)sender;
-            int workHeight = control.ClientSize.Height - this._toolStrip1.Height - this._aboutToolStripMenuItem.Height;
-            //_presentationModel.Resize(workHeight, control.Width, this.splitContainer1, this.splitContainer2, this._dataGridView);
+            _presentationModel.Resize(_canvas, _slide1);
         }
 
         #region Mouse
@@ -150,6 +147,11 @@ namespace Unity
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             _presentationModel.HandleToolStripPointButtonClick(this._toolStrip1.Items, _canvas);
+        }
+
+        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            ResizeWindow(null, null);
         }
     }
 }
