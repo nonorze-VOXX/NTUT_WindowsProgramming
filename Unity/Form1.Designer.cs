@@ -87,7 +87,7 @@ namespace Unity
             this.informationDataGridViewTextBoxColumn});
             this._dataGridView.DataSource = this.shapeListBindingSource;
             this._dataGridView.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this._dataGridView.Location = new System.Drawing.Point(0, 71);
+            this._dataGridView.Location = new System.Drawing.Point(0, 75);
             this._dataGridView.Name = "_dataGridView";
             this._dataGridView.ReadOnly = true;
             this._dataGridView.RowHeadersVisible = false;
@@ -139,7 +139,7 @@ namespace Unity
             // _aboutToolStripMenuItem
             // 
             this._aboutToolStripMenuItem.Name = "_aboutToolStripMenuItem";
-            this._aboutToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this._aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this._aboutToolStripMenuItem.Text = "關於";
             // 
             // _slide1
@@ -228,7 +228,6 @@ namespace Unity
             this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.IsSplitterFixed = true;
             this.splitContainer1.Location = new System.Drawing.Point(0, 49);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -249,10 +248,10 @@ namespace Unity
             // 
             this.splitContainer2.BackColor = System.Drawing.SystemColors.WindowFrame;
             this.splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer2.IsSplitterFixed = true;
-            this.splitContainer2.Location = new System.Drawing.Point(-4, 0);
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
@@ -265,7 +264,7 @@ namespace Unity
             this.splitContainer2.Panel2.Controls.Add(this._dataGridView);
             this.splitContainer2.Panel2.Controls.Add(this._createButton);
             this.splitContainer2.Panel2.Controls.Add(this._shapeComboBox);
-            this.splitContainer2.Size = new System.Drawing.Size(1158, 495);
+            this.splitContainer2.Size = new System.Drawing.Size(1158, 499);
             this.splitContainer2.SplitterDistance = 665;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -359,7 +358,7 @@ namespace Unity
         private DataGridViewTextBoxColumn informationDataGridViewTextBoxColumn;
         private BindingSource shapeListBindingSource;
         private BindingSource shapeModelBindingSource;
-        public SplitContainer splitContainer1;
+        private SplitContainer splitContainer1;
     }
 }
 
