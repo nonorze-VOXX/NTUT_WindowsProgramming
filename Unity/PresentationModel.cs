@@ -56,6 +56,7 @@ namespace Unity
         {
             canvas.Height = canvas.Width / 16 * 9;
             _slide1.Height = _slide1.Width / 16 * 9;
+            _shapeModel.Resize(new Point(canvas.Width, canvas.Height));
         }
 
         /// <summary>

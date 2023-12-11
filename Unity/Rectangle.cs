@@ -15,7 +15,8 @@ namespace Unity
         /// <param name="graphics"></param>
         public override void Draw(IGraphics graphics)
         {
-            graphics.DrawRectangle(_info[0], _info[1]);
+            var info = GetFixedInfo();
+            graphics.DrawRectangle(info[0], info[1]);
         }
 
         /// <summary>

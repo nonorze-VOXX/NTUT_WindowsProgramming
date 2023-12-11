@@ -75,7 +75,7 @@ namespace Unity.ShapeModelState
         /// <param name="shapeType"></param>
         /// <param name="point"></param>
         /// <param name="shapeList"></param>
-        public void MouseDown(ShapeType shapeType, Point point, System.ComponentModel.BindingList<Shape> shapeList)
+        public void MouseDown(ShapeType shapeType, Point point, System.ComponentModel.BindingList<Shape> shapeList, Point nowCanvas)
         {
             _pastPoint = point;
             if (_choosingShape != null)
@@ -109,7 +109,6 @@ namespace Unity.ShapeModelState
                     return circle;
                 }
             }
-            Console.WriteLine(_pastPoint.ToString());
             return new Point(-1, -1);
         }
 

@@ -16,7 +16,8 @@ namespace Unity
         /// <param name="graphics"></param>
         public override void Draw(IGraphics graphics)
         {
-            graphics.DrawLine(_info[0], _info[1]);
+            var info = GetFixedInfo();
+            graphics.DrawLine(info[0], info[1]);
         }
 
         /// <summary>

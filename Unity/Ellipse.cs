@@ -15,7 +15,8 @@ namespace Unity
         /// <param name="graphics"></param>
         public override void Draw(IGraphics graphics)
         {
-            graphics.DrawEllipse(_info[0], _info[1]);
+            var info = GetFixedInfo();
+            graphics.DrawEllipse(info[0], info[1]);
         }
 
         /// <summary>

@@ -19,6 +19,8 @@ namespace Unity
         bool _isPressed;
         private const int CANVAS_MAX = 400;
         private CommandManager _commandManager = new CommandManager();
+        Point nowCanvas = new Point(1920, 1080);
+
         public BindingList<Shape> shapeList
         {
             get
@@ -51,6 +53,15 @@ namespace Unity
         public virtual bool IsScale()
         {
             return _state.IsScale();
+        }
+
+        internal void Resize(Point point)
+        {
+            nowCanvas = point;
+            foreach (var shape in _shapeList)
+            {
+                shape.SetNowCanvasSize(point);
+            }
         }
         #endregion
 
@@ -109,7 +120,7 @@ namespace Unity
         {
             if (PointFunction.IsBothNotNegative(point))
             {
-                _state.MouseDown(shapeType, point, _shapeList);
+                _state.MouseDown(shapeType, point, _shapeList, nowCanvas);
                 _isPressed = true;
             }
         }
@@ -145,7 +156,7 @@ namespace Unity
         /// <param name="type"></param>
         public virtual void Add(ShapeType shapeType)
         {
-            _shapeList.Add(ShapeFactory.CreateByRandom(shapeType, CANVAS_MAX));
+            _shapeList.Add(ShapeFactory.CreateByRandom(shapeType, CANVAS_MAX, nowCanvas));
             NotifyModelChanged();
         }
 
@@ -157,7 +168,7 @@ namespace Unity
         /// <param name="end"></param>
         public virtual void Add(ShapeType type, Point start, Point end)
         {
-            _shapeList.Add(ShapeFactory.CreateShape(type, start, end));
+            _shapeList.Add(ShapeFactory.CreateShape(type, start, end, nowCanvas));
             NotifyModelChanged();
         }
 

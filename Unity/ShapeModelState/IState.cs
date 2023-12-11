@@ -10,7 +10,7 @@ namespace Unity.ShapeModelState
         /// <param name="shapeType"></param>
         /// <param name="point"></param>
         /// <param name="shapeList"></param>
-        void MouseDown(ShapeType shapeType, Point point, System.ComponentModel.BindingList<Shape> shapeList);
+        void MouseDown(ShapeType shapeType, Point point, System.ComponentModel.BindingList<Shape> shapeList, Point nowCanvas);
         /// <summary>
         /// move
         /// </summary>

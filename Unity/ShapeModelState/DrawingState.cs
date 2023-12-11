@@ -29,9 +29,9 @@ namespace Unity.ShapeModelState
         /// <param name="shapeType"></param>
         /// <param name="point"></param>
         /// <param name="shapeList"></param>
-        public void MouseDown(ShapeType shapeType, Point point, System.ComponentModel.BindingList<Shape> shapeList)
+        public void MouseDown(ShapeType shapeType, Point point, System.ComponentModel.BindingList<Shape> shapeList, Point nowCanvas)
         {
-            _hint = ShapeFactory.CreateShape(shapeType, new Point(point.X, point.Y), new Point(0, 0));
+            _hint = ShapeFactory.CreateShape(shapeType, new Point(point.X, point.Y), new Point(0, 0), nowCanvas);
         }
 
         /// <summary>

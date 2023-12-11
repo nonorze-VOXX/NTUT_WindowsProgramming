@@ -16,7 +16,8 @@ namespace Unity
             }
         }
         protected List<Point> _info = new List<Point>();
-        protected Point _canvasSize = new Point(16000, 9000);
+        protected Point _drawCanvasSize = new Point(16000, 9000);
+        protected Point _nowCanvasSize = new Point(16000, 9000);
 
         /// <summary>
         /// draw
@@ -28,8 +29,17 @@ namespace Unity
         {
             get
             {
-                return string.Join(COMMA + EMPTY, _info);
+                List<Point> info = GetFixedInfo();
+                return string.Join(COMMA + EMPTY, info);
             }
+        }
+        public List<Point> GetFixedInfo()
+        {
+            List<Point> info = new List<Point>();
+            info.Add(PointFunction.Translate(_info[0], _drawCanvasSize, _nowCanvasSize));
+            info.Add(PointFunction.Translate(_info[1], _drawCanvasSize, _nowCanvasSize));
+            return info;
+
         }
 
         /// <summary>
@@ -51,12 +61,13 @@ namespace Unity
         public Shape(Point start, Point end, Point canvas)
         {
             SetInfo(start, end);
-            _canvasSize = canvas;
+            _drawCanvasSize = canvas;
+            _nowCanvasSize = canvas;
         }
 
-        private void SetCanvasSize(Point canvas)
+        public void SetNowCanvasSize(Point canvas)
         {
-            _canvasSize = canvas;
+            _nowCanvasSize = canvas;
         }
 
         /// <summary>
