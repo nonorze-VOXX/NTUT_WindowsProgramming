@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using Unity.Command;
@@ -14,8 +13,7 @@ namespace Unity.ShapeModelState
         Point _size = new Point(EIGHT_INTEGER, EIGHT_INTEGER);
         Point _pastPoint = new Point(-1, -1);
         Point _scalePoint = new Point(-1, -1);
-        MoveCommand moveCommand;
-
+        MoveCommand _moveCommand;
 
         /// <summary>
         /// delete
@@ -31,7 +29,6 @@ namespace Unity.ShapeModelState
                 _choosingIndex = -1;
             }
         }
-
 
         /// <summary>
         /// draw
@@ -63,8 +60,10 @@ namespace Unity.ShapeModelState
         {
             var first = points[0];
             var second = points[1];
-            var (x1, y1) = (first.X, first.Y);
-            var (x2, y2) = (second.X, second.Y);
+            var x1 = first.X;
+            var y1 = first.Y;
+            var x2 = second.X;
+            var y2 = second.Y;
             List<Point> list = new List<Point>();
             list.Add(second);
             list.Add(first);
@@ -88,8 +87,7 @@ namespace Unity.ShapeModelState
             _pastPoint = point;
             if (_choosingIndex != -1)
             {
-                Console.WriteLine("choose " + _choosingIndex);
-                moveCommand = new MoveCommand(_choosingIndex, point, shapeList[_choosingIndex].GetFixedInfo(), nowCanvas);
+                _moveCommand = new MoveCommand(_choosingIndex, point, shapeList[_choosingIndex].GetFixedInfo(), nowCanvas);
                 _scalePoint = IsWhichCircle(shapeList);
             }
             if (!_scalePoint.Equals(new Point(-1, -1)))
@@ -180,7 +178,7 @@ namespace Unity.ShapeModelState
                 if (_scalePoint != new Point(-1, -1))
                 {
                     shapes[_choosingIndex].Scale(_scalePoint, delta);
-                    _scalePoint = PointFunction.Add(_scalePoint, delta);
+                    AddButPointState(delta);
                 }
                 else
                 {
@@ -188,6 +186,15 @@ namespace Unity.ShapeModelState
                 }
             }
             _pastPoint = point;
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="delta"></param>
+        private void AddButPointState(Point delta)
+        {
+            _scalePoint = PointFunction.Add(_scalePoint, delta);
         }
 
         /// <summary>
@@ -205,6 +212,7 @@ namespace Unity.ShapeModelState
         {
             _pastPoint = point;
         }
+
         /// <summary>
         /// a
         /// </summary>
@@ -213,7 +221,6 @@ namespace Unity.ShapeModelState
             _scalePoint = point;
         }
 
-
         /// <summary>
         /// up
         /// </summary>
@@ -221,9 +228,9 @@ namespace Unity.ShapeModelState
         /// <param name="shapeList"></param>
         public void MouseUp(Point point, System.ComponentModel.BindingList<Shape> shapeList, Command.CommandManager commandManager)
         {
-            if (_choosingIndex != -1 && moveCommand != null)
+            if (_choosingIndex != -1 && _moveCommand != null)
             {
-                commandManager.Move(moveCommand, shapeList[_choosingIndex].GetFixedInfo());
+                commandManager.Move(_moveCommand, shapeList[_choosingIndex].GetFixedInfo());
             }
             _scalePoint = new Point(-1, -1);
         }

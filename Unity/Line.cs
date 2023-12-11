@@ -6,7 +6,7 @@ namespace Unity
     {
 
         private const string LINE = "Line";
-        public Line(Point point1, Point point2, Point cx) : base(point1, point2, cx)
+        public Line(Point point1, Point point2, Point point) : base(point1, point2, point)
         {
         }
 

@@ -5,7 +5,7 @@ namespace Unity
     public class Rectangle : Shape
     {
         private const string RECTANGLE = "Rectangle";
-        public Rectangle(Point point1, Point point2, Point cx) : base(point1, point2, cx)
+        public Rectangle(Point point1, Point point2, Point point) : base(point1, point2, point)
         {
         }
 

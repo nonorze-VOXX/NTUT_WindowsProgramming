@@ -9,6 +9,8 @@ namespace Unity
 {
     public class PresentationModel
     {
+        private const int ONE_SIX = 16;
+        private const int NINE = 9;
         ShapeModel _shapeModel;
         List<bool> _shapeButtonActive;
         /// <summary>
@@ -49,10 +51,10 @@ namespace Unity
         /// <summary>
         /// a
         /// </summary>
-        internal void Resize(Canvas canvas, Button _slide1)
+        internal void Resize(Canvas canvas, Button slide)
         {
-            canvas.Height = canvas.Width / 16 * 9;
-            _slide1.Height = _slide1.Width / 16 * 9;
+            canvas.Height = canvas.Width / ONE_SIX * NINE;
+            slide.Height = slide.Width / ONE_SIX * NINE;
             _shapeModel.Resize(new Point(canvas.Width, canvas.Height));
         }
 

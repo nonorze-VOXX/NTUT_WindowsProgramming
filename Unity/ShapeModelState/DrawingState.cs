@@ -6,8 +6,8 @@ namespace Unity.ShapeModelState
 {
     public class DrawingState : IState
     {
-        Shape _hint = new Line(new Point(0, 0), new Point(0, 0), new Point(16000, 9000));
-        AddCommand add;
+        Shape _hint = new Line(new Point(0, 0), new Point(0, 0), new Point(1, 1));
+        AddCommand _add;
 
         /// <summary>
         /// delete
@@ -35,7 +35,7 @@ namespace Unity.ShapeModelState
         public void MouseDown(ShapeType shapeType, Point point, System.ComponentModel.BindingList<Shape> shapeList, Point nowCanvas)
         {
             _hint = ShapeFactory.CreateShape(shapeType, new Point(point.X, point.Y), new Point(0, 0), nowCanvas);
-            add = new AddCommand(shapeType, new Point(point.X, point.Y), new Point(0, 0), nowCanvas);
+            _add = new AddCommand(shapeType, new Point(point.X, point.Y), new Point(0, 0), nowCanvas);
         }
 
         /// <summary>
@@ -68,10 +68,10 @@ namespace Unity.ShapeModelState
         {
             _hint.SetSecond(point);
             shapeList.Add(_hint);
-            add = new AddCommand(ShapeType.Line, new Point(point.X, point.Y), new Point(0, 0), new Point(1, 1));
-            commandManager.AddShape(add, point);
+            _add = new AddCommand(ShapeType.Line, new Point(point.X, point.Y), new Point(0, 0), new Point(1, 1));
+            commandManager.AddShape(_add, point);
 
-            _hint = new Line(new Point(0, 0), new Point(0, 0), new Point(16000, 9000));
+            _hint = new Line(new Point(0, 0), new Point(0, 0), new Point(1, 1));
         }
 
         /// <summary>

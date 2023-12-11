@@ -15,8 +15,8 @@ namespace Unity
             }
         }
         protected List<Point> _info = new List<Point>();
-        protected Point _drawCanvasSize = new Point(16000, 9000);
-        protected Point _nowCanvasSize = new Point(16000, 9000);
+        protected Point _drawCanvasSize = new Point(1, 1);
+        protected Point _nowCanvasSize = new Point(1, 1);
 
         /// <summary>
         /// draw
@@ -32,6 +32,7 @@ namespace Unity
                 return string.Join(COMMA + EMPTY, info);
             }
         }
+
         /// <summary>
         /// a
         /// </summary>
@@ -51,13 +52,39 @@ namespace Unity
         /// <returns></returns>
         public virtual bool IsPointIn(Point point)
         {
-            var firstDistance = PointFunction.GetDistance(point, GetFixedInfo()[0]);
-            var secondDistance = PointFunction.GetDistance(point, GetFixedInfo()[1]);
-            var shapeDistance = PointFunction.GetDistance(GetFirst(), GetSecond());
-            var (x1, y1) = (firstDistance.X, firstDistance.Y);
-            var (x2, y2) = (secondDistance.X, secondDistance.Y);
-            var (x3, y3) = (shapeDistance.X, shapeDistance.Y);
-            return x1 + x2 <= x3 && y1 + y2 <= y3;
+            Point firstDistance = GetFirstDistance(point);
+            Point secondDistance = GetSecondDistance(point);
+            Point shapeDistance = GetShapeDistance();
+            return firstDistance.X + secondDistance.X <= shapeDistance.X && firstDistance.Y + secondDistance.Y <= shapeDistance.Y;
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
+        private Point GetShapeDistance()
+        {
+            return PointFunction.GetDistance(GetFirst(), GetSecond());
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        private Point GetSecondDistance(Point point)
+        {
+            return PointFunction.GetDistance(point, GetFixedInfo()[1]);
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        private Point GetFirstDistance(Point point)
+        {
+            return PointFunction.GetDistance(point, GetFixedInfo()[0]);
         }
 
         public Shape(Point start, Point end, Point canvas)
@@ -82,6 +109,7 @@ namespace Unity
         {
             _drawCanvasSize = canvas;
         }
+
         /// <summary>
         /// set two point at once
         /// </summary>
@@ -124,7 +152,6 @@ namespace Unity
             return _info[1];
         }
 
-
         /// <summary>
         /// get shape name string
         /// </summary>
@@ -156,23 +183,32 @@ namespace Unity
         {
             var info = GetFixedInfo();
             Move(new Point(0, 0));
-            if (info[0].X.Equals(scalePoint.X))
-            {
-                _info[0] = new Point(scalePoint.X + delta.X, _info[0].Y);
-            }
-            else
-            if (info[1].X.Equals(scalePoint.X))
-            {
-                _info[1] = new Point(scalePoint.X + delta.X, _info[1].Y);
-            }
+            ScaleX(ref scalePoint, ref delta, info);
             if (info[0].Y.Equals(scalePoint.Y))
             {
                 _info[0] = new Point(_info[0].X, scalePoint.Y + delta.Y);
             }
-            else
-            if (info[1].Y.Equals(scalePoint.Y))
+            else if (info[1].Y.Equals(scalePoint.Y))
             {
                 _info[1] = new Point(_info[1].X, scalePoint.Y + delta.Y);
+            }
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="scalePoint"></param>
+        /// <param name="delta"></param>
+        /// <param name="info"></param>
+        private void ScaleX(ref Point scalePoint, ref Point delta, List<Point> info)
+        {
+            if (info[0].X.Equals(scalePoint.X))
+            {
+                _info[0] = new Point(scalePoint.X + delta.X, _info[0].Y);
+            }
+            else if (info[1].X.Equals(scalePoint.X))
+            {
+                _info[1] = new Point(scalePoint.X + delta.X, _info[1].Y);
             }
         }
     }

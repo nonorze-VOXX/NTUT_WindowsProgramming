@@ -27,7 +27,7 @@ namespace Unity
             this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 
-            toolStripButton4_Click(null, null);
+            ClickMouse(null, null);
             this.Resize += ResizeWindow;
             ResizeWindow(null, null);
         }
@@ -105,10 +105,10 @@ namespace Unity
             return shapeTypes;
         }
 
-
         #endregion
 
         #region IShapeObserver
+
         /// <summary>
         /// interface
         /// </summary>
@@ -144,7 +144,7 @@ namespace Unity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void ClickLine(object sender, EventArgs e)
         {
             _presentationModel.HandleToolStripButtonClick(this._toolStrip1.Items, ShapeType.Line, _canvas);
         }
@@ -154,7 +154,7 @@ namespace Unity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void ClickRectangle(object sender, EventArgs e)
         {
             _presentationModel.HandleToolStripButtonClick(this._toolStrip1.Items, ShapeType.Rectangle, _canvas);
 
@@ -165,7 +165,7 @@ namespace Unity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripButton3_Click(object sender, EventArgs e)
+        private void ClickCircle(object sender, EventArgs e)
         {
             _presentationModel.HandleToolStripButtonClick
                 (this._toolStrip1.Items, ShapeType.Ellipse, _canvas);
@@ -177,7 +177,7 @@ namespace Unity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolStripButton4_Click(object sender, EventArgs e)
+        private void ClickMouse(object sender, EventArgs e)
         {
             _presentationModel.HandleToolStripPointButtonClick(this._toolStrip1.Items, _canvas);
         }
@@ -187,7 +187,7 @@ namespace Unity
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
+        private void MoveRightSplitLine(object sender, SplitterEventArgs e)
         {
             ResizeWindow(null, null);
         }

@@ -38,6 +38,9 @@ namespace Unity.ShapeModelState
         /// </summary>
         /// <returns></returns>
         bool IsScale(BindingList<Shape> shapes);
+        /// <summary>
+        /// a
+        /// </summary>
         void Reset();
     }
 }

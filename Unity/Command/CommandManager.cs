@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 using System.ComponentModel;
 using System.Drawing;
@@ -54,23 +53,24 @@ namespace Unity.Command
         public void Move(MoveCommand moveCommand, List<Point> points)
         {
             var past = moveCommand.GetPastPoints();
-            if (past[0].Equals(points[0]) && past[1].Equals(points[1]))
+            if (IsSame(points, past))
             {
                 return;
             }
             moveCommand.SetTarget(points);
-
             _undoStack.Push(moveCommand);
             _redoStack.Clear();
+        }
 
-            var reverseStack = new Stack<ICommand>();
-            foreach (var command in _undoStack)
-            {
-                reverseStack.Push(command);
-            }
-            foreach (var command in reverseStack)
-            {
-            }
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="points"></param>
+        /// <param name="past"></param>
+        /// <returns></returns>
+        private static bool IsSame(List<Point> points, System.Tuple<Point, Point> past)
+        {
+            return past.Item1.Equals(points[0]) && past.Item2.Equals(points[1]);
         }
 
         /// <summary>
@@ -94,8 +94,6 @@ namespace Unity.Command
             {
                 command.Execute(shapes);
             }
-            Console.WriteLine();
-            Console.WriteLine();
         }
 
         /// <summary>

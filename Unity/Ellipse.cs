@@ -5,7 +5,7 @@ namespace Unity
     public class Ellipse : Shape
     {
         private const string ELLIPSE = "Ellipse";
-        public Ellipse(Point point1, Point point2, Point cx) : base(point1, point2, cx)
+        public Ellipse(Point point1, Point point2, Point point) : base(point1, point2, point)
         {
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 
@@ -6,30 +7,28 @@ namespace Unity.Command
 {
     public class MoveCommand : ICommand
     {
-        private int v;
-        private Point point;
-        private Point nowCanvas;
-        private List<Point> from;
-        private List<Point> to;
+        private int _index;
+        private Point _point;
+        private Point _nowCanvas;
+        private List<Point> _from;
+        private List<Point> _to;
 
         public MoveCommand(int index, Point point, List<Point> points, Point nowCanvas)
         {
-            this.v = index;
-            this.point = point;
-            this.from = points;
-            this.nowCanvas = nowCanvas;
+            this._index = index;
+            this._point = point;
+            this._from = points;
+            this._nowCanvas = nowCanvas;
         }
 
         /// <summary>
         /// a
         /// </summary>
         /// <returns></returns>
-        public List<Point> GetPastPoints()
+        public Tuple<Point, Point> GetPastPoints()
         {
-            return from;
+            return new Tuple<Point, Point>(_from[0], _from[1]);
         }
-
-
 
         /// <summary>
         /// as
@@ -37,7 +36,7 @@ namespace Unity.Command
         /// <param name="points"></param>
         public void SetTarget(List<Point> points)
         {
-            to = points;
+            _to = points;
         }
 
         /// <summary>
@@ -46,10 +45,10 @@ namespace Unity.Command
         /// <param name="shapes"></param>
         public void Execute(BindingList<Shape> shapes)
         {
-            shapes[v].SetNowCanvasSize(nowCanvas);
-            shapes[v].SetDrawCanvasSize(nowCanvas);
-            shapes[v].SetFirst(to[0]);
-            shapes[v].SetSecond(to[1]);
+            shapes[_index].SetNowCanvasSize(_nowCanvas);
+            shapes[_index].SetDrawCanvasSize(_nowCanvas);
+            shapes[_index].SetFirst(_to[0]);
+            shapes[_index].SetSecond(_to[1]);
         }
 
         /// <summary>

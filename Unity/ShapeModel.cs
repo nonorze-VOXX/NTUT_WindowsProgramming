@@ -20,7 +20,7 @@ namespace Unity
         bool _isPressed;
         private const int CANVAS_MAX = 400;
         private CommandManager _commandManager = new CommandManager();
-        Point nowCanvas = new Point(1920, 1080);
+        Point _nowCanvas = new Point(1, 1);
 
         public BindingList<Shape> shapeList
         {
@@ -61,7 +61,7 @@ namespace Unity
         /// </summary>
         public void Resize(Point point)
         {
-            nowCanvas = point;
+            _nowCanvas = point;
             foreach (var shape in _shapeList)
             {
                 shape.SetNowCanvasSize(point);
@@ -124,7 +124,7 @@ namespace Unity
         {
             if (PointFunction.IsBothNotNegative(point))
             {
-                _state.MouseDown(shapeType, point, _shapeList, nowCanvas);
+                _state.MouseDown(shapeType, point, _shapeList, _nowCanvas);
                 _isPressed = true;
             }
         }
@@ -160,7 +160,7 @@ namespace Unity
         /// <param name="type"></param>
         public virtual void Add(ShapeType shapeType)
         {
-            _shapeList.Add(ShapeFactory.CreateByRandom(shapeType, CANVAS_MAX, nowCanvas, _commandManager));
+            _shapeList.Add(ShapeFactory.CreateByRandom(shapeType, CANVAS_MAX, _nowCanvas, _commandManager));
             NotifyModelChanged();
         }
 
@@ -172,8 +172,8 @@ namespace Unity
         /// <param name="end"></param>
         public virtual void Add(ShapeType type, Point start, Point end)
         {
-            _shapeList.Add(ShapeFactory.CreateShape(type, start, end, nowCanvas));
-            _commandManager.AddShape(type, start, end, nowCanvas);
+            _shapeList.Add(ShapeFactory.CreateShape(type, start, end, _nowCanvas));
+            _commandManager.AddShape(type, start, end, _nowCanvas);
             NotifyModelChanged();
         }
 
@@ -199,6 +199,7 @@ namespace Unity
             _state.DeletePress(shapeList, _commandManager);
             NotifyModelChanged();
         }
+
         /// <summary>
         /// a
         /// </summary>
