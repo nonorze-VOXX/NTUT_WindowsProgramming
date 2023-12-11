@@ -27,11 +27,7 @@ namespace Unity
             var end =
                 new Point(random.Next(zero, randomMax), random.Next(zero, randomMax));
             commandManager.AddShape(shapeType, start, end, nowCanvas);
-            return CreateShape(shapeType,
-                start,
-                end,
-                nowCanvas
-                ); ;
+            return CreateShape(shapeType, start, end, nowCanvas); ;
         }
 
         /// <summary>

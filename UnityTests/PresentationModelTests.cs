@@ -13,6 +13,9 @@ namespace Unity.Tests
         private Canvas _mockCanvas;
         private PresentationModel _presentationModel;
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
@@ -22,6 +25,9 @@ namespace Unity.Tests
             _presentationModel = new PresentationModel(_mockShapeModel.Object);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void Utils()
         {
@@ -41,6 +47,9 @@ namespace Unity.Tests
             _presentationModel.HandleCanvasMouseUp(_mockCanvas, new Point(1, 1), null);
 
         }
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void Draw_CallsDrawOnShapeModel()
         {
@@ -51,6 +60,9 @@ namespace Unity.Tests
             _mockShapeModel.Verify(s => s.Draw(_mockGraphics.Object), Times.Once);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void Draw_SetsCursorToSizeNWSEWhenShapeIsScale()
         {
@@ -61,6 +73,9 @@ namespace Unity.Tests
             _presentationModel.Draw(_mockGraphics.Object, _mockCanvas);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void Draw_SetsCursorToDefaultWhenShapeIsNotScaleAndCursorIsNotCross()
         {

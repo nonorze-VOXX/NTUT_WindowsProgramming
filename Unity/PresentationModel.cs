@@ -46,7 +46,9 @@ namespace Unity
             }
         }
 
-
+        /// <summary>
+        /// a
+        /// </summary>
         internal void Resize(Canvas canvas, Button _slide1)
         {
             canvas.Height = canvas.Width / 16 * 9;
@@ -181,11 +183,18 @@ namespace Unity
                 _shapeModel.RemoveIndex(e.RowIndex);
             }
         }
+
+        /// <summary>
+        /// a
+        /// </summary>
         public void Undo()
         {
             _shapeModel.Undo();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         public void Redo()
         {
             _shapeModel.Redo();

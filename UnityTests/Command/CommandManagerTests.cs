@@ -13,12 +13,18 @@ namespace Unity.Tests
         private CommandManager _commandManager;
         private Mock<BindingList<Shape>> _mockShapes;
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
             _commandManager = new CommandManager();
             _mockShapes = new Mock<BindingList<Shape>>();
         }
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void utils()
         {
@@ -30,6 +36,9 @@ namespace Unity.Tests
             _commandManager.Redo(_mockShapes.Object);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void AddShape_AddsAddCommandToUndoStack()
         {
@@ -38,13 +47,17 @@ namespace Unity.Tests
             var nowCanvas = new Point(2, 2);
             _commandManager.AddShape(ShapeType.Line, start, end, nowCanvas);
         }
-
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Delete_AddsDeleteCommandToUndoStack()
         {
             _commandManager.Delete(0);
         }
-
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Move_AddsMoveCommandToUndoStackWhenPointsAreDifferent()
         {

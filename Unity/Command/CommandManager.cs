@@ -8,27 +8,49 @@ namespace Unity.Command
 {
     public class CommandManager
     {
-        Stack<ICommand> undoStack = new Stack<ICommand>();
-        Stack<ICommand> redoStack = new Stack<ICommand>();
+        Stack<ICommand> _undoStack = new Stack<ICommand>();
+        Stack<ICommand> _redoStack = new Stack<ICommand>();
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="shapeType"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <param name="nowCanvas"></param>
         public void AddShape(ShapeType shapeType, Point start, Point end, Point nowCanvas)
         {
             var add = new AddCommand(shapeType, start, end, nowCanvas);
-            undoStack.Push(add);
-            redoStack.Clear();
+            _undoStack.Push(add);
+            _redoStack.Clear();
         }
+
+        /// <summary>
+        /// aa
+        /// </summary>
+        /// <param name="add"></param>
+        /// <param name="point"></param>
         public void AddShape(AddCommand add, Point point)
         {
             add.SetEnd(point);
-            undoStack.Push(add);
-            redoStack.Clear();
+            _undoStack.Push(add);
+            _redoStack.Clear();
         }
 
-        public void Delete(int v)
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="index"></param>
+        public void Delete(int index)
         {
-            undoStack.Push(new DeleteCommand(v));
-            redoStack.Clear();
+            _undoStack.Push(new DeleteCommand(index));
+            _redoStack.Clear();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="moveCommand"></param>
+        /// <param name="points"></param>
         public void Move(MoveCommand moveCommand, List<Point> points)
         {
             var past = moveCommand.GetPastPoints();
@@ -38,59 +60,64 @@ namespace Unity.Command
             }
             moveCommand.SetTarget(points);
 
-            undoStack.Push(moveCommand);
-            redoStack.Clear();
+            _undoStack.Push(moveCommand);
+            _redoStack.Clear();
 
-            Console.WriteLine("MOve commadn");
             var reverseStack = new Stack<ICommand>();
-            foreach (var command in undoStack)
+            foreach (var command in _undoStack)
             {
                 reverseStack.Push(command);
             }
             foreach (var command in reverseStack)
             {
-                Console.WriteLine(command.to_string());
             }
-            Console.WriteLine();
-            Console.WriteLine();
         }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="shapes"></param>
         public void Undo(BindingList<Shape> shapes)
         {
-            if (undoStack.Count == 0)
+            if (_undoStack.Count == 0)
             {
                 return;
             }
             shapes.Clear();
-            redoStack.Push(undoStack.Pop());
+            _redoStack.Push(_undoStack.Pop());
             var reverseStack = new Stack<ICommand>();
-            foreach (var command in undoStack)
+            foreach (var command in _undoStack)
             {
                 reverseStack.Push(command);
             }
             foreach (var command in reverseStack)
             {
-                Console.WriteLine(command.to_string());
-                command.Excute(shapes);
+                command.Execute(shapes);
             }
             Console.WriteLine();
             Console.WriteLine();
         }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="shapes"></param>
         public void Redo(BindingList<Shape> shapes)
         {
-            if (redoStack.Count == 0)
+            if (_redoStack.Count == 0)
             {
                 return;
             }
             shapes.Clear();
-            undoStack.Push(redoStack.Pop());
+            _undoStack.Push(_redoStack.Pop());
             var reverseStack = new Stack<ICommand>();
-            foreach (var command in undoStack)
+            foreach (var command in _undoStack)
             {
                 reverseStack.Push(command);
             }
             foreach (var command in reverseStack)
             {
-                command.Excute(shapes);
+                command.Execute(shapes);
             }
         }
     }

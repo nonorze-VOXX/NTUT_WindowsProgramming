@@ -4,26 +4,28 @@ namespace Unity.Command
 {
     public class DeleteCommand : ICommand
     {
-        private int v;
+        private int _index;
 
-        public DeleteCommand(int v)
+        public DeleteCommand(int index)
         {
-            this.v = v;
+            this._index = index;
         }
 
-
-        public void Excute(BindingList<Shape> shapes)
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="shapes"></param>
+        public void Execute(BindingList<Shape> shapes)
         {
-            shapes.RemoveAt(v);
+            shapes.RemoveAt(_index);
         }
 
-
-        public void Unexcute(BindingList<Shape> shapes)
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="shapes"></param>
+        public void ExecuteNo(BindingList<Shape> shapes)
         {
-        }
-        public string to_string()
-        {
-            return "testl";
         }
     }
 }

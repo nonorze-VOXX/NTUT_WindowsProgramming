@@ -5,35 +5,43 @@ namespace Unity.Command
 {
     public class AddCommand : ICommand
     {
-        private ShapeType shapeType;
-        private Point start;
-        private Point end;
-        private Point nowCanvas;
+        private ShapeType _shapeType;
+        private Point _start;
+        private Point _end;
+        private Point _nowCanvas;
 
         public AddCommand(ShapeType shapeType, Point start, Point end, Point nowCanvas)
         {
-            this.shapeType = shapeType;
-            this.start = start;
-            this.end = end;
-            this.nowCanvas = nowCanvas;
+            this._shapeType = shapeType;
+            this._start = start;
+            this._end = end;
+            this._nowCanvas = nowCanvas;
         }
 
-        public void Excute(BindingList<Shape> shapes)
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="shapes"></param>
+        public void Execute(BindingList<Shape> shapes)
         {
-            shapes.Add(ShapeFactory.CreateShape(shapeType, start, end, nowCanvas));
+            shapes.Add(ShapeFactory.CreateShape(_shapeType, _start, _end, _nowCanvas));
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="point"></param>
         public void SetEnd(Point point)
         {
-            end = point;
+            _end = point;
         }
 
-        public void Unexcute(BindingList<Shape> shapes)
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="shapes"></param>
+        public void ExecuteNo(BindingList<Shape> shapes)
         {
-        }
-        public string to_string()
-        {
-            return "add";
         }
     }
 }

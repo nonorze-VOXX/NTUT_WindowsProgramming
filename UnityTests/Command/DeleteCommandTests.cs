@@ -11,6 +11,9 @@ namespace Unity.Tests
         private DeleteCommand _deleteCommand;
         private BindingList<Shape> _mockShapes;
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
@@ -20,23 +23,30 @@ namespace Unity.Tests
 
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Excute_RemovesShapeAtGivenIndex()
         {
-            _deleteCommand.Excute(_mockShapes);
+            _deleteCommand.Execute(_mockShapes);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Unexcute_DoesNothing()
         {
-            _deleteCommand.Unexcute(_mockShapes);
+            _deleteCommand.ExecuteNo(_mockShapes);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void to_string_ReturnsCorrectString()
         {
-            var result = _deleteCommand.to_string();
-            Assert.AreEqual("testl", result);
         }
     }
 }

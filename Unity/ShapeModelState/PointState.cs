@@ -189,14 +189,25 @@ namespace Unity.ShapeModelState
             }
             _pastPoint = point;
         }
+
+        /// <summary>
+        /// a
+        /// </summary>
         public void SetChoosingIndex(int index)
         {
             _choosingIndex = index;
         }
+
+        /// <summary>
+        /// a
+        /// </summary>
         public void SetPastPoint(Point point)
         {
             _pastPoint = point;
         }
+        /// <summary>
+        /// a
+        /// </summary>
         public void SetScalePoint(Point point)
         {
             _scalePoint = point;
@@ -217,6 +228,9 @@ namespace Unity.ShapeModelState
             _scalePoint = new Point(-1, -1);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         public void Reset()
         {
             _choosingIndex = -1;

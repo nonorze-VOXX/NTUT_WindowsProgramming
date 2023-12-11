@@ -10,7 +10,9 @@ namespace Unity.Tests
         private ShapeModel _shapeModel;
         private Mock<IGraphics> _mockGraphics;
         private Mock<IShapeObserver> _mockShapeObserver;
-
+        /// <summary>
+        /// a
+        /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
@@ -19,10 +21,12 @@ namespace Unity.Tests
             _mockShapeObserver = new Mock<IShapeObserver>();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void utils()
         {
-
             _shapeModel.Add(ShapeType.Line);
             _shapeModel.Resize(new Point(1, 1));
             _shapeModel.Draw(_mockGraphics.Object);
@@ -32,6 +36,10 @@ namespace Unity.Tests
             _shapeModel.Add(ShapeType.Line, new Point(1, 1), new Point(1, 1));
             _shapeModel.RemoveIndex(0);
         }
+
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void SwitchStateDrawing_SetsStateToDrawingState()
         {
@@ -39,20 +47,27 @@ namespace Unity.Tests
             // Add assertions here
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void SwitchStatePoint_SetsStateToPointState()
         {
             _shapeModel.SwitchStatePoint();
             // Add assertions here
         }
-
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void IsScale_ReturnsCorrectValue()
         {
             var result = _shapeModel.IsScale();
             // Add assertions here
         }
-
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Resize_ResizesShapes()
         {
@@ -60,21 +75,27 @@ namespace Unity.Tests
             _shapeModel.Resize(point);
             // Add assertions here
         }
-
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Draw_DrawsShapes()
         {
             _shapeModel.Draw(_mockGraphics.Object);
             // Add assertions here
         }
-
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Attach_AttachesObserver()
         {
             _shapeModel.Attach(_mockShapeObserver.Object);
             // Add assertions here
         }
-
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Detach_DetachesObserver()
         {
@@ -82,6 +103,9 @@ namespace Unity.Tests
             // Add assertions here
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void MouseDown_UpdatesState()
         {
@@ -89,7 +113,9 @@ namespace Unity.Tests
             _shapeModel.MouseDown(ShapeType.Line, point);
             // Add assertions here
         }
-
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void MouseUp_UpdatesState()
         {
@@ -98,6 +124,9 @@ namespace Unity.Tests
             // Add assertions here
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void MouseMove_UpdatesState()
         {
@@ -106,6 +135,9 @@ namespace Unity.Tests
             // Add assertions here
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Add_AddsShape()
         {
@@ -113,6 +145,9 @@ namespace Unity.Tests
             // Add assertions here
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void RemoveIndex_RemovesShape()
         {
@@ -121,6 +156,9 @@ namespace Unity.Tests
             // Add assertions here
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void DeletePress_DeletesShape()
         {
@@ -128,6 +166,9 @@ namespace Unity.Tests
             // Add assertions here
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Undo_UndoesLastAction()
         {
@@ -135,6 +176,9 @@ namespace Unity.Tests
             // Add assertions here
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Redo_RedoLastAction()
         {

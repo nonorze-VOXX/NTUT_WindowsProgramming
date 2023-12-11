@@ -31,6 +31,12 @@ namespace Unity
             this.Resize += ResizeWindow;
             ResizeWindow(null, null);
         }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         internal void ResizeWindow(object sender, EventArgs e)
         {
             _presentationModel.Resize(_canvas, _slide1);
@@ -133,17 +139,32 @@ namespace Unity
             _slide1.Image = new Bitmap(_brief, _slide1.Size);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             _presentationModel.HandleToolStripButtonClick(this._toolStrip1.Items, ShapeType.Line, _canvas);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             _presentationModel.HandleToolStripButtonClick(this._toolStrip1.Items, ShapeType.Rectangle, _canvas);
 
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
             _presentationModel.HandleToolStripButtonClick
@@ -151,21 +172,41 @@ namespace Unity
 
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
             _presentationModel.HandleToolStripPointButtonClick(this._toolStrip1.Items, _canvas);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
         {
             ResizeWindow(null, null);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UndoClick(object sender, EventArgs e)
         {
             _presentationModel.Undo();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RedoClick(object sender, EventArgs e)
         {
             _presentationModel.Redo();

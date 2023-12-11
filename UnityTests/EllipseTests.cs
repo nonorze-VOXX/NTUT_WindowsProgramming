@@ -10,6 +10,9 @@ namespace Unity.Tests
         private Mock<IGraphics> _mockGraphics;
         private Ellipse _ellipse;
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestInitialize()]
         public void SetUp()
         {
@@ -17,6 +20,9 @@ namespace Unity.Tests
             _ellipse = new Ellipse(new Point(0, 0), new Point(10, 10), new Point(5, 5));
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void Draw_CallsDrawEllipseOnGraphics()
         {
@@ -31,6 +37,9 @@ namespace Unity.Tests
             _mockGraphics.Verify(g => g.DrawEllipse(expectedPoint1, expectedPoint2), Times.Once);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void GetShapeName_ReturnsCorrectName()
         {

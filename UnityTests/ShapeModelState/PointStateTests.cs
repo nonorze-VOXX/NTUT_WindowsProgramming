@@ -14,6 +14,9 @@ namespace Unity.Tests
         private Mock<IGraphics> _mockGraphics;
         private Shape _shape;
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
@@ -22,6 +25,9 @@ namespace Unity.Tests
             _mockGraphics = new Mock<IGraphics>();
             _shapes = new BindingList<Shape> { _shape };
         }
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void AllTest()
         {
@@ -49,6 +55,9 @@ namespace Unity.Tests
             _pointState.Reset();
 
         }
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void MouseMove_WhenPressedAndChoosingIndexNotNegative_MovesShape()
         {
@@ -56,6 +65,9 @@ namespace Unity.Tests
             // Add assertions here to verify that the shape was moved
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void MouseMove_WhenScalePointNotNegative_ScalesShape()
         {

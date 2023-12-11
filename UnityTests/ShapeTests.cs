@@ -8,12 +8,18 @@ namespace Unity.Tests
     {
         private MockShape _shape;
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
             _shape = new MockShape(new Point(0, 0), new Point(10, 10), new Point(16000, 9000));
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void utils()
         {
@@ -22,6 +28,9 @@ namespace Unity.Tests
             _shape.SetDrawCanvasSize(new Point(1, 1));
             _shape.SetFirst(new Point(1, 1));
         }
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void Move_ChangesShapePosition()
         {
@@ -36,6 +45,9 @@ namespace Unity.Tests
             Assert.AreEqual(new Point(15, 15), _shape.GetSecond());
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void Scale_ChangesShapeSize()
         {
@@ -54,6 +66,9 @@ namespace Unity.Tests
             _shape.Scale(scalePoint, delta);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void IsPointIn_ReturnsTrueWhenPointIsInShape()
         {
@@ -67,6 +82,9 @@ namespace Unity.Tests
             Assert.IsTrue(result);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void GetFixedInfo_ReturnsCorrectInfo()
         {
@@ -85,11 +103,19 @@ namespace Unity.Tests
         {
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="graphics"></param>
         public override void Draw(IGraphics graphics)
         {
             // Mock implementation
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public override string GetShapeName()
         {
             return "MockShape";

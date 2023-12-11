@@ -32,6 +32,9 @@ namespace Unity
                 return string.Join(COMMA + EMPTY, info);
             }
         }
+        /// <summary>
+        /// a
+        /// </summary>
         public List<Point> GetFixedInfo()
         {
             List<Point> info = new List<Point>();
@@ -64,11 +67,17 @@ namespace Unity
             _nowCanvasSize = canvas;
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         public void SetNowCanvasSize(Point canvas)
         {
             _nowCanvasSize = canvas;
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         public void SetDrawCanvasSize(Point canvas)
         {
             _drawCanvasSize = canvas;
@@ -140,6 +149,9 @@ namespace Unity
             _info[1] = point;
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         public virtual void Scale(Point scalePoint, Point delta)
         {
             var info = GetFixedInfo();

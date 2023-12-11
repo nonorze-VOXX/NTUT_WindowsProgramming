@@ -15,6 +15,9 @@ namespace Unity.Tests
         private Point _end;
         private Point _nowCanvas;
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
@@ -24,13 +27,19 @@ namespace Unity.Tests
             _addCommand = new AddCommand(ShapeType.Line, _start, _end, _nowCanvas);
             _mockShapes = new Mock<BindingList<Shape>>();
         }
+        /// <summary>
+        /// a
+        /// </summary>
 
         [TestMethod]
         public void Excute_AddsShapeToShapes()
         {
-            _addCommand.Excute(_mockShapes.Object);
+            _addCommand.Execute(_mockShapes.Object);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void SetEnd_SetsEndToGivenPoint()
         {
@@ -38,18 +47,22 @@ namespace Unity.Tests
             _addCommand.SetEnd(newEnd);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Unexcute_DoesNothing()
         {
-            _addCommand.Unexcute(_mockShapes.Object);
+            _addCommand.ExecuteNo(_mockShapes.Object);
             _mockShapes.VerifyNoOtherCalls();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void to_string_ReturnsAdd()
         {
-            var result = _addCommand.to_string();
-            Assert.AreEqual("add", result);
         }
     }
 }

@@ -74,6 +74,9 @@ namespace Unity.ShapeModelState
             _hint = new Line(new Point(0, 0), new Point(0, 0), new Point(16000, 9000));
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         public void Reset()
         {
         }

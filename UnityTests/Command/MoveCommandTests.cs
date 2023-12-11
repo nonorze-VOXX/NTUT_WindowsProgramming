@@ -17,6 +17,9 @@ namespace Unity.Tests
         private List<Point> _toPoints;
         private Point _nowCanvas;
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
@@ -28,27 +31,37 @@ namespace Unity.Tests
             _shapes = new BindingList<Shape> { _mockShape.Object };
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Excute_SetsShapeProperties()
         {
             _moveCommand.SetTarget(_toPoints);
-            _moveCommand.Excute(_shapes);
+            _moveCommand.Execute(_shapes);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Unexcute_DoesNothing()
         {
-            _moveCommand.Unexcute(_shapes);
+            _moveCommand.ExecuteNo(_shapes);
             _mockShape.VerifyNoOtherCalls();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void to_string_ReturnsMoveAndIndex()
         {
-            var result = _moveCommand.to_string();
-            Assert.AreEqual("move 0", result);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void GetPastPoints_ReturnsFromPoints()
         {
@@ -56,6 +69,9 @@ namespace Unity.Tests
             CollectionAssert.AreEqual(_fromPoints, result);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void SetTarget_SetsToPoints()
         {

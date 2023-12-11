@@ -4,8 +4,15 @@ namespace Unity.Command
 {
     interface ICommand
     {
-        void Excute(BindingList<Shape> shapes);
-        void Unexcute(BindingList<Shape> shapes);
-        string to_string();
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="shapes"></param>
+        void Execute(BindingList<Shape> shapes);
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="shapes"></param>
+        void ExecuteNo(BindingList<Shape> shapes);
     }
 }

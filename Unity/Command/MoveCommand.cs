@@ -12,13 +12,18 @@ namespace Unity.Command
         private List<Point> from;
         private List<Point> to;
 
-        public MoveCommand(int v, Point point, List<Point> points, Point nowCanvas)
+        public MoveCommand(int index, Point point, List<Point> points, Point nowCanvas)
         {
-            this.v = v;
+            this.v = index;
             this.point = point;
             this.from = points;
             this.nowCanvas = nowCanvas;
         }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public List<Point> GetPastPoints()
         {
             return from;
@@ -26,12 +31,20 @@ namespace Unity.Command
 
 
 
+        /// <summary>
+        /// as
+        /// </summary>
+        /// <param name="points"></param>
         public void SetTarget(List<Point> points)
         {
             to = points;
         }
 
-        public void Excute(BindingList<Shape> shapes)
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="shapes"></param>
+        public void Execute(BindingList<Shape> shapes)
         {
             shapes[v].SetNowCanvasSize(nowCanvas);
             shapes[v].SetDrawCanvasSize(nowCanvas);
@@ -39,12 +52,12 @@ namespace Unity.Command
             shapes[v].SetSecond(to[1]);
         }
 
-        public void Unexcute(BindingList<Shape> shapes)
+        /// <summary>
+        /// as
+        /// </summary>
+        /// <param name="shapes"></param>
+        public void ExecuteNo(BindingList<Shape> shapes)
         {
-        }
-        public string to_string()
-        {
-            return "move " + v.ToString();
         }
     }
 }

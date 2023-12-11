@@ -27,6 +27,9 @@ namespace Unity
             return new Point(point.X / number, point.Y / number);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         internal static Point Translate(Point point, Point from, Point to)
         {
             float x1 = (float)to.X / (float)from.X;

@@ -56,6 +56,9 @@ namespace Unity
             return _state.IsScale(_shapeList);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         public void Resize(Point point)
         {
             nowCanvas = point;
@@ -196,6 +199,9 @@ namespace Unity
             _state.DeletePress(shapeList, _commandManager);
             NotifyModelChanged();
         }
+        /// <summary>
+        /// a
+        /// </summary>
         public void Undo()
         {
             _commandManager.Undo(_shapeList);
@@ -203,6 +209,9 @@ namespace Unity
             NotifyModelChanged();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         public void Redo()
         {
             _commandManager.Redo(_shapeList);

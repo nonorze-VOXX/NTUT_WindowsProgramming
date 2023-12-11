@@ -15,6 +15,9 @@ namespace Unity.Tests
         private Mock<CommandManager> _mockCommandManager;
         private BindingList<Shape> _shapeList;
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
@@ -24,6 +27,9 @@ namespace Unity.Tests
             _shapeList = new BindingList<Shape>();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void DeletePress_DoesNothing()
         {
@@ -31,6 +37,10 @@ namespace Unity.Tests
             // Add assertions here
         }
 
+
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Draw_DrawsHintShape()
         {
@@ -38,6 +48,9 @@ namespace Unity.Tests
             // Add assertions here
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void MouseDown_CreatesNewShapeAndAddCommand()
         {
@@ -46,6 +59,9 @@ namespace Unity.Tests
             // Add assertions here
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void IsScale_ReturnsFalse()
         {
@@ -53,6 +69,10 @@ namespace Unity.Tests
             Assert.IsFalse(result);
         }
 
+
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void MouseMove_SetsSecondPointOfHintShape()
         {
@@ -61,6 +81,9 @@ namespace Unity.Tests
             // Add assertions here
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void MouseUp_SetsSecondPointOfHintShapeAndAddsShapeToList()
         {
@@ -69,6 +92,9 @@ namespace Unity.Tests
             // Add assertions here
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod]
         public void Reset_DoesNothing()
         {
