@@ -64,6 +64,8 @@
     <Compile Include="Canvas.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Command\MoveCommand.cs" />
+    <Compile Include="Command\DeleteCommand.cs" />
     <Compile Include="Command\CommandManager.cs" />
     <Compile Include="Command\AddCommand.cs" />
     <Compile Include="Command\ICommand.cs" />

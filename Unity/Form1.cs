@@ -159,5 +159,15 @@ namespace Unity
         {
             ResizeWindow(null, null);
         }
+
+        private void UndoClick(object sender, EventArgs e)
+        {
+            _presentationModel.Undo();
+        }
+
+        private void RedoClick(object sender, EventArgs e)
+        {
+            _presentationModel.Redo();
+        }
     }
 }

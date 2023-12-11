@@ -177,6 +177,15 @@ namespace Unity
                 _shapeModel.RemoveIndex(e.RowIndex);
             }
         }
+        internal void Undo()
+        {
+            _shapeModel.Undo();
+        }
+
+        internal void Redo()
+        {
+            _shapeModel.Redo();
+        }
 
         /// <summary>
         /// click

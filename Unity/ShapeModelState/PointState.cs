@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using Unity.Command;
 
 namespace Unity.ShapeModelState
 {
@@ -12,15 +13,18 @@ namespace Unity.ShapeModelState
         Point _size = new Point(EIGHT_INTEGER, EIGHT_INTEGER);
         Point _pastPoint = new Point(-1, -1);
         Point _scalePoint = new Point(-1, -1);
+        MoveCommand moveCommand;
+
 
         /// <summary>
         /// delete
         /// </summary>
         /// <param name="shapeList"></param>
-        public void DeletePress(System.ComponentModel.BindingList<Shape> shapeList)
+        public void DeletePress(System.ComponentModel.BindingList<Shape> shapeList, Command.CommandManager commandManager)
         {
             if (_choosingShape != null)
             {
+                commandManager.Delete(shapeList.IndexOf(_choosingShape));
                 shapeList.Remove(_choosingShape);
                 _scalePoint = new Point(-1, -1);
                 _choosingShape = null;
@@ -35,7 +39,6 @@ namespace Unity.ShapeModelState
         {
             if (_choosingShape != null)
             {
-
                 List<Point> points = _choosingShape.GetFixedInfo();
                 var first = points[0];
                 var second = points[1];
@@ -83,6 +86,7 @@ namespace Unity.ShapeModelState
             _pastPoint = point;
             if (_choosingShape != null)
             {
+                moveCommand = new MoveCommand(shapeList.IndexOf(_choosingShape), point, _choosingShape.GetFixedInfo(), nowCanvas);
                 _scalePoint = IsWhichCircle();
                 if (!_scalePoint.Equals(new Point(-1, -1)))
                 {
@@ -189,8 +193,12 @@ namespace Unity.ShapeModelState
         /// </summary>
         /// <param name="point"></param>
         /// <param name="shapeList"></param>
-        public void MouseUp(Point point, System.ComponentModel.BindingList<Shape> shapeList)
+        public void MouseUp(Point point, System.ComponentModel.BindingList<Shape> shapeList, Command.CommandManager commandManager)
         {
+            if (_choosingShape != null && moveCommand != null)
+            {
+                commandManager.Move(moveCommand, _choosingShape.GetFixedInfo());
+            }
             _scalePoint = new Point(-1, -1);
         }
     }

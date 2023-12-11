@@ -21,7 +21,7 @@ namespace Unity.ShapeModelState
         /// </summary>
         /// <param name="point"></param>
         /// <param name="shapeList"></param>
-        void MouseUp(Point point, System.ComponentModel.BindingList<Shape> shapeList);
+        void MouseUp(Point point, System.ComponentModel.BindingList<Shape> shapeList, Command.CommandManager commandManager);
         /// <summary>
         /// draw
         /// </summary>
@@ -31,7 +31,7 @@ namespace Unity.ShapeModelState
         /// delete
         /// </summary>
         /// <param name="shapeList"></param>
-        void DeletePress(System.ComponentModel.BindingList<Shape> shapeList);
+        void DeletePress(System.ComponentModel.BindingList<Shape> shapeList, Command.CommandManager commandManager);
         /// <summary>
         /// tes
         /// </summary>
