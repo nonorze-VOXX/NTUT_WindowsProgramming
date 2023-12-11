@@ -18,11 +18,9 @@ namespace Unity
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>
-        public void DrawEllipse(Point2 point1, Point2 point2)
+        public void DrawEllipse(Point point1, Point point2)
         {
-            var (x1, y1) = point1.GetTuple();
-            var (x2, y2) = point2.GetTuple();
-            _graphics.DrawEllipse(Pens.Black, x1, y1, x2 - x1, y2 - y1);
+            _graphics.DrawEllipse(Pens.Black, point1.X, point1.Y, point2.X - point1.X, point2.Y - point1.Y);
         }
 
         /// <summary>
@@ -30,11 +28,11 @@ namespace Unity
         /// </summary>
         /// <param name="first"></param>
         /// <param name="size"></param>
-        public void DrawEllipseByCenterAndSize(Point2 first, Point2 size)
+        public void DrawEllipseByCenterAndSize(Point first, Point size)
         {
             DrawEllipse(
-                Point2.GetSubstract(first, Point2.Divide(size, TWO_INTEGER)),
-                Point2.Add(first, Point2.Divide(size, TWO_INTEGER))
+                PointFunction.GetSubstract(first, PointFunction.Divide(size, TWO_INTEGER)),
+                PointFunction.Add(first, PointFunction.Divide(size, TWO_INTEGER))
                 );
         }
 
@@ -43,7 +41,7 @@ namespace Unity
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>
-        public void DrawLine(Point2 point1, Point2 point2)
+        public void DrawLine(Point point1, Point point2)
         {
             _graphics.DrawLine(Pens.Black, point1.X, point1.Y, point2.X, point2.Y);
         }
@@ -53,10 +51,10 @@ namespace Unity
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>
-        public void DrawRectangle(Point2 point1, Point2 point2)
+        public void DrawRectangle(Point point1, Point point2)
         {
-            var position = new Point2(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y));
-            Point2 distance = Point2.GetDistance(point1, point2);
+            var position = new Point(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y));
+            Point distance = PointFunction.GetDistance(point1, point2);
             _graphics.DrawRectangle(
                 Pens.Black,
                 position.X, position.Y,
@@ -70,10 +68,10 @@ namespace Unity
         /// </summary>
         /// <param name="point1"></param>
         /// <param name="point2"></param>
-        public void DrawRectangle(Point2 point1, Point2 point2, Pen pen)
+        public void DrawRectangle(Point point1, Point point2, Pen pen)
         {
-            var position = new Point2(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y));
-            Point2 distance = Point2.GetDistance(point1, point2);
+            var position = new Point(Math.Min(point1.X, point2.X), Math.Min(point1.Y, point2.Y));
+            Point distance = PointFunction.GetDistance(point1, point2);
             _graphics.DrawRectangle(
                 pen,
                 position.X, position.Y,

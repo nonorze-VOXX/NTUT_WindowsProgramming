@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 using ButtonFunction = System.Action<object, System.EventArgs>;
@@ -118,7 +119,7 @@ namespace Unity
         /// <param name="canvas"></param>
         /// <param name="point"></param>
         /// <param name="toolStripItems"></param>
-        public void HandleCanvasMouseUp(Canvas canvas, Point2 point, ToolStripItemCollection items)
+        public void HandleCanvasMouseUp(Canvas canvas, Point point, ToolStripItemCollection items)
         {
             _shapeModel.MouseUp(point);
             HandleToolStripPointButtonClick(items, canvas)(null, null);
@@ -128,7 +129,7 @@ namespace Unity
         /// mouse move
         /// </summary>
         /// <param name="point"></param>
-        public void HandleCanvasMouseMove(Point2 point)
+        public void HandleCanvasMouseMove(Point point)
         {
             _shapeModel.MouseMove(point);
         }
@@ -137,7 +138,7 @@ namespace Unity
         /// mouse down
         /// </summary>
         /// <param name="point"></param>
-        public void HandleCanvasMouseDown(Point2 point)
+        public void HandleCanvasMouseDown(Point point)
         {
             for (int i = 0; i < _shapeButtonActive.Count; i++)
             {

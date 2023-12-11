@@ -10,8 +10,8 @@ namespace Unity.Tests
         const int TEN = 10;
         const int FIVE = 5;
         const int TWO = 2;
-        Point2 point1;
-        Point2 point2;
+        PointFunction point1;
+        PointFunction point2;
         const string name = "Rectangle";
         Rectangle rectangle;
         /// <summary>
@@ -43,7 +43,7 @@ namespace Unity.Tests
         {
             var graphics = new Mock<IGraphics>();
             rectangle.Draw(graphics.Object);
-            graphics.Verify(adapter => adapter.DrawRectangle(It.IsAny<Point2>(), It.IsAny<Point2>()), Times.Once());
+            graphics.Verify(adapter => adapter.DrawRectangle(It.IsAny<PointFunction>(), It.IsAny<PointFunction>()), Times.Once());
         }
 
         /// <summary>

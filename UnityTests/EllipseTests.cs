@@ -10,8 +10,8 @@ namespace Unity.Tests
         const int TEN = 10;
         const int FIVE = 5;
         const int TWO = 2;
-        Point2 point1;
-        Point2 point2;
+        PointFunction point1;
+        PointFunction point2;
         const string name = "Ellipse";
         Ellipse ellipse;
         [TestInitialize()]
@@ -33,7 +33,7 @@ namespace Unity.Tests
         {
             var graphics = new Mock<IGraphics>();
             ellipse.Draw(graphics.Object);
-            graphics.Verify(adapter => adapter.DrawEllipse(It.IsAny<Point2>(), It.IsAny<Point2>()), Times.Once());
+            graphics.Verify(adapter => adapter.DrawEllipse(It.IsAny<PointFunction>(), It.IsAny<PointFunction>()), Times.Once());
         }
 
         [TestMethod()]

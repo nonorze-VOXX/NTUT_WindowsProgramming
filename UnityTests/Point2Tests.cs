@@ -10,8 +10,8 @@ namespace Unity.Tests
         const int TEN = 10;
         const int FIVE = 5;
         const int TWO = 2;
-        Point2 point1;
-        Point2 point2;
+        PointFunction point1;
+        PointFunction point2;
         /// <summary>
         /// t
         /// </summary>
@@ -63,7 +63,7 @@ namespace Unity.Tests
             point1.Y = TEN;
             point2.X = FIVE;
             point2.Y = FIVE;
-            Point2 result = Point2.GetSubstract(point1, point2);
+            PointFunction result = PointFunction.GetSubstract(point1, point2);
             Assert.AreEqual(result.X, FIVE);
             Assert.AreEqual(result.Y, FIVE);
         }
@@ -76,7 +76,7 @@ namespace Unity.Tests
         {
             point1.X = TEN;
             point1.Y = TEN;
-            Point2 result = Point2.Divide(point1, FIVE);
+            PointFunction result = PointFunction.Divide(point1, FIVE);
             Assert.AreEqual(result.X, TWO);
             Assert.AreEqual(result.Y, TWO);
         }
@@ -91,7 +91,7 @@ namespace Unity.Tests
             point1.Y = TEN;
             point2.X = FIVE;
             point2.Y = FIVE;
-            Point2 result = Point2.GetDistance(point1, point2);
+            PointFunction result = PointFunction.GetDistance(point1, point2);
             Assert.AreEqual(result.X, FIVE);
             Assert.AreEqual(result.Y, FIVE);
         }
@@ -106,7 +106,7 @@ namespace Unity.Tests
             point1.Y = FIVE;
             point2.X = FIVE;
             point2.Y = FIVE;
-            Point2 result = Point2.Add(point1, point2);
+            PointFunction result = PointFunction.Add(point1, point2);
             Assert.AreEqual(result.X, TEN);
             Assert.AreEqual(result.Y, TEN);
         }
@@ -132,7 +132,7 @@ namespace Unity.Tests
             point1.Y = FIVE;
             point2.X = FIVE;
             point2.Y = FIVE;
-            float result = Point2.GetDistanceFloat(point1, point2);
+            float result = PointFunction.GetDistanceFloat(point1, point2);
             Assert.AreEqual(result, 0);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 using Unity.ShapeModelState;
 
 namespace Unity
@@ -104,9 +105,9 @@ namespace Unity
         /// </summary>
         /// <param name="shapeType"></param>
         /// <param name="point"></param>
-        public virtual void MouseDown(ShapeType shapeType, Point2 point)
+        public virtual void MouseDown(ShapeType shapeType, Point point)
         {
-            if (point.IsBothNotNegative())
+            if (PointFunction.IsBothNotNegative(point))
             {
                 _state.MouseDown(shapeType, point, _shapeList);
                 _isPressed = true;
@@ -117,7 +118,7 @@ namespace Unity
         /// mouse up
         /// </summary>
         /// <param name="point"></param>
-        public virtual void MouseUp(Point2 point)
+        public virtual void MouseUp(Point point)
         {
             if (_isPressed)
             {
@@ -131,7 +132,7 @@ namespace Unity
         /// mouse up
         /// </summary>
         /// <param name="point"></param>
-        public virtual void MouseMove(Point2 point)
+        public virtual void MouseMove(Point point)
         {
             _state.MouseMove(point, _isPressed);
             NotifyModelChanged();
@@ -154,7 +155,7 @@ namespace Unity
         /// <param name="type"></param>
         /// <param name="start"></param>
         /// <param name="end"></param>
-        public virtual void Add(ShapeType type, Point2 start, Point2 end)
+        public virtual void Add(ShapeType type, Point start, Point end)
         {
             _shapeList.Add(ShapeFactory.CreateShape(type, start, end));
             NotifyModelChanged();

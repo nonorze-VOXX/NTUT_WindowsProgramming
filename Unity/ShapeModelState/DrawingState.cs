@@ -1,8 +1,10 @@
-﻿namespace Unity.ShapeModelState
+﻿using System.Drawing;
+
+namespace Unity.ShapeModelState
 {
     class DrawingState : IState
     {
-        Shape _hint = new Line(new Point2(0, 0), new Point2(0, 0), new Point2(16000, 9000));
+        Shape _hint = new Line(new Point(0, 0), new Point(0, 0), new Point(16000, 9000));
 
         /// <summary>
         /// delete
@@ -27,9 +29,9 @@
         /// <param name="shapeType"></param>
         /// <param name="point"></param>
         /// <param name="shapeList"></param>
-        public void MouseDown(ShapeType shapeType, Point2 point, System.ComponentModel.BindingList<Shape> shapeList)
+        public void MouseDown(ShapeType shapeType, Point point, System.ComponentModel.BindingList<Shape> shapeList)
         {
-            _hint = ShapeFactory.CreateShape(shapeType, new Point2(point.X, point.Y), new Point2(0, 0));
+            _hint = ShapeFactory.CreateShape(shapeType, new Point(point.X, point.Y), new Point(0, 0));
         }
 
         /// <summary>
@@ -46,7 +48,7 @@
         /// move
         /// </summary>
         /// <param name="point"></param>
-        public void MouseMove(Point2 point, bool pressed)
+        public void MouseMove(Point point, bool pressed)
         {
             if (pressed)
             {
@@ -59,11 +61,11 @@
         /// </summary>
         /// <param name="point"></param>
         /// <param name="shapeList"></param>
-        public void MouseUp(Point2 point, System.ComponentModel.BindingList<Shape> shapeList)
+        public void MouseUp(Point point, System.ComponentModel.BindingList<Shape> shapeList)
         {
             _hint.SetSecond(point);
             shapeList.Add(_hint);
-            _hint = new Line(new Point2(0, 0), new Point2(0, 0), new Point2(16000, 9000));
+            _hint = new Line(new Point(0, 0), new Point(0, 0), new Point(16000, 9000));
         }
     }
 }

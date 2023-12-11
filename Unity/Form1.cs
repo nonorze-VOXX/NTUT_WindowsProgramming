@@ -47,7 +47,7 @@ namespace Unity
         /// <param name="e"></param>
         private void HandleCanvasMouseUp(object sender, MouseEventArgs e)
         {
-            _presentationModel.HandleCanvasMouseUp(_canvas, new Point2(e.X, e.Y), this._toolStrip1.Items);
+            _presentationModel.HandleCanvasMouseUp(_canvas, new Point(e.X, e.Y), this._toolStrip1.Items);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Unity
         /// <param name="e"></param>
         public void HandleCanvasMouseMove(object sender, MouseEventArgs e)
         {
-            _presentationModel.HandleCanvasMouseMove(new Point2(e.X, e.Y));
+            _presentationModel.HandleCanvasMouseMove(new Point(e.X, e.Y));
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Unity
         /// <param name="e"></param>
         public void HandleCanvasMouseDown(object sender, MouseEventArgs e)
         {
-            _presentationModel.HandleCanvasMouseDown(new Point2(e.X, e.Y));
+            _presentationModel.HandleCanvasMouseDown(new Point(e.X, e.Y));
         }
         #endregion
 

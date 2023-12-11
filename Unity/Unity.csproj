@@ -79,7 +79,7 @@
     <Compile Include="ShapeModelState\DrawingState.cs" />
     <Compile Include="ShapeModelState\IState.cs" />
     <Compile Include="Line.cs" />
-    <Compile Include="Point2.cs" />
+    <Compile Include="PointFunction.cs" />
     <Compile Include="PresentationModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

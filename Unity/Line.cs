@@ -1,10 +1,12 @@
-﻿namespace Unity
+﻿using System.Drawing;
+
+namespace Unity
 {
     public class Line : Shape
     {
 
         private const string LINE = "Line";
-        public Line(Point2 point1, Point2 point2, Point2 cx) : base(point1, point2, cx)
+        public Line(Point point1, Point point2, Point cx) : base(point1, point2, cx)
         {
         }
 

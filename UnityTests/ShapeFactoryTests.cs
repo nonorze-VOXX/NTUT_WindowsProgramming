@@ -22,8 +22,8 @@ namespace Unity.Tests
         [TestMethod()]
         public void CreateShapeTest()
         {
-            Point2 point1 = new Point2(0, 0);
-            Point2 point2 = new Point2(0, 0);
+            PointFunction point1 = new Point2(0, 0);
+            PointFunction point2 = new Point2(0, 0);
             var ellipse = ShapeFactory.CreateShape(ShapeType.Ellipse, point1, point2);
             Assert.AreEqual(ellipse.GetType().Name, ShapeType.Ellipse.ToString());
             var line = ShapeFactory.CreateShape(ShapeType.Line, point1, point2);

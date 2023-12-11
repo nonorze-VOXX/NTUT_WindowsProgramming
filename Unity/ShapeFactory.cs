@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace Unity
 {
@@ -23,8 +24,8 @@ namespace Unity
             var zero = 0;
             var random = new Random();
             return CreateShape(shapeType,
-                new Point2(random.Next(zero, randomMax), random.Next(zero, randomMax)),
-                new Point2(random.Next(zero, randomMax), random.Next(zero, randomMax)));
+                new Point(random.Next(zero, randomMax), random.Next(zero, randomMax)),
+                new Point(random.Next(zero, randomMax), random.Next(zero, randomMax)));
         }
 
         /// <summary>
@@ -34,16 +35,16 @@ namespace Unity
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public static Shape CreateShape(ShapeType shapeType, Point2 start, Point2 end)
+        public static Shape CreateShape(ShapeType shapeType, Point start, Point end)
         {
             switch (shapeType)
             {
                 case ShapeType.Line:
-                    return new Line(start, end, new Point2(16000, 9000));
+                    return new Line(start, end, new Point(16000, 9000));
                 case ShapeType.Rectangle:
-                    return new Rectangle(start, end, new Point2(16000, 9000));
+                    return new Rectangle(start, end, new Point(16000, 9000));
                 default:
-                    return new Ellipse(start, end, new Point2(16000, 9000));
+                    return new Ellipse(start, end, new Point(16000, 9000));
             }
         }
     }

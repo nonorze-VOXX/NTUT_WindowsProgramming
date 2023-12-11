@@ -106,7 +106,7 @@ namespace Unity.Tests
             var graphics = new Mock<IGraphics>();
             _model.Add(ShapeType.Line);
             _model.Draw(graphics.Object);
-            graphics.Verify(adapter => adapter.DrawLine(It.IsAny<Point2>(), It.IsAny<Point2>()), Times.Exactly(2));
+            graphics.Verify(adapter => adapter.DrawLine(It.IsAny<PointFunction>(), It.IsAny<PointFunction>()), Times.Exactly(2));
         }
         /// <summary>
         /// set

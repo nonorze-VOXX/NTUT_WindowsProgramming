@@ -10,9 +10,9 @@ namespace Unity.ShapeModelState
         Shape _choosingShape = null;
         public const int EIGHT_INTEGER = 8;
         public const int TWO_INTEGER = 2;
-        Point2 _size = new Point2(EIGHT_INTEGER, EIGHT_INTEGER);
-        Point2 _pastPoint = new Point2(0, 0);
-        Point2 _scalePoint;
+        Point _size = new Point(EIGHT_INTEGER, EIGHT_INTEGER);
+        Point _pastPoint = new Point(0, 0);
+        Point _scalePoint;
 
         /// <summary>
         /// delete
@@ -23,7 +23,7 @@ namespace Unity.ShapeModelState
             if (_choosingShape != null)
             {
                 shapeList.Remove(_choosingShape);
-                _scalePoint = null;
+                _scalePoint = new Point(-1, -1);
                 _choosingShape = null;
             }
         }
@@ -38,7 +38,7 @@ namespace Unity.ShapeModelState
             {
                 var first = _choosingShape.GetFirst();
                 var second = _choosingShape.GetSecond();
-                List<Point2> list = GetEightPoint(first, second);
+                List<Point> list = GetEightPoint(first, second);
                 graphics.DrawRectangle(first, second, Pens.Red);
                 foreach (var point in list)
                 {
@@ -53,19 +53,19 @@ namespace Unity.ShapeModelState
         /// <param name="first"></param>
         /// <param name="second"></param>
         /// <returns></returns>
-        public List<Point2> GetEightPoint(Point2 first, Point2 second)
+        public List<Point> GetEightPoint(Point first, Point second)
         {
-            var (x1, y1) = first.GetTuple();
-            var (x2, y2) = second.GetTuple();
-            List<Point2> list = new List<Point2>();
+            var (x1, y1) = (first.X, first.Y);
+            var (x2, y2) = (second.X, second.Y);
+            List<Point> list = new List<Point>();
             list.Add(second);
             list.Add(first);
-            list.Add(new Point2(x1, y2));
-            list.Add(new Point2(x2, y1));
-            list.Add(new Point2(x1, (y1 + y2) / TWO_INTEGER));
-            list.Add(new Point2(x2, (y1 + y2) / TWO_INTEGER));
-            list.Add(new Point2((x1 + x2) / TWO_INTEGER, y1));
-            list.Add(new Point2((x1 + x2) / TWO_INTEGER, y2));
+            list.Add(new Point(x1, y2));
+            list.Add(new Point(x2, y1));
+            list.Add(new Point(x1, (y1 + y2) / TWO_INTEGER));
+            list.Add(new Point(x2, (y1 + y2) / TWO_INTEGER));
+            list.Add(new Point((x1 + x2) / TWO_INTEGER, y1));
+            list.Add(new Point((x1 + x2) / TWO_INTEGER, y2));
             return list;
         }
 
@@ -75,18 +75,18 @@ namespace Unity.ShapeModelState
         /// <param name="shapeType"></param>
         /// <param name="point"></param>
         /// <param name="shapeList"></param>
-        public void MouseDown(ShapeType shapeType, Point2 point, System.ComponentModel.BindingList<Shape> shapeList)
+        public void MouseDown(ShapeType shapeType, Point point, System.ComponentModel.BindingList<Shape> shapeList)
         {
             _pastPoint = point;
             if (_choosingShape != null)
             {
                 _scalePoint = IsWhichCircle();
-                if (_scalePoint != null)
+                if (!_scalePoint.Equals(new Point(-1, -1)))
                 {
                     return;
                 }
             }
-            _scalePoint = null;
+            _scalePoint = new Point(-1, -1);
             MoveLogic(point, shapeList);
         }
 
@@ -94,23 +94,23 @@ namespace Unity.ShapeModelState
         /// cir
         /// </summary>
         /// <returns></returns>
-        public Point2 IsWhichCircle()
+        public Point IsWhichCircle()
         {
             if (_choosingShape == null)
             {
-                return null;
+                return new Point(-1, -1);
             }
             foreach (var circle in GetEightPoint(_choosingShape.GetFirst(), _choosingShape.GetSecond()))
             {
-                var distance = Point2.GetDistanceFloat(circle, _pastPoint);
-                var sum = _size.GetSum();
+                var distance = PointFunction.GetDistanceFloat(circle, _pastPoint);
+                var sum = PointFunction.GetSum(_size);
                 if (Close(distance, sum))
                 {
                     return circle;
                 }
             }
             Console.WriteLine(_pastPoint.ToString());
-            return null;
+            return new Point(-1, -1);
         }
 
         /// <summary>
@@ -118,13 +118,13 @@ namespace Unity.ShapeModelState
         /// </summary>
         public bool IsScale()
         {
-            if (_scalePoint != null)
+            if (_scalePoint != new Point(-1, -1))
             {
                 return true;
             }
             else
             {
-                return IsWhichCircle() != null;
+                return IsWhichCircle() != new Point(-1, -1);
             }
 
         }
@@ -134,7 +134,7 @@ namespace Unity.ShapeModelState
         /// </summary>
         /// <param name="point"></param>
         /// <param name="shapeList"></param>
-        private void MoveLogic(Point2 point, BindingList<Shape> shapeList)
+        private void MoveLogic(Point point, BindingList<Shape> shapeList)
         {
             foreach (var shape in shapeList)
             {
@@ -162,16 +162,16 @@ namespace Unity.ShapeModelState
         /// move
         /// </summary>
         /// <param name="point"></param>
-        public void MouseMove(Point2 point, bool pressed)
+        public void MouseMove(Point point, bool pressed)
         {
             if (pressed && _choosingShape != null)
             {
-                var delta = Point2.GetSubstract(point, _pastPoint);
-                if (_scalePoint != null)
+                var delta = PointFunction.GetSubstract(point, _pastPoint);
+                if (_scalePoint != new Point(-1, -1))
                 {
                     var (first, second) = _choosingShape.GetLocal();
                     var tuple = ScaleByDelta(delta, first, second);
-                    var (first1, second1) = new Tuple<Point2, Point2>(tuple.Item1, tuple.Item2);
+                    var (first1, second1) = new Tuple<Point, Point>(tuple.Item1, tuple.Item2);
                     _scalePoint = tuple.Item3;
                     _choosingShape.SetPosition(first1, second1);
                 }
@@ -189,13 +189,13 @@ namespace Unity.ShapeModelState
         /// <param name="delta"></param>
         /// <param name="first"></param>
         /// <param name="second"></param>
-        private Tuple<Point2, Point2, Point2> ScaleByDelta(Point2 delta, Point2 first, Point2 second)
+        private Tuple<Point, Point, Point> ScaleByDelta(Point delta, Point first, Point second)
         {
             var tuple = ScaleX(delta, first, second);
             first = tuple.Item1;
             second = tuple.Item2;
             _scalePoint = tuple.Item3;
-            return Point2.MoveScaleY(first, second, _scalePoint, delta);
+            return PointFunction.MoveScaleY(first, second, _scalePoint, delta);
         }
 
         /// <summary>
@@ -204,9 +204,9 @@ namespace Unity.ShapeModelState
         /// <param name="delta"></param>
         /// <param name="first"></param>
         /// <param name="second"></param>
-        private Tuple<Point2, Point2, Point2> ScaleX(Point2 delta, Point2 first, Point2 second)
+        private Tuple<Point, Point, Point> ScaleX(Point delta, Point first, Point second)
         {
-            return Point2.MoveScaleX(first, second, _scalePoint, delta);
+            return PointFunction.MoveScaleX(first, second, _scalePoint, delta);
         }
 
         /// <summary>
@@ -214,9 +214,9 @@ namespace Unity.ShapeModelState
         /// </summary>
         /// <param name="point"></param>
         /// <param name="shapeList"></param>
-        public void MouseUp(Point2 point, System.ComponentModel.BindingList<Shape> shapeList)
+        public void MouseUp(Point point, System.ComponentModel.BindingList<Shape> shapeList)
         {
-            _scalePoint = null;
+            _scalePoint = new Point(-1, -1);
         }
     }
 }

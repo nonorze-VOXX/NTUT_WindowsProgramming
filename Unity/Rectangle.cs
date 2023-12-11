@@ -1,9 +1,11 @@
-﻿namespace Unity
+﻿using System.Drawing;
+
+namespace Unity
 {
     public class Rectangle : Shape
     {
         private const string RECTANGLE = "Rectangle";
-        public Rectangle(Point2 point1, Point2 point2, Point2 cx) : base(point1, point2, cx)
+        public Rectangle(Point point1, Point point2, Point cx) : base(point1, point2, cx)
         {
         }
 
