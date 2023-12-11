@@ -1,45 +1,53 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Drawing;
 
 namespace Unity.Tests
 {
     [TestClass()]
     public class EllipseTests
     {
-        const int ZERO = 0;
-        const int TEN = 10;
-        const int FIVE = 5;
-        const int TWO = 2;
-        Point2 point1;
-        Point2 point2;
-        const string name = "Ellipse";
-        Ellipse ellipse;
+        private Mock<IGraphics> _mockGraphics;
+        private Ellipse _ellipse;
+
+        /// <summary>
+        /// a
+        /// </summary>
         [TestInitialize()]
-        public void Initialize()
+        public void SetUp()
         {
-            point1 = new Point2(FIVE, FIVE);
-            point2 = new Point2(ZERO, TEN);
-            ellipse = new Ellipse(point1, point2);
-        }
-        [TestMethod()]
-        public void EllipseTest()
-        {
-            Assert.AreEqual(ellipse.GetFirst(), point1);
-            Assert.AreEqual(ellipse.GetSecond(), point2);
+            _mockGraphics = new Mock<IGraphics>();
+            _ellipse = new Ellipse(new Point(0, 0), new Point(10, 10), new Point(5, 5));
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
-        public void DrawTest()
+        public void Draw_CallsDrawEllipseOnGraphics()
         {
-            var graphics = new Mock<IGraphics>();
-            ellipse.Draw(graphics.Object);
-            graphics.Verify(adapter => adapter.DrawEllipse(It.IsAny<Point2>(), It.IsAny<Point2>()), Times.Once());
+            // Arrange
+            var expectedPoint1 = new Point(0, 0);
+            var expectedPoint2 = new Point(10, 10);
+
+            // Act
+            _ellipse.Draw(_mockGraphics.Object);
+
+            // Assert
+            _mockGraphics.Verify(g => g.DrawEllipse(expectedPoint1, expectedPoint2), Times.Once);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
-        public void GetShapeNameTest()
+        public void GetShapeName_ReturnsCorrectName()
         {
-            Assert.AreEqual(ellipse.GetShapeName(), name);
+            // Act
+            var name = _ellipse.GetShapeName();
+
+            // Assert
+            Assert.AreEqual("Ellipse", name);
         }
     }
 }

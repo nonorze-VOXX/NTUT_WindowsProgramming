@@ -1,45 +1,44 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Drawing;
 
 namespace Unity.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class LineTests
     {
-        const int ZERO = 0;
-        const int TEN = 10;
-        const int FIVE = 5;
-        const int TWO = 2;
-        Point2 point1;
-        Point2 point2;
-        const string name = "Line";
-        Line line;
-        [TestInitialize()]
-        public void Initialize()
+        private Mock<IGraphics> _mockGraphics;
+        private Line _line;
+
+        [TestInitialize]
+        public void TestInitialize()
         {
-            point1 = new Point2(FIVE, FIVE);
-            point2 = new Point2(ZERO, TEN);
-            line = new Line(point1, point2);
-        }
-        [TestMethod()]
-        public void LineTest()
-        {
-            Assert.AreEqual(line.GetFirst(), point1);
-            Assert.AreEqual(line.GetSecond(), point2);
+            _mockGraphics = new Mock<IGraphics>();
+            _line = new Line(new Point(0, 0), new Point(10, 10), new Point(5, 5));
         }
 
         [TestMethod()]
-        public void DrawTest()
+        public void Draw_CallsDrawLineOnGraphics()
         {
-            var graphics = new Mock<IGraphics>();
-            line.Draw(graphics.Object);
-            graphics.Verify(adapter => adapter.DrawLine(It.IsAny<Point2>(), It.IsAny<Point2>()), Times.Once());
+            // Arrange
+            var expectedStartPoint = new Point(0, 0);
+            var expectedEndPoint = new Point(10, 10);
+
+            // Act
+            _line.Draw(_mockGraphics.Object);
+
+            // Assert
+            _mockGraphics.Verify(g => g.DrawLine(expectedStartPoint, expectedEndPoint), Times.Once);
         }
 
         [TestMethod()]
-        public void GetShapeNameTest()
+        public void GetShapeName_ReturnsLine()
         {
-            Assert.AreEqual(line.GetShapeName(), name);
+            // Act
+            var result = _line.GetShapeName();
+
+            // Assert
+            Assert.AreEqual("Line", result);
         }
     }
 }

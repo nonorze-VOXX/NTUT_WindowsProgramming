@@ -1,9 +1,11 @@
-﻿namespace Unity
+﻿using System.Drawing;
+
+namespace Unity
 {
     public class Rectangle : Shape
     {
         private const string RECTANGLE = "Rectangle";
-        public Rectangle(Point2 start, Point2 end) : base(start, end)
+        public Rectangle(Point point1, Point point2, Point point) : base(point1, point2, point)
         {
         }
 
@@ -13,7 +15,8 @@
         /// <param name="graphics"></param>
         public override void Draw(IGraphics graphics)
         {
-            graphics.DrawRectangle(_info[0], _info[1]);
+            var info = GetFixedInfo();
+            graphics.DrawRectangle(info[0], info[1]);
         }
 
         /// <summary>

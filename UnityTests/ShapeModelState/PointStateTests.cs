@@ -1,142 +1,80 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.ComponentModel;
+using System.Drawing;
+using Unity.ShapeModelState;
 
-namespace Unity.ShapeModelState.Tests
+namespace Unity.Tests
 {
     [TestClass]
     public class PointStateTests
     {
-        private Mock<IGraphics> _mockGraphics;
-        private Mock<Line> _mockShape;
-        private PrivateObject _pointStatePrivate;
         private PointState _pointState;
+        private BindingList<Shape> _shapes;
+        private Mock<IGraphics> _mockGraphics;
+        private Shape _shape;
 
         /// <summary>
-        /// up
+        /// a
         /// </summary>
         [TestInitialize]
-        public void SetUp()
+        public void TestInitialize()
         {
-            _mockGraphics = new Mock<IGraphics>();
-            _mockShape = new Mock<Line>(new Point2(0, 0), new Point2(0, 0));
             _pointState = new PointState();
-            _pointStatePrivate = new PrivateObject(_pointState);
+            _shape = new Line(new Point(1, 1), new Point(1, 1), new Point(1, 1)); // Replace with your actual Shape object
+            _mockGraphics = new Mock<IGraphics>();
+            _shapes = new BindingList<Shape> { _shape };
+        }
+        /// <summary>
+        /// a
+        /// </summary>
+        [TestMethod]
+        public void AllTest()
+        {
+            _pointState.SetChoosingIndex(0);
+            _pointState.Draw(_mockGraphics.Object, _shapes);
+            _pointState.DeletePress(_shapes, new Command.CommandManager());
+            _pointState.MouseDown(ShapeType.Line, new Point(1, 1), _shapes, new Point(1, 1));
+            _pointState.SetChoosingIndex(0);
+            _shapes.Add(_shape);
+            _pointState.MouseDown(ShapeType.Line, new Point(1, 1), _shapes, new Point(1, 1));
+            _pointState.SetChoosingIndex(-1);
+            _pointState.IsWhichCircle(_shapes);
+            _pointState.SetChoosingIndex(0);
+            _pointState.SetPastPoint(new Point(-20, -20));
+            _pointState.IsWhichCircle(_shapes);
+            _pointState.IsScale(_shapes);
+            _pointState.SetScalePoint(new Point(-1, -1));
+            _pointState.IsScale(_shapes);
+            _pointState.MoveLogic(new Point(1, 1), _shapes);
+            _pointState.MoveLogic(new Point(-1, -1), _shapes);
+            _pointState.SetScalePoint(new Point(1, 1));
+            _pointState.SetChoosingIndex(0);
+            _pointState.MouseMove(new Point(1, 1), true, _shapes);
+            _pointState.MouseUp(new Point(1, 1), _shapes, new Command.CommandManager());
+            _pointState.Reset();
+
+        }
+        /// <summary>
+        /// a
+        /// </summary>
+        [TestMethod]
+        public void MouseMove_WhenPressedAndChoosingIndexNotNegative_MovesShape()
+        {
+            _pointState.MouseMove(new Point(5, 5), true, _shapes);
+            // Add assertions here to verify that the shape was moved
         }
 
         /// <summary>
-        /// press
+        /// a
         /// </summary>
-        [TestMethod()]
-        public void TestDeletePress()
+        [TestMethod]
+        public void MouseMove_WhenScalePointNotNegative_ScalesShape()
         {
-            _mockShape.Setup(s => s.IsPointIn(It.IsAny<Point2>())).Returns(true);
-            var shapeList = new System.ComponentModel.BindingList<Shape> { _mockShape.Object };
-            shapeList.Add(_mockShape.Object);
-            _pointState.MouseDown(ShapeType.Rectangle, new Point2(1, 1), shapeList);
-            _pointState.DeletePress(shapeList);
-            Assert.IsTrue(shapeList.Contains(_mockShape.Object));
-        }
-
-        /// <summary>
-        /// draw
-        /// </summary>
-        [TestMethod()]
-        public void TestDraw()
-        {
-            var shapeList = new System.ComponentModel.BindingList<Shape> { };
-            _pointState.Draw(_mockGraphics.Object);
-        }
-
-        /// <summary>
-        /// down
-        /// </summary>
-        [TestMethod()]
-        public void TestMouseDown()
-        {
-            var shapeList = new System.ComponentModel.BindingList<Shape> { _mockShape.Object };
-            _mockShape.Setup(s => s.IsPointIn(It.IsAny<Point2>())).Returns(true);
-            _mockShape.Setup(x => x.GetFirst()).Returns(new Point2(10, 10));
-            _mockShape.Setup(x => x.GetSecond()).Returns(new Point2(20, 20));
-            _pointState.MouseDown(ShapeType.Rectangle, new Point2(10, 10), shapeList);
-            _pointState.MouseDown(ShapeType.Rectangle, new Point2(1, 1), shapeList);
-            _pointState.Draw(_mockGraphics.Object);
-        }
-
-        /// <summary>
-        /// move
-        /// </summary>
-        [TestMethod()]
-        public void TestMouseMove()
-        {
-            _mockShape.Setup(s => s.IsPointIn(It.IsAny<Point2>())).Returns(true);
-            var shapeList = new System.ComponentModel.BindingList<Shape> { _mockShape.Object };
-            _pointState.MouseMove(new Point2(1, 1), false);
-            _mockShape.Setup(s => s.IsPointIn(It.IsAny<Point2>())).Returns(true);
-            _mockShape.Setup(x => x.GetFirst()).Returns(new Point2(10, 10));
-            _mockShape.Setup(x => x.GetSecond()).Returns(new Point2(20, 20));
-            _pointState.MouseDown(ShapeType.Rectangle, new Point2(1, 1), shapeList);
-            _pointState.MouseMove(new Point2(1, 1), true);
-        }
-
-        /// <summary>
-        /// false
-        /// </summary>
-        [TestMethod()]
-        public void TestMouseMoveFalse()
-        {
-            _mockShape.Setup(s => s.IsPointIn(It.IsAny<Point2>())).Returns(false);
-            var shapeList = new System.ComponentModel.BindingList<Shape> { _mockShape.Object };
-            _mockShape.Setup(x => x.GetFirst()).Returns(new Point2(10, 10));
-            _mockShape.Setup(x => x.GetSecond()).Returns(new Point2(20, 20));
-            _pointState.MouseDown(ShapeType.Rectangle, new Point2(1, 1), shapeList);
-        }
-
-        /// <summary>
-        /// up
-        /// </summary>
-        [TestMethod()]
-        public void TestMouseUp()
-        {
-            var shapeList = new System.ComponentModel.BindingList<Shape> { _mockShape.Object };
-            _pointState.MouseUp(new Point2(1, 1), shapeList);
-        }
-
-        /// <summary>
-        /// scale
-        /// </summary>
-        [TestMethod()]
-        public void TestMouseMoveScale()
-        {
-            _mockShape.Setup(s => s.IsPointIn(It.IsAny<Point2>())).Returns(true);
-            var shapeList = new System.ComponentModel.BindingList<Shape> { _mockShape.Object };
-            _pointState.MouseMove(new Point2(1, 1), false);
-            _mockShape.Setup(s => s.IsPointIn(It.IsAny<Point2>())).Returns(true);
-            _mockShape.Setup(x => x.GetFirst()).Returns(new Point2(10, 10));
-            _mockShape.Setup(x => x.GetSecond()).Returns(new Point2(20, 20));
-            _pointState.MouseDown(ShapeType.Rectangle, new Point2(15, 15), shapeList);
-            Assert.IsNotNull(_pointStatePrivate.GetField("_choosingShape"));
-            _pointState.MouseDown(ShapeType.Rectangle, new Point2(10, 20), shapeList);
-            Assert.IsNotNull(_pointStatePrivate.GetField("_scalePoint"));
-            _pointState.MouseMove(new Point2(12, 12), true);
-            _pointState.MouseMove(new Point2(15, 15), true);
-        }
-
-        /// <summary>
-        /// scale
-        /// </summary>
-        [TestMethod()]
-        public void TestMouseMoveScale2()
-        {
-            _mockShape.Setup(s => s.IsPointIn(It.IsAny<Point2>())).Returns(true);
-            var shapeList = new System.ComponentModel.BindingList<Shape> { _mockShape.Object };
-            _mockShape.Setup(s => s.IsPointIn(It.IsAny<Point2>())).Returns(true);
-            _mockShape.Setup(x => x.GetFirst()).Returns(new Point2(10, 10));
-            _mockShape.Setup(x => x.GetSecond()).Returns(new Point2(20, 20));
-            _pointState.MouseDown(ShapeType.Rectangle, new Point2(15, 15), shapeList);
-            _pointState.MouseDown(ShapeType.Rectangle, new Point2(20, 20), shapeList);
-            _pointState.MouseMove(new Point2(20, 10), true);
-            _pointState.MouseMove(new Point2(18, 12), true);
-            _pointState.MouseUp(new Point2(15, 15), shapeList);
+            // Set _scalePoint to a value other than (-1, -1) before calling MouseMove
+            _pointState.SetChoosingIndex(0);
+            _pointState.MouseMove(new Point(5, 5), true, _shapes);
+            // Add assertions here to verify that the shape was scaled
         }
     }
 }

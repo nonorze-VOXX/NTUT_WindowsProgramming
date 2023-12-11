@@ -8,17 +8,7 @@ namespace Unity
     public partial class Form1 : Form, IShapeObserver
     {
         PresentationModel _presentationModel;
-        List<ToolStripItem> _toolStripItems;
-        ToolStripButton _toolStripPointButton;
 
-        private const string RECTANGLE_IMAGE_PATH = "rectangle.Image";
-        private const string ELLIPSE_IMAGE_PATH = "ellipse.Image";
-        private const string LINE_IMAGE_PATH = "line.Image";
-        private const string POINTER_IMAGE_PATH = "pointer";
-        private const string TOOL_STRIP_BUTTON_NAME = "toolstripButton";
-        private const int TOOL_STRIP_BUTTON_HEIGHT = 22;
-        private const int TOOL_STRIP_BUTTON_WIDTH = 23;
-        private const int STRIP_BUTTON_NUMBER = 3;
         private Bitmap _brief;
         public Form1(PresentationModel presentationModel)
         {
@@ -36,15 +26,24 @@ namespace Unity
             _brief = new Bitmap(_canvas.Width, _canvas.Height);
             this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            List<string> imageNames = GenerateImagePathList();
-            _toolStripItems = GenerateToolStripItems(resources, imageNames);
 
-            _toolStripPointButton = GenerateButton(POINTER_IMAGE_PATH);
-            _toolStripPointButton.Image = ((System.Drawing.Image)(resources.GetObject(POINTER_IMAGE_PATH)));
-            _toolStripPointButton.Click += new EventHandler(_presentationModel.HandleToolStripPointButtonClick(_toolStripItems, _canvas));
-            _toolStripItems.Add(_toolStripPointButton);
+            ClickMouse(null, null);
+            this.Resize += ResizeWindow;
+            ResizeWindow(null, null);
+        }
 
-            _toolStrip1.Items.AddRange(_toolStripItems.ToArray());
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        internal void ResizeWindow(object sender, EventArgs e)
+        {
+            _presentationModel.Resize(_canvas, _slide1);
+            if (_canvas.Width != 0 && _canvas.Height != 0)
+            {
+                _brief = new Bitmap(_canvas.Width, _canvas.Height);
+            }
         }
 
         #region Mouse
@@ -55,7 +54,7 @@ namespace Unity
         /// <param name="e"></param>
         private void HandleCanvasMouseUp(object sender, MouseEventArgs e)
         {
-            _presentationModel.HandleCanvasMouseUp(_canvas, new Point2(e.X, e.Y), _toolStripItems);
+            _presentationModel.HandleCanvasMouseUp(_canvas, new Point(e.X, e.Y), this._toolStrip1.Items);
         }
 
         /// <summary>
@@ -65,7 +64,7 @@ namespace Unity
         /// <param name="e"></param>
         public void HandleCanvasMouseMove(object sender, MouseEventArgs e)
         {
-            _presentationModel.HandleCanvasMouseMove(new Point2(e.X, e.Y));
+            _presentationModel.HandleCanvasMouseMove(new Point(e.X, e.Y));
         }
 
         /// <summary>
@@ -75,7 +74,7 @@ namespace Unity
         /// <param name="e"></param>
         public void HandleCanvasMouseDown(object sender, MouseEventArgs e)
         {
-            _presentationModel.HandleCanvasMouseDown(new Point2(e.X, e.Y));
+            _presentationModel.HandleCanvasMouseDown(new Point(e.X, e.Y));
         }
         #endregion
 
@@ -94,24 +93,6 @@ namespace Unity
         #region Generate
 
         /// <summary>
-        /// generate
-        /// </summary>
-        /// <returns></returns>
-        List<ToolStripItem> GenerateToolStripItems(System.ComponentModel.ComponentResourceManager resources, List<string> imageNames)
-        {
-            var toolStripItems = new List<ToolStripItem>();
-            List<ShapeType> shapeTypes = GenerateShapeTypeList();
-            for (int i = 0; i < STRIP_BUTTON_NUMBER; i++)
-            {
-                var toolStripButton = GenerateButton(TOOL_STRIP_BUTTON_NAME + i.ToString());
-                toolStripButton.Image = ((System.Drawing.Image)(resources.GetObject(imageNames[i])));
-                toolStripButton.Click += new EventHandler(_presentationModel.HandleToolStripButtonClick(toolStripItems, shapeTypes[i], _canvas));
-                toolStripItems.Add(toolStripButton);
-            }
-            return toolStripItems;
-        }
-
-        /// <summary>
         /// shape list
         /// </summary>
         /// <returns></returns>
@@ -124,43 +105,17 @@ namespace Unity
             return shapeTypes;
         }
 
-        /// <summary>
-        /// image path list
-        /// </summary>
-        /// <returns></returns>
-        List<string> GenerateImagePathList()
-        {
-            List<string> imageNames = new List<string>();
-            imageNames.Add(LINE_IMAGE_PATH);
-            imageNames.Add(RECTANGLE_IMAGE_PATH);
-            imageNames.Add(ELLIPSE_IMAGE_PATH);
-            return imageNames;
-        }
-
-        /// <summary>
-        /// Generate Button
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        ToolStripButton GenerateButton(string name)
-        {
-            var toolStripButton = new System.Windows.Forms.ToolStripButton();
-            toolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButton.Size = new System.Drawing.Size(TOOL_STRIP_BUTTON_WIDTH, TOOL_STRIP_BUTTON_HEIGHT);
-            toolStripButton.Name = name;
-            toolStripButton.Text = name;
-            return toolStripButton;
-        }
         #endregion
 
         #region IShapeObserver
+
         /// <summary>
         /// interface
         /// </summary>
         public void ReceiveBell()
         {
             Invalidate(true);
+            ResizeWindow(null, null);
         }
         #endregion
 
@@ -179,8 +134,82 @@ namespace Unity
         /// </summary>
         private void GenerateBrief()
         {
+
             _canvas.DrawToBitmap(_brief, new System.Drawing.Rectangle(0, 0, _canvas.Width, _canvas.Height));
             _slide1.Image = new Bitmap(_brief, _slide1.Size);
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickLine(object sender, EventArgs e)
+        {
+            _presentationModel.HandleToolStripButtonClick(this._toolStrip1.Items, ShapeType.Line, _canvas);
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickRectangle(object sender, EventArgs e)
+        {
+            _presentationModel.HandleToolStripButtonClick(this._toolStrip1.Items, ShapeType.Rectangle, _canvas);
+
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickCircle(object sender, EventArgs e)
+        {
+            _presentationModel.HandleToolStripButtonClick
+                (this._toolStrip1.Items, ShapeType.Ellipse, _canvas);
+
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClickMouse(object sender, EventArgs e)
+        {
+            _presentationModel.HandleToolStripPointButtonClick(this._toolStrip1.Items, _canvas);
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MoveRightSplitLine(object sender, SplitterEventArgs e)
+        {
+            ResizeWindow(null, null);
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void UndoClick(object sender, EventArgs e)
+        {
+            _presentationModel.Undo();
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RedoClick(object sender, EventArgs e)
+        {
+            _presentationModel.Redo();
         }
     }
 }

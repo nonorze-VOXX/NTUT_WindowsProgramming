@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Drawing;
 
 namespace Unity
 {
@@ -14,7 +14,9 @@ namespace Unity
                 return GetShapeName();
             }
         }
-        protected List<Point2> _info = new List<Point2>();
+        protected List<Point> _info = new List<Point>();
+        protected Point _drawCanvasSize = new Point(1, 1);
+        protected Point _nowCanvasSize = new Point(1, 1);
 
         /// <summary>
         /// draw
@@ -26,8 +28,21 @@ namespace Unity
         {
             get
             {
-                return string.Join(COMMA + EMPTY, _info);
+                List<Point> info = GetFixedInfo();
+                return string.Join(COMMA + EMPTY, info);
             }
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        public List<Point> GetFixedInfo()
+        {
+            List<Point> info = new List<Point>();
+            info.Add(PointFunction.Translate(_info[0], _drawCanvasSize, _nowCanvasSize));
+            info.Add(PointFunction.Translate(_info[1], _drawCanvasSize, _nowCanvasSize));
+            return info;
+
         }
 
         /// <summary>
@@ -35,20 +50,64 @@ namespace Unity
         /// </summary>
         /// <param name="point"></param>
         /// <returns></returns>
-        public virtual bool IsPointIn(Point2 point)
+        public virtual bool IsPointIn(Point point)
         {
-            var firstDistance = Point2.GetDistance(point, GetFirst());
-            var secondDistance = Point2.GetDistance(point, GetSecond());
-            var shapeDistance = Point2.GetDistance(GetFirst(), GetSecond());
-            var (x1, y1) = firstDistance.GetTuple();
-            var (x2, y2) = secondDistance.GetTuple();
-            var (x3, y3) = shapeDistance.GetTuple();
-            return x1 + x2 <= x3 && y1 + y2 <= y3;
+            Point firstDistance = GetFirstDistance(point);
+            Point secondDistance = GetSecondDistance(point);
+            Point shapeDistance = GetShapeDistance();
+            return firstDistance.X + secondDistance.X <= shapeDistance.X && firstDistance.Y + secondDistance.Y <= shapeDistance.Y;
         }
 
-        public Shape(Point2 start, Point2 end)
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
+        private Point GetShapeDistance()
+        {
+            return PointFunction.GetDistance(GetFirst(), GetSecond());
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        private Point GetSecondDistance(Point point)
+        {
+            return PointFunction.GetDistance(point, GetFixedInfo()[1]);
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        private Point GetFirstDistance(Point point)
+        {
+            return PointFunction.GetDistance(point, GetFixedInfo()[0]);
+        }
+
+        public Shape(Point start, Point end, Point canvas)
         {
             SetInfo(start, end);
+            _drawCanvasSize = canvas;
+            _nowCanvasSize = canvas;
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        public void SetNowCanvasSize(Point canvas)
+        {
+            _nowCanvasSize = canvas;
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        public void SetDrawCanvasSize(Point canvas)
+        {
+            _drawCanvasSize = canvas;
         }
 
         /// <summary>
@@ -57,7 +116,7 @@ namespace Unity
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        private Shape SetInfo(Point2 start, Point2 end)
+        private Shape SetInfo(Point start, Point end)
         {
             _info.Add(start);
             _info.Add(end);
@@ -68,7 +127,7 @@ namespace Unity
         /// getter
         /// </summary>
         /// <returns></returns>
-        public virtual Point2 GetFirst()
+        public virtual Point GetFirst()
         {
             return _info[0];
         }
@@ -77,35 +136,20 @@ namespace Unity
         /// move
         /// </summary>
         /// <param name="delta"></param>
-        public virtual void Move(Point2 delta)
+        public virtual void Move(Point delta)
         {
-            for (int i = 0; i < _info.Count; i++)
-            {
-                _info[i] = Point2.Add(_info[i], delta);
-            }
+            _info[0] = PointFunction.Add(GetFixedInfo()[0], delta);
+            _info[1] = PointFunction.Add(GetFixedInfo()[1], delta);
+            _drawCanvasSize = _nowCanvasSize;
         }
 
         /// <summary>
         /// getter
         /// </summary>
         /// <returns></returns>
-        public virtual Point2 GetSecond()
+        public virtual Point GetSecond()
         {
             return _info[1];
-        }
-
-        /// <summary>
-        /// get info but string
-        /// </summary>
-        /// <returns></returns>
-        public virtual string GetInfoString()
-        {
-            string result = "";
-            foreach (var i in _info)
-            {
-                result += i.ToString();
-            }
-            return result;
         }
 
         /// <summary>
@@ -118,7 +162,7 @@ namespace Unity
         /// set
         /// </summary>
         /// <param name="point"></param>
-        public void SetFirst(Point2 point)
+        public void SetFirst(Point point)
         {
             _info[0] = point;
         }
@@ -127,29 +171,45 @@ namespace Unity
         /// set
         /// </summary>
         /// <param name="point"></param>
-        public void SetSecond(Point2 point)
+        public void SetSecond(Point point)
         {
             _info[1] = point;
         }
 
         /// <summary>
-        /// scale
+        /// a
         /// </summary>
-        /// <param name="first"></param>
-        /// <param name="second"></param>
-        internal void SetPosition(Point2 first, Point2 second)
+        public virtual void Scale(Point scalePoint, Point delta)
         {
-            SetFirst(first);
-            SetSecond(second);
+            var info = GetFixedInfo();
+            Move(new Point(0, 0));
+            ScaleX(ref scalePoint, ref delta, info);
+            if (info[0].Y.Equals(scalePoint.Y))
+            {
+                _info[0] = new Point(_info[0].X, scalePoint.Y + delta.Y);
+            }
+            else if (info[1].Y.Equals(scalePoint.Y))
+            {
+                _info[1] = new Point(_info[1].X, scalePoint.Y + delta.Y);
+            }
         }
 
         /// <summary>
-        /// scale
+        /// a
         /// </summary>
-        /// <returns></returns>
-        internal Tuple<Point2, Point2> GetLocal()
+        /// <param name="scalePoint"></param>
+        /// <param name="delta"></param>
+        /// <param name="info"></param>
+        private void ScaleX(ref Point scalePoint, ref Point delta, List<Point> info)
         {
-            return new Tuple<Point2, Point2>(GetFirst(), GetSecond());
+            if (info[0].X.Equals(scalePoint.X))
+            {
+                _info[0] = new Point(scalePoint.X + delta.X, _info[0].Y);
+            }
+            else if (info[1].X.Equals(scalePoint.X))
+            {
+                _info[1] = new Point(scalePoint.X + delta.X, _info[1].Y);
+            }
         }
     }
 }

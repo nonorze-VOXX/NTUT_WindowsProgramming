@@ -26,7 +26,7 @@ namespace Unity.Tests
         [TestMethod()]
         public void DrawEllipseTest()
         {
-            windowFormsGraphicsAdaptor.DrawEllipse(new Point2(0, 0), new Point2(0, 0));
+            windowFormsGraphicsAdaptor.DrawEllipse(new Point(0, 0), new Point(0, 0));
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Unity.Tests
         [TestMethod()]
         public void DrawEllipseByCenterAndSizeTest()
         {
-            windowFormsGraphicsAdaptor.DrawEllipseByCenterAndSize(new Point2(1, 1), new Point2(1, 1));
+            windowFormsGraphicsAdaptor.DrawEllipseByCenterAndSize(new Point(1, 1), new Point(1, 1));
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Unity.Tests
         [TestMethod()]
         public void DrawLineTest()
         {
-            windowFormsGraphicsAdaptor.DrawLine(new Point2(0, 0), new Point2(0, 0));
+            windowFormsGraphicsAdaptor.DrawLine(new Point(0, 0), new Point(0, 0));
         }
 
         /// <summary>
@@ -53,8 +53,8 @@ namespace Unity.Tests
         [TestMethod()]
         public void DrawRectangleTest()
         {
-            windowFormsGraphicsAdaptor.DrawRectangle(new Point2(0, 0), new Point2(0, 0));
-            windowFormsGraphicsAdaptor.DrawRectangle(new Point2(0, 0), new Point2(0, 0), Pens.Red);
+            windowFormsGraphicsAdaptor.DrawRectangle(new Point(0, 0), new Point(0, 0));
+            windowFormsGraphicsAdaptor.DrawRectangle(new Point(0, 0), new Point(0, 0), Pens.Red);
         }
     }
 }
