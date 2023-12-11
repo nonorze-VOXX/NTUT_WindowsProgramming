@@ -29,10 +29,10 @@ namespace Unity
 
         internal static Point Translate(Point point, Point from, Point to)
         {
-            float x1 = (float)point.X / (float)from.X;
-            float x2 = x1 * (float)to.X;
-            float y1 = (float)point.Y / (float)from.Y;
-            float y2 = y1 * (float)to.Y;
+            float x1 = (float)to.X / (float)from.X;
+            float x2 = (float)point.X * x1;
+            float y1 = (float)to.Y / (float)from.Y;
+            float y2 = (float)point.Y * y1;
             return new Point((int)x2, (int)y2);
         }
 
@@ -137,7 +137,7 @@ namespace Unity
                 if (EqualsFirst(first, scalePoint))
                 {
                     first = AddX(first, delta);
-                    scalePoint = AddX(scalePoint, delta);
+                    scalePoint.X = first.X;
                 }
             }
             else
@@ -145,7 +145,7 @@ namespace Unity
                 if (EqualsFirst(second, scalePoint))
                 {
                     second = AddX(second, delta);
-                    scalePoint = AddX(scalePoint, delta);
+                    scalePoint.X = second.X;
                 }
             }
             return new Tuple<Point, Point, Point>(first, second, scalePoint);
@@ -188,7 +188,7 @@ namespace Unity
                 if (EqualsY(first, scalePoint))
                 {
                     first = AddY(first, delta);
-                    scalePoint = AddY(scalePoint, delta);
+                    scalePoint.Y = first.Y;
                 }
             }
             else
@@ -196,7 +196,7 @@ namespace Unity
                 if (EqualsY(second, scalePoint))
                 {
                     second = AddY(second, delta);
-                    scalePoint = AddY(scalePoint, delta);
+                    scalePoint.Y = second.Y;
                 }
             }
             return new Tuple<Point, Point, Point>(first, second, scalePoint);

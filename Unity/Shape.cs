@@ -49,8 +49,8 @@ namespace Unity
         /// <returns></returns>
         public virtual bool IsPointIn(Point point)
         {
-            var firstDistance = PointFunction.GetDistance(point, GetFirst());
-            var secondDistance = PointFunction.GetDistance(point, GetSecond());
+            var firstDistance = PointFunction.GetDistance(point, GetFixedInfo()[0]);
+            var secondDistance = PointFunction.GetDistance(point, GetFixedInfo()[1]);
             var shapeDistance = PointFunction.GetDistance(GetFirst(), GetSecond());
             var (x1, y1) = (firstDistance.X, firstDistance.Y);
             var (x2, y2) = (secondDistance.X, secondDistance.Y);
@@ -98,10 +98,9 @@ namespace Unity
         /// <param name="delta"></param>
         public virtual void Move(Point delta)
         {
-            for (int i = 0; i < _info.Count; i++)
-            {
-                _info[i] = PointFunction.Add(_info[i], delta);
-            }
+            _info[0] = PointFunction.Add(GetFixedInfo()[0], delta);
+            _info[1] = PointFunction.Add(GetFixedInfo()[1], delta);
+            _drawCanvasSize = _nowCanvasSize;
         }
 
         /// <summary>
@@ -154,21 +153,34 @@ namespace Unity
         /// <summary>
         /// scale
         /// </summary>
-        /// <param name="first"></param>
-        /// <param name="second"></param>
-        internal void SetPosition(Point first, Point second)
-        {
-            SetFirst(first);
-            SetSecond(second);
-        }
-
-        /// <summary>
-        /// scale
-        /// </summary>
         /// <returns></returns>
         internal Tuple<Point, Point> GetLocal()
         {
             return new Tuple<Point, Point>(GetFirst(), GetSecond());
+        }
+
+        internal void Scale(Point scalePoint, Point delta)
+        {
+            var info = GetFixedInfo();
+            Move(new Point(0, 0));
+            if (info[0].X.Equals(scalePoint.X))
+            {
+                _info[0] = new Point(scalePoint.X + delta.X, _info[0].Y);
+            }
+            else
+            if (info[1].X.Equals(scalePoint.X))
+            {
+                _info[1] = new Point(scalePoint.X + delta.X, _info[1].Y);
+            }
+            if (info[0].Y.Equals(scalePoint.Y))
+            {
+                _info[0] = new Point(_info[0].X, scalePoint.Y + delta.Y);
+            }
+            else
+            if (info[1].Y.Equals(scalePoint.Y))
+            {
+                _info[1] = new Point(_info[1].X, scalePoint.Y + delta.Y);
+            }
         }
     }
 }
