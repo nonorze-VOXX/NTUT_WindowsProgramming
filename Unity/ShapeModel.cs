@@ -187,6 +187,7 @@ namespace Unity
             {
                 _commandManager.Delete(rowIndex);
                 _shapeList.RemoveAt(rowIndex);
+                _state.Reset();
                 NotifyModelChanged();
             }
         }
