@@ -53,7 +53,7 @@ namespace Unity
         /// </summary>
         public virtual bool IsScale()
         {
-            return _state.IsScale();
+            return _state.IsScale(_shapeList);
         }
 
         internal void Resize(Point point)
@@ -77,7 +77,7 @@ namespace Unity
             {
                 shape.Draw(graphics);
             }
-            _state.Draw(graphics);
+            _state.Draw(graphics, _shapeList);
         }
         #endregion
 
@@ -146,7 +146,7 @@ namespace Unity
         /// <param name="point"></param>
         public virtual void MouseMove(Point point)
         {
-            _state.MouseMove(point, _isPressed);
+            _state.MouseMove(point, _isPressed, _shapeList);
             NotifyModelChanged();
         }
         #endregion
@@ -196,6 +196,7 @@ namespace Unity
         internal void Undo()
         {
             _commandManager.Undo(_shapeList);
+            _state.Reset();
             NotifyModelChanged();
         }
 

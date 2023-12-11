@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Drawing;
 using Unity.Command;
 
 namespace Unity.ShapeModelState
@@ -20,7 +21,7 @@ namespace Unity.ShapeModelState
         /// draw
         /// </summary>
         /// <param name="graphics"></param>
-        public void Draw(IGraphics graphics)
+        public void Draw(IGraphics graphics, BindingList<Shape> shapes)
         {
             _hint.Draw(graphics);
         }
@@ -41,17 +42,16 @@ namespace Unity.ShapeModelState
         /// set
         /// </summary>
         /// <returns></returns>
-        public bool IsScale()
+        public bool IsScale(BindingList<Shape> shapes)
         {
             return false;
-
         }
 
         /// <summary>
         /// move
         /// </summary>
         /// <param name="point"></param>
-        public void MouseMove(Point point, bool pressed)
+        public void MouseMove(Point point, bool pressed, BindingList<Shape> shapes)
         {
             if (pressed)
             {
@@ -68,9 +68,13 @@ namespace Unity.ShapeModelState
         {
             _hint.SetSecond(point);
             shapeList.Add(_hint);
-            commandManager.AddShape(add);
+            commandManager.AddShape(add, point);
 
             _hint = new Line(new Point(0, 0), new Point(0, 0), new Point(16000, 9000));
+        }
+
+        public void Reset()
+        {
         }
     }
 }

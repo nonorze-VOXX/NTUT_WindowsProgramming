@@ -23,9 +23,17 @@ namespace Unity.Command
             shapes.Add(ShapeFactory.CreateShape(shapeType, start, end, nowCanvas));
         }
 
+        internal void SetEnd(Point point)
+        {
+            end = point;
+        }
 
         public void Unexcute(BindingList<Shape> shapes)
         {
+        }
+        public string to_string()
+        {
+            return "add";
         }
     }
 }

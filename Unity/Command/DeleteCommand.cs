@@ -21,5 +21,9 @@ namespace Unity.Command
         public void Unexcute(BindingList<Shape> shapes)
         {
         }
+        public string to_string()
+        {
+            return "testl";
+        }
     }
 }

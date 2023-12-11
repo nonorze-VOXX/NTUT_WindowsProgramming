@@ -70,6 +70,10 @@ namespace Unity
             _nowCanvasSize = canvas;
         }
 
+        public void SetDrawCanvasSize(Point canvas)
+        {
+            _drawCanvasSize = canvas;
+        }
         /// <summary>
         /// set two point at once
         /// </summary>

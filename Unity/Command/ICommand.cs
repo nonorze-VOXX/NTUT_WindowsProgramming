@@ -6,5 +6,6 @@ namespace Unity.Command
     {
         void Excute(BindingList<Shape> shapes);
         void Unexcute(BindingList<Shape> shapes);
+        string to_string();
     }
 }

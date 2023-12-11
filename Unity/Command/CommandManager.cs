@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using System.ComponentModel;
 using System.Drawing;
@@ -13,6 +14,7 @@ namespace Unity.Command
         {
             var add = new AddCommand(shapeType, start, end, nowCanvas);
             undoStack.Push(add);
+            redoStack.Clear();
         }
         public void AddShape(AddCommand add)
         {
@@ -37,6 +39,19 @@ namespace Unity.Command
 
             undoStack.Push(moveCommand);
             redoStack.Clear();
+
+            Console.WriteLine("MOve commadn");
+            var reverseStack = new Stack<ICommand>();
+            foreach (var command in undoStack)
+            {
+                reverseStack.Push(command);
+            }
+            foreach (var command in reverseStack)
+            {
+                Console.WriteLine(command.to_string());
+            }
+            Console.WriteLine();
+            Console.WriteLine();
         }
         public void Undo(BindingList<Shape> shapes)
         {
@@ -53,8 +68,11 @@ namespace Unity.Command
             }
             foreach (var command in reverseStack)
             {
+                Console.WriteLine(command.to_string());
                 command.Excute(shapes);
             }
+            Console.WriteLine();
+            Console.WriteLine();
         }
         public void Redo(BindingList<Shape> shapes)
         {

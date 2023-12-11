@@ -34,12 +34,17 @@ namespace Unity.Command
         public void Excute(BindingList<Shape> shapes)
         {
             shapes[v].SetNowCanvasSize(nowCanvas);
+            shapes[v].SetDrawCanvasSize(nowCanvas);
             shapes[v].SetFirst(to[0]);
             shapes[v].SetSecond(to[1]);
         }
 
         public void Unexcute(BindingList<Shape> shapes)
         {
+        }
+        public string to_string()
+        {
+            return "move " + v.ToString();
         }
     }
 }

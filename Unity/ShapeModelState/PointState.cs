@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using Unity.Command;
@@ -7,7 +8,7 @@ namespace Unity.ShapeModelState
 {
     public class PointState : IState
     {
-        Shape _choosingShape = null;
+        int _choosingIndex = -1;
         public const int EIGHT_INTEGER = 8;
         public const int TWO_INTEGER = 2;
         Point _size = new Point(EIGHT_INTEGER, EIGHT_INTEGER);
@@ -22,12 +23,12 @@ namespace Unity.ShapeModelState
         /// <param name="shapeList"></param>
         public void DeletePress(System.ComponentModel.BindingList<Shape> shapeList, Command.CommandManager commandManager)
         {
-            if (_choosingShape != null)
+            if (_choosingIndex != -1)
             {
-                commandManager.Delete(shapeList.IndexOf(_choosingShape));
-                shapeList.Remove(_choosingShape);
+                commandManager.Delete(_choosingIndex);
+                shapeList.RemoveAt(_choosingIndex);
                 _scalePoint = new Point(-1, -1);
-                _choosingShape = null;
+                _choosingIndex = -1;
             }
         }
 
@@ -35,11 +36,11 @@ namespace Unity.ShapeModelState
         /// draw
         /// </summary>
         /// <param name="graphics"></param>
-        public void Draw(IGraphics graphics)
+        public void Draw(IGraphics graphics, BindingList<Shape> shapes)
         {
-            if (_choosingShape != null)
+            if (_choosingIndex != -1)
             {
-                List<Point> points = _choosingShape.GetFixedInfo();
+                List<Point> points = shapes[_choosingIndex].GetFixedInfo();
                 var first = points[0];
                 var second = points[1];
                 List<Point> list = GetEightPoint(points);
@@ -84,10 +85,11 @@ namespace Unity.ShapeModelState
         public void MouseDown(ShapeType shapeType, Point point, System.ComponentModel.BindingList<Shape> shapeList, Point nowCanvas)
         {
             _pastPoint = point;
-            if (_choosingShape != null)
+            if (_choosingIndex != -1)
             {
-                moveCommand = new MoveCommand(shapeList.IndexOf(_choosingShape), point, _choosingShape.GetFixedInfo(), nowCanvas);
-                _scalePoint = IsWhichCircle();
+                Console.WriteLine("choose " + _choosingIndex);
+                moveCommand = new MoveCommand(_choosingIndex, point, shapeList[_choosingIndex].GetFixedInfo(), nowCanvas);
+                _scalePoint = IsWhichCircle(shapeList);
                 if (!_scalePoint.Equals(new Point(-1, -1)))
                 {
                     return;
@@ -101,13 +103,13 @@ namespace Unity.ShapeModelState
         /// cir
         /// </summary>
         /// <returns></returns>
-        public Point IsWhichCircle()
+        public Point IsWhichCircle(BindingList<Shape> shapes)
         {
-            if (_choosingShape == null)
+            if (_choosingIndex == -1)
             {
                 return new Point(-1, -1);
             }
-            foreach (var circle in GetEightPoint(_choosingShape.GetFixedInfo()))
+            foreach (var circle in GetEightPoint(shapes[_choosingIndex].GetFixedInfo()))
             {
                 var distance = PointFunction.GetDistanceFloat(circle, _pastPoint);
                 var sum = PointFunction.GetSum(_size);
@@ -122,7 +124,7 @@ namespace Unity.ShapeModelState
         /// <summary>
         /// set
         /// </summary>
-        public bool IsScale()
+        public bool IsScale(BindingList<Shape> shapes)
         {
             if (_scalePoint != new Point(-1, -1))
             {
@@ -130,7 +132,7 @@ namespace Unity.ShapeModelState
             }
             else
             {
-                return IsWhichCircle() != new Point(-1, -1);
+                return IsWhichCircle(shapes) != new Point(-1, -1);
             }
 
         }
@@ -146,11 +148,11 @@ namespace Unity.ShapeModelState
             {
                 if (shape.IsPointIn(point))
                 {
-                    _choosingShape = shape;
+                    _choosingIndex = shapeList.IndexOf(shape);
                     return;
                 }
             }
-            _choosingShape = null;
+            _choosingIndex = -1;
         }
 
         /// <summary>
@@ -168,20 +170,20 @@ namespace Unity.ShapeModelState
         /// move
         /// </summary>
         /// <param name="point"></param>
-        public void MouseMove(Point point, bool pressed)
+        public void MouseMove(Point point, bool pressed, BindingList<Shape> shapes)
         {
-            if (pressed && _choosingShape != null)
+            if (pressed && _choosingIndex != -1)
             {
                 var delta = PointFunction.GetSubstract(point, _pastPoint);
                 _pastPoint = point;
                 if (_scalePoint != new Point(-1, -1))
                 {
-                    _choosingShape.Scale(_scalePoint, delta);
+                    shapes[_choosingIndex].Scale(_scalePoint, delta);
                     _scalePoint = PointFunction.Add(_scalePoint, delta);
                 }
                 else
                 {
-                    _choosingShape.Move(delta);
+                    shapes[_choosingIndex].Move(delta);
                 }
             }
             _pastPoint = point;
@@ -195,11 +197,16 @@ namespace Unity.ShapeModelState
         /// <param name="shapeList"></param>
         public void MouseUp(Point point, System.ComponentModel.BindingList<Shape> shapeList, Command.CommandManager commandManager)
         {
-            if (_choosingShape != null && moveCommand != null)
+            if (_choosingIndex != -1 && moveCommand != null)
             {
-                commandManager.Move(moveCommand, _choosingShape.GetFixedInfo());
+                commandManager.Move(moveCommand, shapeList[_choosingIndex].GetFixedInfo());
             }
             _scalePoint = new Point(-1, -1);
+        }
+
+        public void Reset()
+        {
+            _choosingIndex = -1;
         }
     }
 }

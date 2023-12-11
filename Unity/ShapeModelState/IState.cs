@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Drawing;
 
 namespace Unity.ShapeModelState
 {
@@ -15,7 +16,7 @@ namespace Unity.ShapeModelState
         /// move
         /// </summary>
         /// <param name="point"></param>
-        void MouseMove(Point point, bool isPress);
+        void MouseMove(Point point, bool pressed, System.ComponentModel.BindingList<Shape> shapes);
         /// <summary>
         /// up
         /// </summary>
@@ -26,7 +27,7 @@ namespace Unity.ShapeModelState
         /// draw
         /// </summary>
         /// <param name="graphics"></param>
-        void Draw(IGraphics graphics);
+        void Draw(IGraphics graphics, BindingList<Shape> shapes);
         /// <summary>
         /// delete
         /// </summary>
@@ -36,6 +37,7 @@ namespace Unity.ShapeModelState
         /// tes
         /// </summary>
         /// <returns></returns>
-        bool IsScale();
+        bool IsScale(BindingList<Shape> shapes);
+        void Reset();
     }
 }

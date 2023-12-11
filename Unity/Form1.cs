@@ -109,6 +109,7 @@ namespace Unity
         public void ReceiveBell()
         {
             Invalidate(true);
+            ResizeWindow(null, null);
         }
         #endregion
 
