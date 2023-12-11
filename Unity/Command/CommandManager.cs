@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace Unity
+namespace Unity.Command
 {
     class CommandManager
     {
+        Stack<ICommand> undoStack = new Stack<ICommand>();
+        Stack<ICommand> redoStack = new Stack<ICommand>();
+
     }
 }

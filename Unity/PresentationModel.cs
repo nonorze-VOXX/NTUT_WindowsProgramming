@@ -22,6 +22,7 @@ namespace Unity
             {
                 false, false, false,false
             };
+            _shapeModel.SwitchStatePoint();
         }
 
         /// <summary>
@@ -123,7 +124,7 @@ namespace Unity
         public void HandleCanvasMouseUp(Canvas canvas, Point point, ToolStripItemCollection items)
         {
             _shapeModel.MouseUp(point);
-            HandleToolStripPointButtonClick(items, canvas)(null, null);
+            HandleToolStripPointButtonClick(items, canvas);
         }
 
         /// <summary>
@@ -197,14 +198,11 @@ namespace Unity
         /// <param name="toolStripItems"></param>
         /// <param name="canvas"></param>
         /// <returns></returns>
-        public ButtonFunction HandleToolStripPointButtonClick(ToolStripItemCollection toolStripItems, Canvas canvas)
+        public void HandleToolStripPointButtonClick(ToolStripItemCollection toolStripItems, Canvas canvas)
         {
-            return (object sender, EventArgs e) =>
-            {
-                UpdateShapeButtonActive(toolStripItems, 1 + 1 + 1, true);
-                canvas.Cursor = System.Windows.Forms.Cursors.Default;
-                _shapeModel.SwitchStatePoint();
-            };
+            UpdateShapeButtonActive(toolStripItems, 1 + 1 + 1, true);
+            canvas.Cursor = System.Windows.Forms.Cursors.Default;
+            _shapeModel.SwitchStatePoint();
         }
 
         /// <summary>

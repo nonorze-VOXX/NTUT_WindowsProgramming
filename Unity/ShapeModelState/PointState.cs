@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 
@@ -11,8 +10,8 @@ namespace Unity.ShapeModelState
         public const int EIGHT_INTEGER = 8;
         public const int TWO_INTEGER = 2;
         Point _size = new Point(EIGHT_INTEGER, EIGHT_INTEGER);
-        Point _pastPoint = new Point(0, 0);
-        Point _scalePoint;
+        Point _pastPoint = new Point(-1, -1);
+        Point _scalePoint = new Point(-1, -1);
 
         /// <summary>
         /// delete

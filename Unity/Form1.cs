@@ -27,6 +27,7 @@ namespace Unity
             this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 
+            toolStripButton4_Click(null, null);
             this.Resize += ResizeWindow;
             ResizeWindow(null, null);
         }
