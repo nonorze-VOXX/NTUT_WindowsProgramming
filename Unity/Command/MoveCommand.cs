@@ -26,7 +26,7 @@ namespace Unity.Command
 
 
 
-        internal void SetTarget(List<Point> points)
+        public void SetTarget(List<Point> points)
         {
             to = points;
         }

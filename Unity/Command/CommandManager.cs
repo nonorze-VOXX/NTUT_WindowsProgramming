@@ -23,13 +23,13 @@ namespace Unity.Command
             redoStack.Clear();
         }
 
-        internal void Delete(int v)
+        public void Delete(int v)
         {
             undoStack.Push(new DeleteCommand(v));
             redoStack.Clear();
         }
 
-        internal void Move(MoveCommand moveCommand, List<Point> points)
+        public void Move(MoveCommand moveCommand, List<Point> points)
         {
             var past = moveCommand.GetPastPoints();
             if (past[0].Equals(points[0]) && past[1].Equals(points[1]))

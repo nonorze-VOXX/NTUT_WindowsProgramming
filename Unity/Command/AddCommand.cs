@@ -23,7 +23,7 @@ namespace Unity.Command
             shapes.Add(ShapeFactory.CreateShape(shapeType, start, end, nowCanvas));
         }
 
-        internal void SetEnd(Point point)
+        public void SetEnd(Point point)
         {
             end = point;
         }
