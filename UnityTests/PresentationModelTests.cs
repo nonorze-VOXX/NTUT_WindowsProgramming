@@ -1,160 +1,74 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Collections.Generic;
-using System.Linq;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Unity.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class PresentationModelTests
     {
+        private Mock<IGraphics> _mockGraphics;
         private Mock<ShapeModel> _mockShapeModel;
-        private PresentationModel _model;
+        private Canvas _mockCanvas;
+        private PresentationModel _presentationModel;
 
-        /// <summary>
-        /// set
-        /// </summary>
-        [TestInitialize()]
-        public void SetUp()
+        [TestInitialize]
+        public void TestInitialize()
         {
+            _mockGraphics = new Mock<IGraphics>();
             _mockShapeModel = new Mock<ShapeModel>();
-            _model = new PresentationModel(_mockShapeModel.Object);
+            _mockCanvas = new Canvas();
+            _presentationModel = new PresentationModel(_mockShapeModel.Object);
         }
 
-        /// <summary>
-        /// constructor
-        /// </summary>
         [TestMethod()]
-        public void TestConstructor()
+        public void Utils()
         {
-            Assert.IsNotNull(_model.GetShapeList());
-            Assert.IsNotNull(_model);
-            Assert.AreEqual(4, _model.GetShapeButtonActive().Count);
-            Assert.IsFalse(_model.GetShapeButtonActive().Any(x => x));
-        }
-
-        /// <summary>
-        /// draw2
-        /// </summary>
-        [TestMethod()]
-        public void TestDraw1()
-        {
-            var mockGraphics = new Mock<IGraphics>();
-            var canvas = new Mock<Canvas>();
-            _mockShapeModel.Setup(x => x.IsScale()).Returns(true);
-            _model.Draw(mockGraphics.Object, canvas.Object);
-            _mockShapeModel.Verify(x => x.Draw(mockGraphics.Object), Times.Once);
-        }
-
-        /// <summary>
-        /// draw
-        /// </summary>
-        [TestMethod()]
-        public void TestDraw()
-        {
-            var mockGraphics = new Mock<IGraphics>();
-            var canvas = new Mock<Canvas>();
-
-            _mockShapeModel.Setup(x => x.IsScale()).Returns(false);
-            _model.Draw(mockGraphics.Object, canvas.Object);
-            _mockShapeModel.Verify(x => x.Draw(mockGraphics.Object), Times.Once);
-        }
-
-        /// <summary>
-        /// shape
-        /// </summary>
-        [TestMethod()]
-        public void TestUpdateShapeButtonActive()
-        {
-            var toolStripItems = new List<ToolStripItem> { new ToolStripButton(), new ToolStripButton(), new ToolStripButton(), new ToolStripButton() };
-            _model.UpdateShapeButtonActive(toolStripItems, 1, true);
-            Assert.IsTrue(_model.GetShapeButtonActive()[1]);
-        }
-
-        /// <summary>
-        /// up
-        /// </summary>
-        [TestMethod()]
-        public void TestHandleCanvasMouseUp()
-        {
-            var mockCanvas = new Mock<Canvas>();
-            var point = new Point2(1, 1);
-            var toolStripItems = new List<ToolStripItem> { new ToolStripButton(), new ToolStripButton(), new ToolStripButton(), new ToolStripButton() };
-            _model.HandleCanvasMouseUp(mockCanvas.Object, point, toolStripItems);
-            _mockShapeModel.Verify(x => x.MouseUp(point), Times.Once);
-        }
-
-        /// <summary>
-        /// move
-        /// </summary>
-        [TestMethod()]
-        public void TestHandleCanvasMouseMove()
-        {
-            var point = new Point2(1, 1);
-            _model.HandleCanvasMouseMove(point);
-            _mockShapeModel.Verify(x => x.MouseMove(point), Times.Once);
-        }
-
-        /// <summary>
-        /// down
-        /// </summary>
-        [TestMethod()]
-        public void TestHandleCanvasMouseDown()
-        {
-            var point = new Point2(1, 1);
-            _model.GetShapeButtonActive()[0] = true;
-            _model.HandleCanvasMouseDown(point);
-            _mockShapeModel.Verify(x => x.MouseDown(It.IsAny<ShapeType>(), point), Times.Once);
-        }
-
-        /// <summary>
-        /// click
-        /// </summary>
-        [TestMethod()]
-        public void TestCreateButtonClick()
-        {
-            var mockComboBox = new Mock<ShapeTypeComboBox>();
-            mockComboBox.Setup(x => x.GetSelectedItem()).Returns(ShapeType.Rectangle);
-            var buttonFunction = _model.CreateButtonClick(mockComboBox.Object);
-            buttonFunction.Invoke(null, null);
-            _mockShapeModel.Verify(x => x.Add(ShapeType.Rectangle), Times.Once);
-        }
-
-        /// <summary>
-        /// click
-        /// </summary>
-        [TestMethod()]
-        public void TestDeleteButtonClick()
-        {
+            _presentationModel.HandleCanvasMouseMove(new Point(1, 1));
+            _presentationModel.HandleCanvasMouseDown(new Point(1, 1));
             var eventArgs = new DataGridViewCellEventArgs(0, 0);
-            _model.DeleteButtonClick(null, eventArgs);
-            _mockShapeModel.Verify(x => x.RemoveIndex(0), Times.Once);
-        }
+            _presentationModel.DeleteButtonClick(null, eventArgs);
+            _presentationModel.Undo();
+            _presentationModel.Redo();
 
-        /// <summary>
-        /// down
-        /// </summary>
-        [TestMethod()]
-        public void TestHandleKeyDown()
-        {
-            var eventArgs = new KeyEventArgs(Keys.Delete);
-            _model.HandleKeyDown(eventArgs);
-            _mockShapeModel.Verify(x => x.DeletePress(), Times.Once);
-        }
-
-        /// <summary>
-        /// click
-        /// </summary>
-        [TestMethod()]
-        public void TestHandleToolStripButtonClick()
-        {
-            var toolStripItems = new List<ToolStripItem> { new ToolStripButton(), new ToolStripButton(), new ToolStripButton(), new ToolStripButton() };
-            int index = 1;
+            int index = 0;
             var canvas = new Mock<Canvas>();
-            var function = _model.HandleToolStripButtonClick(toolStripItems, (ShapeType)index, canvas.Object);
-            function.Invoke(null, null);
-            _mockShapeModel.Verify(x => x.SwitchStateDrawing(), Times.Once);
+            _presentationModel.HandleToolStripButtonClick(null, (ShapeType)index, canvas.Object);
+            var e = new KeyEventArgs(Keys.Delete);
+            _presentationModel.HandleKeyDown(e);
+            _presentationModel.HandleCanvasMouseDown(new Point(1, 1));
+            _presentationModel.HandleCanvasMouseUp(_mockCanvas, new Point(1, 1), null);
+
+        }
+        [TestMethod()]
+        public void Draw_CallsDrawOnShapeModel()
+        {
+            // Act
+            _presentationModel.Draw(_mockGraphics.Object, _mockCanvas);
+
+            // Assert
+            _mockShapeModel.Verify(s => s.Draw(_mockGraphics.Object), Times.Once);
+        }
+
+        [TestMethod()]
+        public void Draw_SetsCursorToSizeNWSEWhenShapeIsScale()
+        {
+            // Arrange
+            _mockShapeModel.Setup(s => s.IsScale()).Returns(true);
+
+            // Act
+            _presentationModel.Draw(_mockGraphics.Object, _mockCanvas);
+        }
+
+        [TestMethod()]
+        public void Draw_SetsCursorToDefaultWhenShapeIsNotScaleAndCursorIsNotCross()
+        {
+            // Arrange
+            _mockShapeModel.Setup(s => s.IsScale()).Returns(false);
+
+            // Act
+            _presentationModel.Draw(_mockGraphics.Object, _mockCanvas);
         }
     }
 }

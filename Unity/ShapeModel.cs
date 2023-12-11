@@ -56,7 +56,7 @@ namespace Unity
             return _state.IsScale(_shapeList);
         }
 
-        internal void Resize(Point point)
+        public void Resize(Point point)
         {
             nowCanvas = point;
             foreach (var shape in _shapeList)
@@ -104,7 +104,7 @@ namespace Unity
         /// <summary>
         /// notify
         /// </summary>
-        void NotifyModelChanged()
+        public void NotifyModelChanged()
         {
             if (_modelChanged != null)
             {
@@ -180,9 +180,12 @@ namespace Unity
         /// <param name="rowIndex"></param>
         public virtual void RemoveIndex(int rowIndex)
         {
-            _commandManager.Delete(rowIndex);
-            _shapeList.RemoveAt(rowIndex);
-            NotifyModelChanged();
+            if (rowIndex < shapeList.Count)
+            {
+                _commandManager.Delete(rowIndex);
+                _shapeList.RemoveAt(rowIndex);
+                NotifyModelChanged();
+            }
         }
 
         /// <summary>
@@ -193,14 +196,14 @@ namespace Unity
             _state.DeletePress(shapeList, _commandManager);
             NotifyModelChanged();
         }
-        internal void Undo()
+        public void Undo()
         {
             _commandManager.Undo(_shapeList);
             _state.Reset();
             NotifyModelChanged();
         }
 
-        internal void Redo()
+        public void Redo()
         {
             _commandManager.Redo(_shapeList);
             NotifyModelChanged();

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 
 namespace Unity
@@ -116,19 +115,6 @@ namespace Unity
             return _info[1];
         }
 
-        /// <summary>
-        /// get info but string
-        /// </summary>
-        /// <returns></returns>
-        public virtual string GetInfoString()
-        {
-            string result = "";
-            foreach (var i in _info)
-            {
-                result += i.ToString();
-            }
-            return result;
-        }
 
         /// <summary>
         /// get shape name string
@@ -154,16 +140,7 @@ namespace Unity
             _info[1] = point;
         }
 
-        /// <summary>
-        /// scale
-        /// </summary>
-        /// <returns></returns>
-        internal Tuple<Point, Point> GetLocal()
-        {
-            return new Tuple<Point, Point>(GetFirst(), GetSecond());
-        }
-
-        internal void Scale(Point scalePoint, Point delta)
+        public virtual void Scale(Point scalePoint, Point delta)
         {
             var info = GetFixedInfo();
             Move(new Point(0, 0));

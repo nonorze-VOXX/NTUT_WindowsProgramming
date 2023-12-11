@@ -4,7 +4,7 @@ using Unity.Command;
 
 namespace Unity.ShapeModelState
 {
-    class DrawingState : IState
+    public class DrawingState : IState
     {
         Shape _hint = new Line(new Point(0, 0), new Point(0, 0), new Point(16000, 9000));
         AddCommand add;
@@ -68,6 +68,7 @@ namespace Unity.ShapeModelState
         {
             _hint.SetSecond(point);
             shapeList.Add(_hint);
+            add = new AddCommand(ShapeType.Line, new Point(point.X, point.Y), new Point(0, 0), new Point(1, 1));
             commandManager.AddShape(add, point);
 
             _hint = new Line(new Point(0, 0), new Point(0, 0), new Point(16000, 9000));

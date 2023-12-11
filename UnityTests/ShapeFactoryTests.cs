@@ -1,35 +1,85 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Drawing;
+using Unity.Command;
 
 namespace Unity.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class ShapeFactoryTests
     {
-        const int CANVAS_MAX = 500;
-        /// <summary>
-        /// test
-        /// </summary>
-        [TestMethod()]
-        public void CreateByRandomTest()
+        private CommandManager _commandManager;
+
+        [TestInitialize]
+        public void TestInitialize()
         {
-            var ellipse = ShapeFactory.CreateByRandom(ShapeType.Ellipse, CANVAS_MAX);
-            Assert.AreEqual(ellipse.shape, "Ellipse");
+            _commandManager = new CommandManager();
         }
 
-        /// <summary>
-        /// rt
-        /// </summary>
         [TestMethod()]
-        public void CreateShapeTest()
+        public void CreateByRandom_ReturnsShape()
         {
-            PointFunction point1 = new Point2(0, 0);
-            PointFunction point2 = new Point2(0, 0);
-            var ellipse = ShapeFactory.CreateShape(ShapeType.Ellipse, point1, point2);
-            Assert.AreEqual(ellipse.GetType().Name, ShapeType.Ellipse.ToString());
-            var line = ShapeFactory.CreateShape(ShapeType.Line, point1, point2);
-            Assert.AreEqual(line.GetType().Name, "Line");
-            var rectangle = ShapeFactory.CreateShape(ShapeType.Rectangle, point1, point2);
-            Assert.AreEqual(rectangle.GetType().Name, "Rectangle");
+            // Arrange
+            var shapeType = ShapeType.Line;
+            var randomMax = 100;
+            var nowCanvas = new Point(0, 0);
+
+            // Act
+            var result = ShapeFactory.CreateByRandom(shapeType, randomMax, nowCanvas, _commandManager);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Line));
+        }
+
+        [TestMethod()]
+        public void CreateShape_ReturnsLineWhenShapeTypeIsLine()
+        {
+            // Arrange
+            var shapeType = ShapeType.Line;
+            var start = new Point(0, 0);
+            var end = new Point(10, 10);
+            var nowCanvas = new Point(0, 0);
+
+            // Act
+            var result = ShapeFactory.CreateShape(shapeType, start, end, nowCanvas);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Line));
+        }
+
+        [TestMethod()]
+        public void CreateShape_ReturnsRectangleWhenShapeTypeIsRectangle()
+        {
+            // Arrange
+            var shapeType = ShapeType.Rectangle;
+            var start = new Point(0, 0);
+            var end = new Point(10, 10);
+            var nowCanvas = new Point(0, 0);
+
+            // Act
+            var result = ShapeFactory.CreateShape(shapeType, start, end, nowCanvas);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Rectangle));
+        }
+
+        [TestMethod()]
+        public void CreateShape_ReturnsEllipseWhenShapeTypeIsEllipse()
+        {
+            // Arrange
+            var shapeType = ShapeType.Ellipse;
+            var start = new Point(0, 0);
+            var end = new Point(10, 10);
+            var nowCanvas = new Point(0, 0);
+
+            // Act
+            var result = ShapeFactory.CreateShape(shapeType, start, end, nowCanvas);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(Ellipse));
         }
     }
 }

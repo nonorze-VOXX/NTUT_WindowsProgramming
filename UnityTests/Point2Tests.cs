@@ -1,139 +1,72 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
+using System.Drawing;
 
 namespace Unity.Tests
 {
     [TestClass()]
-    public class Point2Tests
+    public class PointFunctionTests
     {
-        const int ZERO = 0;
-        const int TEN = 10;
-        const int FIVE = 5;
-        const int TWO = 2;
-        PointFunction point1;
-        PointFunction point2;
-        /// <summary>
-        /// t
-        /// </summary>
-        [TestInitialize()]
-        public void Initialize()
+        [TestMethod()]
+        public void GetSubstract_ReturnsCorrectResult()
         {
-            point1 = new Point2(ZERO, ZERO);
-            point2 = new Point2(ZERO, ZERO);
+            var result = PointFunction.GetSubstract(new Point(10, 10), new Point(5, 5));
+            Assert.AreEqual(new Point(5, 5), result);
         }
 
-        /// <summary>
-        /// t
-        /// </summary>
         [TestMethod()]
-        public void Point2Test()
+        public void Divide_ReturnsCorrectResult()
         {
-            Assert.AreEqual(point1.X, ZERO);
-            Assert.AreEqual(point1.Y, ZERO);
+            var result = PointFunction.Divide(new Point(10, 10), 2);
+            Assert.AreEqual(new Point(5, 5), result);
         }
 
-        /// <summary>
-        /// t
-        /// </summary>
         [TestMethod()]
-        public void ToStringTest()
+        public void GetDistance_ReturnsCorrectResult()
         {
-            string result = "(0,0)";
-            Assert.AreEqual(point1.ToString(), result);
+            var result = PointFunction.GetDistance(new Point(10, 10), new Point(5, 5));
+            Assert.AreEqual(new Point(5, 5), result);
         }
 
-        /// <summary>
-        /// test
-        /// </summary>
         [TestMethod()]
-        public void GetTupleTest()
+        public void GetDistanceFloat_ReturnsCorrectResult()
         {
-            Tuple<float, float> tuple = point1.GetTuple();
-            Assert.AreEqual(tuple.Item1, ZERO);
-            Assert.AreEqual(tuple.Item2, ZERO);
+            var result = PointFunction.GetDistanceFloat(new Point(10, 10), new Point(5, 5));
+            Assert.AreEqual(7.0710678f, result, 0.0000001f);
         }
 
-        /// <summary>
-        /// t
-        /// </summary>
         [TestMethod()]
-        public void GetSubstractTest()
+        public void Add_ReturnsCorrectResult()
         {
-            point1.X = TEN;
-            point1.Y = TEN;
-            point2.X = FIVE;
-            point2.Y = FIVE;
-            PointFunction result = PointFunction.GetSubstract(point1, point2);
-            Assert.AreEqual(result.X, FIVE);
-            Assert.AreEqual(result.Y, FIVE);
+            var result = PointFunction.Add(new Point(10, 10), new Point(5, 5));
+            Assert.AreEqual(new Point(15, 15), result);
         }
 
-        /// <summary>
-        /// test
-        /// </summary>
         [TestMethod()]
-        public void DivideTest()
+        public void AddY_ReturnsCorrectResult()
         {
-            point1.X = TEN;
-            point1.Y = TEN;
-            PointFunction result = PointFunction.Divide(point1, FIVE);
-            Assert.AreEqual(result.X, TWO);
-            Assert.AreEqual(result.Y, TWO);
+            var result = PointFunction.AddY(new Point(10, 10), new Point(5, 5));
+            Assert.AreEqual(new Point(10, 15), result);
         }
 
-        /// <summary>
-        /// tset
-        /// </summary>
         [TestMethod()]
-        public void GetDistanceTest()
+        public void AddX_ReturnsCorrectResult()
         {
-            point1.X = TEN;
-            point1.Y = TEN;
-            point2.X = FIVE;
-            point2.Y = FIVE;
-            PointFunction result = PointFunction.GetDistance(point1, point2);
-            Assert.AreEqual(result.X, FIVE);
-            Assert.AreEqual(result.Y, FIVE);
+            var result = PointFunction.AddX(new Point(10, 10), new Point(5, 5));
+            Assert.AreEqual(new Point(15, 10), result);
         }
 
-        /// <summary>
-        /// t
-        /// </summary>
         [TestMethod()]
-        public void AddTest()
+        public void IsBothNotNegative_ReturnsCorrectResult()
         {
-            point1.X = FIVE;
-            point1.Y = FIVE;
-            point2.X = FIVE;
-            point2.Y = FIVE;
-            PointFunction result = PointFunction.Add(point1, point2);
-            Assert.AreEqual(result.X, TEN);
-            Assert.AreEqual(result.Y, TEN);
+            var result = PointFunction.IsBothNotNegative(new Point(10, 10));
+            Assert.IsTrue(result);
         }
 
-        /// <summary>
-        /// t
-        /// </summary>
         [TestMethod()]
-        public void IsBothPositiveTest()
+        public void IsBothNotNegative_ReturnsFalseWhenNegative()
         {
-            point1.X = FIVE;
-            point1.Y = FIVE;
-            Assert.IsTrue(point1.IsBothNotNegative());
-        }
-
-        /// <summary>
-        /// t
-        /// </summary>
-        [TestMethod()]
-        public void GetDistanceFloatTest()
-        {
-            point1.X = FIVE;
-            point1.Y = FIVE;
-            point2.X = FIVE;
-            point2.Y = FIVE;
-            float result = PointFunction.GetDistanceFloat(point1, point2);
-            Assert.AreEqual(result, 0);
+            var result = PointFunction.IsBothNotNegative(new Point(-10, 10));
+            Assert.IsFalse(result);
         }
     }
 }

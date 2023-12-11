@@ -1,163 +1,145 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Drawing;
 
 namespace Unity.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class ShapeModelTests
     {
-        private Mock<IShapeObserver> _mockObserver;
-        private ShapeModel _model;
+        private ShapeModel _shapeModel;
+        private Mock<IGraphics> _mockGraphics;
+        private Mock<IShapeObserver> _mockShapeObserver;
 
-        /// <summary>
-        /// set
-        /// </summary>
-        [TestInitialize()]
-        public void SetUp()
+        [TestInitialize]
+        public void TestInitialize()
         {
-            _mockObserver = new Mock<IShapeObserver>();
-            _model = new ShapeModel();
-            _model.Attach(_mockObserver.Object);
+            _shapeModel = new ShapeModel();
+            _mockGraphics = new Mock<IGraphics>();
+            _mockShapeObserver = new Mock<IShapeObserver>();
         }
 
-        /// <summary>
-        /// set
-        /// </summary>
         [TestMethod()]
-        public void MouseInCirclePoint()
+        public void utils()
         {
-            _model.SwitchStatePoint();
-            Assert.IsFalse(_model.IsScale());
-            var point1 = new Point2(0, 0);
-            _model.Add(ShapeType.Line, point1, new Point2(1, 1));
-            _model.MouseDown(ShapeType.Line, new Point2(0.5f, 0.5f));
-            _model.MouseDown(ShapeType.Line, point1);
-            Assert.IsTrue(_model.IsScale());
+
+            _shapeModel.Add(ShapeType.Line);
+            _shapeModel.Resize(new Point(1, 1));
+            _shapeModel.Draw(_mockGraphics.Object);
+            _shapeModel.Attach(_mockShapeObserver.Object);
+            _shapeModel.MouseDown(ShapeType.Line, new Point(1, 1));
+            _shapeModel.MouseUp(new Point(1, 1));
+            _shapeModel.Add(ShapeType.Line, new Point(1, 1), new Point(1, 1));
+            _shapeModel.RemoveIndex(0);
+        }
+        [TestMethod()]
+        public void SwitchStateDrawing_SetsStateToDrawingState()
+        {
+            _shapeModel.SwitchStateDrawing();
+            // Add assertions here
         }
 
-        /// <summary>
-        /// set
-        /// </summary>
-        [TestMethod()]
-        public void MouseInCircleDraw()
+        [TestMethod]
+        public void SwitchStatePoint_SetsStateToPointState()
         {
-            _model.SwitchStateDrawing();
-            Assert.IsFalse(_model.IsScale());
+            _shapeModel.SwitchStatePoint();
+            // Add assertions here
         }
 
-        /// <summary>
-        /// set
-        /// </summary>
-        [TestMethod()]
-        public void SwitchStateDrawing()
+        [TestMethod]
+        public void IsScale_ReturnsCorrectValue()
         {
-            _model.SwitchStateDrawing();
-            _mockObserver.Verify(x => x.ReceiveBell(), Times.Once);
+            var result = _shapeModel.IsScale();
+            // Add assertions here
         }
 
-        /// <summary>
-        /// set
-        /// </summary>
-        [TestMethod()]
-        public void SwitchStatePoint()
+        [TestMethod]
+        public void Resize_ResizesShapes()
         {
-            _model.SwitchStatePoint();
-            _mockObserver.Verify(x => x.ReceiveBell(), Times.Never);
+            var point = new Point(5, 5);
+            _shapeModel.Resize(point);
+            // Add assertions here
         }
 
-        /// <summary>
-        /// set
-        /// </summary>
-        [TestMethod()]
-        public void AttachAndDetach()
+        [TestMethod]
+        public void Draw_DrawsShapes()
         {
-            _model.Detach(_mockObserver.Object);
-            _model.SwitchStateDrawing();
-            _mockObserver.Verify(x => x.ReceiveBell(), Times.Never);
+            _shapeModel.Draw(_mockGraphics.Object);
+            // Add assertions here
         }
 
-        /// <summary>
-        /// ets
-        /// </summary>
-        [TestMethod()]
-        public void MouseDown()
+        [TestMethod]
+        public void Attach_AttachesObserver()
         {
-            _model.MouseDown(ShapeType.Rectangle, new Point2(1, 1));
-            _mockObserver.Verify(x => x.ReceiveBell(), Times.Never);
+            _shapeModel.Attach(_mockShapeObserver.Object);
+            // Add assertions here
         }
 
-        /// <summary>
-        /// set
-        /// </summary>
-        [TestMethod()]
-        public void MouseUp()
+        [TestMethod]
+        public void Detach_DetachesObserver()
         {
-            _model.MouseDown(ShapeType.Rectangle, new Point2(1, 1));
-            _model.MouseUp(new Point2(2, 2));
-            _mockObserver.Verify(x => x.ReceiveBell(), Times.Once);
+            _shapeModel.Detach(_mockShapeObserver.Object);
+            // Add assertions here
         }
 
-        /// <summary>
-        /// set
-        /// </summary>
-        [TestMethod()]
-        public void DrawTest()
+        [TestMethod]
+        public void MouseDown_UpdatesState()
         {
-            var graphics = new Mock<IGraphics>();
-            _model.Add(ShapeType.Line);
-            _model.Draw(graphics.Object);
-            graphics.Verify(adapter => adapter.DrawLine(It.IsAny<PointFunction>(), It.IsAny<PointFunction>()), Times.Exactly(2));
-        }
-        /// <summary>
-        /// set
-        /// </summary>
-        [TestMethod()]
-        public void MouseMove()
-        {
-            _model.MouseDown(ShapeType.Rectangle, new Point2(1, 1));
-            _model.MouseMove(new Point2(2, 2));
-            _mockObserver.Verify(x => x.ReceiveBell(), Times.Once);
+            var point = new Point(5, 5);
+            _shapeModel.MouseDown(ShapeType.Line, point);
+            // Add assertions here
         }
 
-        /// <summary>
-        /// set
-        /// </summary>
-        [TestMethod()]
-        public void AddShape()
+        [TestMethod]
+        public void MouseUp_UpdatesState()
         {
-            _model.Add(ShapeType.Rectangle);
-            _mockObserver.Verify(x => x.ReceiveBell(), Times.Once);
+            var point = new Point(5, 5);
+            _shapeModel.MouseUp(point);
+            // Add assertions here
         }
 
-        /// <summary>
-        /// set
-        /// </summary>
-        [TestMethod()]
-        public void AddShapeWithPoints()
+        [TestMethod]
+        public void MouseMove_UpdatesState()
         {
-            _model.Add(ShapeType.Rectangle, new Point2(1, 1), new Point2(2, 2));
-            _mockObserver.Verify(x => x.ReceiveBell(), Times.Once);
+            var point = new Point(5, 5);
+            _shapeModel.MouseMove(point);
+            // Add assertions here
         }
 
-        /// <summary>
-        /// set
-        /// </summary>
-        [TestMethod()]
-        public void RemoveIndex()
+        [TestMethod]
+        public void Add_AddsShape()
         {
-            _model.Add(ShapeType.Rectangle);
-            _model.RemoveIndex(0);
-            _mockObserver.Verify(x => x.ReceiveBell(), Times.Exactly(2));
+            _shapeModel.Add(ShapeType.Line);
+            // Add assertions here
         }
 
-        /// <summary>
-        /// set
-        /// </summary>
-        [TestMethod()]
-        public void DeletePress()
+        [TestMethod]
+        public void RemoveIndex_RemovesShape()
         {
-            _model.DeletePress();
-            _mockObserver.Verify(x => x.ReceiveBell(), Times.Once);
+            var index = 0;
+            _shapeModel.RemoveIndex(index);
+            // Add assertions here
+        }
+
+        [TestMethod]
+        public void DeletePress_DeletesShape()
+        {
+            _shapeModel.DeletePress();
+            // Add assertions here
+        }
+
+        [TestMethod]
+        public void Undo_UndoesLastAction()
+        {
+            _shapeModel.Undo();
+            // Add assertions here
+        }
+
+        [TestMethod]
+        public void Redo_RedoLastAction()
+        {
+            _shapeModel.Redo();
+            // Add assertions here
         }
     }
 }

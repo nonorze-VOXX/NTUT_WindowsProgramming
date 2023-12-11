@@ -26,15 +26,6 @@ namespace Unity
         }
 
         /// <summary>
-        /// active
-        /// </summary>
-        /// <returns></returns>
-        public List<bool> GetShapeButtonActive()
-        {
-            return _shapeButtonActive;
-        }
-
-        /// <summary>
         /// draw
         /// </summary>
         /// <param name="graphics"></param>
@@ -84,6 +75,12 @@ namespace Unity
         List<bool> ResetToolStripButton(ToolStripItemCollection toolStripItems)
         {
             List<bool> newList = new List<bool>();
+
+            if (toolStripItems == null)
+            {
+                newList.Add(false);
+                return newList;
+            }
             for (int i = 0; i < toolStripItems.Count; i++)
             {
                 newList.Add(false);
@@ -99,6 +96,10 @@ namespace Unity
         /// <param name="shapeButtonActive"></param>
         void UpdateToolStripButton(ToolStripItemCollection toolStripItems, List<bool> shapeButtonActive)
         {
+            if (toolStripItems == null)
+            {
+                return;
+            }
             for (int i = 0; i < toolStripItems.Count; i++)
             {
                 var toolStripButton = (System.Windows.Forms.ToolStripButton)toolStripItems[i];
@@ -180,12 +181,12 @@ namespace Unity
                 _shapeModel.RemoveIndex(e.RowIndex);
             }
         }
-        internal void Undo()
+        public void Undo()
         {
             _shapeModel.Undo();
         }
 
-        internal void Redo()
+        public void Redo()
         {
             _shapeModel.Redo();
         }
@@ -212,6 +213,11 @@ namespace Unity
         /// <returns></returns>
         public void HandleToolStripPointButtonClick(ToolStripItemCollection toolStripItems, Canvas canvas)
         {
+            if (toolStripItems == null)
+            {
+                return;
+            }
+
             UpdateShapeButtonActive(toolStripItems, 1 + 1 + 1, true);
             canvas.Cursor = System.Windows.Forms.Cursors.Default;
             _shapeModel.SwitchStatePoint();

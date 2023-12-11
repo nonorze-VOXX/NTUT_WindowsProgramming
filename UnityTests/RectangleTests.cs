@@ -1,58 +1,44 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Drawing;
 
 namespace Unity.Tests
 {
-    [TestClass()]
+    [TestClass]
     public class RectangleTests
     {
-        const int ZERO = 0;
-        const int TEN = 10;
-        const int FIVE = 5;
-        const int TWO = 2;
-        PointFunction point1;
-        PointFunction point2;
-        const string name = "Rectangle";
-        Rectangle rectangle;
-        /// <summary>
-        /// t
-        /// </summary>
-        [TestInitialize()]
-        public void Initialize()
+        private Mock<IGraphics> _mockGraphics;
+        private Rectangle _rectangle;
+
+        [TestInitialize]
+        public void TestInitialize()
         {
-            point1 = new Point2(FIVE, FIVE);
-            point2 = new Point2(ZERO, TEN);
-            rectangle = new Rectangle(point1, point2);
+            _mockGraphics = new Mock<IGraphics>();
+            _rectangle = new Rectangle(new Point(0, 0), new Point(10, 10), new Point(5, 5));
         }
 
-        /// <summary>
-        /// t
-        /// </summary>
         [TestMethod()]
-        public void RectangleTest()
+        public void Draw_CallsDrawRectangleOnGraphics()
         {
-            Assert.AreEqual(rectangle.GetFirst(), point1);
-            Assert.AreEqual(rectangle.GetSecond(), point2);
+            // Arrange
+            var expectedStartPoint = new Point(0, 0);
+            var expectedEndPoint = new Point(10, 10);
+
+            // Act
+            _rectangle.Draw(_mockGraphics.Object);
+
+            // Assert
+            _mockGraphics.Verify(g => g.DrawRectangle(expectedStartPoint, expectedEndPoint), Times.Once);
         }
 
-        /// <summary>
-        /// t
-        /// </summary>
         [TestMethod()]
-        public void DrawTest()
+        public void GetShapeName_ReturnsRectangle()
         {
-            var graphics = new Mock<IGraphics>();
-            rectangle.Draw(graphics.Object);
-            graphics.Verify(adapter => adapter.DrawRectangle(It.IsAny<PointFunction>(), It.IsAny<PointFunction>()), Times.Once());
-        }
+            // Act
+            var result = _rectangle.GetShapeName();
 
-        /// <summary>
-        /// t
-        /// </summary>
-        [TestMethod()]
-        public void GetShapeNameTest()
-        {
-            Assert.AreEqual(rectangle.GetShapeName(), name);
+            // Assert
+            Assert.AreEqual("Rectangle", result);
         }
     }
 }

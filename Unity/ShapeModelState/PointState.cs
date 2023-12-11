@@ -32,6 +32,7 @@ namespace Unity.ShapeModelState
             }
         }
 
+
         /// <summary>
         /// draw
         /// </summary>
@@ -90,10 +91,10 @@ namespace Unity.ShapeModelState
                 Console.WriteLine("choose " + _choosingIndex);
                 moveCommand = new MoveCommand(_choosingIndex, point, shapeList[_choosingIndex].GetFixedInfo(), nowCanvas);
                 _scalePoint = IsWhichCircle(shapeList);
-                if (!_scalePoint.Equals(new Point(-1, -1)))
-                {
-                    return;
-                }
+            }
+            if (!_scalePoint.Equals(new Point(-1, -1)))
+            {
+                return;
             }
             _scalePoint = new Point(-1, -1);
             MoveLogic(point, shapeList);
@@ -142,7 +143,7 @@ namespace Unity.ShapeModelState
         /// </summary>
         /// <param name="point"></param>
         /// <param name="shapeList"></param>
-        private void MoveLogic(Point point, BindingList<Shape> shapeList)
+        public void MoveLogic(Point point, BindingList<Shape> shapeList)
         {
             foreach (var shape in shapeList)
             {
@@ -187,6 +188,18 @@ namespace Unity.ShapeModelState
                 }
             }
             _pastPoint = point;
+        }
+        public void SetChoosingIndex(int index)
+        {
+            _choosingIndex = index;
+        }
+        public void SetPastPoint(Point point)
+        {
+            _pastPoint = point;
+        }
+        public void SetScalePoint(Point point)
+        {
+            _scalePoint = point;
         }
 
 
