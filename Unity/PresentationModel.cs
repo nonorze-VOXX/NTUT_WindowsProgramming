@@ -47,7 +47,10 @@ namespace Unity
             }
             else
             {
-                canvas.Cursor = Cursors.Default;
+                if (canvas.Cursor != Cursors.Cross)
+                {
+                    canvas.Cursor = Cursors.Default;
+                }
 
             }
         }

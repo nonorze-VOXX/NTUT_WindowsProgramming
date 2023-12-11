@@ -16,8 +16,9 @@ namespace Unity.Command
             undoStack.Push(add);
             redoStack.Clear();
         }
-        public void AddShape(AddCommand add)
+        public void AddShape(AddCommand add, Point point)
         {
+            add.SetEnd(point);
             undoStack.Push(add);
             redoStack.Clear();
         }
