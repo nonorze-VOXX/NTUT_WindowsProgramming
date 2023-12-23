@@ -33,7 +33,6 @@ namespace Unity.Tests
             _shapeModel.Attach(_mockShapeObserver.Object);
             _shapeModel.MouseDown(ShapeType.Line, new Point(1, 1));
             _shapeModel.MouseUp(new Point(1, 1));
-            _shapeModel.Add(ShapeType.Line, new Point(1, 1), new Point(1, 1));
             _shapeModel.RemoveIndex(0);
         }
 

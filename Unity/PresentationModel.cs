@@ -9,6 +9,10 @@ namespace Unity
 {
     public class PresentationModel
     {
+        public event AddPage addPage;
+        public delegate void AddPage(int index);
+        private int pageIndex = 0;
+        private int nowPageIndex = 0;
         private const int ONE_SIX = 16;
         private const int NINE = 9;
         ShapeModel _shapeModel;
@@ -33,8 +37,8 @@ namespace Unity
         /// <param name="graphics"></param>
         public void Draw(IGraphics graphics, Canvas canvas)
         {
-            _shapeModel.Draw(graphics);
-            if (_shapeModel.IsScale())
+            _shapeModel.Draw(graphics, nowPageIndex);
+            if (_shapeModel.IsScale(nowPageIndex))
             {
                 canvas.Cursor = Cursors.SizeNWSE;
             }
@@ -51,11 +55,19 @@ namespace Unity
         /// <summary>
         /// a
         /// </summary>
-        internal void Resize(Canvas canvas, Button slide)
+        internal void Resize(Canvas canvas, Control.ControlCollection slide)
         {
             canvas.Height = canvas.Width / ONE_SIX * NINE;
-            slide.Height = slide.Width / ONE_SIX * NINE;
-            _shapeModel.Resize(new Point(canvas.Width, canvas.Height));
+            for (int i = 0; i < slide.Count; i++)
+            {
+                slide[i].Height = slide[i].Width / ONE_SIX * NINE;
+            }
+
+            for (int i = 1; i < slide.Count; i++)
+            {
+                slide[i].Location = new Point(3, slide[i - 1].Location.Y + slide[i - 1].Height);
+            }
+            _shapeModel.Resize(new Point(canvas.Width, canvas.Height), nowPageIndex);
         }
 
         /// <summary>
@@ -118,7 +130,7 @@ namespace Unity
         /// <returns></returns>
         public BindingList<Shape> GetShapeList()
         {
-            return _shapeModel.shapeList;
+            return _shapeModel.shapeList[nowPageIndex];
         }
 
         #region CanvasMouse
@@ -131,7 +143,7 @@ namespace Unity
         /// <param name="toolStripItems"></param>
         public void HandleCanvasMouseUp(Canvas canvas, Point point, ToolStripItemCollection items)
         {
-            _shapeModel.MouseUp(point);
+            _shapeModel.MouseUp(point, nowPageIndex);
             HandleToolStripPointButtonClick(items, canvas);
         }
 
@@ -141,7 +153,7 @@ namespace Unity
         /// <param name="point"></param>
         public void HandleCanvasMouseMove(Point point)
         {
-            _shapeModel.MouseMove(point);
+            _shapeModel.MouseMove(point, nowPageIndex);
         }
 
         /// <summary>
@@ -154,7 +166,7 @@ namespace Unity
             {
                 if (_shapeButtonActive[i])
                 {
-                    _shapeModel.MouseDown((ShapeType)i, point);
+                    _shapeModel.MouseDown((ShapeType)i, point, nowPageIndex);
                 }
             }
         }
@@ -169,7 +181,7 @@ namespace Unity
         {
             return (object sender, EventArgs e) =>
             {
-                _shapeModel.Add((ShapeType)comboBox.GetSelectedItem());
+                _shapeModel.Add((ShapeType)comboBox.GetSelectedItem(), nowPageIndex);
             };
         }
 
@@ -182,7 +194,7 @@ namespace Unity
         {
             if (e.ColumnIndex == 0 && e.RowIndex != -1)
             {
-                _shapeModel.RemoveIndex(e.RowIndex);
+                _shapeModel.RemoveIndex(e.RowIndex, nowPageIndex);
             }
         }
 
@@ -191,7 +203,7 @@ namespace Unity
         /// </summary>
         public void Undo()
         {
-            _shapeModel.Undo();
+            _shapeModel.Undo(nowPageIndex);
         }
 
         /// <summary>
@@ -199,7 +211,7 @@ namespace Unity
         /// </summary>
         public void Redo()
         {
-            _shapeModel.Redo();
+            _shapeModel.Redo(nowPageIndex);
         }
 
         /// <summary>
@@ -242,8 +254,19 @@ namespace Unity
         {
             if (e.KeyCode == Keys.Delete)
             {
-                _shapeModel.DeletePress();
+                _shapeModel.DeletePress(nowPageIndex);
             }
+        }
+
+        internal void AddPageButtonClick()
+        {
+            pageIndex += 1;
+            addPage.Invoke(pageIndex);
+        }
+
+        internal void ClickSlide(int index)
+        {
+            nowPageIndex = index;
         }
     }
 }
