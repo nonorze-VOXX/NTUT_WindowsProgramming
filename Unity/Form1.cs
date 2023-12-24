@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -93,23 +92,6 @@ namespace Unity
             GenerateBrief();
         }
 
-        #region Generate
-
-        /// <summary>
-        /// shape list
-        /// </summary>
-        /// <returns></returns>
-        List<ShapeType> GenerateShapeTypeList()
-        {
-            List<ShapeType> shapeTypes = new List<ShapeType>();
-            shapeTypes.Add(ShapeType.Line);
-            shapeTypes.Add(ShapeType.Rectangle);
-            shapeTypes.Add(ShapeType.Ellipse);
-            return shapeTypes;
-        }
-
-        #endregion
-
         #region IShapeObserver
 
         /// <summary>
@@ -139,7 +121,8 @@ namespace Unity
         {
 
             _canvas.DrawToBitmap(_brief, new System.Drawing.Rectangle(0, 0, _canvas.Width, _canvas.Height));
-            _slide1.Image = new Bitmap(_brief, _slide1.Size);
+            var slide = _splitContainer1.Panel1.Controls[_presentationModel.GetNowPage()] as Button;
+            slide.Image = new Bitmap(_brief, slide.Size);
         }
 
         /// <summary>
@@ -238,7 +221,7 @@ namespace Unity
         {
             return (object sender, EventArgs e) =>
             {
-                _presentationModel.ClickSlide(index);
+                _presentationModel.ClickSlide(index, _dataGridView);
             };
         }
     }

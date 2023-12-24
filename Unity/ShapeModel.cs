@@ -220,5 +220,10 @@ namespace Unity
             _commandManager.Redo(pages[nowPage]);
             NotifyModelChanged();
         }
+
+        public void AddPage(int index)
+        {
+            pages.Add(new BindingList<Shape>());
+        }
     }
 }

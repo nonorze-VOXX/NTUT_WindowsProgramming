@@ -24,6 +24,7 @@ namespace Unity
         public PresentationModel(ShapeModel model)
         {
             _shapeModel = model;
+            addPage += model.AddPage;
             _shapeButtonActive = new List<bool>
             {
                 false, false, false,false
@@ -264,9 +265,16 @@ namespace Unity
             addPage.Invoke(pageIndex);
         }
 
-        internal void ClickSlide(int index)
+        internal void ClickSlide(int index, DataGridView dataGridView)
         {
             nowPageIndex = index;
+            dataGridView.DataSource = GetShapeList();
+            _shapeModel.NotifyModelChanged();
+        }
+
+        public int GetNowPage()
+        {
+            return nowPageIndex;
         }
     }
 }
