@@ -139,7 +139,15 @@ namespace Unity
         /// <returns></returns>
         public BindingList<Shape> GetShapeList()
         {
-            return _shapeModel.shapeList[nowPageIndex];
+            try
+            {
+                return _shapeModel.shapeList[nowPageIndex];
+            }
+            catch (Exception e)
+            {
+                nowPageIndex = _shapeModel.shapeList.Count - 1;
+                return _shapeModel.shapeList[nowPageIndex];
+            }
         }
 
         #region CanvasMouse
@@ -269,8 +277,7 @@ namespace Unity
 
         internal void AddPageButtonClick()
         {
-            pageIndex += 1;
-            addPage.Invoke(pageIndex);
+            addPage.Invoke(GetShapeList().Count);
         }
 
         internal void ClickSlide(int index, DataGridView dataGridView)

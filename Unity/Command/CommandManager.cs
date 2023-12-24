@@ -42,6 +42,12 @@ namespace Unity.Command
             _redoStack.Clear();
             GenerateNowPages(pages);
         }
+        public void AddPage(List<BindingList<Shape>> pages)
+        {
+            _undoStack.Push(new AddPageCommand());
+            _redoStack.Clear();
+            GenerateNowPages(pages);
+        }
 
         /// <summary>
         /// a
@@ -98,7 +104,6 @@ namespace Unity.Command
             {
                 return;
             }
-            pages.Clear();
             _redoStack.Push(_undoStack.Pop());
             GenerateNowPages(pages);
         }

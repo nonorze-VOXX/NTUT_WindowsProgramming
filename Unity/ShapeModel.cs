@@ -93,7 +93,7 @@ namespace Unity
         /// <param name="shapeObserver"></param>
         public void Attach(IShapeObserver shapeObserver)
         {
-            _modelChanged += shapeObserver.ReceiveBell;
+            _modelChanged += () => shapeObserver.ReceiveBell(shapeList);
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Unity
         /// <param name="shapeObserver"></param>
         public void Detach(IShapeObserver shapeObserver)
         {
-            _modelChanged -= shapeObserver.ReceiveBell;
+            _modelChanged -= () => shapeObserver.ReceiveBell(shapeList);
         }
 
         /// <summary>
@@ -224,7 +224,7 @@ namespace Unity
 
         public void AddPage(int index)
         {
-            pages.Add(new BindingList<Shape>());
+            _commandManager.AddPage(pages);
         }
     }
 }

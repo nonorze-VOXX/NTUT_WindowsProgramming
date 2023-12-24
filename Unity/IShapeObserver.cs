@@ -1,10 +1,14 @@
-﻿namespace Unity
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+
+namespace Unity
 {
     public interface IShapeObserver
     {
         /// <summary>
         /// notify
         /// </summary>
-        void ReceiveBell();
+        /// <param name="pages"></param>
+        void ReceiveBell(List<BindingList<Shape>> pages);
     }
 }

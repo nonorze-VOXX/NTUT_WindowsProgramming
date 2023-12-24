@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -20,7 +22,6 @@ namespace Unity
             _canvas.MouseUp += HandleCanvasMouseUp;
             _canvas.MouseDown += HandleCanvasMouseDown;
             _canvas.MouseMove += HandleCanvasMouseMove;
-            this._slide1.Click += (this.HandleSlideClick(0));
             KeyPreview = true;
             KeyDown += HandleKeyDown;
             _brief = new Bitmap(_canvas.Width, _canvas.Height);
@@ -31,7 +32,9 @@ namespace Unity
             ClickMouse(null, null);
             this.Resize += ResizeWindow;
             ResizeWindow(null, null);
-            _slide1.Focus();
+            AddPage(0);
+            _splitContainer1.Panel1.Controls[0].Focus();
+
         }
 
         /// <summary>
@@ -97,13 +100,51 @@ namespace Unity
         /// <summary>
         /// interface
         /// </summary>
-        public void ReceiveBell()
+        /// <param name="pages"></param>
+        public void ReceiveBell(List<BindingList<Shape>> pages)
         {
             Invalidate(true);
             _presentationModel.ResetDataGridViewSource(_dataGridView);
+            AsyncPageButton(pages);
             ResizeWindow(null, null);
         }
         #endregion
+        void AsyncPageButton(List<BindingList<Shape>> pages)
+        {
+            for (int i = 0; i < pages.Count - _splitContainer1.Panel1.Controls.Count; i++)
+            {
+                AddPage(i);
+            }
+            for (int i = pages.Count; i < _splitContainer1.Panel1.Controls.Count; i++)
+            {
+                _splitContainer1.Panel1.Controls.RemoveAt(i);
+            }
+            ResizeWindow(null, null);
+        }
+        public void AddPage(int index)
+        {
+            var slide = new Button();
+            slide.Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Left) | AnchorStyles.Right)));
+            slide.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            if (index == 0)
+            {
+                slide.Location = new Point(3, 3);
+                float height = _splitContainer1.Panel1.Width / 16.0f * 9.0f;
+                slide.Size = new Size(_splitContainer1.Panel1.Width, (int)height);
+            }
+            else
+            {
+                var oldslide = _splitContainer1.Panel1.Controls[index - 1];
+                slide.Location = new Point(3, oldslide.Location.Y + oldslide.Height);
+                slide.Size = new Size(oldslide.Width, oldslide.Height);
+            }
+            slide.Name = "slide";
+            slide.BackColor = Color.White;
+            slide.Click += HandleSlideClick(_splitContainer1.Panel1.Controls, slide);
+            slide.Focus();
+            this._splitContainer1.Panel1.Controls.Add(slide);
+            ResizeWindow(null, null);
+        }
 
         /// <summary>
         /// down
@@ -121,6 +162,10 @@ namespace Unity
         private void GenerateBrief()
         {
 
+            if (_splitContainer1.Panel1.Controls.Count == 0)
+            {
+                return;
+            }
             _canvas.DrawToBitmap(_brief, new System.Drawing.Rectangle(0, 0, _canvas.Width, _canvas.Height));
             var slide = _splitContainer1.Panel1.Controls[_presentationModel.GetNowPage()] as Button;
             slide.Image = new Bitmap(_brief, slide.Size);
@@ -203,26 +248,13 @@ namespace Unity
         {
             _presentationModel.AddPageButtonClick();
         }
-        public void AddPage(int index)
-        {
-            var slide = new Button();
-            slide.Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Left) | AnchorStyles.Right)));
-            slide.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            var oldslide = _splitContainer1.Panel1.Controls[index - 1];
-            slide.Location = new Point(3, oldslide.Location.Y + oldslide.Height);
-            slide.Name = "slide";
-            slide.Size = new Size(oldslide.Width, oldslide.Height);
-            slide.BackColor = Color.White;
-            slide.Click += HandleSlideClick(index);
-            slide.Focus();
-            this._splitContainer1.Panel1.Controls.Add(slide);
-        }
 
-        private EventHandler HandleSlideClick(int index)
+
+        private EventHandler HandleSlideClick(Control.ControlCollection panel1Controls, Button slide)
         {
             return (object sender, EventArgs e) =>
             {
-                _presentationModel.ClickSlide(index, _dataGridView);
+                _presentationModel.ClickSlide(panel1Controls.IndexOf(slide), _dataGridView);
             };
         }
     }
