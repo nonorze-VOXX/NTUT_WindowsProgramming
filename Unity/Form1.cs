@@ -211,7 +211,7 @@ namespace Unity
             slide.Location = new Point(3, oldslide.Location.Y + oldslide.Height);
             slide.Name = "slide";
             slide.Size = new Size(oldslide.Width, oldslide.Height);
-            slide.BackColor = Color.DodgerBlue;
+            slide.BackColor = Color.White;
             slide.Click += HandleSlideClick(index);
             slide.Focus();
             this._splitContainer1.Panel1.Controls.Add(slide);

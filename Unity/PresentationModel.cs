@@ -17,6 +17,14 @@ namespace Unity
         private const int NINE = 9;
         ShapeModel _shapeModel;
         List<bool> _shapeButtonActive;
+        private BindingList<Shape> fakeBindingList;
+        public BindingList<Shape> shapeListUnit
+        {
+            get
+            {
+                return fakeBindingList;
+            }
+        }
         /// <summary>
         /// model
         /// </summary>
