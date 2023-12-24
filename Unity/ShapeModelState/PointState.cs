@@ -19,16 +19,19 @@ namespace Unity.ShapeModelState
         /// delete
         /// </summary>
         /// <param name="shapeList"></param>
-        public void DeletePress(System.ComponentModel.BindingList<Shape> shapeList, Command.CommandManager commandManager)
+        /// <param name="commandManager"></param>
+        /// <param name="nowPage"></param>
+        public void DeletePress(List<BindingList<Shape>> shapeList, CommandManager commandManager, int nowPage)
         {
             if (_choosingIndex != -1)
             {
-                commandManager.Delete(_choosingIndex);
-                shapeList.RemoveAt(_choosingIndex);
+                commandManager.Delete(_choosingIndex, shapeList, nowPage);
                 _scalePoint = new Point(-1, -1);
                 _choosingIndex = -1;
             }
         }
+
+
 
         /// <summary>
         /// draw
@@ -82,12 +85,15 @@ namespace Unity.ShapeModelState
         /// <param name="shapeType"></param>
         /// <param name="point"></param>
         /// <param name="shapeList"></param>
-        public void MouseDown(ShapeType shapeType, Point point, System.ComponentModel.BindingList<Shape> shapeList, Point nowCanvas)
+        /// <param name="nowCanvas"></param>
+        /// <param name="nowPage"></param>
+        public void MouseDown(ShapeType shapeType, Point point, BindingList<Shape> shapeList, Point nowCanvas,
+            int nowPage)
         {
             _pastPoint = point;
             if (_choosingIndex != -1)
             {
-                _moveCommand = new MoveCommand(_choosingIndex, point, shapeList[_choosingIndex].GetFixedInfo(), nowCanvas);
+                _moveCommand = new MoveCommand(point, shapeList[_choosingIndex].GetFixedInfo(), nowCanvas, nowPage);
                 _scalePoint = IsWhichCircle(shapeList);
             }
             if (!_scalePoint.Equals(new Point(-1, -1)))
@@ -123,7 +129,7 @@ namespace Unity.ShapeModelState
         /// <summary>
         /// set
         /// </summary>
-        public bool IsScale(BindingList<Shape> shapes)
+        public bool IsScale(List<BindingList<Shape>> shapes, int nowPage)
         {
             if (_scalePoint != new Point(-1, -1))
             {
@@ -131,7 +137,7 @@ namespace Unity.ShapeModelState
             }
             else
             {
-                return IsWhichCircle(shapes) != new Point(-1, -1);
+                return IsWhichCircle(shapes[nowPage]) != new Point(-1, -1);
             }
 
         }
@@ -226,11 +232,12 @@ namespace Unity.ShapeModelState
         /// </summary>
         /// <param name="point"></param>
         /// <param name="shapeList"></param>
-        public void MouseUp(Point point, System.ComponentModel.BindingList<Shape> shapeList, Command.CommandManager commandManager)
+        public void MouseUp(Point point, List<BindingList<Shape>> shapeList, CommandManager commandManager, int nowPageIndex)
         {
             if (_choosingIndex != -1 && _moveCommand != null)
             {
-                commandManager.Move(_moveCommand, shapeList[_choosingIndex].GetFixedInfo());
+                commandManager.Move(_moveCommand, shapeList[nowPageIndex][_choosingIndex].GetFixedInfo(), shapeList, _choosingIndex);
+                _moveCommand = null;
             }
             _scalePoint = new Point(-1, -1);
         }

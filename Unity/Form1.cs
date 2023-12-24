@@ -100,6 +100,7 @@ namespace Unity
         public void ReceiveBell()
         {
             Invalidate(true);
+            _presentationModel.ResetDataGridViewSource(_dataGridView);
             ResizeWindow(null, null);
         }
         #endregion

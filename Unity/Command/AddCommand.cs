@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 
 namespace Unity.Command
@@ -9,22 +10,24 @@ namespace Unity.Command
         private Point _start;
         private Point _end;
         private Point _nowCanvas;
+        private int nowPageIndex;
 
-        public AddCommand(ShapeType shapeType, Point start, Point end, Point nowCanvas)
+        public AddCommand(ShapeType shapeType, Point start, Point end, Point nowCanvas, int nowPageIndex)
         {
             this._shapeType = shapeType;
             this._start = start;
             this._end = end;
             this._nowCanvas = nowCanvas;
+            this.nowPageIndex = nowPageIndex;
         }
 
         /// <summary>
         /// a
         /// </summary>
-        /// <param name="shapes"></param>
-        public void Execute(BindingList<Shape> shapes)
+        /// <param name="pages"></param>
+        public void Execute(List<BindingList<Shape>> pages)
         {
-            shapes.Add(ShapeFactory.CreateShape(_shapeType, _start, _end, _nowCanvas));
+            pages[nowPageIndex].Add(ShapeFactory.CreateShape(_shapeType, _start, _end, _nowCanvas));
         }
 
         /// <summary>

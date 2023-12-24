@@ -54,7 +54,7 @@ namespace Unity
         /// </summary>
         public virtual bool IsScale(int nowPage)
         {
-            return _state.IsScale(pages[nowPage]);
+            return _state.IsScale(pages, nowPage);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace Unity
         {
             if (PointFunction.IsBothNotNegative(point))
             {
-                _state.MouseDown(shapeType, point, pages[nowPage], _nowCanvas);
+                _state.MouseDown(shapeType, point, pages[nowPage], _nowCanvas, nowPage);
                 _isPressed = true;
             }
         }
@@ -138,7 +138,7 @@ namespace Unity
         {
             if (_isPressed)
             {
-                _state.MouseUp(point, pages[nowPage], _commandManager);
+                _state.MouseUp(point, pages, _commandManager, nowPage);
                 _isPressed = false;
                 NotifyModelChanged();
             }
@@ -161,7 +161,10 @@ namespace Unity
         /// <param name="type"></param>
         public virtual void Add(ShapeType shapeType, int nowPage)
         {
-            pages[nowPage].Add(ShapeFactory.CreateByRandom(shapeType, CANVAS_MAX, _nowCanvas, _commandManager));
+            var newShape = ShapeFactory.CreateByRandom(shapeType, CANVAS_MAX, _nowCanvas);
+            _commandManager.AddShape(
+                shapeType,
+                newShape.GetFirst(), newShape.GetSecond(), _nowCanvas, nowPage, pages);
             NotifyModelChanged();
         }
 
@@ -173,8 +176,7 @@ namespace Unity
         /// <param name="end"></param>
         public virtual void Add(ShapeType type, Point start, Point end, int nowPage)
         {
-            pages[nowPage].Add(ShapeFactory.CreateShape(type, start, end, _nowCanvas));
-            _commandManager.AddShape(type, start, end, _nowCanvas);
+            _commandManager.AddShape(type, start, end, _nowCanvas, nowPage, pages);
             NotifyModelChanged();
         }
 
@@ -186,8 +188,7 @@ namespace Unity
         {
             if (rowIndex < pages[nowPage].Count)
             {
-                _commandManager.Delete(rowIndex);
-                pages[nowPage].RemoveAt(rowIndex);
+                _commandManager.Delete(rowIndex, pages, nowPage);
                 _state.Reset();
                 NotifyModelChanged();
             }
@@ -198,7 +199,7 @@ namespace Unity
         /// </summary>
         public virtual void DeletePress(int nowPage)
         {
-            _state.DeletePress(pages[nowPage], _commandManager);
+            _state.DeletePress(pages, _commandManager, nowPage);
             NotifyModelChanged();
         }
 
@@ -207,7 +208,7 @@ namespace Unity
         /// </summary>
         public void Undo(int nowPage)
         {
-            _commandManager.Undo(pages[nowPage]);
+            _commandManager.Undo(pages);
             _state.Reset();
             NotifyModelChanged();
         }
@@ -217,7 +218,7 @@ namespace Unity
         /// </summary>
         public void Redo(int nowPage)
         {
-            _commandManager.Redo(pages[nowPage]);
+            _commandManager.Redo(pages);
             NotifyModelChanged();
         }
 

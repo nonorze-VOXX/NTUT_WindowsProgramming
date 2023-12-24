@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using System.ComponentModel;
 namespace Unity.Command
 {
@@ -7,8 +8,8 @@ namespace Unity.Command
         /// <summary>
         /// a
         /// </summary>
-        /// <param name="shapes"></param>
-        void Execute(BindingList<Shape> shapes);
+        /// <param name="pages"></param>
+        void Execute(List<BindingList<Shape>> pages);
         /// <summary>
         /// a
         /// </summary>

@@ -276,13 +276,18 @@ namespace Unity
         internal void ClickSlide(int index, DataGridView dataGridView)
         {
             nowPageIndex = index;
-            dataGridView.DataSource = GetShapeList();
+            ResetDataGridViewSource(dataGridView);
             _shapeModel.NotifyModelChanged();
         }
 
         public int GetNowPage()
         {
             return nowPageIndex;
+        }
+
+        public void ResetDataGridViewSource(DataGridView dataGridView)
+        {
+            dataGridView.DataSource = GetShapeList();
         }
     }
 }

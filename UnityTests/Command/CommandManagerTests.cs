@@ -29,9 +29,9 @@ namespace Unity.Tests
         public void utils()
         {
             var moveCommand = new MoveCommand(0, new Point(0, 0), new List<Point> { new Point(1, 1), new Point(2, 2) }, new Point(3, 3));
-            _commandManager.Move(moveCommand, new List<Point> { new Point(1, 1), new Point(2, 2) });
-            _commandManager.AddShape(new AddCommand(ShapeType.Line, new Point(1, 1), new Point(2, 2), new Point(3, 3)), new Point(1, 1));
-            _commandManager.AddShape(new AddCommand(ShapeType.Line, new Point(1, 1), new Point(2, 2), new Point(3, 3)), new Point(1, 1));
+            _commandManager.Move(moveCommand, new List<Point> { new Point(1, 1), new Point(2, 2) }, TODO);
+            _commandManager.AddShape(new AddCommand(ShapeType.Line, new Point(1, 1), new Point(2, 2), new Point(3, 3)), new Point(1, 1), TODO);
+            _commandManager.AddShape(new AddCommand(ShapeType.Line, new Point(1, 1), new Point(2, 2), new Point(3, 3)), new Point(1, 1), TODO);
             _commandManager.Undo(_mockShapes.Object);
             _commandManager.Redo(_mockShapes.Object);
         }
@@ -62,7 +62,7 @@ namespace Unity.Tests
         public void Move_AddsMoveCommandToUndoStackWhenPointsAreDifferent()
         {
             var moveCommand = new MoveCommand(0, new Point(0, 0), new List<Point> { new Point(1, 1), new Point(2, 2) }, new Point(3, 3));
-            _commandManager.Move(moveCommand, new List<Point> { new Point(4, 4), new Point(5, 5) });
+            _commandManager.Move(moveCommand, new List<Point> { new Point(4, 4), new Point(5, 5) }, TODO);
         }
     }
 }

@@ -19,14 +19,13 @@ namespace Unity
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <returns></returns>
-        public static Shape CreateByRandom(ShapeType shapeType, int randomMax, Point nowCanvas, Command.CommandManager commandManager)
+        public static Shape CreateByRandom(ShapeType shapeType, int randomMax, Point nowCanvas)
         {
             var zero = 0;
             var random = new Random();
             var start = new Point(random.Next(zero, randomMax), random.Next(zero, randomMax));
             var end =
                 new Point(random.Next(zero, randomMax), random.Next(zero, randomMax));
-            commandManager.AddShape(shapeType, start, end, nowCanvas);
             return CreateShape(shapeType, start, end, nowCanvas);
         }
 

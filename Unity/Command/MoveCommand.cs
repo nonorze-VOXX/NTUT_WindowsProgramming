@@ -12,13 +12,14 @@ namespace Unity.Command
         private Point _nowCanvas;
         private List<Point> _from;
         private List<Point> _to;
+        private int _nowPage;
 
-        public MoveCommand(int index, Point point, List<Point> points, Point nowCanvas)
+        public MoveCommand(Point point, List<Point> points, Point nowCanvas, int nowPage)
         {
-            this._index = index;
             this._point = point;
             this._from = points;
             this._nowCanvas = nowCanvas;
+            this._nowPage = nowPage;
         }
 
         /// <summary>
@@ -42,13 +43,13 @@ namespace Unity.Command
         /// <summary>
         /// a
         /// </summary>
-        /// <param name="shapes"></param>
-        public void Execute(BindingList<Shape> shapes)
+        /// <param name="pages"></param>
+        public void Execute(List<BindingList<Shape>> pages)
         {
-            shapes[_index].SetNowCanvasSize(_nowCanvas);
-            shapes[_index].SetDrawCanvasSize(_nowCanvas);
-            shapes[_index].SetFirst(_to[0]);
-            shapes[_index].SetSecond(_to[1]);
+            pages[_nowPage][_index].SetNowCanvasSize(_nowCanvas);
+            pages[_nowPage][_index].SetDrawCanvasSize(_nowCanvas);
+            pages[_nowPage][_index].SetFirst(_to[0]);
+            pages[_nowPage][_index].SetSecond(_to[1]);
         }
 
         /// <summary>
@@ -57,6 +58,11 @@ namespace Unity.Command
         /// <param name="shapes"></param>
         public void ExecuteNo(BindingList<Shape> shapes)
         {
+        }
+
+        public void SetChoosingIndex(int choosingIndex)
+        {
+            _index = choosingIndex;
         }
     }
 }
