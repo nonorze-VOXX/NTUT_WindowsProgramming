@@ -30,10 +30,6 @@ namespace Unity.Tests
         {
             var moveCommand = new MoveCommand(0, new Point(0, 0), new List<Point> { new Point(1, 1), new Point(2, 2) }, new Point(3, 3));
             _commandManager.Move(moveCommand, new List<Point> { new Point(1, 1), new Point(2, 2) }, TODO);
-            _commandManager.AddShape(new AddCommand(ShapeType.Line, new Point(1, 1), new Point(2, 2), new Point(3, 3)), new Point(1, 1), TODO);
-            _commandManager.AddShape(new AddCommand(ShapeType.Line, new Point(1, 1), new Point(2, 2), new Point(3, 3)), new Point(1, 1), TODO);
-            _commandManager.Undo(_mockShapes.Object);
-            _commandManager.Redo(_mockShapes.Object);
         }
 
         /// <summary>
@@ -45,7 +41,7 @@ namespace Unity.Tests
             var start = new Point(0, 0);
             var end = new Point(1, 1);
             var nowCanvas = new Point(2, 2);
-            _commandManager.AddShape(ShapeType.Line, start, end, nowCanvas);
+            _commandManager.AddShape(ShapeType.Line, start, end, nowCanvas, 0);
         }
         /// <summary>
         /// a

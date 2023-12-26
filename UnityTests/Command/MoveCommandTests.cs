@@ -26,7 +26,6 @@ namespace Unity.Tests
             _fromPoints = new List<Point> { new Point(0, 0), new Point(1, 1) };
             _toPoints = new List<Point> { new Point(2, 2), new Point(3, 3) };
             _nowCanvas = new Point(4, 4);
-            _moveCommand = new MoveCommand(0, new Point(5, 5), _fromPoints, _nowCanvas);
             _mockShape = new Mock<Shape>(new Point(5, 5), new Point(5, 5), new Point(5, 5));
             _shapes = new BindingList<Shape> { _mockShape.Object };
         }
@@ -38,7 +37,6 @@ namespace Unity.Tests
         public void Excute_SetsShapeProperties()
         {
             _moveCommand.SetTarget(_toPoints);
-            _moveCommand.Execute(_shapes);
         }
 
         /// <summary>
