@@ -119,5 +119,10 @@ namespace Unity
         {
             _page.AttachCommandManager(from);
         }
+
+        public void Attach(Form1 form)
+        {
+            _page.Attach(form);
+        }
     }
 }

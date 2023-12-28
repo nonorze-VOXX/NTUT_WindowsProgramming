@@ -17,7 +17,7 @@ namespace Unity
             PageModel pageModel = new PageModel(page);
             PresentationModel presentationModel = new PresentationModel(pageModel);
             var form = new Form1(presentationModel);
-            page.Attach(form);
+            pageModel.Attach(form);
             Application.Run(form);
         }
     }

@@ -279,7 +279,7 @@ namespace Unity
         {
             nowPageIndex = index;
             dataGridView.DataSource = GetShapeList();
-            //_page.SetNowPageIndex(index);
+            //_pageModel.SetNowPageIndex(index);
         }
 
         public int GetNowPage()
