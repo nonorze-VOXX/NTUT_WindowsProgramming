@@ -64,6 +64,7 @@
     <Compile Include="Canvas.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Command\CMM\CommandManagerManager.cs" />
     <Compile Include="Command\MoveCommand.cs" />
     <Compile Include="Command\DeleteCommand.cs" />
     <Compile Include="Command\CommandManager.cs" />
@@ -78,6 +79,7 @@
     </Compile>
     <Compile Include="IGraphics.cs" />
     <Compile Include="IShapeObserver.cs" />
+    <Compile Include="PageModel.cs" />
     <Compile Include="ShapeModelState\DrawingState.cs" />
     <Compile Include="ShapeModelState\IState.cs" />
     <Compile Include="Line.cs" />
@@ -88,7 +90,7 @@
     <Compile Include="Rectangle.cs" />
     <Compile Include="Shape.cs" />
     <Compile Include="ShapeFactory.cs" />
-    <Compile Include="ShapeModel.cs" />
+    <Compile Include="Page.cs" />
     <Compile Include="ShapeModelState\PointState.cs" />
     <Compile Include="ShapeTypeComboBox.cs">
       <SubType>Component</SubType>
@@ -152,5 +154,6 @@
   <ItemGroup>
     <None Include="Resources\ellipse.Image.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

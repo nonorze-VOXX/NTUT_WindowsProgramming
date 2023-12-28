@@ -12,7 +12,7 @@ namespace Unity.Tests
         [TestMethod()]
         public void Form1Test()
         {
-            var shapeModel = new Mock<ShapeModel>();
+            var shapeModel = new Mock<Page>();
             var presentationModel = new Mock<PresentationModel>(shapeModel.Object);
             var form = new Form1(presentationModel.Object);
             var formPrivate = new PrivateObject(form);

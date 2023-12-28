@@ -9,7 +9,7 @@ namespace Unity.Tests
     public class PresentationModelTests
     {
         private Mock<IGraphics> _mockGraphics;
-        private Mock<ShapeModel> _mockShapeModel;
+        private Mock<Page> _mockShapeModel;
         private Canvas _mockCanvas;
         private PresentationModel _presentationModel;
 
@@ -20,7 +20,7 @@ namespace Unity.Tests
         public void TestInitialize()
         {
             _mockGraphics = new Mock<IGraphics>();
-            _mockShapeModel = new Mock<ShapeModel>();
+            _mockShapeModel = new Mock<Page>();
             _mockCanvas = new Canvas();
             _presentationModel = new PresentationModel(_mockShapeModel.Object);
         }

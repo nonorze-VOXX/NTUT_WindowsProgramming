@@ -326,7 +326,7 @@ namespace Unity
             // 
             // shapeModelBindingSource
             // 
-            this.shapeModelBindingSource.DataSource = typeof(Unity.ShapeModel);
+            this.shapeModelBindingSource.DataSource = typeof(Unity.Page);
             // 
             // Form1
             // 
