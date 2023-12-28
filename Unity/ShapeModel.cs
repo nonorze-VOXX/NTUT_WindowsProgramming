@@ -15,6 +15,8 @@ namespace Unity
     {
         public event ModelChangedEventHandler _modelChanged;
         public delegate void ModelChangedEventHandler();
+        public event CommandManagerHandler _commandManagerChanges;
+        public delegate void CommandManagerHandler(bool undo, bool redo);
         private List<BindingList<Shape>> pages = new List<BindingList<Shape>> { new BindingList<Shape>() };
         private PointState _pointState = new PointState();
         private IState _state = new DrawingState();
@@ -23,6 +25,7 @@ namespace Unity
         private CommandManager _commandManager = new CommandManager();
         private int nowPageIndex = 0;
         Point _nowCanvas = new Point(1, 1);
+
 
         public List<BindingList<Shape>> shapeList
         {
@@ -87,6 +90,14 @@ namespace Unity
         #endregion
 
         #region subscribe
+        /// <summary>
+        /// attach
+        /// </summary>
+        /// <param name="shapeObserver"></param>
+        public void AttachCommandManager(Form1 model)
+        {
+            _commandManagerChanges += model.HandleUndoButtonState;
+        }
 
         /// <summary>
         /// attach
@@ -114,6 +125,11 @@ namespace Unity
             if (_modelChanged != null)
             {
                 _modelChanged();
+            }
+
+            if (_commandManagerChanges != null)
+            {
+                _commandManagerChanges(_commandManager.IsUnDo(), _commandManager.IsReDo());
             }
         }
 

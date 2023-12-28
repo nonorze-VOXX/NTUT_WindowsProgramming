@@ -31,6 +31,8 @@ namespace Unity
             this.Resize += ResizeWindow;
             ResizeWindow(null, null);
             AddPage(0);
+            _presentationModel.SetUndoHandler(this);
+            HandleUndoButtonState(false, false);
         }
 
         /// <summary>
@@ -224,6 +226,12 @@ namespace Unity
             {
                 _presentationModel.ClickSlide(index, _dataGridView);
             };
+        }
+
+        public void HandleUndoButtonState(bool undo, bool redo)
+        {
+            _undoButton.Enabled = undo;
+            _redoButton.Enabled = redo;
         }
     }
 }

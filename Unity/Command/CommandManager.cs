@@ -118,5 +118,14 @@ namespace Unity.Command
                 command.Execute(shapes);
             }
         }
+
+        public bool IsUnDo()
+        {
+            return _undoStack.Count != 0;
+        }
+        public bool IsReDo()
+        {
+            return _redoStack.Count != 0;
+        }
     }
 }

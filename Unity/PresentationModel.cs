@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using ButtonFunction = System.Action<object, System.EventArgs>;
+
 namespace Unity
 {
     public class PresentationModel
@@ -283,6 +284,12 @@ namespace Unity
         public int GetNowPage()
         {
             return nowPageIndex;
+        }
+
+        public void SetUndoHandler(Form1 from)
+        {
+            _shapeModel.AttachCommandManager(from);
+
         }
     }
 }
