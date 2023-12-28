@@ -226,5 +226,11 @@ namespace Unity
         {
             pages.Add(new BindingList<Shape>());
         }
+
+        public void SetNowPageIndex(int index)
+        {
+            nowPageIndex = index;
+            NotifyModelChanged();
+        }
     }
 }

@@ -212,13 +212,14 @@ namespace Unity
             slide.Location = new Point(3, 3 + _splitContainer1.Panel1.Controls.Count * height);
             slide.Name = "slide";
             slide.BackColor = Color.White;
-            slide.Click += HandleSlideClick(_splitContainer1.Panel1.Controls.IndexOf(slide));
             slide.Focus();
             this._splitContainer1.Panel1.Controls.Add(slide);
+            slide.Click += HandleSlideClick(_splitContainer1.Panel1.Controls, slide);
         }
 
-        private EventHandler HandleSlideClick(int index)
+        private EventHandler HandleSlideClick(Control.ControlCollection panel1Controls, Button slide)
         {
+            var index = _splitContainer1.Panel1.Controls.IndexOf(slide);
             return (object sender, EventArgs e) =>
             {
                 _presentationModel.ClickSlide(index, _dataGridView);
