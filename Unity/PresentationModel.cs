@@ -46,8 +46,8 @@ namespace Unity
         /// <param name="graphics"></param>
         public void Draw(IGraphics graphics, Canvas canvas)
         {
-            _shapeModel.Draw(graphics, nowPageIndex);
-            if (_shapeModel.IsScale(nowPageIndex))
+            _shapeModel.Draw(graphics);
+            if (_shapeModel.IsScale())
             {
                 canvas.Cursor = Cursors.SizeNWSE;
             }
@@ -76,7 +76,7 @@ namespace Unity
             {
                 slide[i].Location = new Point(3, slide[i - 1].Location.Y + slide[i - 1].Height);
             }
-            _shapeModel.Resize(new Point(canvas.Width, canvas.Height), nowPageIndex);
+            _shapeModel.Resize(new Point(canvas.Width, canvas.Height));
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace Unity
         /// <param name="toolStripItems"></param>
         public void HandleCanvasMouseUp(Canvas canvas, Point point, ToolStripItemCollection items)
         {
-            _shapeModel.MouseUp(point, nowPageIndex);
+            _shapeModel.MouseUp(point);
             HandleToolStripPointButtonClick(items, canvas);
         }
 
@@ -162,7 +162,7 @@ namespace Unity
         /// <param name="point"></param>
         public void HandleCanvasMouseMove(Point point)
         {
-            _shapeModel.MouseMove(point, nowPageIndex);
+            _shapeModel.MouseMove(point);
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace Unity
             {
                 if (_shapeButtonActive[i])
                 {
-                    _shapeModel.MouseDown((ShapeType)i, point, nowPageIndex);
+                    _shapeModel.MouseDown((ShapeType)i, point);
                 }
             }
         }
@@ -190,7 +190,7 @@ namespace Unity
         {
             return (object sender, EventArgs e) =>
             {
-                _shapeModel.Add((ShapeType)comboBox.GetSelectedItem(), nowPageIndex);
+                _shapeModel.Add((ShapeType)comboBox.GetSelectedItem());
             };
         }
 
@@ -203,7 +203,7 @@ namespace Unity
         {
             if (e.ColumnIndex == 0 && e.RowIndex != -1)
             {
-                _shapeModel.RemoveIndex(e.RowIndex, nowPageIndex);
+                _shapeModel.RemoveIndex(e.RowIndex);
             }
         }
 
@@ -212,7 +212,7 @@ namespace Unity
         /// </summary>
         public void Undo()
         {
-            _shapeModel.Undo(nowPageIndex);
+            _shapeModel.Undo();
         }
 
         /// <summary>
@@ -220,7 +220,7 @@ namespace Unity
         /// </summary>
         public void Redo()
         {
-            _shapeModel.Redo(nowPageIndex);
+            _shapeModel.Redo();
         }
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace Unity
         {
             if (e.KeyCode == Keys.Delete)
             {
-                _shapeModel.DeletePress(nowPageIndex);
+                _shapeModel.DeletePress();
             }
         }
 
