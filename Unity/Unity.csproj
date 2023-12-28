@@ -65,6 +65,8 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Command\CMM\CommandManagerManager.cs" />
+    <Compile Include="Command\CMM\IManagerCommand.cs" />
+    <Compile Include="Command\CMM\SomeCommand.cs" />
     <Compile Include="Command\MoveCommand.cs" />
     <Compile Include="Command\DeleteCommand.cs" />
     <Compile Include="Command\CommandManager.cs" />

@@ -1,16 +1,48 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 
 namespace Unity.Command.CMM
 {
-    class CommandManagerManager
+    public class CommandManagerManager
     {
-        private List<CommandManager> commandManagers = new List<CommandManager>();
+        private Stack<IManagerCommand> _undoStack = new Stack<IManagerCommand>();
+        private Stack<IManagerCommand> _redoStack = new Stack<IManagerCommand>();
 
-        void AddShape(int pageIndex, ShapeType shapeType, Point start, Point end, Point nowCanvas)
+        public void AddSomeCommand(int index)
         {
+            _undoStack.Push(new SomeCommand(index));
+            _redoStack.Clear();
+        }
 
-            commandManagers[pageIndex].AddShape(shapeType, start, end, nowCanvas);
+        public void Undo(List<Page> pages)
+        {
+            if (_undoStack.Count == 0)
+            {
+                return;
+            }
+
+            var command = _undoStack.Pop();
+            command.Undo(pages);
+            _redoStack.Push(command);
+        }
+        public void Redo(List<Page> pages)
+        {
+            if (_redoStack.Count == 0)
+            {
+                return;
+            }
+
+            var command = _redoStack.Pop();
+            command.Redo(pages);
+            _undoStack.Push(command);
+        }
+
+        public bool IsUnDo()
+        {
+            return _undoStack.Count != 0;
+        }
+        public bool IsReDo()
+        {
+            return _redoStack.Count != 0;
         }
     }
 }

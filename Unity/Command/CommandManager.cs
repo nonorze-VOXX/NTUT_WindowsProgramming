@@ -9,6 +9,25 @@ namespace Unity.Command
     {
         Stack<ICommand> _undoStack = new Stack<ICommand>();
         Stack<ICommand> _redoStack = new Stack<ICommand>();
+
+        public event CommandChange _commandChanged;
+        public delegate void CommandChange();
+        public void Detach(Page page)
+        {
+            _commandChanged -= page.HandleCommandChange;
+        }
+        public void Attach(Page page)
+        {
+            _commandChanged += page.HandleCommandChange;
+        }
+        public void NotifyModelChanged()
+        {
+            if (_commandChanged != null)
+            {
+                _commandChanged();
+            }
+        }
+
         /// <summary>
         /// a
         /// </summary>
@@ -21,6 +40,7 @@ namespace Unity.Command
             var add = new AddCommand(shapeType, start, end, nowCanvas);
             _undoStack.Push(add);
             _redoStack.Clear();
+            NotifyModelChanged();
         }
 
         /// <summary>
@@ -33,6 +53,7 @@ namespace Unity.Command
             add.SetEnd(point);
             _undoStack.Push(add);
             _redoStack.Clear();
+            NotifyModelChanged();
         }
 
         /// <summary>
@@ -43,6 +64,7 @@ namespace Unity.Command
         {
             _undoStack.Push(new DeleteCommand(index));
             _redoStack.Clear();
+            NotifyModelChanged();
         }
 
         /// <summary>
@@ -60,6 +82,7 @@ namespace Unity.Command
             moveCommand.SetTarget(points);
             _undoStack.Push(moveCommand);
             _redoStack.Clear();
+            NotifyModelChanged();
         }
 
         /// <summary>
@@ -119,13 +142,5 @@ namespace Unity.Command
             }
         }
 
-        public bool IsUnDo()
-        {
-            return _undoStack.Count != 0;
-        }
-        public bool IsReDo()
-        {
-            return _redoStack.Count != 0;
-        }
     }
 }

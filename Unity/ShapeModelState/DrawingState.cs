@@ -68,9 +68,9 @@ namespace Unity.ShapeModelState
         {
             _hint.SetSecond(point);
             shapeList.Add(_hint);
-            _add = new AddCommand(ShapeType.Line, new Point(point.X, point.Y), new Point(0, 0), new Point(1, 1));
             commandManager.AddShape(_add, point);
 
+            _add = null;
             _hint = new Line(new Point(0, 0), new Point(0, 0), new Point(1, 1));
         }
 

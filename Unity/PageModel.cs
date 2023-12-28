@@ -1,14 +1,24 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using Unity.Command.CMM;
 
 namespace Unity
 {
-    public class PageModel
+    public class PageModel : IShapeObserver
     {
+        private CommandManagerManager _commandManagerManager;
         public BindingList<Shape> shapeList
         {
-            get { return _pages[nowPageIndex].shapeList; }
+            get
+            {
+                if (_pages.Count == 0)
+                {
+                    return null;
+                }
+
+                return _pages[nowPageIndex].shapeList;
+            }
         }
 
         private Page _page
@@ -23,28 +33,14 @@ namespace Unity
 
         private int nowPageIndex = 0;
 
-        public PageModel(Page page)
+        public PageModel()
         {
             _pages = new List<Page>();
-            _pages.Add(page);
+            _commandManagerManager = new CommandManagerManager();
         }
 
-        /*
-        public void AddPage(int index)
-        {
-            pages.Add(new BindingList<Shape>());
-        }
-        public void DeletePage(int index)
-        {
-            pages.RemoveAt(index);
-        }
+        #region wrapper        
 
-        public void SetNowPageIndex(int index)
-        {
-            nowPageIndex = index;
-            NotifyModelChanged();
-        }
-        */
         public void Resize(Point point)
         {
             _page.Resize(point);
@@ -100,29 +96,73 @@ namespace Unity
             _page.RemoveIndex(eRowIndex);
         }
 
-        public void Undo()
-        {
-            _page.Undo();
-        }
-
-        public void Redo()
-        {
-            _page.Redo();
-        }
-
         public void DeletePress()
         {
             _page.DeletePress();
         }
 
-        public void AttachCommandManager(Form1 from)
-        {
-            _page.AttachCommandManager(from);
-        }
-
         public void Attach(Form1 form)
         {
             _page.Attach(form);
+        }
+
+        public void SetNowPageIndex(int index)
+        {
+            nowPageIndex = index;
+            _page.NotifyModelChanged();
+        }
+        #endregion
+
+        #region CMM
+        public void AddPage(int index, IShapeObserver form)
+        {
+            var page = new Page();
+            page.Attach(form);
+            page.Attach(this);
+            page.Attach((IShapeObserver)this);
+            _pages.Add(page);
+        }
+        public void DeletePage(int index, IShapeObserver form)
+        {
+            _pages[index].Detach(form);
+            _pages[index].Detach(this);
+            _pages[index].Detach((IShapeObserver)this);
+            _pages.RemoveAt(index);
+        }
+
+        public void Undo()
+        {
+            _commandManagerManager.Undo(_pages);
+        }
+
+        public void Redo()
+        {
+            _commandManagerManager.Redo(_pages);
+        }
+        #endregion
+
+        public void HandleCommandChange(Page page)
+        {
+            var index = _pages.IndexOf(page);
+            _commandManagerManager.AddSomeCommand(index);
+        }
+        public event CommandManagerHandler _commandManagerChanges;
+        public delegate void CommandManagerHandler(bool undo, bool redo);
+        public void AttachCommandManager(Form1 model)
+        {
+            _commandManagerChanges += model.HandleUndoButtonState;
+        }
+        public void NotifyCommandChanged()
+        {
+            if (_commandManagerChanges != null)
+            {
+                _commandManagerChanges(_commandManagerManager.IsUnDo(), _commandManagerManager.IsReDo());
+            }
+        }
+
+        public void ReceiveBell()
+        {
+            NotifyCommandChanged();
         }
     }
 }

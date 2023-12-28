@@ -12,7 +12,7 @@ namespace Unity
     {
         public event AddPage addPage;
         public delegate void AddPage(int index);
-        private int pageIndex = 0;
+        private int pageIndex = -1;
         private int nowPageIndex = 0;
         private const int ONE_SIX = 16;
         private const int NINE = 9;
@@ -34,12 +34,16 @@ namespace Unity
         public PresentationModel(PageModel model)
         {
             _pageModel = model;
-            //addPage += model.AddPage;
             _shapeButtonActive = new List<bool>
             {
                 false, false, false,false
             };
             _pageModel.SwitchStatePoint();
+        }
+
+        public void SetAddPageEvent(Form1 form)
+        {
+            addPage += index => _pageModel.AddPage(index, form);
         }
 
         /// <summary>
@@ -278,8 +282,8 @@ namespace Unity
         internal void ClickSlide(int index, DataGridView dataGridView)
         {
             nowPageIndex = index;
+            _pageModel.SetNowPageIndex(index);
             dataGridView.DataSource = GetShapeList();
-            //_pageModel.SetNowPageIndex(index);
         }
 
         public int GetNowPage()
@@ -290,7 +294,6 @@ namespace Unity
         public void SetUndoHandler(Form1 from)
         {
             _pageModel.AttachCommandManager(from);
-
         }
     }
 }

@@ -15,22 +15,23 @@ namespace Unity
             InitializeComponent();
             _shapeComboBox.DataSource = Enum.GetValues(typeof(ShapeType));
             _dataGridView.CellContentClick += _presentationModel.DeleteButtonClick;
-            _dataGridView.DataSource = _presentationModel.GetShapeList();
             _canvas.Paint += HandleCanvasPaint;
             _canvas.MouseUp += HandleCanvasMouseUp;
             _canvas.MouseDown += HandleCanvasMouseDown;
             _canvas.MouseMove += HandleCanvasMouseMove;
             KeyPreview = true;
             KeyDown += HandleKeyDown;
+            _presentationModel.SetAddPageEvent(this);
+            _presentationModel.addPage += AddPage;
+            _presentationModel.AddPageButtonClick();
+            _dataGridView.DataSource = _presentationModel.GetShapeList();
             _brief = new Bitmap(_canvas.Width, _canvas.Height);
             this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
-            _presentationModel.addPage += AddPage;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 
             ClickMouse(null, null);
             this.Resize += ResizeWindow;
             ResizeWindow(null, null);
-            AddPage(0);
             _presentationModel.SetUndoHandler(this);
             HandleUndoButtonState(false, false);
         }

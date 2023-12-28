@@ -13,8 +13,7 @@ namespace Unity
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Page page = new Page();
-            PageModel pageModel = new PageModel(page);
+            PageModel pageModel = new PageModel();
             PresentationModel presentationModel = new PresentationModel(pageModel);
             var form = new Form1(presentationModel);
             pageModel.Attach(form);
