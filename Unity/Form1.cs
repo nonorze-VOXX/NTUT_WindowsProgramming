@@ -20,7 +20,6 @@ namespace Unity
             _canvas.MouseUp += HandleCanvasMouseUp;
             _canvas.MouseDown += HandleCanvasMouseDown;
             _canvas.MouseMove += HandleCanvasMouseMove;
-            this._slide1.Click += (this.HandleSlideClick(0));
             KeyPreview = true;
             KeyDown += HandleKeyDown;
             _brief = new Bitmap(_canvas.Width, _canvas.Height);
@@ -31,7 +30,7 @@ namespace Unity
             ClickMouse(null, null);
             this.Resize += ResizeWindow;
             ResizeWindow(null, null);
-            _slide1.Focus();
+            AddPage(0);
         }
 
         /// <summary>
@@ -205,14 +204,15 @@ namespace Unity
         public void AddPage(int index)
         {
             var slide = new Button();
-            slide.Anchor = ((AnchorStyles)(((AnchorStyles.Top | AnchorStyles.Left) | AnchorStyles.Right)));
+            slide.Anchor = ((AnchorStyles)(((AnchorStyles.Right | AnchorStyles.Left) | AnchorStyles.Top)));
             slide.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            var oldslide = _splitContainer1.Panel1.Controls[index - 1];
-            slide.Location = new Point(3, oldslide.Location.Y + oldslide.Height);
+            var width = _splitContainer1.Panel1.Width - 6;
+            var height = width / 16 * 9;
+            slide.Size = new Size(width, height);
+            slide.Location = new Point(3, 3 + _splitContainer1.Panel1.Controls.Count * height);
             slide.Name = "slide";
-            slide.Size = new Size(oldslide.Width, oldslide.Height);
             slide.BackColor = Color.White;
-            slide.Click += HandleSlideClick(index);
+            slide.Click += HandleSlideClick(_splitContainer1.Panel1.Controls.IndexOf(slide));
             slide.Focus();
             this._splitContainer1.Panel1.Controls.Add(slide);
         }
