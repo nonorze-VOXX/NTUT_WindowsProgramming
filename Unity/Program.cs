@@ -14,7 +14,8 @@ namespace Unity
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Page page = new Page();
-            PresentationModel presentationModel = new PresentationModel(page);
+            PageModel pageModel = new PageModel(page);
+            PresentationModel presentationModel = new PresentationModel(pageModel);
             var form = new Form1(presentationModel);
             page.Attach(form);
             Application.Run(form);

@@ -16,7 +16,8 @@ namespace Unity
         private int nowPageIndex = 0;
         private const int ONE_SIX = 16;
         private const int NINE = 9;
-        Page _page;
+        //Page _page;
+        private PageModel _pageModel;
         List<bool> _shapeButtonActive;
         private BindingList<Shape> fakeBindingList;
         public BindingList<Shape> shapeListUnit
@@ -30,15 +31,15 @@ namespace Unity
         /// model
         /// </summary>
         /// <param name="model"></param>
-        public PresentationModel(Page model)
+        public PresentationModel(PageModel model)
         {
-            _page = model;
+            _pageModel = model;
             //addPage += model.AddPage;
             _shapeButtonActive = new List<bool>
             {
                 false, false, false,false
             };
-            _page.SwitchStatePoint();
+            _pageModel.SwitchStatePoint();
         }
 
         /// <summary>
@@ -47,8 +48,8 @@ namespace Unity
         /// <param name="graphics"></param>
         public void Draw(IGraphics graphics, Canvas canvas)
         {
-            _page.Draw(graphics);
-            if (_page.IsScale())
+            _pageModel.Draw(graphics);
+            if (_pageModel.IsScale())
             {
                 canvas.Cursor = Cursors.SizeNWSE;
             }
@@ -77,7 +78,7 @@ namespace Unity
             {
                 slide[i].Location = new Point(3, slide[i - 1].Location.Y + slide[i - 1].Height);
             }
-            _page.Resize(new Point(canvas.Width, canvas.Height));
+            _pageModel.Resize(new Point(canvas.Width, canvas.Height));
         }
 
         /// <summary>
@@ -140,7 +141,7 @@ namespace Unity
         /// <returns></returns>
         public BindingList<Shape> GetShapeList()
         {
-            return _page.shapeList;
+            return _pageModel.shapeList;
         }
 
         #region CanvasMouse
@@ -153,7 +154,7 @@ namespace Unity
         /// <param name="toolStripItems"></param>
         public void HandleCanvasMouseUp(Canvas canvas, Point point, ToolStripItemCollection items)
         {
-            _page.MouseUp(point);
+            _pageModel.MouseUp(point);
             HandleToolStripPointButtonClick(items, canvas);
         }
 
@@ -163,7 +164,7 @@ namespace Unity
         /// <param name="point"></param>
         public void HandleCanvasMouseMove(Point point)
         {
-            _page.MouseMove(point);
+            _pageModel.MouseMove(point);
         }
 
         /// <summary>
@@ -176,7 +177,7 @@ namespace Unity
             {
                 if (_shapeButtonActive[i])
                 {
-                    _page.MouseDown((ShapeType)i, point);
+                    _pageModel.MouseDown((ShapeType)i, point);
                 }
             }
         }
@@ -191,7 +192,7 @@ namespace Unity
         {
             return (object sender, EventArgs e) =>
             {
-                _page.Add((ShapeType)comboBox.GetSelectedItem());
+                _pageModel.Add((ShapeType)comboBox.GetSelectedItem());
             };
         }
 
@@ -204,7 +205,7 @@ namespace Unity
         {
             if (e.ColumnIndex == 0 && e.RowIndex != -1)
             {
-                _page.RemoveIndex(e.RowIndex);
+                _pageModel.RemoveIndex(e.RowIndex);
             }
         }
 
@@ -213,7 +214,7 @@ namespace Unity
         /// </summary>
         public void Undo()
         {
-            _page.Undo();
+            _pageModel.Undo();
         }
 
         /// <summary>
@@ -221,7 +222,7 @@ namespace Unity
         /// </summary>
         public void Redo()
         {
-            _page.Redo();
+            _pageModel.Redo();
         }
 
         /// <summary>
@@ -235,7 +236,7 @@ namespace Unity
         {
             UpdateShapeButtonActive(toolStripItems, (int)shapeType, true);
             canvas.Cursor = System.Windows.Forms.Cursors.Cross;
-            _page.SwitchStateDrawing();
+            _pageModel.SwitchStateDrawing();
         }
 
         /// <summary>
@@ -253,7 +254,7 @@ namespace Unity
 
             UpdateShapeButtonActive(toolStripItems, 1 + 1 + 1, true);
             canvas.Cursor = System.Windows.Forms.Cursors.Default;
-            _page.SwitchStatePoint();
+            _pageModel.SwitchStatePoint();
         }
 
         /// <summary>
@@ -264,7 +265,7 @@ namespace Unity
         {
             if (e.KeyCode == Keys.Delete)
             {
-                _page.DeletePress();
+                _pageModel.DeletePress();
             }
         }
 
@@ -288,7 +289,7 @@ namespace Unity
 
         public void SetUndoHandler(Form1 from)
         {
-            _page.AttachCommandManager(from);
+            _pageModel.AttachCommandManager(from);
 
         }
     }

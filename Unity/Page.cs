@@ -236,21 +236,5 @@ namespace Unity
             NotifyModelChanged();
         }
 
-        /*
-        public void AddPage(int index)
-        {
-            pages.Add(new BindingList<Shape>());
-        }
-        public void DeletePage(int index)
-        {
-            pages.RemoveAt(index);
-        }
-
-        public void SetNowPageIndex(int index)
-        {
-            nowPageIndex = index;
-            NotifyModelChanged();
-        }
-        */
     }
 }
