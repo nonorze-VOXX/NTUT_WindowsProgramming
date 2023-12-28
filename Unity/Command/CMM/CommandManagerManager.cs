@@ -11,6 +11,7 @@ namespace Unity.Command.CMM
         {
             _undoStack.Push(new SomeCommand(index));
             _redoStack.Clear();
+            NotifyCommandChange();
         }
 
         public void Undo(List<Page> pages)
@@ -23,6 +24,7 @@ namespace Unity.Command.CMM
             var command = _undoStack.Pop();
             command.Undo(pages);
             _redoStack.Push(command);
+            NotifyCommandChange();
         }
         public void Redo(List<Page> pages)
         {
@@ -34,6 +36,7 @@ namespace Unity.Command.CMM
             var command = _redoStack.Pop();
             command.Redo(pages);
             _undoStack.Push(command);
+            NotifyCommandChange();
         }
 
         public bool IsUnDo()
@@ -43,6 +46,19 @@ namespace Unity.Command.CMM
         public bool IsReDo()
         {
             return _redoStack.Count != 0;
+        }
+        public event CommandManagerManagerChange _commandChange;
+        public delegate void CommandManagerManagerChange();
+        public void Attach(PageModel pageModel)
+        {
+            _commandChange += pageModel.ReceiveCommandChanged;
+        }
+        void NotifyCommandChange()
+        {
+            if (_commandChange != null)
+            {
+                _commandChange.Invoke();
+            }
         }
     }
 }

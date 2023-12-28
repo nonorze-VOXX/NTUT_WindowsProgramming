@@ -112,7 +112,7 @@ namespace Unity
         {
             if (_modelChanged != null)
             {
-                _modelChanged();
+                _modelChanged.Invoke();
             }
         }
 

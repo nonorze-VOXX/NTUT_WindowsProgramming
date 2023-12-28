@@ -5,7 +5,7 @@ using Unity.Command.CMM;
 
 namespace Unity
 {
-    public class PageModel : IShapeObserver
+    public class PageModel
     {
         private CommandManagerManager _commandManagerManager;
         public BindingList<Shape> shapeList
@@ -37,6 +37,7 @@ namespace Unity
         {
             _pages = new List<Page>();
             _commandManagerManager = new CommandManagerManager();
+            _commandManagerManager.Attach(this);
         }
 
         #region wrapper        
@@ -119,14 +120,12 @@ namespace Unity
             var page = new Page();
             page.Attach(form);
             page.Attach(this);
-            page.Attach((IShapeObserver)this);
             _pages.Add(page);
         }
         public void DeletePage(int index, IShapeObserver form)
         {
             _pages[index].Detach(form);
             _pages[index].Detach(this);
-            _pages[index].Detach((IShapeObserver)this);
             _pages.RemoveAt(index);
         }
 
@@ -160,7 +159,7 @@ namespace Unity
             }
         }
 
-        public void ReceiveBell()
+        public void ReceiveCommandChanged()
         {
             NotifyCommandChanged();
         }
