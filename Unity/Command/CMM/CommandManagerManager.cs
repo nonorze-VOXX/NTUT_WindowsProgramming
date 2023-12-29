@@ -7,6 +7,13 @@ namespace Unity.Command.CMM
         private Stack<IManagerCommand> _undoStack = new Stack<IManagerCommand>();
         private Stack<IManagerCommand> _redoStack = new Stack<IManagerCommand>();
 
+        public void AddAddPageCommand(Form1 form)
+        {
+            _undoStack.Push(new AddPageCommand(form));
+            _redoStack.Clear();
+            NotifyCommandChange();
+        }
+
         public void AddSomeCommand(int index)
         {
             _undoStack.Push(new SomeCommand(index));

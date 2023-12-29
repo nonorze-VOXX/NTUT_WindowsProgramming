@@ -23,7 +23,8 @@ namespace Unity
             KeyDown += HandleKeyDown;
             _presentationModel.SetAddPageEvent(this);
             _presentationModel.addPage += AddPage;
-            _presentationModel.AddPageButtonClick();
+            InitAddPage();
+            presentationModel.InitAddPage(0, this);
             _dataGridView.DataSource = _presentationModel.GetShapeList();
             _brief = new Bitmap(_canvas.Width, _canvas.Height);
             this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
@@ -204,6 +205,21 @@ namespace Unity
         {
             _presentationModel.AddPageButtonClick();
         }
+
+        public void InitAddPage()
+        {
+            var slide = new Button();
+            slide.Anchor = ((AnchorStyles)(((AnchorStyles.Right | AnchorStyles.Left) | AnchorStyles.Top)));
+            slide.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            var width = _splitContainer1.Panel1.Width - 6;
+            var height = width / 16 * 9;
+            slide.Size = new Size(width, height);
+            slide.Location = new Point(3, 3 + _splitContainer1.Panel1.Controls.Count * height);
+            slide.Name = "slide";
+            slide.BackColor = Color.White;
+            slide.Focus();
+            this._splitContainer1.Panel1.Controls.Add(slide);
+        }
         public void AddPage(int index)
         {
             var slide = new Button();
@@ -233,6 +249,20 @@ namespace Unity
         {
             _undoButton.Enabled = undo;
             _redoButton.Enabled = redo;
+        }
+
+        public void RemovePage(int pagesCount)
+        {
+            var control = _splitContainer1.Panel1.Controls;
+            control.RemoveAt(pagesCount);
+            if (pagesCount >= control.Count)
+            {
+                HandleSlideClick(control, (Button)control[_splitContainer1.Panel1.Controls.Count - 1])(null, null);
+            }
+            else
+            {
+                HandleSlideClick(control, (Button)control[pagesCount])(null, null);
+            }
         }
     }
 }

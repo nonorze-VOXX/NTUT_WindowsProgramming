@@ -46,6 +46,11 @@ namespace Unity
             addPage += index => _pageModel.AddPage(index, form);
         }
 
+        public void InitAddPage(int index, Form1 form)
+        {
+            _pageModel.InitAddPage(0, form);
+        }
+
         /// <summary>
         /// draw
         /// </summary>

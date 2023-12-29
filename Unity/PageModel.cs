@@ -115,12 +115,20 @@ namespace Unity
         #endregion
 
         #region CMM
-        public void AddPage(int index, IShapeObserver form)
+        public void InitAddPage(int index, Form1 form)
         {
             var page = new Page();
             page.Attach(form);
             page.Attach(this);
             _pages.Add(page);
+        }
+        public void AddPage(int index, Form1 form)
+        {
+            var page = new Page();
+            page.Attach(form);
+            page.Attach(this);
+            _pages.Add(page);
+            _commandManagerManager.AddAddPageCommand(form);
         }
         public void DeletePage(int index, IShapeObserver form)
         {
