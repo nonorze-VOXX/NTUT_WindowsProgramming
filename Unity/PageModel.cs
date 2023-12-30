@@ -40,7 +40,11 @@ namespace Unity
             _commandManagerManager.Attach(this);
         }
 
-        #region wrapper        
+        public void SwitchToSliderWrapper(Form1 form)
+        {
+            _commandManagerManager.Attach(form);
+        }
+        #region wrapper
 
         public void Resize(Point point)
         {

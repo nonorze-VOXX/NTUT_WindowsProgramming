@@ -40,6 +40,10 @@ namespace Unity
             };
             _pageModel.SwitchStatePoint();
         }
+        public void SwitchToSliderWrapper(Form1 form)
+        {
+            _pageModel.SwitchToSliderWrapper(form);
+        }
 
         public void SetAddPageEvent(Form1 form)
         {

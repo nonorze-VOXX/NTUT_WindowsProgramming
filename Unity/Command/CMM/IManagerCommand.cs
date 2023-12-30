@@ -6,5 +6,6 @@ namespace Unity.Command.CMM
     {
         void Undo(List<Page> pages);
         void Redo(List<Page> pages);
+        int GetIndex();
     }
 }

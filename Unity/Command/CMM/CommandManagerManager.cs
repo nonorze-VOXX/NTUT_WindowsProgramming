@@ -30,6 +30,7 @@ namespace Unity.Command.CMM
 
             var command = _undoStack.Pop();
             command.Undo(pages);
+            switchPage.Invoke(command.GetIndex());
             _redoStack.Push(command);
             NotifyCommandChange();
         }
@@ -42,6 +43,7 @@ namespace Unity.Command.CMM
 
             var command = _redoStack.Pop();
             command.Redo(pages);
+            switchPage.Invoke(command.GetIndex());
             _undoStack.Push(command);
             NotifyCommandChange();
         }
@@ -65,6 +67,19 @@ namespace Unity.Command.CMM
             if (_commandChange != null)
             {
                 _commandChange.Invoke();
+            }
+        }
+        public event SwitchPage switchPage;
+        public delegate void SwitchPage(int index);
+        public void Attach(Form1 form)
+        {
+            switchPage += form.SwitchToslide;
+        }
+        void SwitchToSlide(int index)
+        {
+            if (switchPage != null)
+            {
+                switchPage.Invoke(index);
             }
         }
     }

@@ -29,6 +29,7 @@ namespace Unity
             _brief = new Bitmap(_canvas.Width, _canvas.Height);
             this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            _presentationModel.SwitchToSliderWrapper(this);
 
             ClickMouse(null, null);
             this.Resize += ResizeWindow;
@@ -242,6 +243,7 @@ namespace Unity
             return (object sender, EventArgs e) =>
             {
                 _presentationModel.ClickSlide(index, _dataGridView);
+                slide.Focus();
             };
         }
 
@@ -255,14 +257,12 @@ namespace Unity
         {
             var control = _splitContainer1.Panel1.Controls;
             control.RemoveAt(pagesCount);
-            if (pagesCount >= control.Count)
-            {
-                HandleSlideClick(control, (Button)control[_splitContainer1.Panel1.Controls.Count - 1])(null, null);
-            }
-            else
-            {
-                HandleSlideClick(control, (Button)control[pagesCount])(null, null);
-            }
+        }
+
+        public void SwitchToslide(int index)
+        {
+            var control = _splitContainer1.Panel1.Controls;
+            HandleSlideClick(control, (Button)control[index])(null, null);
         }
     }
 }

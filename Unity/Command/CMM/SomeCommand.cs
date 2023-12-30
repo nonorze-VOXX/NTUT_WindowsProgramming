@@ -17,5 +17,10 @@ namespace Unity.Command.CMM
         {
             pages[_index].Redo();
         }
+
+        public int GetIndex()
+        {
+            return _index;
+        }
     }
 }
