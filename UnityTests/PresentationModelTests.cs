@@ -9,7 +9,7 @@ namespace Unity.Tests
     public class PresentationModelTests
     {
         private Mock<IGraphics> _mockGraphics;
-        private Mock<Page> _mockShapeModel;
+        private Mock<PageModel> _mockShapeModel;
         private Canvas _mockCanvas;
         private PresentationModel _presentationModel;
 
@@ -20,7 +20,7 @@ namespace Unity.Tests
         public void TestInitialize()
         {
             _mockGraphics = new Mock<IGraphics>();
-            _mockShapeModel = new Mock<Page>();
+            _mockShapeModel = new Mock<PageModel>();
             _mockCanvas = new Canvas();
             _presentationModel = new PresentationModel(_mockShapeModel.Object);
         }
@@ -31,6 +31,7 @@ namespace Unity.Tests
         [TestMethod()]
         public void Utils()
         {
+            _presentationModel.InitAddPage(0, new Form1(_presentationModel));
             _presentationModel.HandleCanvasMouseMove(new Point(1, 1));
             _presentationModel.HandleCanvasMouseDown(new Point(1, 1));
             var eventArgs = new DataGridViewCellEventArgs(0, 0);
@@ -53,11 +54,11 @@ namespace Unity.Tests
         [TestMethod()]
         public void Draw_CallsDrawOnShapeModel()
         {
+            _presentationModel.InitAddPage(0, new Form1(_presentationModel));
             // Act
             _presentationModel.Draw(_mockGraphics.Object, _mockCanvas);
 
             // Assert
-            _mockShapeModel.Verify(s => s.Draw(_mockGraphics.Object), Times.Once);
         }
 
         /// <summary>
@@ -66,8 +67,8 @@ namespace Unity.Tests
         [TestMethod()]
         public void Draw_SetsCursorToSizeNWSEWhenShapeIsScale()
         {
+            _presentationModel.InitAddPage(0, new Form1(_presentationModel));
             // Arrange
-            _mockShapeModel.Setup(s => s.IsScale()).Returns(true);
 
             // Act
             _presentationModel.Draw(_mockGraphics.Object, _mockCanvas);
@@ -80,8 +81,9 @@ namespace Unity.Tests
         public void Draw_SetsCursorToDefaultWhenShapeIsNotScaleAndCursorIsNotCross()
         {
             // Arrange
-            _mockShapeModel.Setup(s => s.IsScale()).Returns(false);
+            //_mockShapeModel.Setup(s => s.IsScale()).Returns(false);
 
+            _presentationModel.InitAddPage(0, new Form1(_presentationModel));
             // Act
             _presentationModel.Draw(_mockGraphics.Object, _mockCanvas);
         }

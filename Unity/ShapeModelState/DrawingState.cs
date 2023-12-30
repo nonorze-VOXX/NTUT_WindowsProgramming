@@ -70,7 +70,7 @@ namespace Unity.ShapeModelState
             shapeList.Add(_hint);
             commandManager.AddShape(_add, point);
 
-            _add = null;
+            _add = new AddCommand(ShapeType.Line, new Point(point.X, point.Y), new Point(0, 0), new Point(1, 1));
             _hint = new Line(new Point(0, 0), new Point(0, 0), new Point(1, 1));
         }
 
