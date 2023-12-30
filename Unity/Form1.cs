@@ -23,6 +23,7 @@ namespace Unity
             KeyDown += HandleKeyDown;
             _presentationModel.SetAddPageEvent(this);
             _presentationModel.addPage += AddPage;
+            _presentationModel.AttatchDelete(this);
             InitAddPage();
             presentationModel.InitAddPage(0, this);
             _dataGridView.DataSource = _presentationModel.GetShapeList();
@@ -220,6 +221,7 @@ namespace Unity
             slide.BackColor = Color.White;
             slide.Focus();
             this._splitContainer1.Panel1.Controls.Add(slide);
+            slide.Click += HandleSlideClick(_splitContainer1.Panel1.Controls, slide);
         }
         public void AddPage(int index)
         {
@@ -239,9 +241,18 @@ namespace Unity
 
         private EventHandler HandleSlideClick(Control.ControlCollection panel1Controls, Button slide)
         {
-            var index = _splitContainer1.Panel1.Controls.IndexOf(slide);
             return (object sender, EventArgs e) =>
             {
+                var control = _splitContainer1.Panel1.Controls;
+                var index = 0;
+                for (int i = 0; i < control.Count; i++)
+                {
+                    if (control[i] == slide)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
                 _presentationModel.ClickSlide(index, _dataGridView);
                 slide.Focus();
             };
@@ -263,6 +274,16 @@ namespace Unity
         {
             var control = _splitContainer1.Panel1.Controls;
             HandleSlideClick(control, (Button)control[index])(null, null);
+        }
+
+        public void DeletePage()
+        {
+            _presentationModel.DeletePage(this);
+        }
+
+        public void DeletePageAt(int index)
+        {
+            _splitContainer1.Panel1.Controls.RemoveAt(index);
         }
     }
 }

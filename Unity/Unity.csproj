@@ -66,6 +66,7 @@
     </Compile>
     <Compile Include="Command\CMM\AddPageCommand.cs" />
     <Compile Include="Command\CMM\CommandManagerManager.cs" />
+    <Compile Include="Command\CMM\DeletePageCommand.cs" />
     <Compile Include="Command\CMM\IManagerCommand.cs" />
     <Compile Include="Command\CMM\SomeCommand.cs" />
     <Compile Include="Command\MoveCommand.cs" />

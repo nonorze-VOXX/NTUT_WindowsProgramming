@@ -50,6 +50,31 @@ namespace Unity
             addPage += index => _pageModel.AddPage(index, form);
         }
 
+        public event DeletePageEvent _deletePage;
+        public delegate void DeletePageEvent();
+
+        public void DeletePage(Form1 form)
+        {
+            if (_pageModel.GetPageCount() <= 1)
+            {
+                return;
+            }
+            _pageModel.DeletePage(nowPageIndex, form);
+            form.DeletePageAt(nowPageIndex);
+            if (_pageModel.GetPageCount() - 1 < nowPageIndex)
+            {
+                form.SwitchToslide(_pageModel.GetPageCount() - 1);
+            }
+            else
+            {
+                form.SwitchToslide(nowPageIndex);
+            }
+
+        }
+        public void AttatchDelete(Form1 form)
+        {
+            _deletePage += form.DeletePage;
+        }
         public void InitAddPage(int index, Form1 form)
         {
             _pageModel.InitAddPage(0, form);
@@ -193,6 +218,8 @@ namespace Unity
                     _pageModel.MouseDown((ShapeType)i, point);
                 }
             }
+
+            focusSlide = false;
         }
         #endregion
 
@@ -278,9 +305,20 @@ namespace Unity
         {
             if (e.KeyCode == Keys.Delete)
             {
-                _pageModel.DeletePress();
+                if (focusSlide)
+                {
+                    if (_deletePage != null)
+                    {
+                        _deletePage.Invoke();
+                    }
+                }
+                else
+                {
+                    _pageModel.DeletePress();
+                }
             }
         }
+
 
         internal void AddPageButtonClick()
         {
@@ -293,8 +331,10 @@ namespace Unity
             nowPageIndex = index;
             _pageModel.SetNowPageIndex(index);
             dataGridView.DataSource = GetShapeList();
+            focusSlide = true;
         }
 
+        private bool focusSlide = false;
         public int GetNowPage()
         {
             return nowPageIndex;

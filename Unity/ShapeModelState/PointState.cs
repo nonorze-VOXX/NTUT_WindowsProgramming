@@ -19,7 +19,7 @@ namespace Unity.ShapeModelState
         /// delete
         /// </summary>
         /// <param name="shapeList"></param>
-        public void DeletePress(System.ComponentModel.BindingList<Shape> shapeList, Command.CommandManager commandManager)
+        public void DeletePress(BindingList<Shape> shapeList, Command.CommandManager commandManager)
         {
             if (_choosingIndex != -1)
             {

@@ -40,6 +40,11 @@ namespace Unity
             _commandManagerManager.Attach(this);
         }
 
+        public int GetPageCount()
+        {
+            return _pages.Count;
+        }
+
         public void SwitchToSliderWrapper(Form1 form)
         {
             _commandManagerManager.Attach(form);
@@ -134,10 +139,12 @@ namespace Unity
             _pages.Add(page);
             _commandManagerManager.AddAddPageCommand(form);
         }
-        public void DeletePage(int index, IShapeObserver form)
+        public void DeletePage(int index, Form1 form)
         {
-            _pages[index].Detach(form);
-            _pages[index].Detach(this);
+            //_pages[index].Detach(form);
+            //_pages[index].Detach(this);
+            var page = _pages[index];
+            _commandManagerManager.AddRemovePagecommand(form, index, page);
             _pages.RemoveAt(index);
         }
 

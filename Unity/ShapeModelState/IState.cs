@@ -42,5 +42,6 @@ namespace Unity.ShapeModelState
         /// a
         /// </summary>
         void Reset();
+
     }
 }
