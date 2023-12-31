@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -13,23 +12,39 @@ namespace Unity
         public Form1(PresentationModel presentationModel)
         {
             _presentationModel = presentationModel;
+            _saveForm = new SaveForm(presentationModel);
+            _loadForm = new LoadForm(this, presentationModel);
+            _addShapeForm = new AddShapeForm(presentationModel);
             InitializeComponent();
             _shapeComboBox.DataSource = Enum.GetValues(typeof(ShapeType));
             _dataGridView.CellContentClick += _presentationModel.DeleteButtonClick;
-            _dataGridView.DataSource = _presentationModel.GetShapeList();
             _canvas.Paint += HandleCanvasPaint;
             _canvas.MouseUp += HandleCanvasMouseUp;
             _canvas.MouseDown += HandleCanvasMouseDown;
             _canvas.MouseMove += HandleCanvasMouseMove;
             KeyPreview = true;
             KeyDown += HandleKeyDown;
+            _presentationModel.SetAddPageEvent(this);
+            _presentationModel.addPage += AddPage;
+            _presentationModel.AttatchDelete(this);
+            InitAddPage();
+            presentationModel.InitAddPage(0, this);
+            _dataGridView.DataSource = _presentationModel.GetShapeList();
             _brief = new Bitmap(_canvas.Width, _canvas.Height);
-            this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
+            //this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            _presentationModel.SwitchToSliderWrapper(this);
 
             ClickMouse(null, null);
             this.Resize += ResizeWindow;
             ResizeWindow(null, null);
+            _presentationModel.SetUndoHandler(this);
+            HandleUndoButtonState(false, false);
+            var wrapper = new GoogleDriveWrapper();
+            //wrapper.DownloadFile("save.txt")
+            //wrapper.UploadFile("save.txt");
+
+
         }
 
         /// <summary>
@@ -39,7 +54,7 @@ namespace Unity
         /// <param name="e"></param>
         internal void ResizeWindow(object sender, EventArgs e)
         {
-            _presentationModel.Resize(_canvas, _slide1);
+            _presentationModel.Resize(_canvas, _splitContainer1.Panel1.Controls);
             if (_canvas.Width != 0 && _canvas.Height != 0)
             {
                 _brief = new Bitmap(_canvas.Width, _canvas.Height);
@@ -90,23 +105,6 @@ namespace Unity
             GenerateBrief();
         }
 
-        #region Generate
-
-        /// <summary>
-        /// shape list
-        /// </summary>
-        /// <returns></returns>
-        List<ShapeType> GenerateShapeTypeList()
-        {
-            List<ShapeType> shapeTypes = new List<ShapeType>();
-            shapeTypes.Add(ShapeType.Line);
-            shapeTypes.Add(ShapeType.Rectangle);
-            shapeTypes.Add(ShapeType.Ellipse);
-            return shapeTypes;
-        }
-
-        #endregion
-
         #region IShapeObserver
 
         /// <summary>
@@ -114,10 +112,25 @@ namespace Unity
         /// </summary>
         public void ReceiveBell()
         {
-            Invalidate(true);
             ResizeWindow(null, null);
+            _dataGridView.DataSource = _presentationModel.GetShapeList();
+            AsyncPageCount();
+            Invalidate(true);
         }
         #endregion
+
+        void AsyncPageCount()
+        {
+            for (int i = _splitContainer1.Panel1.Controls.Count; i < _presentationModel.GetPageCount(); i++)
+            {
+                AddPage(0);
+
+            }
+            for (int i = _presentationModel.GetPageCount(); i < _splitContainer1.Panel1.Controls.Count; i++)
+            {
+                DeletePageAt(i);
+            }
+        }
 
         /// <summary>
         /// down
@@ -136,7 +149,8 @@ namespace Unity
         {
 
             _canvas.DrawToBitmap(_brief, new System.Drawing.Rectangle(0, 0, _canvas.Width, _canvas.Height));
-            _slide1.Image = new Bitmap(_brief, _slide1.Size);
+            var slide = _splitContainer1.Panel1.Controls[_presentationModel.GetNowPage()] as Button;
+            slide.Image = new Bitmap(_brief, slide.Size);
         }
 
         /// <summary>
@@ -176,7 +190,7 @@ namespace Unity
         /// a
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="e"></param>White
         private void ClickMouse(object sender, EventArgs e)
         {
             _presentationModel.HandleToolStripPointButtonClick(this._toolStrip1.Items, _canvas);
@@ -210,6 +224,109 @@ namespace Unity
         private void RedoClick(object sender, EventArgs e)
         {
             _presentationModel.Redo();
+        }
+
+        private void AddPageButtonClick(object sender, EventArgs e)
+        {
+            _presentationModel.AddPageButtonClick();
+        }
+
+        public void InitAddPage()
+        {
+            var slide = new Button();
+            slide.Anchor = ((AnchorStyles)(((AnchorStyles.Right | AnchorStyles.Left) | AnchorStyles.Top)));
+            slide.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            var width = _splitContainer1.Panel1.Width - 6;
+            var height = width / 16 * 9;
+            slide.Size = new Size(width, height);
+            slide.Location = new Point(3, 3 + _splitContainer1.Panel1.Controls.Count * height);
+            slide.Name = "slide";
+            slide.BackColor = Color.White;
+            slide.Focus();
+            this._splitContainer1.Panel1.Controls.Add(slide);
+            slide.Click += HandleSlideClick(_splitContainer1.Panel1.Controls, slide);
+        }
+        public void AddPage(int index)
+        {
+            var slide = new Button();
+            slide.Anchor = ((AnchorStyles)(((AnchorStyles.Right | AnchorStyles.Left) | AnchorStyles.Top)));
+            slide.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            var width = _splitContainer1.Panel1.Width - 6;
+            var height = width / 16 * 9;
+            slide.Size = new Size(width, height);
+            slide.Location = new Point(3, 3 + _splitContainer1.Panel1.Controls.Count * height);
+            slide.Name = "slide";
+            slide.BackColor = Color.White;
+            slide.Focus();
+            this._splitContainer1.Panel1.Controls.Add(slide);
+            slide.Click += HandleSlideClick(_splitContainer1.Panel1.Controls, slide);
+        }
+
+        private EventHandler HandleSlideClick(Control.ControlCollection panel1Controls, Button slide)
+        {
+            return (object sender, EventArgs e) =>
+            {
+                var control = _splitContainer1.Panel1.Controls;
+                var index = 0;
+                for (int i = 0; i < control.Count; i++)
+                {
+                    if (control[i] == slide)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                _presentationModel.ClickSlide(index, _dataGridView);
+                slide.Focus();
+            };
+        }
+
+        public void HandleUndoButtonState(bool undo, bool redo)
+        {
+            _undoButton.Enabled = undo;
+            _redoButton.Enabled = redo;
+        }
+
+        public void RemovePage(int pagesCount)
+        {
+            var control = _splitContainer1.Panel1.Controls;
+            control.RemoveAt(pagesCount);
+        }
+
+        public void SwitchToslide(int index)
+        {
+            var control = _splitContainer1.Panel1.Controls;
+            HandleSlideClick(control, (Button)control[index])(null, null);
+        }
+
+        public void DeletePage()
+        {
+            _presentationModel.DeletePage(this);
+        }
+
+        public void DeletePageAt(int index)
+        {
+            _splitContainer1.Panel1.Controls.RemoveAt(index);
+        }
+
+        SaveForm _saveForm;
+        private void LoadButtonClick(object sender, EventArgs e)
+        {
+            _loadForm.ShowDialog();
+        }
+
+        private LoadForm _loadForm;
+
+
+        private void SaveButtonClick(object sender, EventArgs e)
+        {
+            _saveForm.ShowDialog();
+        }
+
+        private AddShapeForm _addShapeForm;
+        private void _createButton_Click(object sender, EventArgs e)
+        {
+            _addShapeForm.ShowDialog();
         }
     }
 }

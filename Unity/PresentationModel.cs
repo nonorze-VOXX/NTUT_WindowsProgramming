@@ -1,30 +1,84 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-using ButtonFunction = System.Action<object, System.EventArgs>;
 namespace Unity
 {
     public class PresentationModel
     {
+        public event AddPage addPage;
+        public delegate void AddPage(int index);
+        private int pageIndex = -1;
+        private int nowPageIndex = 0;
         private const int ONE_SIX = 16;
         private const int NINE = 9;
-        ShapeModel _shapeModel;
+        //Page _page;
+        private PageModel _pageModel;
         List<bool> _shapeButtonActive;
+        private BindingList<Shape> fakeBindingList;
+        public BindingList<Shape> shapeListUnit
+        {
+            get
+            {
+                return fakeBindingList;
+            }
+        }
         /// <summary>
         /// model
         /// </summary>
         /// <param name="model"></param>
-        public PresentationModel(ShapeModel model)
+        public PresentationModel(PageModel model)
         {
-            _shapeModel = model;
+            _pageModel = model;
             _shapeButtonActive = new List<bool>
             {
                 false, false, false,false
             };
-            _shapeModel.SwitchStatePoint();
+            _pageModel.SwitchStatePoint();
+        }
+        public void SwitchToSliderWrapper(Form1 form)
+        {
+            _pageModel.SwitchToSliderWrapper(form);
+        }
+
+        public void SetAddPageEvent(Form1 form)
+        {
+            addPage += index => _pageModel.AddPage(index, form);
+        }
+
+        public void SetNowPageIndex(int i)
+        {
+            nowPageIndex = i;
+        }
+        public event DeletePageEvent _deletePage;
+        public delegate void DeletePageEvent();
+
+        public void DeletePage(Form1 form)
+        {
+            if (_pageModel.GetPageCount() <= 1)
+            {
+                return;
+            }
+            _pageModel.DeletePage(nowPageIndex, form);
+            form.DeletePageAt(nowPageIndex);
+            if (_pageModel.GetPageCount() - 1 < nowPageIndex)
+            {
+                form.SwitchToslide(_pageModel.GetPageCount() - 1);
+            }
+            else
+            {
+                form.SwitchToslide(nowPageIndex);
+            }
+
+        }
+        public void AttatchDelete(Form1 form)
+        {
+            _deletePage += form.DeletePage;
+        }
+        public void InitAddPage(int index, Form1 form)
+        {
+            _pageModel.InitAddPage(0, form);
         }
 
         /// <summary>
@@ -33,8 +87,8 @@ namespace Unity
         /// <param name="graphics"></param>
         public void Draw(IGraphics graphics, Canvas canvas)
         {
-            _shapeModel.Draw(graphics);
-            if (_shapeModel.IsScale())
+            _pageModel.Draw(graphics);
+            if (_pageModel.IsScale())
             {
                 canvas.Cursor = Cursors.SizeNWSE;
             }
@@ -51,11 +105,19 @@ namespace Unity
         /// <summary>
         /// a
         /// </summary>
-        internal void Resize(Canvas canvas, Button slide)
+        internal void Resize(Canvas canvas, Control.ControlCollection slide)
         {
             canvas.Height = canvas.Width / ONE_SIX * NINE;
-            slide.Height = slide.Width / ONE_SIX * NINE;
-            _shapeModel.Resize(new Point(canvas.Width, canvas.Height));
+            for (int i = 0; i < slide.Count; i++)
+            {
+                slide[i].Height = slide[i].Width / ONE_SIX * NINE;
+            }
+
+            for (int i = 1; i < slide.Count; i++)
+            {
+                slide[i].Location = new Point(3, slide[i - 1].Location.Y + slide[i - 1].Height);
+            }
+            _pageModel.Resize(new Point(canvas.Width, canvas.Height));
         }
 
         /// <summary>
@@ -118,7 +180,7 @@ namespace Unity
         /// <returns></returns>
         public BindingList<Shape> GetShapeList()
         {
-            return _shapeModel.shapeList;
+            return _pageModel.shapeList;
         }
 
         #region CanvasMouse
@@ -131,7 +193,7 @@ namespace Unity
         /// <param name="toolStripItems"></param>
         public void HandleCanvasMouseUp(Canvas canvas, Point point, ToolStripItemCollection items)
         {
-            _shapeModel.MouseUp(point);
+            _pageModel.MouseUp(point);
             HandleToolStripPointButtonClick(items, canvas);
         }
 
@@ -141,7 +203,7 @@ namespace Unity
         /// <param name="point"></param>
         public void HandleCanvasMouseMove(Point point)
         {
-            _shapeModel.MouseMove(point);
+            _pageModel.MouseMove(point);
         }
 
         /// <summary>
@@ -154,24 +216,13 @@ namespace Unity
             {
                 if (_shapeButtonActive[i])
                 {
-                    _shapeModel.MouseDown((ShapeType)i, point);
+                    _pageModel.MouseDown((ShapeType)i, point);
                 }
             }
+
+            focusSlide = false;
         }
         #endregion
-
-        /// <summary>
-        /// create shape button click
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public ButtonFunction CreateButtonClick(ShapeTypeComboBox comboBox)
-        {
-            return (object sender, EventArgs e) =>
-            {
-                _shapeModel.Add((ShapeType)comboBox.GetSelectedItem());
-            };
-        }
 
         /// <summary>
         /// delete button click with delete model and datagridview
@@ -182,7 +233,7 @@ namespace Unity
         {
             if (e.ColumnIndex == 0 && e.RowIndex != -1)
             {
-                _shapeModel.RemoveIndex(e.RowIndex);
+                _pageModel.RemoveIndex(e.RowIndex);
             }
         }
 
@@ -191,7 +242,7 @@ namespace Unity
         /// </summary>
         public void Undo()
         {
-            _shapeModel.Undo();
+            _pageModel.Undo();
         }
 
         /// <summary>
@@ -199,7 +250,7 @@ namespace Unity
         /// </summary>
         public void Redo()
         {
-            _shapeModel.Redo();
+            _pageModel.Redo();
         }
 
         /// <summary>
@@ -213,7 +264,7 @@ namespace Unity
         {
             UpdateShapeButtonActive(toolStripItems, (int)shapeType, true);
             canvas.Cursor = System.Windows.Forms.Cursors.Cross;
-            _shapeModel.SwitchStateDrawing();
+            _pageModel.SwitchStateDrawing();
         }
 
         /// <summary>
@@ -231,7 +282,7 @@ namespace Unity
 
             UpdateShapeButtonActive(toolStripItems, 1 + 1 + 1, true);
             canvas.Cursor = System.Windows.Forms.Cursors.Default;
-            _shapeModel.SwitchStatePoint();
+            _pageModel.SwitchStatePoint();
         }
 
         /// <summary>
@@ -242,8 +293,69 @@ namespace Unity
         {
             if (e.KeyCode == Keys.Delete)
             {
-                _shapeModel.DeletePress();
+                if (focusSlide)
+                {
+                    if (_deletePage != null)
+                    {
+                        _deletePage.Invoke();
+                    }
+                }
+                else
+                {
+                    _pageModel.DeletePress();
+                }
             }
+        }
+
+
+        public void AddPageButtonClick()
+        {
+            pageIndex += 1;
+            addPage.Invoke(pageIndex);
+        }
+
+        internal void ClickSlide(int index, DataGridView dataGridView)
+        {
+            nowPageIndex = index;
+            _pageModel.SetNowPageIndex(index);
+            dataGridView.DataSource = GetShapeList();
+            focusSlide = true;
+        }
+
+        private bool focusSlide = false;
+
+        public void SetFocusSlide(bool slide)
+        {
+            focusSlide = slide;
+        }
+        public int GetNowPage()
+        {
+            return nowPageIndex;
+        }
+
+        public void SetUndoHandler(Form1 from)
+        {
+            _pageModel.AttachCommandManager(from);
+        }
+
+        public void Load(Form1 form)
+        {
+            _pageModel.Load(form);
+        }
+
+        public void Save()
+        {
+            _pageModel.Save();
+        }
+
+        public int GetPageCount()
+        {
+            return _pageModel.GetPageCount();
+        }
+
+        public void AddShape(ShapeType shapeType, Point point, Point point1)
+        {
+            _pageModel.Add(shapeType, point, point1);
         }
     }
 }

@@ -72,11 +72,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Command\AddCommandTests.cs" />
+    <Compile Include="Command\CMM\CommandManagerManagerTests.cs" />
     <Compile Include="Command\CommandManagerTests.cs" />
     <Compile Include="Command\DeleteCommandTests.cs" />
     <Compile Include="Command\MoveCommandTests.cs" />
     <Compile Include="EllipseTests.cs" />
     <Compile Include="Form1Tests.cs" />
+    <Compile Include="GoogleDriveWrapperTests.cs" />
     <Compile Include="LineTests.cs" />
     <Compile Include="PointFunctionTest.cs" />
     <Compile Include="PresentationModelTests.cs" />
@@ -85,12 +87,13 @@
     <Compile Include="ShapeFactoryTests.cs" />
     <Compile Include="ShapeModelState\DrawingStateTests.cs" />
     <Compile Include="ShapeModelState\PointStateTests.cs" />
-    <Compile Include="ShapeModelTests.cs" />
+    <Compile Include="PageTests.cs" />
     <Compile Include="ShapeTests.cs" />
     <Compile Include="ShapeTypeComboBoxTests.cs" />
     <Compile Include="WindowFormsGraphicsAdaptorTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

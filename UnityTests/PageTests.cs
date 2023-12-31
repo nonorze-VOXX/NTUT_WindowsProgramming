@@ -5,9 +5,9 @@ using System.Drawing;
 namespace Unity.Tests
 {
     [TestClass]
-    public class ShapeModelTests
+    public class PageTests
     {
-        private ShapeModel _shapeModel;
+        private Page _page;
         private Mock<IGraphics> _mockGraphics;
         private Mock<IShapeObserver> _mockShapeObserver;
         /// <summary>
@@ -16,7 +16,7 @@ namespace Unity.Tests
         [TestInitialize]
         public void TestInitialize()
         {
-            _shapeModel = new ShapeModel();
+            _page = new Page();
             _mockGraphics = new Mock<IGraphics>();
             _mockShapeObserver = new Mock<IShapeObserver>();
         }
@@ -27,14 +27,13 @@ namespace Unity.Tests
         [TestMethod()]
         public void utils()
         {
-            _shapeModel.Add(ShapeType.Line);
-            _shapeModel.Resize(new Point(1, 1));
-            _shapeModel.Draw(_mockGraphics.Object);
-            _shapeModel.Attach(_mockShapeObserver.Object);
-            _shapeModel.MouseDown(ShapeType.Line, new Point(1, 1));
-            _shapeModel.MouseUp(new Point(1, 1));
-            _shapeModel.Add(ShapeType.Line, new Point(1, 1), new Point(1, 1));
-            _shapeModel.RemoveIndex(0);
+            _page.Add(ShapeType.Line);
+            _page.Resize(new Point(1, 1));
+            _page.Draw(_mockGraphics.Object);
+            _page.Attach(_mockShapeObserver.Object);
+            _page.MouseDown(ShapeType.Line, new Point(1, 1));
+            _page.MouseUp(new Point(1, 1));
+            _page.RemoveIndex(0);
         }
 
         /// <summary>
@@ -43,7 +42,7 @@ namespace Unity.Tests
         [TestMethod()]
         public void SwitchStateDrawing_SetsStateToDrawingState()
         {
-            _shapeModel.SwitchStateDrawing();
+            _page.SwitchStateDrawing();
             // Add assertions here
         }
 
@@ -53,7 +52,7 @@ namespace Unity.Tests
         [TestMethod]
         public void SwitchStatePoint_SetsStateToPointState()
         {
-            _shapeModel.SwitchStatePoint();
+            _page.SwitchStatePoint();
             // Add assertions here
         }
         /// <summary>
@@ -62,7 +61,7 @@ namespace Unity.Tests
         [TestMethod]
         public void IsScale_ReturnsCorrectValue()
         {
-            var result = _shapeModel.IsScale();
+            var result = _page.IsScale();
             // Add assertions here
         }
         /// <summary>
@@ -72,7 +71,7 @@ namespace Unity.Tests
         public void Resize_ResizesShapes()
         {
             var point = new Point(5, 5);
-            _shapeModel.Resize(point);
+            _page.Resize(point);
             // Add assertions here
         }
         /// <summary>
@@ -81,7 +80,7 @@ namespace Unity.Tests
         [TestMethod]
         public void Draw_DrawsShapes()
         {
-            _shapeModel.Draw(_mockGraphics.Object);
+            _page.Draw(_mockGraphics.Object);
             // Add assertions here
         }
         /// <summary>
@@ -90,7 +89,7 @@ namespace Unity.Tests
         [TestMethod]
         public void Attach_AttachesObserver()
         {
-            _shapeModel.Attach(_mockShapeObserver.Object);
+            _page.Attach(_mockShapeObserver.Object);
             // Add assertions here
         }
         /// <summary>
@@ -99,7 +98,7 @@ namespace Unity.Tests
         [TestMethod]
         public void Detach_DetachesObserver()
         {
-            _shapeModel.Detach(_mockShapeObserver.Object);
+            _page.Detach(_mockShapeObserver.Object);
             // Add assertions here
         }
 
@@ -110,7 +109,7 @@ namespace Unity.Tests
         public void MouseDown_UpdatesState()
         {
             var point = new Point(5, 5);
-            _shapeModel.MouseDown(ShapeType.Line, point);
+            _page.MouseDown(ShapeType.Line, point);
             // Add assertions here
         }
         /// <summary>
@@ -120,7 +119,7 @@ namespace Unity.Tests
         public void MouseUp_UpdatesState()
         {
             var point = new Point(5, 5);
-            _shapeModel.MouseUp(point);
+            _page.MouseUp(point);
             // Add assertions here
         }
 
@@ -131,7 +130,7 @@ namespace Unity.Tests
         public void MouseMove_UpdatesState()
         {
             var point = new Point(5, 5);
-            _shapeModel.MouseMove(point);
+            _page.MouseMove(point);
             // Add assertions here
         }
 
@@ -141,7 +140,7 @@ namespace Unity.Tests
         [TestMethod]
         public void Add_AddsShape()
         {
-            _shapeModel.Add(ShapeType.Line);
+            _page.Add(ShapeType.Line);
             // Add assertions here
         }
 
@@ -152,7 +151,7 @@ namespace Unity.Tests
         public void RemoveIndex_RemovesShape()
         {
             var index = 0;
-            _shapeModel.RemoveIndex(index);
+            _page.RemoveIndex(index);
             // Add assertions here
         }
 
@@ -162,7 +161,7 @@ namespace Unity.Tests
         [TestMethod]
         public void DeletePress_DeletesShape()
         {
-            _shapeModel.DeletePress();
+            _page.DeletePress();
             // Add assertions here
         }
 
@@ -172,7 +171,7 @@ namespace Unity.Tests
         [TestMethod]
         public void Undo_UndoesLastAction()
         {
-            _shapeModel.Undo();
+            _page.Undo();
             // Add assertions here
         }
 
@@ -182,7 +181,7 @@ namespace Unity.Tests
         [TestMethod]
         public void Redo_RedoLastAction()
         {
-            _shapeModel.Redo();
+            _page.Redo();
             // Add assertions here
         }
     }

@@ -10,11 +10,11 @@ namespace Unity
         DRAWING,
         POINT
     }
-    public class ShapeModel
+    public class Page
     {
         public event ModelChangedEventHandler _modelChanged;
         public delegate void ModelChangedEventHandler();
-        private BindingList<Shape> _shapeList = new BindingList<Shape>();
+        private BindingList<Shape> shapes = new BindingList<Shape> { };
         private PointState _pointState = new PointState();
         private IState _state = new DrawingState();
         bool _isPressed;
@@ -22,11 +22,12 @@ namespace Unity
         private CommandManager _commandManager = new CommandManager();
         Point _nowCanvas = new Point(1, 1);
 
+
         public BindingList<Shape> shapeList
         {
             get
             {
-                return _shapeList;
+                return shapes;
             }
         }
         #region state
@@ -53,7 +54,7 @@ namespace Unity
         /// </summary>
         public virtual bool IsScale()
         {
-            return _state.IsScale(_shapeList);
+            return _state.IsScale(shapes);
         }
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace Unity
         public void Resize(Point point)
         {
             _nowCanvas = point;
-            foreach (var shape in _shapeList)
+            foreach (var shape in shapes)
             {
                 shape.SetNowCanvasSize(point);
             }
@@ -76,11 +77,11 @@ namespace Unity
         /// <param name="graphics"></param>
         public virtual void Draw(IGraphics graphics)
         {
-            foreach (Shape shape in _shapeList)
+            foreach (Shape shape in shapes)
             {
                 shape.Draw(graphics);
             }
-            _state.Draw(graphics, _shapeList);
+            _state.Draw(graphics, shapes);
         }
         #endregion
 
@@ -111,7 +112,7 @@ namespace Unity
         {
             if (_modelChanged != null)
             {
-                _modelChanged();
+                _modelChanged.Invoke();
             }
         }
 
@@ -124,7 +125,7 @@ namespace Unity
         {
             if (PointFunction.IsBothNotNegative(point))
             {
-                _state.MouseDown(shapeType, point, _shapeList, _nowCanvas);
+                _state.MouseDown(shapeType, point, shapes, _nowCanvas);
                 _isPressed = true;
             }
         }
@@ -137,7 +138,7 @@ namespace Unity
         {
             if (_isPressed)
             {
-                _state.MouseUp(point, _shapeList, _commandManager);
+                _state.MouseUp(point, shapes, _commandManager);
                 _isPressed = false;
                 NotifyModelChanged();
             }
@@ -149,7 +150,7 @@ namespace Unity
         /// <param name="point"></param>
         public virtual void MouseMove(Point point)
         {
-            _state.MouseMove(point, _isPressed, _shapeList);
+            _state.MouseMove(point, _isPressed, shapes);
             NotifyModelChanged();
         }
         #endregion
@@ -160,7 +161,12 @@ namespace Unity
         /// <param name="type"></param>
         public virtual void Add(ShapeType shapeType)
         {
-            _shapeList.Add(ShapeFactory.CreateByRandom(shapeType, CANVAS_MAX, _nowCanvas, _commandManager));
+            shapes.Add(ShapeFactory.CreateByRandom(shapeType, CANVAS_MAX, _nowCanvas, _commandManager));
+            NotifyModelChanged();
+        }
+        public virtual void Add(Shape shape)
+        {
+            shapes.Add(shape);
             NotifyModelChanged();
         }
 
@@ -172,7 +178,7 @@ namespace Unity
         /// <param name="end"></param>
         public virtual void Add(ShapeType type, Point start, Point end)
         {
-            _shapeList.Add(ShapeFactory.CreateShape(type, start, end, _nowCanvas));
+            shapes.Add(ShapeFactory.CreateShape(type, start, end, _nowCanvas));
             _commandManager.AddShape(type, start, end, _nowCanvas);
             NotifyModelChanged();
         }
@@ -183,10 +189,10 @@ namespace Unity
         /// <param name="rowIndex"></param>
         public virtual void RemoveIndex(int rowIndex)
         {
-            if (rowIndex < shapeList.Count)
+            if (rowIndex < shapes.Count)
             {
                 _commandManager.Delete(rowIndex);
-                _shapeList.RemoveAt(rowIndex);
+                shapes.RemoveAt(rowIndex);
                 _state.Reset();
                 NotifyModelChanged();
             }
@@ -197,7 +203,7 @@ namespace Unity
         /// </summary>
         public virtual void DeletePress()
         {
-            _state.DeletePress(shapeList, _commandManager);
+            _state.DeletePress(shapes, _commandManager);
             NotifyModelChanged();
         }
 
@@ -206,7 +212,7 @@ namespace Unity
         /// </summary>
         public void Undo()
         {
-            _commandManager.Undo(_shapeList);
+            _commandManager.Undo(shapes);
             _state.Reset();
             NotifyModelChanged();
         }
@@ -216,8 +222,38 @@ namespace Unity
         /// </summary>
         public void Redo()
         {
-            _commandManager.Redo(_shapeList);
+            _commandManager.Redo(shapes);
             NotifyModelChanged();
+        }
+
+        public void HandleCommandChange()
+        {
+            NotifyCommandChange();
+        }
+        public event PageCommandChange _pageCommandChanged;
+        public delegate void PageCommandChange(Page page);
+        public void Detach(PageModel pageModel)
+        {
+            _pageCommandChanged -= pageModel.HandleCommandChange;
+            _commandManager.Detach(this);
+        }
+        public void Attach(PageModel pageModel)
+        {
+            _pageCommandChanged += pageModel.HandleCommandChange;
+
+            _commandManager.Attach(this);
+        }
+        void NotifyCommandChange()
+        {
+            if (_pageCommandChanged != null)
+            {
+                _pageCommandChanged.Invoke(this);
+            }
+        }
+
+        public void Clear()
+        {
+            shapes.Clear();
         }
     }
 }

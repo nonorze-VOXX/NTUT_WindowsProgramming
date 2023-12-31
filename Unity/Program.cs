@@ -13,10 +13,10 @@ namespace Unity
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            ShapeModel shapeModel = new ShapeModel();
-            PresentationModel presentationModel = new PresentationModel(shapeModel);
+            PageModel pageModel = new PageModel();
+            PresentationModel presentationModel = new PresentationModel(pageModel);
             var form = new Form1(presentationModel);
-            shapeModel.Attach(form);
+            pageModel.Attach(form);
             Application.Run(form);
         }
     }

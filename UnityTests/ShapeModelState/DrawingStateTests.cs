@@ -88,6 +88,7 @@ namespace Unity.Tests
         public void MouseUp_SetsSecondPointOfHintShapeAndAddsShapeToList()
         {
             var point = new Point(5, 5);
+            _drawingState.MouseDown(ShapeType.Line, point, _shapeList, point);
             _drawingState.MouseUp(point, _shapeList, _mockCommandManager.Object);
             // Add assertions here
         }

@@ -211,5 +211,13 @@ namespace Unity
                 _info[1] = new Point(scalePoint.X + delta.X, _info[1].Y);
             }
         }
+
+        public string Serializable()
+        {
+            return GetShapeName() + ","
+                             + _info[0].X + "," + _info[0].Y + ","
+                             + _info[1].X + "," + _info[1].Y + ","
+                             + _drawCanvasSize.X + "," + _drawCanvasSize.Y + "\n";
+        }
     }
 }
