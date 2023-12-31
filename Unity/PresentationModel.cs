@@ -344,5 +344,15 @@ namespace Unity
         {
             _pageModel.AttachCommandManager(from);
         }
+
+        public void Load()
+        {
+            _pageModel.Load();
+        }
+
+        public void Save()
+        {
+            _pageModel.Save();
+        }
     }
 }

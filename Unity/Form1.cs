@@ -37,6 +37,13 @@ namespace Unity
             ResizeWindow(null, null);
             _presentationModel.SetUndoHandler(this);
             HandleUndoButtonState(false, false);
+            var wrapper = new GoogleDriveWrapper();
+            //wrapper.DownloadFile("save.txt")
+            //wrapper.UploadFile("save.txt");
+
+            _presentationModel.Save();
+            _presentationModel.Load();
+
         }
 
         /// <summary>
@@ -106,8 +113,22 @@ namespace Unity
         {
             Invalidate(true);
             ResizeWindow(null, null);
+            _dataGridView.DataSource = _presentationModel.GetShapeList();
+            AsyncPageCount();
         }
         #endregion
+
+        void AsyncPageCount()
+        {
+            for (int i = _splitContainer1.Panel1.Controls.Count; i < _presentationModel.GetShapeList().Count; i++)
+            {
+                AddPage(i);
+            }
+            for (int i = _presentationModel.GetShapeList().Count; i < _splitContainer1.Panel1.Controls.Count; i++)
+            {
+                DeletePage();
+            }
+        }
 
         /// <summary>
         /// down

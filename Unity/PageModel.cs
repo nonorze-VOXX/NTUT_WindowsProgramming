@@ -182,5 +182,21 @@ namespace Unity
         {
             NotifyCommandChanged();
         }
+
+        #region google
+
+        private GoogleDriveWrapper _drive = new GoogleDriveWrapper();
+
+        public void Load()
+        {
+            _drive.LoadData();
+            NotifyCommandChanged();
+        }
+        public void Save()
+        {
+            _drive.SaveData(_pages);
+            NotifyCommandChanged();
+        }
+        #endregion
     }
 }

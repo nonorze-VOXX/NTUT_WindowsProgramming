@@ -164,6 +164,11 @@ namespace Unity
             shapes.Add(ShapeFactory.CreateByRandom(shapeType, CANVAS_MAX, _nowCanvas, _commandManager));
             NotifyModelChanged();
         }
+        public virtual void Add(Shape shape)
+        {
+            shapes.Add(shape);
+            NotifyModelChanged();
+        }
 
         /// <summary>
         /// Add newShape with type and two point
