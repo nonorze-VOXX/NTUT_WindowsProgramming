@@ -95,6 +95,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddShapeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddShapeForm.Designer.cs">
+      <DependentUpon>AddShapeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Canvas.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -119,7 +125,19 @@
     <Compile Include="GoogleDriveWrapper.cs" />
     <Compile Include="IGraphics.cs" />
     <Compile Include="IShapeObserver.cs" />
+    <Compile Include="LoadForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoadForm.Designer.cs">
+      <DependentUpon>LoadForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PageModel.cs" />
+    <Compile Include="SaveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SaveForm.Designer.cs">
+      <DependentUpon>SaveForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ShapeModelState\DrawingState.cs" />
     <Compile Include="ShapeModelState\IState.cs" />
     <Compile Include="Line.cs" />
@@ -136,12 +154,18 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="WindowFormsGraphicsAdaptor.cs" />
+    <EmbeddedResource Include="AddShapeForm.resx">
+      <DependentUpon>AddShapeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Canvas.resx">
       <DependentUpon>Canvas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <Generator>None</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoadForm.resx">
+      <DependentUpon>LoadForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -152,6 +176,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SaveForm.resx">
+      <DependentUpon>SaveForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="clientSecret.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

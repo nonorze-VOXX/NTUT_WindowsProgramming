@@ -12,6 +12,9 @@ namespace Unity
         public Form1(PresentationModel presentationModel)
         {
             _presentationModel = presentationModel;
+            _saveForm = new SaveForm(presentationModel);
+            _loadForm = new LoadForm(this, presentationModel);
+            _addShapeForm = new AddShapeForm(presentationModel);
             InitializeComponent();
             _shapeComboBox.DataSource = Enum.GetValues(typeof(ShapeType));
             _dataGridView.CellContentClick += _presentationModel.DeleteButtonClick;
@@ -28,7 +31,7 @@ namespace Unity
             presentationModel.InitAddPage(0, this);
             _dataGridView.DataSource = _presentationModel.GetShapeList();
             _brief = new Bitmap(_canvas.Width, _canvas.Height);
-            this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
+            //this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             _presentationModel.SwitchToSliderWrapper(this);
 
@@ -41,8 +44,6 @@ namespace Unity
             //wrapper.DownloadFile("save.txt")
             //wrapper.UploadFile("save.txt");
 
-            _presentationModel.Save();
-            _presentationModel.Load();
 
         }
 
@@ -111,22 +112,23 @@ namespace Unity
         /// </summary>
         public void ReceiveBell()
         {
-            Invalidate(true);
             ResizeWindow(null, null);
             _dataGridView.DataSource = _presentationModel.GetShapeList();
             AsyncPageCount();
+            Invalidate(true);
         }
         #endregion
 
         void AsyncPageCount()
         {
-            for (int i = _splitContainer1.Panel1.Controls.Count; i < _presentationModel.GetShapeList().Count; i++)
+            for (int i = _splitContainer1.Panel1.Controls.Count; i < _presentationModel.GetPageCount(); i++)
             {
-                AddPage(i);
+                AddPage(0);
+
             }
-            for (int i = _presentationModel.GetShapeList().Count; i < _splitContainer1.Panel1.Controls.Count; i++)
+            for (int i = _presentationModel.GetPageCount(); i < _splitContainer1.Panel1.Controls.Count; i++)
             {
-                DeletePage();
+                DeletePageAt(i);
             }
         }
 
@@ -305,6 +307,26 @@ namespace Unity
         public void DeletePageAt(int index)
         {
             _splitContainer1.Panel1.Controls.RemoveAt(index);
+        }
+
+        SaveForm _saveForm;
+        private void LoadButtonClick(object sender, EventArgs e)
+        {
+            _loadForm.ShowDialog();
+        }
+
+        private LoadForm _loadForm;
+
+
+        private void SaveButtonClick(object sender, EventArgs e)
+        {
+            _saveForm.ShowDialog();
+        }
+
+        private AddShapeForm _addShapeForm;
+        private void _createButton_Click(object sender, EventArgs e)
+        {
+            _addShapeForm.ShowDialog();
         }
     }
 }

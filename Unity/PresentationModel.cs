@@ -345,14 +345,24 @@ namespace Unity
             _pageModel.AttachCommandManager(from);
         }
 
-        public void Load()
+        public void Load(Form1 form)
         {
-            _pageModel.Load();
+            _pageModel.Load(form);
         }
 
         public void Save()
         {
             _pageModel.Save();
+        }
+
+        public int GetPageCount()
+        {
+            return _pageModel.GetPageCount();
+        }
+
+        public void AddShape(ShapeType shapeType, Point point, Point point1)
+        {
+            _pageModel.Add(shapeType, point, point1);
         }
     }
 }

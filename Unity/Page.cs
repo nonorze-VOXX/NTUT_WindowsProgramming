@@ -250,5 +250,10 @@ namespace Unity
                 _pageCommandChanged.Invoke(this);
             }
         }
+
+        public void Clear()
+        {
+            shapes.Clear();
+        }
     }
 }

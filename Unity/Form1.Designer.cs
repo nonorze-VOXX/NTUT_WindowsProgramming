@@ -54,14 +54,14 @@ namespace Unity
             this._undoButton = new System.Windows.Forms.ToolStripButton();
             this._redoButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this._splitContainer1 = new System.Windows.Forms.SplitContainer();
             this._splitContainer2 = new System.Windows.Forms.SplitContainer();
             this._canvas = new Unity.Canvas();
             this._shapeComboBox = new Unity.ShapeTypeComboBox();
             this.presentationModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.shapeModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.shapeListUnitBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.presentationModelBindingSource1)).BeginInit();
@@ -142,6 +142,7 @@ namespace Unity
             this._createButton.TabIndex = 1;
             this._createButton.Text = "create";
             this._createButton.UseVisualStyleBackColor = true;
+            this._createButton.Click += new System.EventHandler(this._createButton_Click);
             // 
             // _topBar
             // 
@@ -262,6 +263,28 @@ namespace Unity
             this.toolStripButton1.Text = "📝";
             this.toolStripButton1.Click += new System.EventHandler(this.AddPageButtonClick);
             // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.AccessibleName = "Save";
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton2.Text = "💾";
+            this.toolStripButton2.Click += new System.EventHandler(this.SaveButtonClick);
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.AccessibleName = "Load";
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Text = "⬇️";
+            this.toolStripButton3.Click += new System.EventHandler(this.LoadButtonClick);
+            // 
             // _splitContainer1
             // 
             this._splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -338,26 +361,6 @@ namespace Unity
             // shapeModelBindingSource
             // 
             this.shapeModelBindingSource.DataSource = typeof(Unity.Page);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.AccessibleName = "Save";
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "💾";
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.AccessibleName = "Load";
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "⬇️";
             // 
             // Form1
             // 

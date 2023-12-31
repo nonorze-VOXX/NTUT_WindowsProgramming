@@ -90,5 +90,11 @@ namespace Unity.Command.CMM
                 switchPage.Invoke(index);
             }
         }
+
+        public void Clear()
+        {
+            _redoStack.Clear();
+            _undoStack.Clear();
+        }
     }
 }

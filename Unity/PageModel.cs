@@ -100,6 +100,10 @@ namespace Unity
         {
             _page.Add(getSelectedItem);
         }
+        public void Add(ShapeType getSelectedItem, Point point1, Point point2)
+        {
+            _page.Add(getSelectedItem, point1, point2);
+        }
 
         public void RemoveIndex(int eRowIndex)
         {
@@ -187,14 +191,35 @@ namespace Unity
 
         private GoogleDriveWrapper _drive = new GoogleDriveWrapper();
 
-        public void Load()
+        public void Load(Form1 form)
         {
-            _drive.LoadData();
+            var newPage = _drive.LoadData();
+            int i = 0;
+            for (i = 0; i < newPage.Count; i++)
+            {
+                if (_pages.Count == i)
+                {
+                    AddPage(i, form);
+                }
+
+                _pages[i].Clear();
+                foreach (var shape in newPage[i].shapeList)
+                {
+                    _pages[i].Add(shape);
+                }
+            }
+
+            for (int j = _pages.Count - 1; j >= i; j--)
+            {
+                _pages.RemoveAt(i);
+            }
+            _commandManagerManager.Clear();
             NotifyCommandChanged();
         }
         public void Save()
         {
             _drive.SaveData(_pages);
+            _commandManagerManager.Clear();
             NotifyCommandChanged();
         }
         #endregion
