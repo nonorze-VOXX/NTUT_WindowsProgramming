@@ -35,23 +35,26 @@ namespace Unity
             string result = "";
             foreach (var page in pages)
             {
+                result += ".\n";
                 foreach (var shape in page.shapeList)
                 {
                     result += shape.Serializable();
                 }
-                result += "\n";
             }
             return result;
         }
         private List<Page> Decode(string origin)
         {
             var lines = origin.Split('\n');
-            var pageIndex = 0;
+            var pageIndex = -1;
             List<Page> pages = new List<Page>();
-            pages.Add(new Page());
             foreach (var line in lines)
             {
                 if (line.Length == 0)
+                {
+                    continue;
+                }
+                if (line == ".")
                 {
                     pageIndex++;
                     pages.Add(new Page());
