@@ -72,6 +72,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Command\AddCommandTests.cs" />
+    <Compile Include="Command\CMM\CommandManagerManagerTests.cs" />
     <Compile Include="Command\CommandManagerTests.cs" />
     <Compile Include="Command\DeleteCommandTests.cs" />
     <Compile Include="Command\MoveCommandTests.cs" />

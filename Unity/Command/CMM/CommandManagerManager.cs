@@ -83,13 +83,6 @@ namespace Unity.Command.CMM
         {
             switchPage += form.SwitchToslide;
         }
-        void SwitchToSlide(int index)
-        {
-            if (switchPage != null)
-            {
-                switchPage.Invoke(index);
-            }
-        }
 
         public void Clear()
         {

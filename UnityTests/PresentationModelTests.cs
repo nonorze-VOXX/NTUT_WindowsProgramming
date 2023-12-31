@@ -25,6 +25,32 @@ namespace Unity.Tests
             _presentationModel = new PresentationModel(_mockShapeModel.Object);
         }
 
+        [TestMethod()]
+        public void Utils1()
+        {
+            var form = new Form1(_presentationModel);
+            _presentationModel.InitAddPage(0, form);
+            var eventArgs = new DataGridViewCellEventArgs(0, 0);
+            _presentationModel.DeleteButtonClick(null, eventArgs);
+            _presentationModel.HandleCanvasMouseDown(new Point(1, 1));
+            var canvas = new Mock<Canvas>();
+            int index = 0;
+            _presentationModel.HandleToolStripButtonClick(null, (ShapeType)index, canvas.Object);
+
+            _presentationModel.HandleCanvasMouseDown(new Point(1, 1));
+            _presentationModel.HandleCanvasMouseUp(_mockCanvas, new Point(3, 3), null);
+
+            _presentationModel.Undo();
+            _presentationModel.Redo();
+            _presentationModel.AddPageButtonClick();
+            _presentationModel.Undo();
+            _presentationModel.Redo();
+            _presentationModel.DeletePage(form);
+            _presentationModel.Undo();
+            _presentationModel.Redo();
+
+        }
+
         /// <summary>
         /// a
         /// </summary>

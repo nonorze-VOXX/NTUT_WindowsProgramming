@@ -96,10 +96,6 @@ namespace Unity
             _page.MouseDown(shapeType, point);
         }
 
-        public void Add(ShapeType getSelectedItem)
-        {
-            _page.Add(getSelectedItem);
-        }
         public void Add(ShapeType getSelectedItem, Point point1, Point point2)
         {
             _page.Add(getSelectedItem, point1, point2);
