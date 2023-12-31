@@ -60,6 +60,8 @@ namespace Unity
             this._shapeComboBox = new Unity.ShapeTypeComboBox();
             this.presentationModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.shapeModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.shapeListUnitBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.presentationModelBindingSource1)).BeginInit();
@@ -81,8 +83,8 @@ namespace Unity
             this._dataGridView.AllowUserToAddRows = false;
             this._dataGridView.AllowUserToResizeColumns = false;
             this._dataGridView.AllowUserToResizeRows = false;
-            this._dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this._dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._dataGridView.AutoGenerateColumns = false;
             this._dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -174,7 +176,9 @@ namespace Unity
             this._toolStripButton4,
             this._undoButton,
             this._redoButton,
-            this.toolStripButton1});
+            this.toolStripButton1,
+            this.toolStripButton2,
+            this.toolStripButton3});
             this._toolStrip1.Location = new System.Drawing.Point(0, 24);
             this._toolStrip1.Name = "_toolStrip1";
             this._toolStrip1.Size = new System.Drawing.Size(1363, 25);
@@ -183,6 +187,7 @@ namespace Unity
             // 
             // _toolStripButton1
             // 
+            this._toolStripButton1.AccessibleName = "Line";
             this._toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this._toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("_toolStripButton1.Image")));
             this._toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -193,6 +198,7 @@ namespace Unity
             // 
             // _toolStripButton2
             // 
+            this._toolStripButton2.AccessibleName = "Rectangle";
             this._toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this._toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("_toolStripButton2.Image")));
             this._toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -203,6 +209,7 @@ namespace Unity
             // 
             // _toolStripButton3
             // 
+            this._toolStripButton3.AccessibleName = "Ellipse";
             this._toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this._toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("_toolStripButton3.Image")));
             this._toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -213,6 +220,7 @@ namespace Unity
             // 
             // _toolStripButton4
             // 
+            this._toolStripButton4.AccessibleName = "Point";
             this._toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this._toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("_toolStripButton4.Image")));
             this._toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -223,6 +231,7 @@ namespace Unity
             // 
             // _undoButton
             // 
+            this._undoButton.AccessibleName = "Undo";
             this._undoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this._undoButton.Image = ((System.Drawing.Image)(resources.GetObject("_undoButton.Image")));
             this._undoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -233,6 +242,7 @@ namespace Unity
             // 
             // _redoButton
             // 
+            this._redoButton.AccessibleName = "Redo";
             this._redoButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this._redoButton.Image = ((System.Drawing.Image)(resources.GetObject("_redoButton.Image")));
             this._redoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -243,6 +253,7 @@ namespace Unity
             // 
             // toolStripButton1
             // 
+            this.toolStripButton1.AccessibleName = "AddPage";
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -253,8 +264,8 @@ namespace Unity
             // 
             // _splitContainer1
             // 
-            this._splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this._splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this._splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
@@ -276,8 +287,8 @@ namespace Unity
             // 
             // _splitContainer2
             // 
-            this._splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this._splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._splitContainer2.BackColor = System.Drawing.SystemColors.WindowFrame;
             this._splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -302,7 +313,7 @@ namespace Unity
             // 
             // _canvas
             // 
-            this._canvas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this._canvas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this._canvas.BackColor = System.Drawing.Color.White;
             this._canvas.Location = new System.Drawing.Point(3, 3);
@@ -327,6 +338,26 @@ namespace Unity
             // shapeModelBindingSource
             // 
             this.shapeModelBindingSource.DataSource = typeof(Unity.Page);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.AccessibleName = "Save";
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton2.Text = "💾";
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.AccessibleName = "Load";
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Text = "⬇️";
             // 
             // Form1
             // 
@@ -390,6 +421,8 @@ namespace Unity
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private BindingSource shapeListUnitBindingSource;
+        private ToolStripButton toolStripButton2;
+        private ToolStripButton toolStripButton3;
     }
 }
 
