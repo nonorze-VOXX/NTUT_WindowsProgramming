@@ -60,14 +60,11 @@ namespace Unity.Tests
             _presentationModel.SetNowPageIndex(2);
             _presentationModel.DeletePage(form);
 
-            /*TODO
+            _presentationModel.AddShape(ShapeType.Line, new Point(1, 1), new Point(2, 2));
+            _presentationModel.AddShape(ShapeType.Rectangle, new Point(1, 1), new Point(2, 2));
+            _presentationModel.AddShape(ShapeType.Ellipse, new Point(1, 1), new Point(2, 2));
             _presentationModel.Save();
             _presentationModel.Load(form);
-            _presentationModel.AddPageButtonClick();
-            _presentationModel.AddPageButtonClick();
-            _presentationModel.AddPageButtonClick();
-            _presentationModel.Load(form);
-            */
         }
         /// <summary>
         /// a

@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Unity
 {
-    class GoogleDriveWrapper
+    public class GoogleDriveWrapper
     {
         private GoogleDriveService _service;
 
