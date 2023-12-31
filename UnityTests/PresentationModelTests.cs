@@ -31,7 +31,8 @@ namespace Unity.Tests
         [TestMethod()]
         public void Utils()
         {
-            _presentationModel.InitAddPage(0, new Form1(_presentationModel));
+            var form = new Form1(_presentationModel);
+            _presentationModel.InitAddPage(0, form);
             _presentationModel.HandleCanvasMouseMove(new Point(1, 1));
             _presentationModel.HandleCanvasMouseDown(new Point(1, 1));
             var eventArgs = new DataGridViewCellEventArgs(0, 0);
@@ -46,7 +47,27 @@ namespace Unity.Tests
             _presentationModel.HandleKeyDown(e);
             _presentationModel.HandleCanvasMouseDown(new Point(1, 1));
             _presentationModel.HandleCanvasMouseUp(_mockCanvas, new Point(1, 1), null);
+            _presentationModel.DeletePage(form);
+            _presentationModel.DeletePage(form);
+            _presentationModel.AddShape(ShapeType.Line, new Point(1, 1), new Point(2, 2));
+            _presentationModel.AddPageButtonClick();
+            _presentationModel.AddPageButtonClick();
+            _presentationModel.AddPageButtonClick();
+            _presentationModel.GetNowPage();
+            _presentationModel.SetFocusSlide(true);
+            _presentationModel.HandleKeyDown(e);
+            var test = _presentationModel.shapeListUnit;
+            _presentationModel.SetNowPageIndex(2);
+            _presentationModel.DeletePage(form);
 
+            /*TODO
+            _presentationModel.Save();
+            _presentationModel.Load(form);
+            _presentationModel.AddPageButtonClick();
+            _presentationModel.AddPageButtonClick();
+            _presentationModel.AddPageButtonClick();
+            _presentationModel.Load(form);
+            */
         }
         /// <summary>
         /// a

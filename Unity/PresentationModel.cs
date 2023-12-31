@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-
-using ButtonFunction = System.Action<object, System.EventArgs>;
 
 namespace Unity
 {
@@ -50,6 +47,10 @@ namespace Unity
             addPage += index => _pageModel.AddPage(index, form);
         }
 
+        public void SetNowPageIndex(int i)
+        {
+            nowPageIndex = i;
+        }
         public event DeletePageEvent _deletePage;
         public delegate void DeletePageEvent();
 
@@ -224,19 +225,6 @@ namespace Unity
         #endregion
 
         /// <summary>
-        /// create shape button click
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public ButtonFunction CreateButtonClick(ShapeTypeComboBox comboBox)
-        {
-            return (object sender, EventArgs e) =>
-            {
-                _pageModel.Add((ShapeType)comboBox.GetSelectedItem());
-            };
-        }
-
-        /// <summary>
         /// delete button click with delete model and datagridview
         /// </summary>
         /// <param name="sender"></param>
@@ -320,7 +308,7 @@ namespace Unity
         }
 
 
-        internal void AddPageButtonClick()
+        public void AddPageButtonClick()
         {
             pageIndex += 1;
             addPage.Invoke(pageIndex);
@@ -335,6 +323,11 @@ namespace Unity
         }
 
         private bool focusSlide = false;
+
+        public void SetFocusSlide(bool slide)
+        {
+            focusSlide = slide;
+        }
         public int GetNowPage()
         {
             return nowPageIndex;
