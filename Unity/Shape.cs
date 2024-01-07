@@ -7,6 +7,7 @@ namespace Unity
     {
         private const string COMMA = ",";
         private const string EMPTY = " ";
+        private const string LINE = "\n";
         public string shape
         {
             get
@@ -212,12 +213,13 @@ namespace Unity
             }
         }
 
-        public string Serializable()
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
+        public string GetFile()
         {
-            return GetShapeName() + ","
-                             + _info[0].X + "," + _info[0].Y + ","
-                             + _info[1].X + "," + _info[1].Y + ","
-                             + _drawCanvasSize.X + "," + _drawCanvasSize.Y + "\n";
+            return GetShapeName() + COMMA + _info[0].X + COMMA + _info[0].Y + COMMA + _info[1].X + COMMA + _info[1].Y + COMMA + _drawCanvasSize.X + COMMA + _drawCanvasSize.Y + LINE;
         }
     }
 }

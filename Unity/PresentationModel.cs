@@ -1,27 +1,30 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace Unity
 {
-    public class PresentationModel
+    public partial class PresentationModel
     {
-        public event AddPage addPage;
-        public delegate void AddPage(int index);
-        private int pageIndex = -1;
-        private int nowPageIndex = 0;
+        public event DeletePageEventHandler _deletePage;
+        public delegate void DeletePageEventHandler();
+        public event AddPageEventHandler _addPage;
+        public delegate void AddPageEventHandler(int index);
+        private int _pageIndex = -1;
+        private int _nowPageIndex = 0;
         private const int ONE_SIX = 16;
         private const int NINE = 9;
         //Page _page;
         private PageModel _pageModel;
         List<bool> _shapeButtonActive;
-        private BindingList<Shape> fakeBindingList;
+        private BindingList<Shape> _fakeBindingList = new BindingList<Shape>();
         public BindingList<Shape> shapeListUnit
         {
             get
             {
-                return fakeBindingList;
+                return _fakeBindingList;
             }
         }
         /// <summary>
@@ -37,48 +40,72 @@ namespace Unity
             };
             _pageModel.SwitchStatePoint();
         }
-        public void SwitchToSliderWrapper(Form1 form)
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
+        public void SwitchToSliderWrap(Form1 form)
         {
-            _pageModel.SwitchToSliderWrapper(form);
+            _pageModel.SwitchToSliderWrap(form);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void SetAddPageEvent(Form1 form)
         {
-            addPage += index => _pageModel.AddPage(index, form);
+            _addPage += index => _pageModel.AddPage(index, form);
         }
 
-        public void SetNowPageIndex(int i)
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
+        public void SetNowPageIndex(int index)
         {
-            nowPageIndex = i;
+            _nowPageIndex = index;
         }
-        public event DeletePageEvent _deletePage;
-        public delegate void DeletePageEvent();
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void DeletePage(Form1 form)
         {
             if (_pageModel.GetPageCount() <= 1)
             {
                 return;
             }
-            _pageModel.DeletePage(nowPageIndex, form);
-            form.DeletePageAt(nowPageIndex);
-            if (_pageModel.GetPageCount() - 1 < nowPageIndex)
+            _pageModel.DeletePage(_nowPageIndex, form);
+            form.DeletePageAt(_nowPageIndex);
+            if (_pageModel.GetPageCount() - 1 < _nowPageIndex)
             {
-                form.SwitchToslide(_pageModel.GetPageCount() - 1);
+                form.SwitchToSlide(_pageModel.GetPageCount() - 1);
             }
             else
             {
-                form.SwitchToslide(nowPageIndex);
+                form.SwitchToSlide(_nowPageIndex);
             }
-
+            Debug.Assert(_nowPageIndex >= 0);
         }
-        public void AttatchDelete(Form1 form)
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
+        public void AttachDelete(Form1 form)
         {
             _deletePage += form.DeletePage;
         }
-        public void InitAddPage(int index, Form1 form)
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
+        public void AddFirstPage(int index, Form1 form)
         {
-            _pageModel.InitAddPage(0, form);
+            _pageModel.AddStartPage(0, form);
         }
 
         /// <summary>
@@ -115,7 +142,7 @@ namespace Unity
 
             for (int i = 1; i < slide.Count; i++)
             {
-                slide[i].Location = new Point(3, slide[i - 1].Location.Y + slide[i - 1].Height);
+                slide[i].Location = new Point(1 + 1 + 1, slide[i - 1].Location.Y + slide[i - 1].Height);
             }
             _pageModel.Resize(new Point(canvas.Width, canvas.Height));
         }
@@ -172,190 +199,6 @@ namespace Unity
                 toolStripButton.Checked = shapeButtonActive[i];
             }
 
-        }
-
-        /// <summary>
-        /// get
-        /// </summary>
-        /// <returns></returns>
-        public BindingList<Shape> GetShapeList()
-        {
-            return _pageModel.shapeList;
-        }
-
-        #region CanvasMouse
-
-        /// <summary>
-        /// mouse up
-        /// </summary>
-        /// <param name="canvas"></param>
-        /// <param name="point"></param>
-        /// <param name="toolStripItems"></param>
-        public void HandleCanvasMouseUp(Canvas canvas, Point point, ToolStripItemCollection items)
-        {
-            _pageModel.MouseUp(point);
-            HandleToolStripPointButtonClick(items, canvas);
-        }
-
-        /// <summary>
-        /// mouse move
-        /// </summary>
-        /// <param name="point"></param>
-        public void HandleCanvasMouseMove(Point point)
-        {
-            _pageModel.MouseMove(point);
-        }
-
-        /// <summary>
-        /// mouse down
-        /// </summary>
-        /// <param name="point"></param>
-        public void HandleCanvasMouseDown(Point point)
-        {
-            for (int i = 0; i < _shapeButtonActive.Count; i++)
-            {
-                if (_shapeButtonActive[i])
-                {
-                    _pageModel.MouseDown((ShapeType)i, point);
-                }
-            }
-
-            focusSlide = false;
-        }
-        #endregion
-
-        /// <summary>
-        /// delete button click with delete model and datagridview
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void DeleteButtonClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 0 && e.RowIndex != -1)
-            {
-                _pageModel.RemoveIndex(e.RowIndex);
-            }
-        }
-
-        /// <summary>
-        /// a
-        /// </summary>
-        public void Undo()
-        {
-            _pageModel.Undo();
-        }
-
-        /// <summary>
-        /// a
-        /// </summary>
-        public void Redo()
-        {
-            _pageModel.Redo();
-        }
-
-        /// <summary>
-        /// click
-        /// </summary>
-        /// <param name="toolStripItems"></param>
-        /// <param name="shapeType"></param>
-        /// <param name="canvas"></param>
-        /// <returns></returns>
-        public void HandleToolStripButtonClick(ToolStripItemCollection toolStripItems, ShapeType shapeType, Canvas canvas)
-        {
-            UpdateShapeButtonActive(toolStripItems, (int)shapeType, true);
-            canvas.Cursor = System.Windows.Forms.Cursors.Cross;
-            _pageModel.SwitchStateDrawing();
-        }
-
-        /// <summary>
-        /// click
-        /// </summary>
-        /// <param name="toolStripItems"></param>
-        /// <param name="canvas"></param>
-        /// <returns></returns>
-        public void HandleToolStripPointButtonClick(ToolStripItemCollection toolStripItems, Canvas canvas)
-        {
-            if (toolStripItems == null)
-            {
-                return;
-            }
-
-            UpdateShapeButtonActive(toolStripItems, 1 + 1 + 1, true);
-            canvas.Cursor = System.Windows.Forms.Cursors.Default;
-            _pageModel.SwitchStatePoint();
-        }
-
-        /// <summary>
-        /// down
-        /// </summary>
-        /// <param name="e"></param>
-        public void HandleKeyDown(KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Delete)
-            {
-                if (focusSlide)
-                {
-                    if (_deletePage != null)
-                    {
-                        _deletePage.Invoke();
-                    }
-                }
-                else
-                {
-                    _pageModel.DeletePress();
-                }
-            }
-        }
-
-
-        public void AddPageButtonClick()
-        {
-            pageIndex += 1;
-            addPage.Invoke(pageIndex);
-        }
-
-        internal void ClickSlide(int index, DataGridView dataGridView)
-        {
-            nowPageIndex = index;
-            _pageModel.SetNowPageIndex(index);
-            dataGridView.DataSource = GetShapeList();
-            focusSlide = true;
-        }
-
-        private bool focusSlide = false;
-
-        public void SetFocusSlide(bool slide)
-        {
-            focusSlide = slide;
-        }
-        public int GetNowPage()
-        {
-            return nowPageIndex;
-        }
-
-        public void SetUndoHandler(Form1 from)
-        {
-            _pageModel.AttachCommandManager(from);
-        }
-
-        public void Load(Form1 form)
-        {
-            _pageModel.Load(form);
-        }
-
-        public void Save()
-        {
-            _pageModel.Save();
-        }
-
-        public int GetPageCount()
-        {
-            return _pageModel.GetPageCount();
-        }
-
-        public void AddShape(ShapeType shapeType, Point point, Point point1)
-        {
-            _pageModel.Add(shapeType, point, point1);
         }
     }
 }

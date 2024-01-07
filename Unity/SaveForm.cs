@@ -12,13 +12,21 @@ namespace Unity
             InitializeComponent();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private void SaveClick(object sender, EventArgs e)
         {
             _presentationModel.Save();
             Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
+        private void Button1Click(object sender, EventArgs e)
         {
             Close();
         }

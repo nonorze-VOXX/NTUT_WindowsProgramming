@@ -37,11 +37,11 @@ namespace Unity
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this._dataGridView = new System.Windows.Forms.DataGridView();
-            this.delete = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.shapeListUnitBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.presentationModelBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this._delete1 = new System.Windows.Forms.DataGridViewButtonColumn();
+            this._dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this._shapeListUnitBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this._presentationModelBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this._createButton = new System.Windows.Forms.Button();
             this._topBar = new System.Windows.Forms.MenuStrip();
             this._toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,18 +53,18 @@ namespace Unity
             this._toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this._undoButton = new System.Windows.Forms.ToolStripButton();
             this._redoButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this._toolStripButton11 = new System.Windows.Forms.ToolStripButton();
+            this._toolStripButton21 = new System.Windows.Forms.ToolStripButton();
+            this._toolStripButton31 = new System.Windows.Forms.ToolStripButton();
             this._splitContainer1 = new System.Windows.Forms.SplitContainer();
             this._splitContainer2 = new System.Windows.Forms.SplitContainer();
             this._canvas = new Unity.Canvas();
             this._shapeComboBox = new Unity.ShapeTypeComboBox();
-            this.presentationModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.shapeModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this._presentationModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this._shapeModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.shapeListUnitBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.presentationModelBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._shapeListUnitBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._presentationModelBindingSource1)).BeginInit();
             this._topBar.SuspendLayout();
             this._toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._splitContainer1)).BeginInit();
@@ -74,8 +74,8 @@ namespace Unity
             this._splitContainer2.Panel1.SuspendLayout();
             this._splitContainer2.Panel2.SuspendLayout();
             this._splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.presentationModelBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.shapeModelBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._presentationModelBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._shapeModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // _dataGridView
@@ -83,17 +83,17 @@ namespace Unity
             this._dataGridView.AllowUserToAddRows = false;
             this._dataGridView.AllowUserToResizeColumns = false;
             this._dataGridView.AllowUserToResizeRows = false;
-            this._dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this._dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this._dataGridView.AutoGenerateColumns = false;
             this._dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this._dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.delete,
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2});
-            this._dataGridView.DataSource = this.shapeListUnitBindingSource;
+            this._delete1,
+            this._dataGridViewTextBoxColumn1,
+            this._dataGridViewTextBoxColumn2});
+            this._dataGridView.DataSource = this._shapeListUnitBindingSource;
             this._dataGridView.Location = new System.Drawing.Point(0, 75);
             this._dataGridView.Name = "_dataGridView";
             this._dataGridView.ReadOnly = true;
@@ -103,36 +103,36 @@ namespace Unity
             // 
             // delete
             // 
-            this.delete.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.delete.HeaderText = "delete";
-            this.delete.Name = "delete";
-            this.delete.ReadOnly = true;
-            this.delete.Text = "delete";
-            this.delete.UseColumnTextForButtonValue = true;
-            this.delete.Width = 42;
+            this._delete1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this._delete1.HeaderText = "delete";
+            this._delete1.Name = "delete";
+            this._delete1.ReadOnly = true;
+            this._delete1.Text = "delete";
+            this._delete1.UseColumnTextForButtonValue = true;
+            this._delete1.Width = 42;
             // 
             // dataGridViewTextBoxColumn1
             // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "shape";
-            this.dataGridViewTextBoxColumn1.HeaderText = "shape";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this._dataGridViewTextBoxColumn1.DataPropertyName = "shape";
+            this._dataGridViewTextBoxColumn1.HeaderText = "shape";
+            this._dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this._dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Information";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Information";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this._dataGridViewTextBoxColumn2.DataPropertyName = "Information";
+            this._dataGridViewTextBoxColumn2.HeaderText = "Information";
+            this._dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this._dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
             // shapeListUnitBindingSource
             // 
-            this.shapeListUnitBindingSource.DataMember = "shapeListUnit";
-            this.shapeListUnitBindingSource.DataSource = this.presentationModelBindingSource1;
+            this._shapeListUnitBindingSource.DataMember = "shapeListUnit";
+            this._shapeListUnitBindingSource.DataSource = this._presentationModelBindingSource1;
             // 
             // presentationModelBindingSource1
             // 
-            this.presentationModelBindingSource1.DataSource = typeof(Unity.PresentationModel);
+            this._presentationModelBindingSource1.DataSource = typeof(Unity.PresentationModel);
             // 
             // _createButton
             // 
@@ -142,7 +142,7 @@ namespace Unity
             this._createButton.TabIndex = 1;
             this._createButton.Text = "create";
             this._createButton.UseVisualStyleBackColor = true;
-            this._createButton.Click += new System.EventHandler(this._createButton_Click);
+            this._createButton.Click += new System.EventHandler(this.CreateButtonClick);
             // 
             // _topBar
             // 
@@ -177,9 +177,9 @@ namespace Unity
             this._toolStripButton4,
             this._undoButton,
             this._redoButton,
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripButton3});
+            this._toolStripButton11,
+            this._toolStripButton21,
+            this._toolStripButton31});
             this._toolStrip1.Location = new System.Drawing.Point(0, 24);
             this._toolStrip1.Name = "_toolStrip1";
             this._toolStrip1.Size = new System.Drawing.Size(1363, 25);
@@ -254,41 +254,41 @@ namespace Unity
             // 
             // toolStripButton1
             // 
-            this.toolStripButton1.AccessibleName = "AddPage";
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "📝";
-            this.toolStripButton1.Click += new System.EventHandler(this.AddPageButtonClick);
+            this._toolStripButton11.AccessibleName = "AddPageEventHandler";
+            this._toolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this._toolStripButton11.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this._toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripButton11.Name = "toolStripButton1";
+            this._toolStripButton11.Size = new System.Drawing.Size(23, 22);
+            this._toolStripButton11.Text = "📝";
+            this._toolStripButton11.Click += new System.EventHandler(this.AddPageButtonClick);
             // 
             // toolStripButton2
             // 
-            this.toolStripButton2.AccessibleName = "Save";
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "💾";
-            this.toolStripButton2.Click += new System.EventHandler(this.SaveButtonClick);
+            this._toolStripButton21.AccessibleName = "Save";
+            this._toolStripButton21.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this._toolStripButton21.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this._toolStripButton21.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripButton21.Name = "toolStripButton2";
+            this._toolStripButton21.Size = new System.Drawing.Size(23, 22);
+            this._toolStripButton21.Text = "💾";
+            this._toolStripButton21.Click += new System.EventHandler(this.SaveButtonClick);
             // 
             // toolStripButton3
             // 
-            this.toolStripButton3.AccessibleName = "Load";
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "⬇️";
-            this.toolStripButton3.Click += new System.EventHandler(this.LoadButtonClick);
+            this._toolStripButton31.AccessibleName = "Load";
+            this._toolStripButton31.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this._toolStripButton31.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this._toolStripButton31.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripButton31.Name = "toolStripButton3";
+            this._toolStripButton31.Size = new System.Drawing.Size(23, 22);
+            this._toolStripButton31.Text = "⬇️";
+            this._toolStripButton31.Click += new System.EventHandler(this.LoadButtonClick);
             // 
             // _splitContainer1
             // 
-            this._splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this._splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this._splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this._splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
@@ -310,8 +310,8 @@ namespace Unity
             // 
             // _splitContainer2
             // 
-            this._splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this._splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this._splitContainer2.BackColor = System.Drawing.SystemColors.WindowFrame;
             this._splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -336,7 +336,7 @@ namespace Unity
             // 
             // _canvas
             // 
-            this._canvas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this._canvas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this._canvas.BackColor = System.Drawing.Color.White;
             this._canvas.Location = new System.Drawing.Point(3, 3);
@@ -356,11 +356,11 @@ namespace Unity
             // 
             // presentationModelBindingSource
             // 
-            this.presentationModelBindingSource.DataSource = typeof(Unity.PresentationModel);
+            this._presentationModelBindingSource.DataSource = typeof(Unity.PresentationModel);
             // 
             // shapeModelBindingSource
             // 
-            this.shapeModelBindingSource.DataSource = typeof(Unity.Page);
+            this._shapeModelBindingSource.DataSource = typeof(Unity.Page);
             // 
             // Form1
             // 
@@ -374,8 +374,8 @@ namespace Unity
             this.Name = "Form1";
             this.Text = "amogus";
             ((System.ComponentModel.ISupportInitialize)(this._dataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.shapeListUnitBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.presentationModelBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._shapeListUnitBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._presentationModelBindingSource1)).EndInit();
             this._topBar.ResumeLayout(false);
             this._topBar.PerformLayout();
             this._toolStrip1.ResumeLayout(false);
@@ -387,8 +387,8 @@ namespace Unity
             this._splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._splitContainer2)).EndInit();
             this._splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.presentationModelBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.shapeModelBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._presentationModelBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._shapeModelBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -411,21 +411,16 @@ namespace Unity
         private ToolStripButton _undoButton;
         private ToolStripButton _redoButton;
         private SplitContainer _splitContainer1;
-        private DataGridViewButtonColumn _delete;
-        private DataGridViewTextBoxColumn _shapeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn _informationDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn shapeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn informationDataGridViewTextBoxColumn;
-        private ToolStripButton toolStripButton1;
-        private DataGridViewButtonColumn delete;
-        private BindingSource shapeModelBindingSource;
-        private BindingSource presentationModelBindingSource;
-        private BindingSource presentationModelBindingSource1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private BindingSource shapeListUnitBindingSource;
-        private ToolStripButton toolStripButton2;
-        private ToolStripButton toolStripButton3;
+        private ToolStripButton _toolStripButton11;
+        private DataGridViewButtonColumn _delete1;
+        private BindingSource _shapeModelBindingSource;
+        private BindingSource _presentationModelBindingSource;
+        private BindingSource _presentationModelBindingSource1;
+        private DataGridViewTextBoxColumn _dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn _dataGridViewTextBoxColumn2;
+        private BindingSource _shapeListUnitBindingSource;
+        private ToolStripButton _toolStripButton21;
+        private ToolStripButton _toolStripButton31;
     }
 }
 

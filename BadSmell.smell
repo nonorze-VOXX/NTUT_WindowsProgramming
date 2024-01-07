@@ -185,11 +185,176 @@
     <div class="data">
       <Data id="ReviewPalData">
         <CodeReview xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-          <Reviews />
+          <Reviews>
+            <Smell>
+              <Id>1</Id>
+              <SmellType>Static method and fields(濫用Static)</SmellType>
+              <HashCode>StaticMethodAndFields 38223069</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Unity</Project>
+              <File>GoogleDriveService.cs</File>
+              <Line>18</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>2</Id>
+              <SmellType>ICS(變數-1)</SmellType>
+              <HashCode>Variable1.GoogleDriveService.SCOPES</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Unity</Project>
+              <File>GoogleDriveService.cs</File>
+              <Line>18</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>ICS(變數-1) Class 成員變數以底線開始，底線後第一個字母小寫，若由多個單字組成，從第二個單字開始，每個單字的第一個字母大寫，其餘小寫。 不以底線區隔單字</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>3</Id>
+              <SmellType>Long method(過長函式)</SmellType>
+              <HashCode>LongMethod.GoogleDriveService.CreateNewService.23string applicationName;string clientSecretFileName;</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>23</Weight>
+              <Project>Unity</Project>
+              <File>GoogleDriveService.cs</File>
+              <Line>43</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>4</Id>
+              <SmellType>Long method(過長函式)</SmellType>
+              <HashCode>LongMethod.GoogleDriveService.ListFileAndFolderWithQueryString.23string queryString;</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>23</Weight>
+              <Project>Unity</Project>
+              <File>GoogleDriveService.cs</File>
+              <Line>115</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>5</Id>
+              <SmellType>Long method(過長函式)</SmellType>
+              <HashCode>LongMethod.GoogleDriveService.UploadFile.46string uploadFileName;string contentType;Action&lt;IUploadProgress&gt; uploadProgressEventHandler;Action&lt;Google.Apis.Drive.v2.Data.File&gt; responseReceivedEventHandler;</HashCode>
+              <Severity>Red</Severity>
+              <Weight>46</Weight>
+              <Project>Unity</Project>
+              <File>GoogleDriveService.cs</File>
+              <Line>147</Line>
+              <StartLine>0</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>0</EndLine>
+              <EndCol>0</EndCol>
+              <Comment />
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>6</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>83 目前物件 Unity.PresentationModel，使用物件的方法或屬性次數：0次，Envy到對象物件 Unity.PageModel，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Unity.PageModel.GetPageCount() 以及 Unity.PageModel.GetPageCount()</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Unity</Project>
+              <File>C:\Users\green\source\repos\Unity\Unity\PresentationModel.cs</File>
+              <Line>83</Line>
+              <StartLine>82</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>83</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>目前物件 Unity.PresentationModel，使用物件的方法或屬性次數：0次，Envy到對象物件 Unity.PageModel，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Unity.PageModel.GetPageCount() 以及 Unity.PageModel.GetPageCount()</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>7</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>325 目前物件 Unity.PageModel，使用物件的方法或屬性次數：1次，Envy到對象物件 Unity.Page，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Unity.Page.shapeList 以及 Unity.Page.Add(Unity.Shape)</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Unity</Project>
+              <File>C:\Users\green\source\repos\Unity\Unity\PageModel.cs</File>
+              <Line>325</Line>
+              <StartLine>324</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>325</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>目前物件 Unity.PageModel，使用物件的方法或屬性次數：1次，Envy到對象物件 Unity.Page，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Unity.Page.shapeList 以及 Unity.Page.Add(Unity.Shape)</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>8</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>252 目前物件 GoogleDriveUploader.GoogleDrive.GoogleDriveService，使用物件的方法或屬性次數：0次，Envy到對象物件 Google.Apis.Drive.v2.DriveService，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Google.Apis.Drive.v2.DriveService.Files 以及 Google.Apis.Drive.v2.DriveService.Files</HashCode>
+              <Severity>Warning</Severity>
+              <Weight>1</Weight>
+              <Project>Unity</Project>
+              <File>C:\Users\green\source\repos\Unity\Unity\GoogleDriveService.cs</File>
+              <Line>252</Line>
+              <StartLine>252</StartLine>
+              <StartCol>48</StartCol>
+              <EndLine>252</EndLine>
+              <EndCol>114</EndCol>
+              <Comment>目前物件 GoogleDriveUploader.GoogleDrive.GoogleDriveService，使用物件的方法或屬性次數：0次，Envy到對象物件 Google.Apis.Drive.v2.DriveService，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Google.Apis.Drive.v2.DriveService.Files 以及 Google.Apis.Drive.v2.DriveService.Files</Comment>
+              <Auto>false</Auto>
+            </Smell>
+            <Smell>
+              <Id>9</Id>
+              <SmellType>Feature Envy(依戀情節)</SmellType>
+              <HashCode>153 目前物件 Unity.GoogleDriveWrap，使用物件的方法或屬性次數：0次，Envy到對象物件 GoogleDriveUploader.GoogleDrive.GoogleDriveService，使用物件方法或屬性次數：4次，使用到的方法或屬性為以下：GoogleDriveUploader.GoogleDrive.GoogleDriveService.ListRootFileAndFolder() 以及 GoogleDriveUploader.GoogleDrive.GoogleDriveService.ListRootFileAndFolder() 以及 GoogleDriveUploader.GoogleDrive.GoogleDriveService.DownloadFile(Google.Apis.Drive.v2.Data.File, string, System.Action&lt;Google.Apis.Download.IDownloadProgress&gt;) 以及 GoogleDriveUploader.GoogleDrive.GoogleDriveService.ListRootFileAndFolder()</HashCode>
+              <Severity>Red</Severity>
+              <Weight>1</Weight>
+              <Project>Unity</Project>
+              <File>C:\Users\green\source\repos\Unity\Unity\GoogleDriveWrap.cs</File>
+              <Line>153</Line>
+              <StartLine>152</StartLine>
+              <StartCol>0</StartCol>
+              <EndLine>153</EndLine>
+              <EndCol>0</EndCol>
+              <Comment>目前物件 Unity.GoogleDriveWrap，使用物件的方法或屬性次數：0次，Envy到對象物件 GoogleDriveUploader.GoogleDrive.GoogleDriveService，使用物件方法或屬性次數：4次，使用到的方法或屬性為以下：GoogleDriveUploader.GoogleDrive.GoogleDriveService.ListRootFileAndFolder() 以及 GoogleDriveUploader.GoogleDrive.GoogleDriveService.ListRootFileAndFolder() 以及 GoogleDriveUploader.GoogleDrive.GoogleDriveService.DownloadFile(Google.Apis.Drive.v2.Data.File, string, System.Action&lt;Google.Apis.Download.IDownloadProgress&gt;) 以及 GoogleDriveUploader.GoogleDrive.GoogleDriveService.ListRootFileAndFolder()</Comment>
+              <Auto>false</Auto>
+            </Smell>
+          </Reviews>
           <HashCodeIgnoreList />
-          <HashCodeRequestIgnoreList />
+          <HashCodeRequestIgnoreList>
+            <string>Variable1.GoogleDriveService.SCOPES</string>
+            <string>LongMethod.GoogleDriveService.CreateNewService.23string applicationName;string clientSecretFileName;</string>
+            <string>LongMethod.GoogleDriveService.ListFileAndFolderWithQueryString.23string queryString;</string>
+            <string>LongMethod.GoogleDriveService.UploadFile.46string uploadFileName;string contentType;Action&lt;IUploadProgress&gt; uploadProgressEventHandler;Action&lt;Google.Apis.Drive.v2.Data.File&gt; responseReceivedEventHandler;</string>
+            <string>83 目前物件 Unity.PresentationModel，使用物件的方法或屬性次數：0次，Envy到對象物件 Unity.PageModel，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Unity.PageModel.GetPageCount() 以及 Unity.PageModel.GetPageCount()</string>
+            <string>325 目前物件 Unity.PageModel，使用物件的方法或屬性次數：1次，Envy到對象物件 Unity.Page，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Unity.Page.shapeList 以及 Unity.Page.Add(Unity.Shape)</string>
+            <string>252 目前物件 GoogleDriveUploader.GoogleDrive.GoogleDriveService，使用物件的方法或屬性次數：0次，Envy到對象物件 Google.Apis.Drive.v2.DriveService，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Google.Apis.Drive.v2.DriveService.Files 以及 Google.Apis.Drive.v2.DriveService.Files</string>
+            <string>153 目前物件 Unity.GoogleDriveWrap，使用物件的方法或屬性次數：0次，Envy到對象物件 GoogleDriveUploader.GoogleDrive.GoogleDriveService，使用物件方法或屬性次數：4次，使用到的方法或屬性為以下：GoogleDriveUploader.GoogleDrive.GoogleDriveService.ListRootFileAndFolder() 以及 GoogleDriveUploader.GoogleDrive.GoogleDriveService.ListRootFileAndFolder() 以及 GoogleDriveUploader.GoogleDrive.GoogleDriveService.DownloadFile(Google.Apis.Drive.v2.Data.File, string, System.Action&lt;Google.Apis.Download.IDownloadProgress&gt;) 以及 GoogleDriveUploader.GoogleDrive.GoogleDriveService.ListRootFileAndFolder()</string>
+            <string>StaticMethodAndFields 38223069</string>
+          </HashCodeRequestIgnoreList>
           <AnalysisFileManager>
             <AnalysisFiles>
+              <AnalysisFile>
+                <RelativePath>AddShapeForm.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>ViewOrController</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>AddShapeForm.Designer.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Designer</AnalysisFileType>
+              </AnalysisFile>
               <AnalysisFile>
                 <RelativePath>Canvas.cs</RelativePath>
                 <ProjectName>Unity</ProjectName>
@@ -197,6 +362,31 @@
               </AnalysisFile>
               <AnalysisFile>
                 <RelativePath>Command\AddCommand.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Command\CMM\AddPageCommand.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Command\CMM\CommandManagerManager.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Command\CMM\DeletePageCommand.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Command\CMM\IManagerCommand.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Command\CMM\SomeCommand.cs</RelativePath>
                 <ProjectName>Unity</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
@@ -236,6 +426,21 @@
                 <AnalysisFileType>Designer</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>Form1Part.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>GoogleDriveService.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>GoogleDriveWrap.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>IGraphics.cs</RelativePath>
                 <ProjectName>Unity</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
@@ -247,6 +452,31 @@
               </AnalysisFile>
               <AnalysisFile>
                 <RelativePath>Line.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>LoadForm.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>ViewOrController</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>LoadForm.Designer.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Designer</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>Page.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>PageModel.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Model</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>PartModel.cs</RelativePath>
                 <ProjectName>Unity</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
@@ -286,17 +516,22 @@
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>SaveForm.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>ViewOrController</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>SaveForm.Designer.cs</RelativePath>
+                <ProjectName>Unity</ProjectName>
+                <AnalysisFileType>Designer</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>Shape.cs</RelativePath>
                 <ProjectName>Unity</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
                 <RelativePath>ShapeFactory.cs</RelativePath>
-                <ProjectName>Unity</ProjectName>
-                <AnalysisFileType>Model</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
-                <RelativePath>ShapeModel.cs</RelativePath>
                 <ProjectName>Unity</ProjectName>
                 <AnalysisFileType>Model</AnalysisFileType>
               </AnalysisFile>
@@ -331,6 +566,11 @@
                 <AnalysisFileType>Test</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>Command\CMM\CommandManagerManagerTests.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>Command\CommandManagerTests.cs</RelativePath>
                 <ProjectName>UnityTests</ProjectName>
                 <AnalysisFileType>Test</AnalysisFileType>
@@ -356,7 +596,17 @@
                 <AnalysisFileType>Test</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
+                <RelativePath>GoogleDriveWrapperTests.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
                 <RelativePath>LineTests.cs</RelativePath>
+                <ProjectName>UnityTests</ProjectName>
+                <AnalysisFileType>Test</AnalysisFileType>
+              </AnalysisFile>
+              <AnalysisFile>
+                <RelativePath>PageTests.cs</RelativePath>
                 <ProjectName>UnityTests</ProjectName>
                 <AnalysisFileType>Test</AnalysisFileType>
               </AnalysisFile>
@@ -396,11 +646,6 @@
                 <AnalysisFileType>Test</AnalysisFileType>
               </AnalysisFile>
               <AnalysisFile>
-                <RelativePath>ShapeModelTests.cs</RelativePath>
-                <ProjectName>UnityTests</ProjectName>
-                <AnalysisFileType>Test</AnalysisFileType>
-              </AnalysisFile>
-              <AnalysisFile>
                 <RelativePath>ShapeTests.cs</RelativePath>
                 <ProjectName>UnityTests</ProjectName>
                 <AnalysisFileType>Test</AnalysisFileType>
@@ -417,8 +662,8 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>2457</ProductionLoc>
-          <TestLoc>1254</TestLoc>
+          <ProductionLoc>4595</ProductionLoc>
+          <TestLoc>1372</TestLoc>
         </CodeReview>
       </Data>
     </div>

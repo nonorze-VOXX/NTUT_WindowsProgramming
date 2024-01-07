@@ -25,11 +25,14 @@ namespace Unity.Tests
             _presentationModel = new PresentationModel(_mockShapeModel.Object);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void Utils1()
         {
             var form = new Form1(_presentationModel);
-            _presentationModel.InitAddPage(0, form);
+            _presentationModel.AddFirstPage(0, form);
             var eventArgs = new DataGridViewCellEventArgs(0, 0);
             _presentationModel.DeleteButtonClick(null, eventArgs);
             _presentationModel.HandleCanvasMouseDown(new Point(1, 1));
@@ -58,7 +61,7 @@ namespace Unity.Tests
         public void Utils()
         {
             var form = new Form1(_presentationModel);
-            _presentationModel.InitAddPage(0, form);
+            _presentationModel.AddFirstPage(0, form);
             _presentationModel.HandleCanvasMouseMove(new Point(1, 1));
             _presentationModel.HandleCanvasMouseDown(new Point(1, 1));
             var eventArgs = new DataGridViewCellEventArgs(0, 0);
@@ -98,7 +101,7 @@ namespace Unity.Tests
         [TestMethod()]
         public void Draw_CallsDrawOnShapeModel()
         {
-            _presentationModel.InitAddPage(0, new Form1(_presentationModel));
+            _presentationModel.AddFirstPage(0, new Form1(_presentationModel));
             // Act
             _presentationModel.Draw(_mockGraphics.Object, _mockCanvas);
 
@@ -111,7 +114,7 @@ namespace Unity.Tests
         [TestMethod()]
         public void Draw_SetsCursorToSizeNWSEWhenShapeIsScale()
         {
-            _presentationModel.InitAddPage(0, new Form1(_presentationModel));
+            _presentationModel.AddFirstPage(0, new Form1(_presentationModel));
             // Arrange
 
             // Act
@@ -127,7 +130,7 @@ namespace Unity.Tests
             // Arrange
             //_mockShapeModel.Setup(s => s.IsScale()).Returns(false);
 
-            _presentationModel.InitAddPage(0, new Form1(_presentationModel));
+            _presentationModel.AddFirstPage(0, new Form1(_presentationModel));
             // Act
             _presentationModel.Draw(_mockGraphics.Object, _mockCanvas);
         }
