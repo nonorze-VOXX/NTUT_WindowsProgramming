@@ -10,6 +10,9 @@ namespace Unity.Tests
         private Mock<IGraphics> _mockGraphics;
         private Rectangle _rectangle;
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
@@ -17,6 +20,9 @@ namespace Unity.Tests
             _rectangle = new Rectangle(new Point(0, 0), new Point(10, 10), new Point(5, 5));
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void Draw_CallsDrawRectangleOnGraphics()
         {
@@ -31,6 +37,9 @@ namespace Unity.Tests
             _mockGraphics.Verify(g => g.DrawRectangle(expectedStartPoint, expectedEndPoint), Times.Once);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void GetShapeName_ReturnsRectangle()
         {

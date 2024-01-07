@@ -121,8 +121,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form1Part.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GoogleDriveService.cs" />
-    <Compile Include="GoogleDriveWrapper.cs" />
+    <Compile Include="GoogleDriveWrap.cs" />
     <Compile Include="IGraphics.cs" />
     <Compile Include="IShapeObserver.cs" />
     <Compile Include="LoadForm.cs">
@@ -132,6 +135,7 @@
       <DependentUpon>LoadForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PageModel.cs" />
+    <Compile Include="PartModel.cs" />
     <Compile Include="SaveForm.cs">
       <SubType>Form</SubType>
     </Compile>

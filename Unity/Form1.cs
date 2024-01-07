@@ -6,7 +6,14 @@ namespace Unity
 {
     public partial class Form1 : Form, IShapeObserver
     {
+        private AddShapeForm _addShapeForm;
+        private LoadForm _loadForm;
         PresentationModel _presentationModel;
+        const int TEN_SIX = 16;
+        const int NINE = 9;
+        const int THREE = 3;
+        const int SIX = 6;
+        const string SLIDE = "slide";
 
         private Bitmap _brief;
         public Form1(PresentationModel presentationModel)
@@ -27,7 +34,7 @@ namespace Unity
             _presentationModel.SetAddPageEvent(this);
             _presentationModel._addPage += AddPage;
             _presentationModel.AttachDelete(this);
-            InitAddPage();
+            AddPageStart();
             presentationModel.AddFirstPage(0, this);
             _dataGridView.DataSource = _presentationModel.GetShapeList();
             _brief = new Bitmap(_canvas.Width, _canvas.Height);
@@ -40,11 +47,6 @@ namespace Unity
             ResizeWindow(null, null);
             _presentationModel.SetUndoHandler(this);
             HandleUndoButtonState(false, false);
-            var wrapper = new GoogleDriveWrapper();
-            //wrapper.DownloadFile("save.txt")
-            //wrapper.UploadFile("save.txt");
-
-
         }
 
         /// <summary>
@@ -114,7 +116,7 @@ namespace Unity
         {
             ResizeWindow(null, null);
             _dataGridView.DataSource = _presentationModel.GetShapeList();
-            AsyncPageCount();
+            AddAsyncPageCount();
             Invalidate(true);
         }
         #endregion
@@ -123,7 +125,7 @@ namespace Unity
         /// a
         /// </summary>
         /// <returns></returns>
-        void AsyncPageCount()
+        void AddAsyncPageCount()
         {
             for (int i = _splitContainer1.Panel1.Controls.Count; i < _presentationModel.GetPageCount(); i++)
             {
@@ -243,142 +245,21 @@ namespace Unity
         /// a
         /// </summary>
         /// <returns></returns>
-        public void InitAddPage()
+        public void AddPageStart()
         {
             var slide = new Button();
             slide.Anchor = ((AnchorStyles)(((AnchorStyles.Right | AnchorStyles.Left) | AnchorStyles.Top)));
             slide.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            var width = _splitContainer1.Panel1.Width - 6;
-            var height = width / 16 * 9;
+            var width = _splitContainer1.Panel1.Width - SIX;
+            var height = width / TEN_SIX * NINE;
             slide.Size = new Size(width, height);
-            slide.Location = new Point(3, 3 + _splitContainer1.Panel1.Controls.Count * height);
-            slide.Name = "slide";
-            slide.BackColor = Color.White;
-            slide.Focus();
-            this._splitContainer1.Panel1.Controls.Add(slide);
-            slide.Click += HandleSlideClick(_splitContainer1.Panel1.Controls, slide);
-        }
-        /// <summary>
-        /// a
-        /// </summary>
-        /// <returns></returns>
-        public void AddPage(int index)
-        {
-            var slide = new Button();
-            slide.Anchor = ((AnchorStyles)(((AnchorStyles.Right | AnchorStyles.Left) | AnchorStyles.Top)));
-            slide.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            var width = _splitContainer1.Panel1.Width - 6;
-            var height = width / 16 * 9;
-            slide.Size = new Size(width, height);
-            slide.Location = new Point(3, 3 + _splitContainer1.Panel1.Controls.Count * height);
-            slide.Name = "slide";
+            slide.Location = new Point(THREE, THREE + _splitContainer1.Panel1.Controls.Count * height);
+            slide.Name = SLIDE;
             slide.BackColor = Color.White;
             slide.Focus();
             this._splitContainer1.Panel1.Controls.Add(slide);
             slide.Click += HandleSlideClick(_splitContainer1.Panel1.Controls, slide);
         }
 
-        /// <summary>
-        /// a
-        /// </summary>
-        /// <returns></returns>
-        private EventHandler HandleSlideClick(Control.ControlCollection panel1Controls, Button slide)
-        {
-            return (object sender, EventArgs e) =>
-            {
-                var control = _splitContainer1.Panel1.Controls;
-                var index = 0;
-                for (int i = 0; i < control.Count; i++)
-                {
-                    if (control[i] == slide)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-                _presentationModel.ClickSlide(index, _dataGridView);
-                slide.Focus();
-            };
-        }
-
-        /// <summary>
-        /// a
-        /// </summary>
-        /// <returns></returns>
-        public void HandleUndoButtonState(bool undo, bool redo)
-        {
-            _undoButton.Enabled = undo;
-            _redoButton.Enabled = redo;
-        }
-
-        /// <summary>
-        /// a
-        /// </summary>
-        /// <returns></returns>
-        public void RemovePage(int pagesCount)
-        {
-            var control = _splitContainer1.Panel1.Controls;
-            control.RemoveAt(pagesCount);
-        }
-
-        /// <summary>
-        /// a
-        /// </summary>
-        /// <returns></returns>
-        public void SwitchToslide(int index)
-        {
-            var control = _splitContainer1.Panel1.Controls;
-            HandleSlideClick(control, (Button)control[index])(null, null);
-        }
-
-        /// <summary>
-        /// a
-        /// </summary>
-        /// <returns></returns>
-        public void DeletePage()
-        {
-            _presentationModel.DeletePage(this);
-        }
-
-        /// <summary>
-        /// a
-        /// </summary>
-        /// <returns></returns>
-        public void DeletePageAt(int index)
-        {
-            _splitContainer1.Panel1.Controls.RemoveAt(index);
-        }
-
-        SaveForm _saveForm;
-        /// <summary>
-        /// a
-        /// </summary>
-        /// <returns></returns>
-        private void LoadButtonClick(object sender, EventArgs e)
-        {
-            _loadForm.ShowDialog();
-        }
-
-        private LoadForm _loadForm;
-
-
-        /// <summary>
-        /// a
-        /// </summary>
-        /// <returns></returns>
-        private void SaveButtonClick(object sender, EventArgs e)
-        {
-            _saveForm.ShowDialog();
-        }
-
-        private AddShapeForm _addShapeForm;
-        /// <summary>
-        /// a
-        /// </summary>
-        /// <returns></returns>
-        private void _createButton_Click(object sender, EventArgs e)
-        {
-            _addShapeForm.ShowDialog();
-        }
     }
 }

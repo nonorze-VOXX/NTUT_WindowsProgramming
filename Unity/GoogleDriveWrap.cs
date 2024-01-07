@@ -1,16 +1,20 @@
 ﻿using GoogleDriveUploader.GoogleDrive;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 
 namespace Unity
 {
-    public class GoogleDriveWrapper
+    public class GoogleDriveWrap
     {
+        const char COMMA = ',';
+        const string END = ".";
+        const string NEW = "\n";
+        const char NEW_CHAR = '\n';
+        const string FILE_NAME = "save.txt";
         private GoogleDriveService _service;
 
-        public GoogleDriveWrapper()
+        public GoogleDriveWrap()
         {
             const string APPLICATION_NAME = "DrawAnyWhere";
             const string CLIENT_SECRETS_FILE_NAME = "clientSecret.json";
@@ -24,30 +28,31 @@ namespace Unity
         public void SaveData(List<Page> pages)
         {
 
-            System.IO.File.WriteAllText("save.txt", Encode(pages));
-            UploadFile("save.txt");
-        }
-        /// <summary>
-        /// a
-        /// </summary>
-        /// <returns></returns>
-        public List<Page> LoadData()
-        {
-            DownloadFile("save.txt");
-            var data = System.IO.File.ReadAllText("save.txt");
-            return Decode(data);
+            System.IO.File.WriteAllText(FILE_NAME, DoEncode(pages));
+            UploadFile(FILE_NAME);
         }
 
         /// <summary>
         /// a
         /// </summary>
         /// <returns></returns>
-        private string Encode(List<Page> pages)
+        public List<Page> LoadData()
+        {
+            DownloadFile(FILE_NAME);
+            var data = System.IO.File.ReadAllText(FILE_NAME);
+            return DoNoEncode(data);
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
+        private string DoEncode(List<Page> pages)
         {
             string result = "";
             foreach (var page in pages)
             {
-                result += ".\n";
+                result += END + NEW;
                 foreach (var shape in page.shapeList)
                 {
                     result += shape.GetFile();
@@ -55,29 +60,26 @@ namespace Unity
             }
             return result;
         }
+
         /// <summary>
         /// a
         /// </summary>
         /// <returns></returns>
-        private List<Page> Decode(string origin)
+        private List<Page> DoNoEncode(string origin)
         {
-            var lines = origin.Split('\n');
+            var lines = origin.Split(NEW_CHAR);
             var pageIndex = -1;
             List<Page> pages = new List<Page>();
             foreach (var line in lines)
             {
-                if (line.Length == 0)
-                {
-                    continue;
-                }
-                if (line == ".")
+                if (line == END)
                 {
                     pageIndex++;
                     pages.Add(new Page());
                 }
-                else
+                else if (line.Length != 0)
                 {
-                    pages[pageIndex].Add(DecodeShape(line));
+                    pages[pageIndex].Add(DoNoEncodeShape(line));
                 }
             }
             return pages;
@@ -87,32 +89,42 @@ namespace Unity
         /// a
         /// </summary>
         /// <returns></returns>
-        private Shape DecodeShape(string line)
+        private Shape DoNoEncodeShape(string line)
         {
-            var words = line.Split(',');
+            var words = line.Split(COMMA);
             Shape shape;
-            Point first = new Point(int.Parse(words[1]), int.Parse(words[2]));
-            Point second = new Point(int.Parse(words[3]), int.Parse(words[4]));
-            Point drawCanvaSize = new Point(int.Parse(words[5]), int.Parse(words[6]));
+            Point first = new Point(int.Parse(words[1]), int.Parse(words[1 + 1]));
+            Point second = new Point(int.Parse(words[1 + 1 + 1]), int.Parse(words[1 + 1 + 1 + 1]));
+            Point drawCanvasSize = new Point(int.Parse(words[1 + 1 + 1 + 1 + 1]), int.Parse(words[1 + 1 + 1 + 1 + 1 + 1]));
 
-            if (words[0] == "Line")
-            {
-                shape = new Line(first, second, drawCanvaSize);
-            }
-            else if (words[0] == "Rectangle")
-            {
-                shape = new Rectangle(first, second, drawCanvaSize);
-            }
-            else if (words[0] == "Ellipse")
-            {
-                shape = new Ellipse(first, second, drawCanvaSize);
-            }
-            else
-            {
-                throw new Exception(words[0] + "shape not found");
-            }
+            shape = CreateShape(words, first, second, drawCanvasSize);
 
             return shape;
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="words"></param>
+        /// <param name="first"></param>
+        /// <param name="second"></param>
+        /// <param name="drawCanvasSize"></param>
+        /// <returns></returns>
+        private static Shape CreateShape(string[] words, Point first, Point second, Point drawCanvasSize)
+        {
+            if (words[0] == ShapeType.Line.ToString())
+            {
+                return new Line(first, second, drawCanvasSize);
+            }
+            else if (words[0] == ShapeType.Rectangle.ToString())
+            {
+                return new Rectangle(first, second, drawCanvasSize);
+            }
+            else if (words[0] == ShapeType.Ellipse.ToString())
+            {
+                return new Ellipse(first, second, drawCanvasSize);
+            }
+            return new Line(first, second, drawCanvasSize);
         }
 
         /// <summary>
@@ -121,8 +133,8 @@ namespace Unity
         /// <returns></returns>
         private void UploadFile(string fileName)
         {
-            const string content_type = "text/plain";
-            _service.UploadFile(fileName, content_type);
+            const string CONTENT_TYPE = "text/plain";
+            _service.UploadFile(fileName, CONTENT_TYPE);
         }
 
         /// <summary>

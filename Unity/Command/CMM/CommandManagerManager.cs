@@ -4,8 +4,10 @@ namespace Unity.Command.CommandManagerManager
 {
     public class CommandManagerManager
     {
-        public event CommandManagerManagerChangeEventHanlder _commandChange;
-        public delegate void CommandManagerManagerChangeEventHanlder();
+        public event SwitchPageEventHandler _switchPage;
+        public delegate void SwitchPageEventHandler(int index);
+        public event CommandManagerManagerChangeEventHandler _commandChange;
+        public delegate void CommandManagerManagerChangeEventHandler();
         private Stack<IManagerCommand> _undoStack = new Stack<IManagerCommand>();
         private Stack<IManagerCommand> _redoStack = new Stack<IManagerCommand>();
 
@@ -13,7 +15,7 @@ namespace Unity.Command.CommandManagerManager
         /// a
         /// </summary>
         /// <returns></returns>
-        public void AddRemovePagecommand(Form1 form, int index, Page page)
+        public void AddRemovePageCommand(Form1 form, int index, Page page)
         {
             var deleteCommand = new DeletePageCommand(form, index, page);
             _undoStack.Push(deleteCommand);
@@ -56,7 +58,7 @@ namespace Unity.Command.CommandManagerManager
 
             var command = _undoStack.Pop();
             command.Undo(pages);
-            switchPage.Invoke(command.GetIndex());
+            _switchPage.Invoke(command.GetIndex());
             _redoStack.Push(command);
             NotifyCommandChange();
         }
@@ -74,7 +76,7 @@ namespace Unity.Command.CommandManagerManager
 
             var command = _redoStack.Pop();
             command.Redo(pages);
-            switchPage.Invoke(command.GetIndex());
+            _switchPage.Invoke(command.GetIndex());
             _undoStack.Push(command);
             NotifyCommandChange();
         }
@@ -83,7 +85,7 @@ namespace Unity.Command.CommandManagerManager
         /// a
         /// </summary>
         /// <returns></returns>
-        public bool IsUnDo()
+        public bool IsUndo()
         {
             return _undoStack.Count != 0;
         }
@@ -92,7 +94,7 @@ namespace Unity.Command.CommandManagerManager
         /// a
         /// </summary>
         /// <returns></returns>
-        public bool IsReDo()
+        public bool IsRedo()
         {
             return _redoStack.Count != 0;
         }
@@ -117,8 +119,6 @@ namespace Unity.Command.CommandManagerManager
                 _commandChange.Invoke();
             }
         }
-        public event SwitchPage switchPage;
-        public delegate void SwitchPage(int index);
 
         /// <summary>
         /// a
@@ -126,7 +126,7 @@ namespace Unity.Command.CommandManagerManager
         /// <returns></returns>
         public void Attach(Form1 form)
         {
-            switchPage += form.SwitchToslide;
+            _switchPage += form.SwitchToSlide;
         }
 
         /// <summary>

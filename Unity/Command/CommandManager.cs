@@ -7,11 +7,11 @@ namespace Unity.Command
 {
     public class CommandManager
     {
+        public event CommandChangeEventHandler _commandChanged;
+        public delegate void CommandChangeEventHandler();
         Stack<ICommand> _undoStack = new Stack<ICommand>();
         Stack<ICommand> _redoStack = new Stack<ICommand>();
 
-        public event CommandChange _commandChanged;
-        public delegate void CommandChange();
         /// <summary>
         /// a
         /// </summary>
@@ -20,6 +20,7 @@ namespace Unity.Command
         {
             _commandChanged -= page.HandleCommandChange;
         }
+
         /// <summary>
         /// a
         /// </summary>
@@ -28,6 +29,7 @@ namespace Unity.Command
         {
             _commandChanged += page.HandleCommandChange;
         }
+
         /// <summary>
         /// a
         /// </summary>

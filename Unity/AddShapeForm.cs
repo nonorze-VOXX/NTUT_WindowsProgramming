@@ -7,7 +7,7 @@ namespace Unity
 
     public partial class AddShapeForm : Form
     {
-        private ShapeType shapeType;
+        private ShapeType _shapeType = ShapeType.Line;
         int _top;
         int _left;
         int _right;
@@ -30,7 +30,7 @@ namespace Unity
         /// <returns></returns>
         private void CreateShape(object sender, EventArgs e)
         {
-            _presentationModel.AddShape(shapeType, new Point(_left, _top), new Point(_right, _down));
+            _presentationModel.AddShape(_shapeType, new Point(_left, _top), new Point(_right, _down));
             _textBox1.Text = "";
             _textBox2.Text = "";
             _textBox3.Text = "";
@@ -73,6 +73,7 @@ namespace Unity
             }
             ChangeOkState();
         }
+
         /// <summary>
         /// a
         /// </summary>
@@ -90,6 +91,7 @@ namespace Unity
             }
             ChangeOkState();
         }
+
         /// <summary>
         /// a
         /// </summary>
@@ -135,6 +137,15 @@ namespace Unity
         private void CancelClick(object sender, EventArgs e)
         {
             Close();
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="shapeType"></param>
+        internal void SetShapeType(ShapeType shapeType)
+        {
+            _shapeType = shapeType;
         }
     }
 }

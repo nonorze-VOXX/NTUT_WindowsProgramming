@@ -12,11 +12,11 @@ namespace Unity
     }
     public class Page
     {
-        public event PageCommandChange _pageCommandChanged;
-        public delegate void PageCommandChange(Page page);
+        public event PageCommandChangeEventHandler _pageCommandChanged;
+        public delegate void PageCommandChangeEventHandler(Page page);
         public event ModelChangedEventHandler _modelChanged;
         public delegate void ModelChangedEventHandler();
-        private BindingList<Shape> shapes = new BindingList<Shape>();
+        private BindingList<Shape> _shapes = new BindingList<Shape>();
         private PointState _pointState = new PointState();
         private IState _state = new DrawingState();
         bool _isPressed;
@@ -28,7 +28,7 @@ namespace Unity
         {
             get
             {
-                return shapes;
+                return _shapes;
             }
         }
         #region state
@@ -55,7 +55,7 @@ namespace Unity
         /// </summary>
         public virtual bool IsScale()
         {
-            return _state.IsScale(shapes);
+            return _state.IsScale(_shapes);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Unity
         public void Resize(Point point)
         {
             _nowCanvas = point;
-            foreach (var shape in shapes)
+            foreach (var shape in _shapes)
             {
                 shape.SetNowCanvasSize(point);
             }
@@ -78,11 +78,11 @@ namespace Unity
         /// <param name="graphics"></param>
         public virtual void Draw(IGraphics graphics)
         {
-            foreach (Shape shape in shapes)
+            foreach (Shape shape in _shapes)
             {
                 shape.Draw(graphics);
             }
-            _state.Draw(graphics, shapes);
+            _state.Draw(graphics, _shapes);
         }
         #endregion
 
@@ -126,7 +126,7 @@ namespace Unity
         {
             if (PointFunction.IsBothNotNegative(point))
             {
-                _state.MouseDown(shapeType, point, shapes, _nowCanvas);
+                _state.MouseDown(shapeType, point, _shapes, _nowCanvas);
                 _isPressed = true;
             }
         }
@@ -139,7 +139,7 @@ namespace Unity
         {
             if (_isPressed)
             {
-                _state.MouseUp(point, shapes, _commandManager);
+                _state.MouseUp(point, _shapes, _commandManager);
                 _isPressed = false;
                 NotifyModelChanged();
             }
@@ -151,7 +151,7 @@ namespace Unity
         /// <param name="point"></param>
         public virtual void MouseMove(Point point)
         {
-            _state.MouseMove(point, _isPressed, shapes);
+            _state.MouseMove(point, _isPressed, _shapes);
             NotifyModelChanged();
         }
         #endregion
@@ -162,7 +162,7 @@ namespace Unity
         /// <param name="type"></param>
         public virtual void Add(ShapeType shapeType)
         {
-            shapes.Add(ShapeFactory.CreateByRandom(shapeType, CANVAS_MAX, _nowCanvas, _commandManager));
+            _shapes.Add(ShapeFactory.CreateByRandom(shapeType, CANVAS_MAX, _nowCanvas, _commandManager));
             NotifyModelChanged();
         }
 
@@ -172,7 +172,7 @@ namespace Unity
         /// <returns></returns>
         public virtual void Add(Shape shape)
         {
-            shapes.Add(shape);
+            _shapes.Add(shape);
             NotifyModelChanged();
         }
 
@@ -184,7 +184,7 @@ namespace Unity
         /// <param name="end"></param>
         public virtual void Add(ShapeType type, Point start, Point end)
         {
-            shapes.Add(ShapeFactory.CreateShape(type, start, end, _nowCanvas));
+            _shapes.Add(ShapeFactory.CreateShape(type, start, end, _nowCanvas));
             _commandManager.AddShape(type, start, end, _nowCanvas);
             NotifyModelChanged();
         }
@@ -195,10 +195,10 @@ namespace Unity
         /// <param name="rowIndex"></param>
         public virtual void RemoveIndex(int rowIndex)
         {
-            if (rowIndex < shapes.Count)
+            if (rowIndex < _shapes.Count)
             {
                 _commandManager.Delete(rowIndex);
-                shapes.RemoveAt(rowIndex);
+                _shapes.RemoveAt(rowIndex);
                 _state.Reset();
                 NotifyModelChanged();
             }
@@ -209,7 +209,7 @@ namespace Unity
         /// </summary>
         public virtual void DeletePress()
         {
-            _state.DeletePress(shapes, _commandManager);
+            _state.DeletePress(_shapes, _commandManager);
             NotifyModelChanged();
         }
 
@@ -218,7 +218,7 @@ namespace Unity
         /// </summary>
         public void Undo()
         {
-            _commandManager.Undo(shapes);
+            _commandManager.Undo(_shapes);
             _state.Reset();
             NotifyModelChanged();
         }
@@ -228,7 +228,7 @@ namespace Unity
         /// </summary>
         public void Redo()
         {
-            _commandManager.Redo(shapes);
+            _commandManager.Redo(_shapes);
             NotifyModelChanged();
         }
 
@@ -280,7 +280,7 @@ namespace Unity
         /// <returns></returns>
         public void Clear()
         {
-            shapes.Clear();
+            _shapes.Clear();
         }
     }
 }

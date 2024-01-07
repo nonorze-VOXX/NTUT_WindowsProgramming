@@ -50,14 +50,13 @@ namespace GoogleDriveUploader.GoogleDrive
             {
                 string credentialPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
                 credentialPath = Path.Combine(credentialPath, CREDENTIAL_FOLDER + applicationName);
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.Load(stream).Secrets, SCOPES, USER, CancellationToken.None, new FileDataStore(credentialPath, true)).Result;
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, SCOPES, USER, CancellationToken.None, new FileDataStore(credentialPath, true)).Result;
             }
 
-            DriveService service = new DriveService(new BaseClientService.Initializer()
-            {
-                HttpClientInitializer = credential,
-                ApplicationName = applicationName
-            });
+            var tmp = new BaseClientService.Initializer();
+            tmp.HttpClientInitializer = credential;
+            tmp.ApplicationName = applicationName;
+            DriveService service = new DriveService(tmp);
 
             _credential = credential;
             DateTime now = DateTime.Now;
@@ -196,8 +195,8 @@ namespace GoogleDriveUploader.GoogleDrive
         /// </summary>
         /// <param name="fileToDownload">欲下載的檔案(Google Drive File) 一般會從List取得</param>
         /// <param name="downloadPath">下載到路徑</param>
-        /// <param name="downloadProgressChangedEventHandeler">當下載進度改變時，呼叫這個函式</param>
-        public void DownloadFile(Google.Apis.Drive.v2.Data.File fileToDownload, string downloadPath, Action<IDownloadProgress> downloadProgressChangedEventHandeler = null)
+        /// <param name="downloadProgressChangedEventHandler">當下載進度改變時，呼叫這個函式</param>
+        public void DownloadFile(Google.Apis.Drive.v2.Data.File fileToDownload, string downloadPath, Action<IDownloadProgress> downloadProgressChangedEventHandler = null)
         {
             const string SPLASH = @"\";
 

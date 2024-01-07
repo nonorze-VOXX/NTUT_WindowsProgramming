@@ -9,12 +9,18 @@ namespace Unity.Tests
     {
         private CommandManager _commandManager;
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestInitialize]
         public void TestInitialize()
         {
             _commandManager = new CommandManager();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void CreateByRandom_ReturnsShape()
         {
@@ -31,6 +37,9 @@ namespace Unity.Tests
             Assert.IsInstanceOfType(result, typeof(Line));
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void CreateShape_ReturnsLineWhenShapeTypeIsLine()
         {
@@ -48,6 +57,9 @@ namespace Unity.Tests
             Assert.IsInstanceOfType(result, typeof(Line));
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void CreateShape_ReturnsRectangleWhenShapeTypeIsRectangle()
         {
@@ -65,6 +77,9 @@ namespace Unity.Tests
             Assert.IsInstanceOfType(result, typeof(Rectangle));
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
         [TestMethod()]
         public void CreateShape_ReturnsEllipseWhenShapeTypeIsEllipse()
         {

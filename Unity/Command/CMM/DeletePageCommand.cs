@@ -4,7 +4,7 @@ namespace Unity.Command.CommandManagerManager
 {
     public class DeletePageCommand : IManagerCommand
     {
-        Page storePage;
+        Page _storePage;
         private Form1 _form;
         private int _clickIndex;
         private int _removeIndex;
@@ -12,7 +12,7 @@ namespace Unity.Command.CommandManagerManager
         {
             _form = form;
             _removeIndex = index;
-            storePage = page;
+            _storePage = page;
         }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace Unity.Command.CommandManagerManager
         /// <returns></returns>
         public void Undo(List<Page> pages)
         {
-            pages.Insert(_removeIndex, storePage);
+            pages.Insert(_removeIndex, _storePage);
             _form.AddPage(pages.Count);
             _clickIndex = _removeIndex;
         }

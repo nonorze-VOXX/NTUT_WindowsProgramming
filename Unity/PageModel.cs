@@ -7,8 +7,8 @@ namespace Unity
 {
     public class PageModel
     {
-        public event CommandManagerHandler _commandManagerChanges;
-        public delegate void CommandManagerHandler(bool undo, bool redo);
+        public event CommandManagerEventHandler _commandManagerChanges;
+        public delegate void CommandManagerEventHandler(bool undo, bool redo);
         private CommandManagerManager _commandManagerManager;
         public BindingList<Shape> shapeList
         {
@@ -55,7 +55,7 @@ namespace Unity
         /// a
         /// </summary>
         /// <returns></returns>
-        public void SwitchToSliderWrapper(Form1 form)
+        public void SwitchToSliderWrap(Form1 form)
         {
             _commandManagerManager.Attach(form);
         }
@@ -152,9 +152,9 @@ namespace Unity
         /// a
         /// </summary>
         /// <returns></returns>
-        public void RemoveIndex(int eRowIndex)
+        public void RemoveIndex(int index)
         {
-            _page.RemoveIndex(eRowIndex);
+            _page.RemoveIndex(index);
         }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace Unity
         /// a
         /// </summary>
         /// <returns></returns>
-        public void InitAddPage(int index, Form1 form)
+        public void AddStartPage(int index, Form1 form)
         {
             var page = new Page();
             page.Attach(form);
@@ -221,7 +221,7 @@ namespace Unity
             //_pages[index].Detach(form);
             //_pages[index].Detach(this);
             var page = _pages[index];
-            _commandManagerManager.AddRemovePagecommand(form, index, page);
+            _commandManagerManager.AddRemovePageCommand(form, index, page);
             _pages.RemoveAt(index);
         }
 
@@ -271,7 +271,7 @@ namespace Unity
         {
             if (_commandManagerChanges != null)
             {
-                _commandManagerChanges(_commandManagerManager.IsUnDo(), _commandManagerManager.IsReDo());
+                _commandManagerChanges(_commandManagerManager.IsUndo(), _commandManagerManager.IsRedo());
             }
         }
 
@@ -286,7 +286,7 @@ namespace Unity
 
         #region google
 
-        private GoogleDriveWrapper _drive = new GoogleDriveWrapper();
+        private GoogleDriveWrap _drive = new GoogleDriveWrap();
 
         /// <summary>
         /// a
@@ -295,25 +295,35 @@ namespace Unity
         public void Load(Form1 form)
         {
             var newPage = _drive.LoadData();
-            int i = 0;
-            for (i = 0; i < newPage.Count; i++)
+            int index = 0;
+            for (index = 0; index < newPage.Count; index++)
             {
-                if (_pages.Count == i)
+                if (_pages.Count == index)
                 {
-                    AddPage(i, form);
+                    AddPage(index, form);
                 }
-                _pages[i].Clear();
-                foreach (var shape in newPage[i].shapeList)
-                {
-                    _pages[i].Add(shape);
-                }
+                _pages[index].Clear();
+                AddToList(newPage, index);
             }
-            for (int j = _pages.Count - 1; j >= i; j--)
+            for (int j = _pages.Count - 1; j >= index; j--)
             {
-                _pages.RemoveAt(i);
+                _pages.RemoveAt(index);
             }
             _commandManagerManager.Clear();
             NotifyCommandChanged();
+        }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <param name="newPage"></param>
+        /// <param name="index"></param>
+        void AddToList(List<Page> newPage, int index)
+        {
+            foreach (var shape in newPage[index].shapeList)
+            {
+                _pages[index].Add(shape);
+            }
         }
 
         /// <summary>
