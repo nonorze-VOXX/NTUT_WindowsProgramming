@@ -12,16 +12,17 @@ namespace Unity
     }
     public class Page
     {
+        public event PageCommandChange _pageCommandChanged;
+        public delegate void PageCommandChange(Page page);
         public event ModelChangedEventHandler _modelChanged;
         public delegate void ModelChangedEventHandler();
-        private BindingList<Shape> shapes = new BindingList<Shape> { };
+        private BindingList<Shape> shapes = new BindingList<Shape>();
         private PointState _pointState = new PointState();
         private IState _state = new DrawingState();
         bool _isPressed;
         private const int CANVAS_MAX = 400;
         private CommandManager _commandManager = new CommandManager();
         Point _nowCanvas = new Point(1, 1);
-
 
         public BindingList<Shape> shapeList
         {
@@ -164,6 +165,11 @@ namespace Unity
             shapes.Add(ShapeFactory.CreateByRandom(shapeType, CANVAS_MAX, _nowCanvas, _commandManager));
             NotifyModelChanged();
         }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public virtual void Add(Shape shape)
         {
             shapes.Add(shape);
@@ -226,23 +232,40 @@ namespace Unity
             NotifyModelChanged();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void HandleCommandChange()
         {
             NotifyCommandChange();
         }
-        public event PageCommandChange _pageCommandChanged;
-        public delegate void PageCommandChange(Page page);
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void Detach(PageModel pageModel)
         {
             _pageCommandChanged -= pageModel.HandleCommandChange;
             _commandManager.Detach(this);
         }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void Attach(PageModel pageModel)
         {
             _pageCommandChanged += pageModel.HandleCommandChange;
 
             _commandManager.Attach(this);
         }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         void NotifyCommandChange()
         {
             if (_pageCommandChanged != null)
@@ -251,6 +274,10 @@ namespace Unity
             }
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void Clear()
         {
             shapes.Clear();

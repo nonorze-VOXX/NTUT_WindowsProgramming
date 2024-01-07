@@ -1,12 +1,18 @@
 ﻿using System.Collections.Generic;
 
-namespace Unity.Command.CMM
+namespace Unity.Command.CommandManagerManager
 {
     public class CommandManagerManager
     {
+        public event CommandManagerManagerChangeEventHanlder _commandChange;
+        public delegate void CommandManagerManagerChangeEventHanlder();
         private Stack<IManagerCommand> _undoStack = new Stack<IManagerCommand>();
         private Stack<IManagerCommand> _redoStack = new Stack<IManagerCommand>();
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void AddRemovePagecommand(Form1 form, int index, Page page)
         {
             var deleteCommand = new DeletePageCommand(form, index, page);
@@ -15,6 +21,10 @@ namespace Unity.Command.CMM
             NotifyCommandChange();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void AddAddPageCommand(Form1 form)
         {
             _undoStack.Push(new AddPageCommand(form));
@@ -22,6 +32,10 @@ namespace Unity.Command.CMM
             NotifyCommandChange();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void AddSomeCommand(int index)
         {
             _undoStack.Push(new SomeCommand(index));
@@ -29,6 +43,10 @@ namespace Unity.Command.CMM
             NotifyCommandChange();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void Undo(List<Page> pages)
         {
             if (_undoStack.Count == 0)
@@ -42,6 +60,11 @@ namespace Unity.Command.CMM
             _redoStack.Push(command);
             NotifyCommandChange();
         }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void Redo(List<Page> pages)
         {
             if (_redoStack.Count == 0)
@@ -56,20 +79,37 @@ namespace Unity.Command.CMM
             NotifyCommandChange();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public bool IsUnDo()
         {
             return _undoStack.Count != 0;
         }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public bool IsReDo()
         {
             return _redoStack.Count != 0;
         }
-        public event CommandManagerManagerChange _commandChange;
-        public delegate void CommandManagerManagerChange();
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void Attach(PageModel pageModel)
         {
             _commandChange += pageModel.ReceiveCommandChanged;
         }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         void NotifyCommandChange()
         {
             if (_commandChange != null)
@@ -79,11 +119,20 @@ namespace Unity.Command.CMM
         }
         public event SwitchPage switchPage;
         public delegate void SwitchPage(int index);
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void Attach(Form1 form)
         {
             switchPage += form.SwitchToslide;
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void Clear()
         {
             _redoStack.Clear();

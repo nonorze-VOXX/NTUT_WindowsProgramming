@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Unity.Command.CMM
+namespace Unity.Command.CommandManagerManager
 {
     public class DeletePageCommand : IManagerCommand
     {
@@ -14,6 +14,11 @@ namespace Unity.Command.CMM
             _removeIndex = index;
             storePage = page;
         }
+
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void Undo(List<Page> pages)
         {
             pages.Insert(_removeIndex, storePage);
@@ -21,6 +26,10 @@ namespace Unity.Command.CMM
             _clickIndex = _removeIndex;
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void Redo(List<Page> pages)
         {
             pages.RemoveAt(_removeIndex);
@@ -36,6 +45,10 @@ namespace Unity.Command.CMM
 
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public int GetIndex()
         {
             return _clickIndex;

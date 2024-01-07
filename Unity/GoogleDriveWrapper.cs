@@ -17,12 +17,20 @@ namespace Unity
             _service = new GoogleDriveService(APPLICATION_NAME, CLIENT_SECRETS_FILE_NAME);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void SaveData(List<Page> pages)
         {
 
             System.IO.File.WriteAllText("save.txt", Encode(pages));
             UploadFile("save.txt");
         }
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public List<Page> LoadData()
         {
             DownloadFile("save.txt");
@@ -30,6 +38,10 @@ namespace Unity
             return Decode(data);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private string Encode(List<Page> pages)
         {
             string result = "";
@@ -38,11 +50,15 @@ namespace Unity
                 result += ".\n";
                 foreach (var shape in page.shapeList)
                 {
-                    result += shape.Serializable();
+                    result += shape.GetFile();
                 }
             }
             return result;
         }
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private List<Page> Decode(string origin)
         {
             var lines = origin.Split('\n');
@@ -67,6 +83,10 @@ namespace Unity
             return pages;
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private Shape DecodeShape(string line)
         {
             var words = line.Split(',');
@@ -95,12 +115,20 @@ namespace Unity
             return shape;
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private void UploadFile(string fileName)
         {
             const string content_type = "text/plain";
             _service.UploadFile(fileName, content_type);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private void DownloadFile(string fileName)
         {
             List<Google.Apis.Drive.v2.Data.File> fileList = _service.ListRootFileAndFolder();

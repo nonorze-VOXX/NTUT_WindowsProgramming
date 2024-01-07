@@ -25,15 +25,15 @@ namespace Unity
             KeyPreview = true;
             KeyDown += HandleKeyDown;
             _presentationModel.SetAddPageEvent(this);
-            _presentationModel.addPage += AddPage;
-            _presentationModel.AttatchDelete(this);
+            _presentationModel._addPage += AddPage;
+            _presentationModel.AttachDelete(this);
             InitAddPage();
-            presentationModel.InitAddPage(0, this);
+            presentationModel.AddFirstPage(0, this);
             _dataGridView.DataSource = _presentationModel.GetShapeList();
             _brief = new Bitmap(_canvas.Width, _canvas.Height);
             //this._createButton.Click += new System.EventHandler(_presentationModel.CreateButtonClick(_shapeComboBox));
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            _presentationModel.SwitchToSliderWrapper(this);
+            _presentationModel.SwitchToSliderWrap(this);
 
             ClickMouse(null, null);
             this.Resize += ResizeWindow;
@@ -119,6 +119,10 @@ namespace Unity
         }
         #endregion
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         void AsyncPageCount()
         {
             for (int i = _splitContainer1.Panel1.Controls.Count; i < _presentationModel.GetPageCount(); i++)
@@ -226,11 +230,19 @@ namespace Unity
             _presentationModel.Redo();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private void AddPageButtonClick(object sender, EventArgs e)
         {
             _presentationModel.AddPageButtonClick();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void InitAddPage()
         {
             var slide = new Button();
@@ -246,6 +258,10 @@ namespace Unity
             this._splitContainer1.Panel1.Controls.Add(slide);
             slide.Click += HandleSlideClick(_splitContainer1.Panel1.Controls, slide);
         }
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void AddPage(int index)
         {
             var slide = new Button();
@@ -262,6 +278,10 @@ namespace Unity
             slide.Click += HandleSlideClick(_splitContainer1.Panel1.Controls, slide);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private EventHandler HandleSlideClick(Control.ControlCollection panel1Controls, Button slide)
         {
             return (object sender, EventArgs e) =>
@@ -281,35 +301,59 @@ namespace Unity
             };
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void HandleUndoButtonState(bool undo, bool redo)
         {
             _undoButton.Enabled = undo;
             _redoButton.Enabled = redo;
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void RemovePage(int pagesCount)
         {
             var control = _splitContainer1.Panel1.Controls;
             control.RemoveAt(pagesCount);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void SwitchToslide(int index)
         {
             var control = _splitContainer1.Panel1.Controls;
             HandleSlideClick(control, (Button)control[index])(null, null);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void DeletePage()
         {
             _presentationModel.DeletePage(this);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void DeletePageAt(int index)
         {
             _splitContainer1.Panel1.Controls.RemoveAt(index);
         }
 
         SaveForm _saveForm;
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private void LoadButtonClick(object sender, EventArgs e)
         {
             _loadForm.ShowDialog();
@@ -318,12 +362,20 @@ namespace Unity
         private LoadForm _loadForm;
 
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private void SaveButtonClick(object sender, EventArgs e)
         {
             _saveForm.ShowDialog();
         }
 
         private AddShapeForm _addShapeForm;
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private void _createButton_Click(object sender, EventArgs e)
         {
             _addShapeForm.ShowDialog();

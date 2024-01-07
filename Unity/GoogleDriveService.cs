@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Google.Apis.Auth.OAuth2;
+using Google.Apis.Download;
 using Google.Apis.Drive.v2;
-using Google.Apis.Auth.OAuth2;
-using System.IO;
-using System.Threading;
-using Google.Apis.Util.Store;
+using Google.Apis.Drive.v2.Data;
 using Google.Apis.Services;
 using Google.Apis.Upload;
-using Google.Apis.Download;
-using Google.Apis.Drive.v2.Data;
-using System.Net;
+using Google.Apis.Util.Store;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace GoogleDriveUploader.GoogleDrive
 {
@@ -39,6 +36,10 @@ namespace GoogleDriveUploader.GoogleDrive
             this.CreateNewService(applicationName, clientSecretFileName);
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private void CreateNewService(string applicationName, string clientSecretFileName)
         {
             const string USER = "user";
@@ -81,7 +82,9 @@ namespace GoogleDriveUploader.GoogleDrive
             int nowTimeStamp = UNIXNowTimeStamp;
 
             if ((nowTimeStamp - _timeStamp) > ONE_HOUR_SECOND)
+            {
                 this.CreateNewService(_applicationName, _clientSecretFileName);
+            }
         }
 
         /// <summary>
@@ -129,7 +132,7 @@ namespace GoogleDriveUploader.GoogleDrive
                     listRequest.PageToken = null;
                     throw exception;
                 }
-            } while (!String.IsNullOrEmpty(listRequest.PageToken));
+            } while (!string.IsNullOrEmpty(listRequest.PageToken));
 
             return returnList;
         }
@@ -150,20 +153,27 @@ namespace GoogleDriveUploader.GoogleDrive
 
             this.CheckCredentialTimeStamp();
             if (uploadFileName.LastIndexOf(SPLASH) != -1)
+            {
                 title = uploadFileName.Substring(uploadFileName.LastIndexOf(SPLASH) + 1);
+            }
             else
+            {
                 title = uploadFileName;
+            }
 
             Google.Apis.Drive.v2.Data.File fileToInsert = new Google.Apis.Drive.v2.Data.File { Title = title };
             FilesResource.InsertMediaUpload insertRequest = _service.Files.Insert(fileToInsert, uploadStream, contentType);
             insertRequest.ChunkSize = FilesResource.InsertMediaUpload.MinimumChunkSize * 2;
 
             if (uploadProgressEventHandeler != null)
+            {
                 insertRequest.ProgressChanged += uploadProgressEventHandeler;
-
+            }
 
             if (responseReceivedEventHandler != null)
+            {
                 insertRequest.ResponseReceived += responseReceivedEventHandler;
+            }
 
             try
             {
@@ -192,7 +202,7 @@ namespace GoogleDriveUploader.GoogleDrive
             const string SPLASH = @"\";
 
             CheckCredentialTimeStamp();
-            if (!String.IsNullOrEmpty(fileToDownload.DownloadUrl))
+            if (!string.IsNullOrEmpty(fileToDownload.DownloadUrl))
             {
                 try
                 {

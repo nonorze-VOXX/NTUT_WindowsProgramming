@@ -12,14 +12,26 @@ namespace Unity.Command
 
         public event CommandChange _commandChanged;
         public delegate void CommandChange();
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void Detach(Page page)
         {
             _commandChanged -= page.HandleCommandChange;
         }
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void Attach(Page page)
         {
             _commandChanged += page.HandleCommandChange;
         }
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         public void NotifyModelChanged()
         {
             if (_commandChanged != null)

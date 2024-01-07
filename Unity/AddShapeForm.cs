@@ -18,23 +18,31 @@ namespace Unity
             this._presentationModel = presentationModel;
 
             InitializeComponent();
-            textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
-            textBox4.Text = "";
+            _textBox1.Text = "";
+            _textBox2.Text = "";
+            _textBox3.Text = "";
+            _textBox4.Text = "";
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private void CreateShape(object sender, EventArgs e)
         {
             _presentationModel.AddShape(shapeType, new Point(_left, _top), new Point(_right, _down));
-            textBox1.Text = "";
-            textBox2.Text = "";
-            textBox3.Text = "";
-            textBox4.Text = "";
+            _textBox1.Text = "";
+            _textBox2.Text = "";
+            _textBox3.Text = "";
+            _textBox4.Text = "";
             Close();
         }
 
-        private void DownChange(object sender, EventArgs e)
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
+        private void ChangeDown(object sender, EventArgs e)
         {
             var box = (TextBox)sender;
             try
@@ -48,6 +56,10 @@ namespace Unity
             ChangeOkState();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private void TopChange(object sender, EventArgs e)
         {
             var box = (TextBox)sender;
@@ -61,7 +73,11 @@ namespace Unity
             }
             ChangeOkState();
         }
-        private void RightChange(object sender, EventArgs e)
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
+        private void ChangeRight(object sender, EventArgs e)
         {
             var box = (TextBox)sender;
             try
@@ -74,6 +90,10 @@ namespace Unity
             }
             ChangeOkState();
         }
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private void LeftChange(object sender, EventArgs e)
         {
             var box = (TextBox)sender;
@@ -89,6 +109,10 @@ namespace Unity
             ChangeOkState();
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         void ChangeOkState()
         {
             if (_left >= _right)
@@ -104,6 +128,10 @@ namespace Unity
             _createButton.Enabled = true;
         }
 
+        /// <summary>
+        /// a
+        /// </summary>
+        /// <returns></returns>
         private void CancelClick(object sender, EventArgs e)
         {
             Close();

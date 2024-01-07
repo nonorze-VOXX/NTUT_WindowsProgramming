@@ -83,8 +83,8 @@ namespace Unity
             this._dataGridView.AllowUserToAddRows = false;
             this._dataGridView.AllowUserToResizeColumns = false;
             this._dataGridView.AllowUserToResizeRows = false;
-            this._dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this._dataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this._dataGridView.AutoGenerateColumns = false;
             this._dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -254,7 +254,7 @@ namespace Unity
             // 
             // toolStripButton1
             // 
-            this.toolStripButton1.AccessibleName = "AddPage";
+            this.toolStripButton1.AccessibleName = "AddPageEventHandler";
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -287,8 +287,8 @@ namespace Unity
             // 
             // _splitContainer1
             // 
-            this._splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this._splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this._splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this._splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
@@ -310,8 +310,8 @@ namespace Unity
             // 
             // _splitContainer2
             // 
-            this._splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this._splitContainer2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this._splitContainer2.BackColor = System.Drawing.SystemColors.WindowFrame;
             this._splitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -336,7 +336,7 @@ namespace Unity
             // 
             // _canvas
             // 
-            this._canvas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this._canvas.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this._canvas.BackColor = System.Drawing.Color.White;
             this._canvas.Location = new System.Drawing.Point(3, 3);

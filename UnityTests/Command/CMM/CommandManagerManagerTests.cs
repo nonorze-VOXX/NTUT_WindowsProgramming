@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Unity.Command.CMM.Tests
+namespace Unity.Command.CommandManagerManager.Tests
 {
     [TestClass()]
     public class CommandManagerManagerTests
@@ -15,7 +15,7 @@ namespace Unity.Command.CMM.Tests
             var model = new PageModel();
             var _presentationModel = new PresentationModel(model);
             var form = new Form1(_presentationModel);
-            _presentationModel.InitAddPage(0, form);
+            _presentationModel.AddFirstPage(0, form);
             var page = new Page();
             cmm.AddRemovePagecommand(form, 1, page);
             var pages = new List<Page>();
