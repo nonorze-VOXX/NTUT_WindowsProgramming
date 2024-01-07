@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -86,7 +87,7 @@ namespace Unity
             {
                 form.SwitchToSlide(_nowPageIndex);
             }
-
+            Debug.Assert(_nowPageIndex >= 0);
         }
 
         /// <summary>
