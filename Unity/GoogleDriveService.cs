@@ -53,10 +53,10 @@ namespace GoogleDriveUploader.GoogleDrive
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(GoogleClientSecrets.FromStream(stream).Secrets, SCOPES, USER, CancellationToken.None, new FileDataStore(credentialPath, true)).Result;
             }
 
-            var tmp = new BaseClientService.Initializer();
-            tmp.HttpClientInitializer = credential;
-            tmp.ApplicationName = applicationName;
-            DriveService service = new DriveService(tmp);
+            var apple = new BaseClientService.Initializer();
+            apple.HttpClientInitializer = credential;
+            apple.ApplicationName = applicationName;
+            DriveService service = new DriveService(apple);
 
             _credential = credential;
             DateTime now = DateTime.Now;
@@ -141,10 +141,10 @@ namespace GoogleDriveUploader.GoogleDrive
         /// </summary>
         /// <param name="uploadFileName">上傳的檔案名稱 </param>
         /// <param name="contentType">上傳的檔案種類，請參考MIME Type : http://www.iana.org/assignments/media-types/media-types.xhtml </param>
-        /// <param name="uploadProgressEventHandeler"> 上傳進度改變時呼叫的函式</param>
+        /// <param name="uploadProgressEventHandler"> 上傳進度改變時呼叫的函式</param>
         /// <param name="responseReceivedEventHandler">收到回應時呼叫的函式 </param>
         /// <returns>上傳成功，回傳上傳成功的 Google Drive 格式之File</returns>
-        public Google.Apis.Drive.v2.Data.File UploadFile(string uploadFileName, string contentType, Action<IUploadProgress> uploadProgressEventHandeler = null, Action<Google.Apis.Drive.v2.Data.File> responseReceivedEventHandler = null)
+        public Google.Apis.Drive.v2.Data.File UploadFile(string uploadFileName, string contentType, Action<IUploadProgress> uploadProgressEventHandler = null, Action<Google.Apis.Drive.v2.Data.File> responseReceivedEventHandler = null)
         {
             FileStream uploadStream = new FileStream(uploadFileName, FileMode.Open, FileAccess.Read);
             const char SPLASH = '\\';
@@ -160,13 +160,14 @@ namespace GoogleDriveUploader.GoogleDrive
                 title = uploadFileName;
             }
 
-            Google.Apis.Drive.v2.Data.File fileToInsert = new Google.Apis.Drive.v2.Data.File { Title = title };
+            Google.Apis.Drive.v2.Data.File fileToInsert = new Google.Apis.Drive.v2.Data.File();
+            fileToInsert.Title = title;
             FilesResource.InsertMediaUpload insertRequest = _service.Files.Insert(fileToInsert, uploadStream, contentType);
-            insertRequest.ChunkSize = FilesResource.InsertMediaUpload.MinimumChunkSize * 2;
+            insertRequest.ChunkSize = FilesResource.InsertMediaUpload.MinimumChunkSize * (1 + 1);
 
-            if (uploadProgressEventHandeler != null)
+            if (uploadProgressEventHandler != null)
             {
-                insertRequest.ProgressChanged += uploadProgressEventHandeler;
+                insertRequest.ProgressChanged += uploadProgressEventHandler;
             }
 
             if (responseReceivedEventHandler != null)

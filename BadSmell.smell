@@ -188,56 +188,8 @@
           <Reviews>
             <Smell>
               <Id>1</Id>
-              <SmellType>ICS(縮排與換行-1)</SmellType>
-              <HashCode>IndentAndNewLine1.UploadFile.            Google.Apis.Drive.v2.Data.File fileToInsert = new Google.Apis.Drive.v2.Data.File { Title = title };</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>Unity</Project>
-              <File>GoogleDriveService.cs</File>
-              <Line>163</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment>ICS(縮排與換行-1) 左大括號一律換行</Comment>
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>2</Id>
-              <SmellType>ICS(縮排與換行-3)</SmellType>
-              <HashCode>IndentAndNewLine3.UploadFile.            Google.Apis.Drive.v2.Data.File fileToInsert = new Google.Apis.Drive.v2.Data.File { Title = title };</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>Unity</Project>
-              <File>GoogleDriveService.cs</File>
-              <Line>163</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment>ICS(縮排與換行-3) 左大括號後，一律換行撰寫程式碼</Comment>
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>3</Id>
-              <SmellType>Literal constants(字面常數)-2</SmellType>
-              <HashCode>LiteralConstants.UploadFile.2</HashCode>
-              <Severity>Warning</Severity>
-              <Weight>1</Weight>
-              <Project>Unity</Project>
-              <File>GoogleDriveService.cs</File>
-              <Line>165</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment />
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>4</Id>
               <SmellType>Static method and fields(濫用Static)</SmellType>
-              <HashCode>StaticMethodAndFields 26381360</HashCode>
+              <HashCode>StaticMethodAndFields 38223069</HashCode>
               <Severity>Red</Severity>
               <Weight>1</Weight>
               <Project>Unity</Project>
@@ -251,7 +203,7 @@
               <Auto>false</Auto>
             </Smell>
             <Smell>
-              <Id>5</Id>
+              <Id>2</Id>
               <SmellType>ICS(變數-1)</SmellType>
               <HashCode>Variable1.GoogleDriveService.SCOPES</HashCode>
               <Severity>Red</Severity>
@@ -267,23 +219,7 @@
               <Auto>false</Auto>
             </Smell>
             <Smell>
-              <Id>6</Id>
-              <SmellType>Unsuitable naming(名不符實)-tmp(tmp)</SmellType>
-              <HashCode>UnsuitableNaming.GoogleDriveService.CreateNewService.tmp</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>Unity</Project>
-              <File>GoogleDriveService.cs</File>
-              <Line>56</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment />
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>7</Id>
+              <Id>3</Id>
               <SmellType>Long method(過長函式)</SmellType>
               <HashCode>LongMethod.GoogleDriveService.CreateNewService.23string applicationName;string clientSecretFileName;</HashCode>
               <Severity>Warning</Severity>
@@ -299,7 +235,7 @@
               <Auto>false</Auto>
             </Smell>
             <Smell>
-              <Id>8</Id>
+              <Id>4</Id>
               <SmellType>Long method(過長函式)</SmellType>
               <HashCode>LongMethod.GoogleDriveService.ListFileAndFolderWithQueryString.23string queryString;</HashCode>
               <Severity>Warning</Severity>
@@ -315,27 +251,11 @@
               <Auto>false</Auto>
             </Smell>
             <Smell>
-              <Id>9</Id>
-              <SmellType>Unsuitable naming(名不符實)-uploadProgressEventHandeler(handeler)</SmellType>
-              <HashCode>UnsuitableNaming.GoogleDriveService.UploadFile.uploadProgressEventHandeler</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>Unity</Project>
-              <File>GoogleDriveService.cs</File>
-              <Line>147</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment />
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>10</Id>
+              <Id>5</Id>
               <SmellType>Long method(過長函式)</SmellType>
-              <HashCode>LongMethod.GoogleDriveService.UploadFile.45string uploadFileName;string contentType;Action&lt;IUploadProgress&gt; uploadProgressEventHandeler;Action&lt;Google.Apis.Drive.v2.Data.File&gt; responseReceivedEventHandler;</HashCode>
+              <HashCode>LongMethod.GoogleDriveService.UploadFile.46string uploadFileName;string contentType;Action&lt;IUploadProgress&gt; uploadProgressEventHandler;Action&lt;Google.Apis.Drive.v2.Data.File&gt; responseReceivedEventHandler;</HashCode>
               <Severity>Red</Severity>
-              <Weight>45</Weight>
+              <Weight>46</Weight>
               <Project>Unity</Project>
               <File>GoogleDriveService.cs</File>
               <Line>147</Line>
@@ -347,39 +267,7 @@
               <Auto>false</Auto>
             </Smell>
             <Smell>
-              <Id>11</Id>
-              <SmellType>ICS(空白與空行-16)</SmellType>
-              <HashCode>SpacingAndNewLine16.PageModel.Save.0</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>Unity</Project>
-              <File>PageModel.cs</File>
-              <Line>332</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment>ICS(空白與空行-16) 每個函式之間加一個空行</Comment>
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>12</Id>
-              <SmellType>Unresolved warnings(忽視警告)-Field 'AddShapeForm._shapeType' is never assigned to, and will always have its default value</SmellType>
-              <HashCode>Unity\Unity.AddShapeForm.cs.Unresolved warnings(忽視警告)-Field 'AddShapeForm._shapeType' is never assigned to, and will always have its default value.10</HashCode>
-              <Severity>Red</Severity>
-              <Weight>1</Weight>
-              <Project>Unity\Unity</Project>
-              <File>AddShapeForm.cs</File>
-              <Line>10</Line>
-              <StartLine>0</StartLine>
-              <StartCol>0</StartCol>
-              <EndLine>0</EndLine>
-              <EndCol>0</EndCol>
-              <Comment />
-              <Auto>false</Auto>
-            </Smell>
-            <Smell>
-              <Id>13</Id>
+              <Id>6</Id>
               <SmellType>Feature Envy(依戀情節)</SmellType>
               <HashCode>83 目前物件 Unity.PresentationModel，使用物件的方法或屬性次數：0次，Envy到對象物件 Unity.PageModel，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Unity.PageModel.GetPageCount() 以及 Unity.PageModel.GetPageCount()</HashCode>
               <Severity>Warning</Severity>
@@ -395,7 +283,7 @@
               <Auto>false</Auto>
             </Smell>
             <Smell>
-              <Id>14</Id>
+              <Id>7</Id>
               <SmellType>Feature Envy(依戀情節)</SmellType>
               <HashCode>325 目前物件 Unity.PageModel，使用物件的方法或屬性次數：1次，Envy到對象物件 Unity.Page，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Unity.Page.shapeList 以及 Unity.Page.Add(Unity.Shape)</HashCode>
               <Severity>Warning</Severity>
@@ -411,23 +299,23 @@
               <Auto>false</Auto>
             </Smell>
             <Smell>
-              <Id>15</Id>
+              <Id>8</Id>
               <SmellType>Feature Envy(依戀情節)</SmellType>
-              <HashCode>251 目前物件 GoogleDriveUploader.GoogleDrive.GoogleDriveService，使用物件的方法或屬性次數：0次，Envy到對象物件 Google.Apis.Drive.v2.DriveService，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Google.Apis.Drive.v2.DriveService.Files 以及 Google.Apis.Drive.v2.DriveService.Files</HashCode>
+              <HashCode>252 目前物件 GoogleDriveUploader.GoogleDrive.GoogleDriveService，使用物件的方法或屬性次數：0次，Envy到對象物件 Google.Apis.Drive.v2.DriveService，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Google.Apis.Drive.v2.DriveService.Files 以及 Google.Apis.Drive.v2.DriveService.Files</HashCode>
               <Severity>Warning</Severity>
               <Weight>1</Weight>
               <Project>Unity</Project>
               <File>C:\Users\green\source\repos\Unity\Unity\GoogleDriveService.cs</File>
-              <Line>251</Line>
-              <StartLine>251</StartLine>
+              <Line>252</Line>
+              <StartLine>252</StartLine>
               <StartCol>48</StartCol>
-              <EndLine>251</EndLine>
+              <EndLine>252</EndLine>
               <EndCol>114</EndCol>
               <Comment>目前物件 GoogleDriveUploader.GoogleDrive.GoogleDriveService，使用物件的方法或屬性次數：0次，Envy到對象物件 Google.Apis.Drive.v2.DriveService，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Google.Apis.Drive.v2.DriveService.Files 以及 Google.Apis.Drive.v2.DriveService.Files</Comment>
               <Auto>false</Auto>
             </Smell>
             <Smell>
-              <Id>16</Id>
+              <Id>9</Id>
               <SmellType>Feature Envy(依戀情節)</SmellType>
               <HashCode>153 目前物件 Unity.GoogleDriveWrap，使用物件的方法或屬性次數：0次，Envy到對象物件 GoogleDriveUploader.GoogleDrive.GoogleDriveService，使用物件方法或屬性次數：4次，使用到的方法或屬性為以下：GoogleDriveUploader.GoogleDrive.GoogleDriveService.ListRootFileAndFolder() 以及 GoogleDriveUploader.GoogleDrive.GoogleDriveService.ListRootFileAndFolder() 以及 GoogleDriveUploader.GoogleDrive.GoogleDriveService.DownloadFile(Google.Apis.Drive.v2.Data.File, string, System.Action&lt;Google.Apis.Download.IDownloadProgress&gt;) 以及 GoogleDriveUploader.GoogleDrive.GoogleDriveService.ListRootFileAndFolder()</HashCode>
               <Severity>Red</Severity>
@@ -445,15 +333,15 @@
           </Reviews>
           <HashCodeIgnoreList />
           <HashCodeRequestIgnoreList>
-            <string>LongMethod.GoogleDriveService.UploadFile.45string uploadFileName;string contentType;Action&lt;IUploadProgress&gt; uploadProgressEventHandeler;Action&lt;Google.Apis.Drive.v2.Data.File&gt; responseReceivedEventHandler;</string>
-            <string>IndentAndNewLine1.UploadFile.            Google.Apis.Drive.v2.Data.File fileToInsert = new Google.Apis.Drive.v2.Data.File { Title = title };</string>
-            <string>IndentAndNewLine3.UploadFile.            Google.Apis.Drive.v2.Data.File fileToInsert = new Google.Apis.Drive.v2.Data.File { Title = title };</string>
-            <string>LiteralConstants.UploadFile.2</string>
             <string>Variable1.GoogleDriveService.SCOPES</string>
-            <string>UnsuitableNaming.GoogleDriveService.CreateNewService.tmp</string>
             <string>LongMethod.GoogleDriveService.CreateNewService.23string applicationName;string clientSecretFileName;</string>
             <string>LongMethod.GoogleDriveService.ListFileAndFolderWithQueryString.23string queryString;</string>
-            <string>UnsuitableNaming.GoogleDriveService.UploadFile.uploadProgressEventHandeler</string>
+            <string>LongMethod.GoogleDriveService.UploadFile.46string uploadFileName;string contentType;Action&lt;IUploadProgress&gt; uploadProgressEventHandler;Action&lt;Google.Apis.Drive.v2.Data.File&gt; responseReceivedEventHandler;</string>
+            <string>83 目前物件 Unity.PresentationModel，使用物件的方法或屬性次數：0次，Envy到對象物件 Unity.PageModel，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Unity.PageModel.GetPageCount() 以及 Unity.PageModel.GetPageCount()</string>
+            <string>325 目前物件 Unity.PageModel，使用物件的方法或屬性次數：1次，Envy到對象物件 Unity.Page，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Unity.Page.shapeList 以及 Unity.Page.Add(Unity.Shape)</string>
+            <string>252 目前物件 GoogleDriveUploader.GoogleDrive.GoogleDriveService，使用物件的方法或屬性次數：0次，Envy到對象物件 Google.Apis.Drive.v2.DriveService，使用物件方法或屬性次數：2次，使用到的方法或屬性為以下：Google.Apis.Drive.v2.DriveService.Files 以及 Google.Apis.Drive.v2.DriveService.Files</string>
+            <string>153 目前物件 Unity.GoogleDriveWrap，使用物件的方法或屬性次數：0次，Envy到對象物件 GoogleDriveUploader.GoogleDrive.GoogleDriveService，使用物件方法或屬性次數：4次，使用到的方法或屬性為以下：GoogleDriveUploader.GoogleDrive.GoogleDriveService.ListRootFileAndFolder() 以及 GoogleDriveUploader.GoogleDrive.GoogleDriveService.ListRootFileAndFolder() 以及 GoogleDriveUploader.GoogleDrive.GoogleDriveService.DownloadFile(Google.Apis.Drive.v2.Data.File, string, System.Action&lt;Google.Apis.Download.IDownloadProgress&gt;) 以及 GoogleDriveUploader.GoogleDrive.GoogleDriveService.ListRootFileAndFolder()</string>
+            <string>StaticMethodAndFields 38223069</string>
           </HashCodeRequestIgnoreList>
           <AnalysisFileManager>
             <AnalysisFiles>
@@ -774,7 +662,7 @@
               </AnalysisFile>
             </AnalysisFiles>
           </AnalysisFileManager>
-          <ProductionLoc>4583</ProductionLoc>
+          <ProductionLoc>4595</ProductionLoc>
           <TestLoc>1372</TestLoc>
         </CodeReview>
       </Data>
